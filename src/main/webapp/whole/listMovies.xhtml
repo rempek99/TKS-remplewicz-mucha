@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>List of movies</title>
+        <link rel="stylesheet" type="text/css" href="../styles/listMovie.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h2>List of movies</h2>
+            <h:form>
+                <p:dataTable
+                        var="movie"
+                        widgetVar="filtered"
+                        value="#{restAPI.allMovies}"
+                        filteredValue="#{listMoviesController.filteredMovies}"
+                        emptyMessage="No movies found with given criteria"
+                        style="text-align:center">
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Search all fields:  " />
+                            <p:inputText id="globalFilter" onkeyup="PF('filtered').filter()" style="width:250px" placeholder="Enter keyword"/>
+                        </p:outputPanel>
+                    </f:facet>
+                    <p:column  headerText="Title of movie" filterBy="#{movie.title}" sortBy="#{movie.title}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="title" value="#{movie.title}" />
+                    </p:column>
+                    <p:column headerText="Author" filterBy="#{movie.author}" sortBy="#{movie.author}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="author" value="#{movie.author}" />
+                    </p:column>
+                    <p:column headerText="Rating" filterBy="#{movie.rating}" sortBy="#{movie.rating}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="rating" value="#{movie.rating} / 10" />
+                    </p:column>
+                    <p:column headerText="Rented" rendered="#{login.adminAllowedAccess}" filterBy="#{movie.rented}" sortBy="#{movie.rented}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="rented" value="#{movie.rented}"/>
+                    </p:column>
+<!--                    <p:column headerText="Rental period">-->
+<!--                    <p:datePicker id="range" selectionMode="range" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{movie.rentalDateRange}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 200px" style="text-align:center; margin-left: -8px;" />-->
+<!--                    </p:column>-->
+                    <p:column headerText="Rental starts">
+                        <p:datePicker id="start" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{movie.rentalStart}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
+                    </p:column>
+                    <p:column headerText="Rental ends">
+                        <p:datePicker id="end" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{movie.rentalEnd}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
+                    </p:column>
+                    <p:column headerText="Choose User" rendered="#{login.adminAllowedAccess}">
+                        <p:selectOneMenu disabled="#{!login.adminAllowedAccess}" value="#{movie.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                            <f:selectItems value="#{listAccountsController.accounts}"
+                                           var="single"
+                                           itemValue="#{single.id}"
+                                           itemLabel="#{single.firstName} #{single.lastName} (#{single.roleOfUser})"
+                                           itemDisabled="#{!single.active}"
+                            />
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="Choose User" rendered="#{login.managerOrUserAllowedAccess}">
+                        <p:selectOneMenu disabled="#{!login.managerOrUserAllowedAccess}" value="#{movie.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                            <f:selectItem itemValue = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).id}"
+                                          itemDisabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
+                                          itemLabel = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).firstName}
+                                           #{listAccountsController.getDesiredAccount(request.userPrincipal.name).lastName} (it's you)" />
+
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="Options">
+                            <h:commandButton value="Rent" action="#{restAPI.addMovieRental(addRentalController.movieRental)}"
+                                             disabled="#{movie.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
+                                             onclick="return window.confirm('Are you sure you want rent #{movie.title}?')" style="margin-left: 0px">
+                                <f:actionListener binding="#{addRentalController.setMovie(movie)}"/>
+                                <f:actionListener binding="#{addRentalController.setMovieAccount(listAccountsController.getSelectedSingleMovieAccount(movie))}"/>
+                            </h:commandButton>
+                            <h:commandButton value="Remove"
+                                             action="#{restAPI.deleteMovie(movie.id)}"
+                                             disabled="#{movie.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
+                                             rendered="#{login.adminAndManagerAllowedAccess}"
+                                             onclick="return window.confirm('Are you sure you want delete #{movie.title}?')" style="margin-left: 0px"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+            <h:button value="Back" class="button" outcome="index.xhtml"/>
+        </div>
+    </h:body>
+</html>

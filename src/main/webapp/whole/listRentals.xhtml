@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>List of movies</title>
+    <link rel="stylesheet" type="text/css" href="../styles/listRentals.css"/>
+</h:head>
+<h:body>
+    <div class="container">
+        <h2>List of all rented movies</h2>
+        <h:form>
+            <p:dataTable
+                        id="first"
+                        var="movieRental"
+                        widgetVar="filteredMov"
+                        value="#{restAPI.allMovieRentals}"
+                        filteredValue="#{listMovieRentalsController.filteredMovies}"
+                        emptyMessage="No movies found with given criteria"
+                        style="text-align:center">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Search all fields:  " />
+                        <p:inputText id="globalFilter" onkeyup="PF('filteredMov').filter()" style="width:250px" placeholder="Enter keyword"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column headerText="Movie title" filterBy="#{movieRental.movie.title}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="movieTitle" value="#{movieRental.movie.title}"/>
+                </p:column>
+                <p:column headerText="Author" filterBy="#{movieRental.movie.author}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="movieAuthor" value="#{movieRental.movie.author}" />
+                </p:column>
+                <p:column headerText="Rating" filterBy="#{movieRental.movie.rating}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="movieRating" value="#{movieRental.movie.rating} / 10" />
+                </p:column>
+                <p:column headerText="Rental starts" filterBy="#{movieRental.rentalStart}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="rentalPeroid" value="#{movieRental.rentalStart}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Warsaw"/>
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="Rental ends" filterBy="#{movieRental.rentalEnd}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="rentalPeroidEnd" value="#{movieRental.rentalEnd}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Warsaw"/>
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="Rented by" rendered="#{login.adminAllowedAccess}">
+                    <h:outputText id="rentalUser" value="#{movieRental.account.firstName} #{movieRental.account.lastName}"/>
+                </p:column>
+<!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{movieRental.account.id}" filterStyle="display:none">-->
+<!--                    <div style="text-align: center"><h:outputText-->
+<!--                            id="userMovieSingle"-->
+<!--                            value="#{listAccountsController.getDesiredAccount((request.userPrincipal.name)).firstName} #{listAccountsController.getDesiredAccount((request.userPrincipal.name)).lastName} (you)" /></div>-->
+<!--                </p:column>-->
+                <p:column headerText="Options">
+                    <h:commandButton value="Release rented movie"
+                                     rendered="#{login.adminAllowedAccess}"
+                                     action="#{restAPI.deleteMovieRental(movieRental.id)}"
+                                     onclick="return window.confirm('Are you sure you want return #{movieRental.movie.title}?')"
+                                     style="margin-left: 0px">
+                    </h:commandButton>
+                    <h:commandButton value="#{movieRental.account.id==request.userPrincipal.name? 'Release rented book' : 'Not your rental'}"
+                                     rendered="#{login.managerOrUserAllowedAccess}"
+                                     action="#{restAPI.deleteMovieRental(movieRental.id)}"
+                                     disabled="#{movieRental.account.id ne request.userPrincipal.name}"
+                                     onclick="return window.confirm('Are you sure you want return #{movieRental.movie.title}?')"
+                                     style="margin-left: 0px">
+                    </h:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h2>List of all rented books</h2>
+        <h:form>
+            <p:dataTable
+                    id="second"
+                    var="bookRental"
+                    widgetVar="filteredBooks"
+                    value="#{restAPI.allBookRentals}"
+                    filteredValue="#{listBookRentalsController.filteredBooks}"
+                    emptyMessage="No books found with given criteria"
+                    style="text-align:center">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Search all fields:  " />
+                        <p:inputText id="globalsFilter" onkeyup="PF('filteredBooks').filter()" style="width:250px" placeholder="Enter keyword"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column headerText="Book title" filterBy="#{bookRental.book.title}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="title" value="#{bookRental.book.title}" />
+                </p:column>
+                <p:column headerText="Author" filterBy="#{bookRental.book.author}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="author" value="#{bookRental.book.author}" />
+                </p:column>
+                <p:column headerText="Number of pages" filterBy="#{bookRental.book.pages}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="rating" value="#{bookRental.book.pages}" />
+                </p:column>
+                <p:column headerText="Rental starts" filterBy="#{bookRental.rentalStart}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="peroidStart" value="#{bookRental.rentalStart}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Warsaw"/>
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="Rental ends" filterBy="#{bookRental.rentalEnd}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="peroidEnd" value="#{bookRental.rentalEnd}" >
+                            <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Warsaw"/>
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="Rented by" rendered="#{login.adminAllowedAccess}">
+                    <h:outputText id="user" value="#{bookRental.account.firstName} #{bookRental.account.lastName}"/>
+                </p:column>
+<!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{bookRental.account.id}" filterStyle="display:none">-->
+<!--                    <div style="text-align: center"><h:outputText-->
+<!--                            id="userSingle"-->
+<!--                            value="#{listAccountsController.getDesiredAccount((request.userPrincipal.name)).firstName} #{listAccountsController.getDesiredAccount((request.userPrincipal.name)).lastName} (you)" /></div>-->
+<!--                </p:column>-->
+                <p:column headerText="Options">
+                    <h:commandButton value="Release rented book"
+                                     rendered="#{login.adminAllowedAccess}"
+                                     action="#{restAPI.deleteBookRental(bookRental.id)}"
+                                     onclick="return window.confirm('Are you sure you want return #{bookRental.book.title}?')"
+                                     style="margin-left: 0px">
+                    </h:commandButton>
+                        <h:commandButton value="#{bookRental.account.id==request.userPrincipal.name? 'Release rented book' : 'Not your rental'}"
+                                         rendered="#{login.managerOrUserAllowedAccess}"
+                                         action="#{restAPI.deleteBookRental(bookRental.id)}"
+                                         disabled="#{bookRental.account.id ne request.userPrincipal.name}"
+                                         onclick="return window.confirm('Are you sure you want return #{bookRental.book.title}?')"
+                                         style="margin-left: 0px">
+                        </h:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:button value="Back" class="button" outcome="index.xhtml"/>
+    </div>
+</h:body>
+</html>

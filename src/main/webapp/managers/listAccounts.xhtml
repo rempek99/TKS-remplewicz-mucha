@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>List of accounts</title>
+        <link rel="stylesheet" type="text/css" href="../styles/listAccount.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h2>List of users</h2>
+            <h:form>
+                <p:dataTable
+                        value="#{restAPI.allAccounts}"
+                        filteredValue="#{listAccountsController.filteredAccounts}"
+                        var="account"
+                        widgetVar="filtered"
+                        emptyMessage="No accounts found with given criteria"
+                        style="text-align:center">
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Search all fields:  " />
+                            <p:inputText id="globalFilter" onkeyup="PF('filtered').filter()" style="width:250px" placeholder="Enter keyword"/>
+                        </p:outputPanel>
+                    </f:facet>
+                    <p:column headerText="First name" filterBy="#{account.firstName}" sortBy="#{account.firstName}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="firstName" value="#{account.firstName}"/>
+                    </p:column>
+                    <p:column headerText="Last name" filterBy="#{account.lastName}" sortBy="#{account.lastName}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="lastName" value="#{account.lastName}" />
+                    </p:column>
+                    <p:column headerText="Role of user" filterBy="#{account.roleOfUser}" sortBy="#{account.roleOfUser}" filterMatchMode="contains" filterStyle="display:none">
+                       <h:outputText id="role" value="#{account.roleOfUser}" />
+                    </p:column>
+                    <p:column headerText="Active" filterBy="#{account.active}" sortBy="#{account.active}" filterMatchMode="contains" filterStyle="display:none">
+                        <h:outputText id="isActive" value="#{account.active}" />
+                    </p:column>
+                    <p:column headerText="Set role of user" rendered="#{login.adminAllowedAccess}">
+                        <p:selectOneMenu value = "#{account.roleOfUser}" id="roleOfUser">
+                            <f:selectItem itemValue = "USER" itemLabel = "Ordinary user" />
+                            <f:selectItem itemValue = "MANAGER" itemLabel = "System manager" />
+                            <f:selectItem itemValue = "ADMIN" itemLabel = "Admin" />
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="Is user active?" rendered="#{login.adminAndManagerAllowedAccess}">
+                        <p:selectOneMenu value = "#{account.active}" id="activityStatus">
+                            <f:selectItem itemValue = "true" itemLabel = "User is active" />
+                            <f:selectItem itemValue = "false" itemLabel = "User is not active" />
+                            <f:converter converterId="booleanConverter"/>
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="Remove user" rendered="#{login.adminAllowedAccess}">
+                            <h:commandButton value="Remove user now" action="#{restAPI.deleteAccount(account.id)}" onclick="return window.confirm('Are you sure you want delete #{account.firstName}?')" style="margin-left: 0px"/>
+                    </p:column>
+                    <p:column headerText="Update user" rendered="#{login.adminAndManagerAllowedAccess}">
+                        <h:commandButton value="Update status" action="#{listAccountsController.getSingleAccount(account).setActive(account.active)}" onclick="return window.confirm('Are you sure you want update #{account.firstName}?')" style="margin-left: 0px"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+            <h:button value="Cancel" class="button" outcome="/whole/index.xhtml"/>
+        </div>
+    </h:body>
+</html>
