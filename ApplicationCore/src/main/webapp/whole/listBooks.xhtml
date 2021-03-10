@@ -1,8 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en">
     <h:head>
         <title>List of books</title>
         <link rel="stylesheet" type="text/css" href="../styles/listBook.css"/>
@@ -46,26 +48,26 @@
                     <p:column headerText="Rental ends">
                         <p:datePicker id="end" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{book.rentalEnd}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
                     </p:column>
-                    <p:column headerText="Choose User" rendered="#{login.adminAllowedAccess}">
-                        <p:selectOneMenu disabled="#{!login.adminAllowedAccess}" value="#{book.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                    <h:column headerText="Choose User" rendered="#{login.adminAllowedAccess}">
+                        <h:selectOneMenu disabled="#{!login.adminAllowedAccess}" value="#{book.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItems value="#{listAccountsController.accounts}"
                                            var="single"
                                            itemValue="#{single.id}"
                                            itemLabel="#{single.firstName} #{single.lastName} (#{single.roleOfUser})"
                                            itemDisabled="#{!single.active}"
                             />
-                        </p:selectOneMenu>
-                    </p:column>
-                    <p:column headerText="Choose User" rendered="#{login.managerOrUserAllowedAccess}">
-                        <p:selectOneMenu disabled="#{!login.managerOrUserAllowedAccess}" value="#{book.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                        </h:selectOneMenu>
+                    </h:column>
+                    <h:column headerText="Choose User" rendered="#{login.managerOrUserAllowedAccess}">
+                        <h:selectOneMenu disabled="#{!login.managerOrUserAllowedAccess}" value="#{book.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItem itemValue = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).id}"
                                           itemDisabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
                                           itemLabel = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).firstName}
                                            #{listAccountsController.getDesiredAccount(request.userPrincipal.name).lastName} (it's you)" />
 
-                        </p:selectOneMenu>
-                    </p:column>
-                    <p:column headerText="Options">
+                        </h:selectOneMenu>
+                    </h:column>
+                    <h:column headerText="Options">
                             <h:commandButton value="Rent"
                                              action="#{restAPI.addBookRental(addRentalController.bookRental)}"
                                              disabled="#{book.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
@@ -78,7 +80,7 @@
                                              disabled="#{book.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
                                              rendered="#{login.adminAndManagerAllowedAccess}"
                                              onclick="return window.confirm('Are you sure you want delete #{book.title}?')" style="margin-left: 0px"/>
-                    </p:column>
+                    </h:column>
                 </p:dataTable>
             </h:form>
             <h:button value="Back" class="button" outcome="index.xhtml"/>

@@ -1,32 +1,32 @@
-//package controller;
-//
-//import model.Book;
-//import java.io.Serializable;
-//import java.util.List;
-//import javax.faces.view.ViewScoped;
-//import javax.inject.Inject;
-//import javax.inject.Named;
-//
-//@Named
-//@ViewScoped
-//public class ListBooksController implements Serializable{
-//    @Inject
-//    private BookService bookService;
-//    private List<Book> filteredBooks;
-//
-//    public List<Book> getFilteredBooks() {
-//        return filteredBooks;
-//    }
-//
-//    public void setFilteredBooks(List<Book> filteredBooks) {
-//        this.filteredBooks = filteredBooks;
-//    }
-//
-//    public List<Book> getBooks() {
-//        return bookService.getAllBooks();
-//    }
-//
-//    public void removeSelectedBook(Book b) {
-//        bookService.removeBook(b);
-//    }
-//}
+package controller;
+
+import model.Book;
+import java.io.Serializable;
+import java.util.List;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+@Named
+@ViewScoped
+public class ListBooksController implements Serializable{
+    @Inject
+    private BookService bookService;
+    private List<Book> filteredBooks;
+
+    public List<Book> getFilteredBooks() {
+        return filteredBooks;
+    }
+
+    public void setFilteredBooks(List<Book> filteredBooks) {
+        this.filteredBooks = filteredBooks;
+    }
+
+    public List<Book> getBooks() {
+        return bookService.getAllBooks();
+    }
+
+    public void removeSelectedBook(Book b) {
+        bookService.removeBook(b);
+    }
+}
