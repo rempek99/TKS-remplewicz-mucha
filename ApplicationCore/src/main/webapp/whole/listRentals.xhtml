@@ -28,14 +28,14 @@
                         <p:inputText id="globalFilter" onkeyup="PF('filteredMov').filter()" style="width:250px" placeholder="Enter keyword"/>
                     </p:outputPanel>
                 </f:facet>
-                <p:column headerText="Movie title" filterBy="#{movieRental.movie.title}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText id="movieTitle" value="#{movieRental.movie.title}"/>
+                <p:column headerText="Movie title" filterBy="#{movieRental.movieEnt.title}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="movieTitle" value="#{movieRental.movieEnt.title}"/>
                 </p:column>
-                <p:column headerText="Author" filterBy="#{movieRental.movie.author}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText id="movieAuthor" value="#{movieRental.movie.author}" />
+                <p:column headerText="Author" filterBy="#{movieRental.movieEnt.author}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="movieAuthor" value="#{movieRental.movieEnt.author}" />
                 </p:column>
-                <p:column headerText="Rating" filterBy="#{movieRental.movie.rating}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText id="movieRating" value="#{movieRental.movie.rating} / 10" />
+                <p:column headerText="Rating" filterBy="#{movieRental.movieEnt.rating}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="movieRating" value="#{movieRental.movieEnt.rating} / 10" />
                 </p:column>
                 <p:column headerText="Rental starts" filterBy="#{movieRental.rentalStart}" filterMatchMode="contains" filterStyle="display:none">
                         <h:outputText id="rentalPeroid" value="#{movieRental.rentalStart}" >
@@ -48,25 +48,25 @@
                         </h:outputText>
                 </p:column>
                 <p:column headerText="Rented by" rendered="#{login.adminAllowedAccess}">
-                    <h:outputText id="rentalUser" value="#{movieRental.account.firstName} #{movieRental.account.lastName}"/>
+                    <h:outputText id="rentalUser" value="#{movieRental.accountEnt.firstName} #{movieRental.accountEnt.lastName}"/>
                 </p:column>
-<!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{movieRental.account.id}" filterStyle="display:none">-->
+<!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{movieRental.accountEnt.id}" filterStyle="display:none">-->
 <!--                    <div style="text-align: center"><h:outputText-->
 <!--                            id="userMovieSingle"-->
 <!--                            value="#{listAccountsController.getDesiredAccount((request.userPrincipal.name)).firstName} #{listAccountsController.getDesiredAccount((request.userPrincipal.name)).lastName} (you)" /></div>-->
 <!--                </p:column>-->
                 <p:column headerText="Options">
-                    <h:commandButton value="Release rented movie"
+                    <h:commandButton value="Release rented movieEnt"
                                      rendered="#{login.adminAllowedAccess}"
                                      action="#{restAPI.deleteMovieRental(movieRental.id)}"
-                                     onclick="return window.confirm('Are you sure you want return #{movieRental.movie.title}?')"
+                                     onclick="return window.confirm('Are you sure you want return #{movieRental.movieEnt.title}?')"
                                      style="margin-left: 0px">
                     </h:commandButton>
-                    <h:commandButton value="#{movieRental.account.id==request.userPrincipal.name? 'Release rented book' : 'Not your rental'}"
+                    <h:commandButton value="#{movieRental.accountEnt.id==request.userPrincipal.name? 'Release rented bookEnt' : 'Not your rental'}"
                                      rendered="#{login.managerOrUserAllowedAccess}"
                                      action="#{restAPI.deleteMovieRental(movieRental.id)}"
-                                     disabled="#{movieRental.account.id ne request.userPrincipal.name}"
-                                     onclick="return window.confirm('Are you sure you want return #{movieRental.movie.title}?')"
+                                     disabled="#{movieRental.accountEnt.id ne request.userPrincipal.name}"
+                                     onclick="return window.confirm('Are you sure you want return #{movieRental.movieEnt.title}?')"
                                      style="margin-left: 0px">
                     </h:commandButton>
                 </p:column>
@@ -88,14 +88,14 @@
                         <p:inputText id="globalsFilter" onkeyup="PF('filteredBooks').filter()" style="width:250px" placeholder="Enter keyword"/>
                     </p:outputPanel>
                 </f:facet>
-                <p:column headerText="Book title" filterBy="#{bookRental.book.title}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText id="title" value="#{bookRental.book.title}" />
+                <p:column headerText="Book title" filterBy="#{bookRental.bookEnt.title}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="title" value="#{bookRental.bookEnt.title}" />
                 </p:column>
-                <p:column headerText="Author" filterBy="#{bookRental.book.author}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText id="author" value="#{bookRental.book.author}" />
+                <p:column headerText="Author" filterBy="#{bookRental.bookEnt.author}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="author" value="#{bookRental.bookEnt.author}" />
                 </p:column>
-                <p:column headerText="Number of pages" filterBy="#{bookRental.book.pages}" filterMatchMode="contains" filterStyle="display:none">
-                    <h:outputText id="rating" value="#{bookRental.book.pages}" />
+                <p:column headerText="Number of pages" filterBy="#{bookRental.bookEnt.pages}" filterMatchMode="contains" filterStyle="display:none">
+                    <h:outputText id="rating" value="#{bookRental.bookEnt.pages}" />
                 </p:column>
                 <p:column headerText="Rental starts" filterBy="#{bookRental.rentalStart}" filterMatchMode="contains" filterStyle="display:none">
                         <h:outputText id="peroidStart" value="#{bookRental.rentalStart}" >
@@ -108,25 +108,25 @@
                         </h:outputText>
                 </p:column>
                 <p:column headerText="Rented by" rendered="#{login.adminAllowedAccess}">
-                    <h:outputText id="user" value="#{bookRental.account.firstName} #{bookRental.account.lastName}"/>
+                    <h:outputText id="user" value="#{bookRental.accountEnt.firstName} #{bookRental.accountEnt.lastName}"/>
                 </p:column>
-<!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{bookRental.account.id}" filterStyle="display:none">-->
+<!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{bookRental.accountEnt.id}" filterStyle="display:none">-->
 <!--                    <div style="text-align: center"><h:outputText-->
 <!--                            id="userSingle"-->
 <!--                            value="#{listAccountsController.getDesiredAccount((request.userPrincipal.name)).firstName} #{listAccountsController.getDesiredAccount((request.userPrincipal.name)).lastName} (you)" /></div>-->
 <!--                </p:column>-->
                 <p:column headerText="Options">
-                    <h:commandButton value="Release rented book"
+                    <h:commandButton value="Release rented bookEnt"
                                      rendered="#{login.adminAllowedAccess}"
                                      action="#{restAPI.deleteBookRental(bookRental.id)}"
-                                     onclick="return window.confirm('Are you sure you want return #{bookRental.book.title}?')"
+                                     onclick="return window.confirm('Are you sure you want return #{bookRental.bookEnt.title}?')"
                                      style="margin-left: 0px">
                     </h:commandButton>
-                        <h:commandButton value="#{bookRental.account.id==request.userPrincipal.name? 'Release rented book' : 'Not your rental'}"
+                        <h:commandButton value="#{bookRental.accountEnt.id==request.userPrincipal.name? 'Release rented bookEnt' : 'Not your rental'}"
                                          rendered="#{login.managerOrUserAllowedAccess}"
                                          action="#{restAPI.deleteBookRental(bookRental.id)}"
-                                         disabled="#{bookRental.account.id ne request.userPrincipal.name}"
-                                         onclick="return window.confirm('Are you sure you want return #{bookRental.book.title}?')"
+                                         disabled="#{bookRental.accountEnt.id ne request.userPrincipal.name}"
+                                         onclick="return window.confirm('Are you sure you want return #{bookRental.bookEnt.title}?')"
                                          style="margin-left: 0px">
                         </h:commandButton>
                 </p:column>

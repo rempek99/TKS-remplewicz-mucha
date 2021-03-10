@@ -4,14 +4,14 @@
       xmlns:f = "http://java.sun.com/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-    <title>Add account</title>
+    <title>Add accountEnt</title>
     <link rel="stylesheet" type="text/css" href="styles/addAccount.css"/>
 </h:head>
 <h:body>
     <div class="container">
         <h:form id="addAccount">
             <label for="login">Login</label>
-            <h:inputText id="login" value="#{addAccountController.account.login}"
+            <h:inputText id="login" value="#{addAccountController.accountEnt.login}"
                          required="true"
                          validator="#{addAccountController.accountService.accountRepo.checkIfUsernameExists}"
                          requiredMessage="The field is empty"
@@ -20,7 +20,7 @@
             </h:inputText>
             <h:message for="login" errorStyle="color:red; font-weight: bold; display:block"/>
             <label for="password">Password</label>
-            <h:inputSecret id="password" value="#{addAccountController.account.password}"
+            <h:inputSecret id="password" value="#{addAccountController.accountEnt.password}"
                          required="true"
                          requiredMessage="The field is empty"
                          validatorMessage="String is not valid (only characters a-z A-Z 0-9). Minimal length is 5, maximal length is 20">
@@ -28,13 +28,13 @@
             </h:inputSecret>
             <h:message for="password" errorStyle="color:red; font-weight: bold; display:block"/>
             <label for="fname">First Name</label>
-            <h:inputText id="fname" value="#{addAccountController.account.firstName}"
+            <h:inputText id="fname" value="#{addAccountController.accountEnt.firstName}"
                          required="true"
                          requiredMessage="The field is empty"
                          validatorMessage="String is not valid (only characters a-z A-Z)"/>
             <h:message for="fname" errorStyle="color:red; font-weight: bold; display:block"/>
             <label for="lname">Last Name</label>
-            <h:inputText id="lname" value="#{addAccountController.account.lastName}"
+            <h:inputText id="lname" value="#{addAccountController.accountEnt.lastName}"
                          required="true"
                          requiredMessage="The field is empty"
                          validatorMessage="String is not valid (only characters a-z A-Z)"/>
@@ -44,8 +44,8 @@
                              value="Register"
                              action="/login.xhtml"
                              onclick="return window.confirm('Are you sure you want to register yourself?')">
-                <f:actionListener binding="#{addAccountController.account.setRoleOfUser('USER')}"/>
-                <f:actionListener binding="#{addAccountController.account.setActive(false)}"/>
+                <f:actionListener binding="#{addAccountController.accountEnt.setRoleOfUser('USER')}"/>
+                <f:actionListener binding="#{addAccountController.accountEnt.setActive(false)}"/>
                 <f:actionListener binding="#{addAccountController.addConfirmed()}"/>
             </h:commandButton>
             <h:button value="Back" class="button" outcome="/login.xhtml"/>

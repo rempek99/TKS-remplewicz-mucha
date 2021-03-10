@@ -18,13 +18,13 @@
             <div class="topNavigationBar" id="navBar">
                 <ui:fragment><a href="#home" class="active" >Welcome page</a></ui:fragment>
                 <ui:fragment rendered="#{login.adminAllowedAccess}">
-                    <a href="../admins/addAccount.xhtml">Add account</a>
+                    <a href="../admins/addAccount.xhtml">Add accountEnt</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{login.adminAndManagerAllowedAccess}">
-                    <a href="../managers/addMovie.xhtml">Add movie</a>
+                    <a href="../managers/addMovie.xhtml">Add movieEnt</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{login.adminAndManagerAllowedAccess}">
-                    <a href="../managers/addBook.xhtml">Add book</a>
+                    <a href="../managers/addBook.xhtml">Add bookEnt</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{login.adminAndManagerAllowedAccess}">
                     <a href="../managers/listAccounts.xhtml">List all accounts</a>
