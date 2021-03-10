@@ -48,8 +48,8 @@
                     <p:column headerText="Rental ends">
                         <p:datePicker id="end" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{book.rentalEnd}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
                     </p:column>
-                    <h:column headerText="Choose User" rendered="#{login.adminAllowedAccess}">
-                        <h:selectOneMenu disabled="#{!login.adminAllowedAccess}" value="#{book.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                    <h:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
+                        <h:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}" value="#{book.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItems value="#{listAccountsController.accounts}"
                                            var="single"
                                            itemValue="#{single.id}"
@@ -58,8 +58,8 @@
                             />
                         </h:selectOneMenu>
                     </h:column>
-                    <h:column headerText="Choose User" rendered="#{login.managerOrUserAllowedAccess}">
-                        <h:selectOneMenu disabled="#{!login.managerOrUserAllowedAccess}" value="#{book.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                    <h:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
+                        <h:selectOneMenu disabled="#{!(listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER')}" value="#{book.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItem itemValue = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).id}"
                                           itemDisabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
                                           itemLabel = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).firstName}
@@ -78,7 +78,7 @@
                             <h:commandButton value="Remove"
                                              action="#{restAPI.deleteBook(book.id)}"
                                              disabled="#{book.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
-                                             rendered="#{login.adminAndManagerAllowedAccess}"
+                                             rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}"
                                              onclick="return window.confirm('Are you sure you want delete #{book.title}?')" style="margin-left: 0px"/>
                     </h:column>
                 </p:dataTable>
