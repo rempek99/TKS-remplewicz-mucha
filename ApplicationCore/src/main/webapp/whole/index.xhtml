@@ -56,7 +56,7 @@
                 <f:metadata>
                     <f:viewAction action="#{login.setRole(login.checkLoggedUserRole())}" immediate="true"  />
                 </f:metadata>
-                <h:commandButton styleClass="RoleButton" value="Your role: #{login.role}" disabled="true" style="color: chartreuse; font-weight: bold; pointer-events: none"/>
+                <h:commandButton styleClass="RoleButton" value="Your role: #{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser}" disabled="true" style="color: chartreuse; font-weight: bold; pointer-events: none"/>
             </ui:fragment>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()"/>
         </div>
