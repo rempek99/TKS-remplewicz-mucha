@@ -17,25 +17,25 @@
         <h:form>
             <div class="topNavigationBar" id="navBar">
                 <ui:fragment><a href="#home" class="active" >Welcome page</a></ui:fragment>
-                <ui:fragment rendered="#{login.adminAllowedAccess}">
+                <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
                     <a href="../admins/addAccount.xhtml">Add accountEnt</a>
                 </ui:fragment>
-                <ui:fragment rendered="#{login.adminAndManagerAllowedAccess}">
+                <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                     <a href="../managers/addMovie.xhtml">Add movieEnt</a>
                 </ui:fragment>
-                <ui:fragment rendered="#{login.adminAndManagerAllowedAccess}">
+                <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                     <a href="../managers/addBook.xhtml">Add bookEnt</a>
                 </ui:fragment>
-                <ui:fragment rendered="#{login.adminAndManagerAllowedAccess}">
+                <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                     <a href="../managers/listAccounts.xhtml">List all accounts</a>
                 </ui:fragment>
-                <ui:fragment rendered="#{login.allUserAllowedAccess}">
+                <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
                     <a href="../whole/listMovies.xhtml">Show available movies</a>
                 </ui:fragment>
-                <ui:fragment rendered="#{login.allUserAllowedAccess}">
+                <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
                     <a href="../whole/listBooks.xhtml">Show available books</a>
                 </ui:fragment>
-                <ui:fragment rendered="#{login.allUserAllowedAccess}">
+                <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
                     <a href="../whole/listRentals.xhtml">Show rentals list</a>
                 </ui:fragment>
                 <ui:fragment>
@@ -56,7 +56,7 @@
                     <f:metadata>
                         <f:viewAction action="#{login.setRole(login.checkLoggedUserRole())}" immediate="true"  />
                     </f:metadata>
-                    <h:commandButton styleClass="RoleButton" value="Your role: #{login.role}" disabled="true" style="color: chartreuse; font-weight: bold; pointer-events: none"/>
+                    <h:commandButton styleClass="RoleButton" value="Your role: #{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser}" disabled="true" style="color: chartreuse; font-weight: bold; pointer-events: none"/>
                 </ui:fragment>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()"/>
             </div>

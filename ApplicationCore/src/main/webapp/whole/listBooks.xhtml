@@ -35,7 +35,7 @@
                     <p:column headerText="Number of pages" filterBy="#{bookEnt.pages}" sortBy="#{bookEnt.pages}" filterMatchMode="contains" filterStyle="display:none">
                         <h:outputText id="pages" value="#{bookEnt.pages}" />
                     </p:column>
-                    <p:column headerText="Rented" rendered="#{login.adminAllowedAccess}" filterBy="#{bookEnt.rented}" sortBy="#{bookEnt.rented}" filterMatchMode="contains" filterStyle="display:none">
+                    <p:column headerText="Rented" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}" filterBy="#{bookEnt.rented}" sortBy="#{bookEnt.rented}" filterMatchMode="contains" filterStyle="display:none">
                         <h:outputText id="rented" value="#{bookEnt.rented}"/>
                     </p:column>
 <!--                    <p:column headerText="Rental period">-->
@@ -48,26 +48,26 @@
                     <p:column headerText="Rental ends">
                         <p:datePicker id="end" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{bookEnt.rentalEnd}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
                     </p:column>
-                    <h:column headerText="Choose User" rendered="#{login.adminAllowedAccess}">
-                        <h:selectOneMenu disabled="#{!login.adminAllowedAccess}" value="#{bookEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                    <p:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
+                        <p:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}" value="#{bookEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItems value="#{listAccountsController.accounts}"
                                            var="single"
                                            itemValue="#{single.id}"
                                            itemLabel="#{single.firstName} #{single.lastName} (#{single.roleOfUser})"
                                            itemDisabled="#{!single.active}"
                             />
-                        </h:selectOneMenu>
-                    </h:column>
-                    <h:column headerText="Choose User" rendered="#{login.managerOrUserAllowedAccess}">
-                        <h:selectOneMenu disabled="#{!login.managerOrUserAllowedAccess}" value="#{bookEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
+                        <p:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}" value="#{bookEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItem itemValue = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).id}"
                                           itemDisabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
                                           itemLabel = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).firstName}
                                            #{listAccountsController.getDesiredAccount(request.userPrincipal.name).lastName} (it's you)" />
 
-                        </h:selectOneMenu>
-                    </h:column>
-                    <h:column headerText="Options">
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="Options">
                             <h:commandButton value="Rent"
                                              action="#{restAPI.addBookRental(addRentalController.bookRental)}"
                                              disabled="#{bookEnt.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
@@ -78,9 +78,9 @@
                             <h:commandButton value="Remove"
                                              action="#{restAPI.deleteBook(bookEnt.id)}"
                                              disabled="#{bookEnt.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
-                                             rendered="#{login.adminAndManagerAllowedAccess}"
+                                             rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}"
                                              onclick="return window.confirm('Are you sure you want delete #{bookEnt.title}?')" style="margin-left: 0px"/>
-                    </h:column>
+                    </p:column>
                 </p:dataTable>
             </h:form>
             <h:button value="Back" class="button" outcome="index.xhtml"/>

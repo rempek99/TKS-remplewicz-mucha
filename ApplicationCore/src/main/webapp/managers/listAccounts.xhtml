@@ -36,24 +36,24 @@
                     <p:column headerText="Active" filterBy="#{accountEnt.active}" sortBy="#{accountEnt.active}" filterMatchMode="contains" filterStyle="display:none">
                         <h:outputText id="isActive" value="#{accountEnt.active}" />
                     </p:column>
-                    <p:column headerText="Set role of user" rendered="#{login.adminAllowedAccess}">
+                    <p:column headerText="Set role of user" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
                         <p:selectOneMenu value = "#{accountEnt.roleOfUser}" id="roleOfUser">
                             <f:selectItem itemValue = "USER" itemLabel = "Ordinary user" />
                             <f:selectItem itemValue = "MANAGER" itemLabel = "System manager" />
                             <f:selectItem itemValue = "ADMIN" itemLabel = "Admin" />
                         </p:selectOneMenu>
                     </p:column>
-                    <p:column headerText="Is user active?" rendered="#{login.adminAndManagerAllowedAccess}">
+                    <p:column headerText="Is user active?" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                         <p:selectOneMenu value = "#{accountEnt.active}" id="activityStatus">
                             <f:selectItem itemValue = "true" itemLabel = "User is active" />
                             <f:selectItem itemValue = "false" itemLabel = "User is not active" />
-                            <f:converter converterId="booleanConverter"/>
+                            <f:converter converterId="javax.faces.Boolean"/>
                         </p:selectOneMenu>
                     </p:column>
-                    <p:column headerText="Remove user" rendered="#{login.adminAllowedAccess}">
+                    <p:column headerText="Remove user" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
                             <h:commandButton value="Remove user now" action="#{restAPI.deleteAccount(accountEnt.id)}" onclick="return window.confirm('Are you sure you want delete #{accountEnt.firstName}?')" style="margin-left: 0px"/>
                     </p:column>
-                    <p:column headerText="Update user" rendered="#{login.adminAndManagerAllowedAccess}">
+                    <p:column headerText="Update user" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                         <h:commandButton value="Update status" action="#{listAccountsController.getSingleAccount(accountEnt).setActive(accountEnt.active)}" onclick="return window.confirm('Are you sure you want update #{accountEnt.firstName}?')" style="margin-left: 0px"/>
                     </p:column>
                 </p:dataTable>

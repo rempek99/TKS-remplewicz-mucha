@@ -33,7 +33,7 @@
                     <p:column headerText="Rating" filterBy="#{movieEnt.rating}" sortBy="#{movieEnt.rating}" filterMatchMode="contains" filterStyle="display:none">
                         <h:outputText id="rating" value="#{movieEnt.rating} / 10" />
                     </p:column>
-                    <p:column headerText="Rented" rendered="#{login.adminAllowedAccess}" filterBy="#{movieEnt.rented}" sortBy="#{movieEnt.rented}" filterMatchMode="contains" filterStyle="display:none">
+                    <p:column headerText="Rented" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}" filterBy="#{movieEnt.rented}" sortBy="#{movieEnt.rented}" filterMatchMode="contains" filterStyle="display:none">
                         <h:outputText id="rented" value="#{movieEnt.rented}"/>
                     </p:column>
 <!--                    <p:column headerText="Rental period">-->
@@ -45,8 +45,8 @@
                     <p:column headerText="Rental ends">
                         <p:datePicker id="end" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{movieEnt.rentalEnd}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
                     </p:column>
-                    <p:column headerText="Choose User" rendered="#{login.adminAllowedAccess}">
-                        <p:selectOneMenu disabled="#{!login.adminAllowedAccess}" value="#{movieEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                    <p:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
+                        <p:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}" value="#{movieEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItems value="#{listAccountsController.accounts}"
                                            var="single"
                                            itemValue="#{single.id}"
@@ -55,8 +55,8 @@
                             />
                         </p:selectOneMenu>
                     </p:column>
-                    <p:column headerText="Choose User" rendered="#{login.managerOrUserAllowedAccess}">
-                        <p:selectOneMenu disabled="#{!login.managerOrUserAllowedAccess}" value="#{movieEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                    <p:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
+                        <p:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}" value="#{movieEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItem itemValue = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).id}"
                                           itemDisabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
                                           itemLabel = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).firstName}
@@ -74,7 +74,7 @@
                             <h:commandButton value="Remove"
                                              action="#{restAPI.deleteMovie(movieEnt.id)}"
                                              disabled="#{movieEnt.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
-                                             rendered="#{login.adminAndManagerAllowedAccess}"
+                                             rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}"
                                              onclick="return window.confirm('Are you sure you want delete #{movieEnt.title}?')" style="margin-left: 0px"/>
                     </p:column>
                 </p:dataTable>

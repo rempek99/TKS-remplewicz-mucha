@@ -47,7 +47,7 @@
                             <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Warsaw"/>
                         </h:outputText>
                 </p:column>
-                <p:column headerText="Rented by" rendered="#{login.adminAllowedAccess}">
+                <p:column headerText="Rented by" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
                     <h:outputText id="rentalUser" value="#{movieRental.accountEnt.firstName} #{movieRental.accountEnt.lastName}"/>
                 </p:column>
 <!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{movieRental.accountEnt.id}" filterStyle="display:none">-->
@@ -57,13 +57,13 @@
 <!--                </p:column>-->
                 <p:column headerText="Options">
                     <h:commandButton value="Release rented movieEnt"
-                                     rendered="#{login.adminAllowedAccess}"
+                                     rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}"
                                      action="#{restAPI.deleteMovieRental(movieRental.id)}"
                                      onclick="return window.confirm('Are you sure you want return #{movieRental.movieEnt.title}?')"
                                      style="margin-left: 0px">
                     </h:commandButton>
                     <h:commandButton value="#{movieRental.accountEnt.id==request.userPrincipal.name? 'Release rented bookEnt' : 'Not your rental'}"
-                                     rendered="#{login.managerOrUserAllowedAccess}"
+                                     rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}"
                                      action="#{restAPI.deleteMovieRental(movieRental.id)}"
                                      disabled="#{movieRental.accountEnt.id ne request.userPrincipal.name}"
                                      onclick="return window.confirm('Are you sure you want return #{movieRental.movieEnt.title}?')"
@@ -107,7 +107,7 @@
                             <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Warsaw"/>
                         </h:outputText>
                 </p:column>
-                <p:column headerText="Rented by" rendered="#{login.adminAllowedAccess}">
+                <p:column headerText="Rented by" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
                     <h:outputText id="user" value="#{bookRental.accountEnt.firstName} #{bookRental.accountEnt.lastName}"/>
                 </p:column>
 <!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{bookRental.accountEnt.id}" filterStyle="display:none">-->
@@ -117,13 +117,13 @@
 <!--                </p:column>-->
                 <p:column headerText="Options">
                     <h:commandButton value="Release rented bookEnt"
-                                     rendered="#{login.adminAllowedAccess}"
+                                     rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}"
                                      action="#{restAPI.deleteBookRental(bookRental.id)}"
                                      onclick="return window.confirm('Are you sure you want return #{bookRental.bookEnt.title}?')"
                                      style="margin-left: 0px">
                     </h:commandButton>
                         <h:commandButton value="#{bookRental.accountEnt.id==request.userPrincipal.name? 'Release rented bookEnt' : 'Not your rental'}"
-                                         rendered="#{login.managerOrUserAllowedAccess}"
+                                         rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}"
                                          action="#{restAPI.deleteBookRental(bookRental.id)}"
                                          disabled="#{bookRental.accountEnt.id ne request.userPrincipal.name}"
                                          onclick="return window.confirm('Are you sure you want return #{bookRental.bookEnt.title}?')"
