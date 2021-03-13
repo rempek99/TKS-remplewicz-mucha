@@ -1,47 +1,26 @@
-package model.entities;
+package model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 import java.util.UUID;
 
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-public class AccountEnt {
-
-    @NotNull(message = "Please enter your first name")
-    @Pattern(regexp = "[a-zA-Z]+")
+public class Account {
     private String firstName;
-    @NotNull(message = "Please enter your last name")
-    @Pattern(regexp = "[a-zA-Z]+")
     private String lastName;
-    @NotNull(message = "Please choose one from the list")
     private String roleOfUser;
     private boolean isActive;
-    @NotNull
     private String id;
-    @NotNull
-    @Pattern(regexp = "[a-zA-Z0-9]+")
     private String login;
-    @NotNull
-    @Pattern(regexp = "[a-zA-Z0-9]+")
     private String password;
 
-    public AccountEnt() {
+    public Account() {
         this.id = UUID.randomUUID().toString();
     }
 
-    @JsonCreator
-    public AccountEnt(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("roleOfUser") String roleOfUser, @JsonProperty("active") boolean isActive, @JsonProperty("login") String login, @JsonProperty("password") String password) {
+    public Account(String firstName, String lastName, String roleOfUser, boolean isActive, String login,  String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.roleOfUser = roleOfUser;
@@ -50,6 +29,7 @@ public class AccountEnt {
         this.password = password;
         this.id = UUID.randomUUID().toString();
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -72,7 +52,7 @@ public class AccountEnt {
     }
 
     public void setRoleOfUser(String roleOfUser) {
-        this.roleOfUser = roleOfUser;
+            this.roleOfUser = roleOfUser;
     }
 
     public boolean isActive() {
@@ -80,7 +60,7 @@ public class AccountEnt {
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+            isActive = active;
     }
 
     public String getId() {
@@ -121,8 +101,8 @@ public class AccountEnt {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AccountEnt)) return false;
-        AccountEnt account = (AccountEnt) o;
+        if (!(o instanceof Account)) return false;
+        Account account = (Account) o;
         return isActive() == account.isActive() &&
                 getFirstName().equals(account.getFirstName()) &&
                 getLastName().equals(account.getLastName()) &&

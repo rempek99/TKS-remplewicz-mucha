@@ -1,6 +1,7 @@
 package model.entities;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.annotation.FacesConfig;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
 import java.io.IOException;
 import java.io.Serializable;
 
-@Named
+@FacesConfig
 @RequestScoped
 public class LoginEnt implements Serializable {
 

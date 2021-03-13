@@ -1,0 +1,125 @@
+package model.entities;
+
+import java.util.*;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import javax.security.enterprise.credential.Credential;
+import javax.security.enterprise.credential.UsernamePasswordCredential;
+import javax.security.enterprise.identitystore.CredentialValidationResult;
+import javax.security.enterprise.identitystore.IdentityStore;
+
+@ApplicationScoped
+public class AccountRepoEnt implements IdentityStore {
+
+    private List<AccountEnt> accounts = Collections.synchronizedList(new ArrayList<AccountEnt>());
+
+    @PostConstruct
+    private void insertInitData() {
+        accounts.add(new AccountEnt("Jan", "Kowalski", "USER", true, "jan12", "kowalski"));
+        accounts.add(new AccountEnt("Tomasz", "Nowak", "USER", true, "tomasz", "nowak"));
+        accounts.add(new AccountEnt("Artur", "Wiśniewski","USER", true, "artur", "wiśniewski"));
+        accounts.add(new AccountEnt("Janusz", "Szybki", "MANAGER", true, "janusz", "szybki"));
+        accounts.add(new AccountEnt("Mariusz", "Władczy", "ADMIN", true, "admin", "admin"));
+    }
+
+    public List<AccountEnt> getAllAccounts() {
+        return accounts;
+    }
+
+    public void addAccount(AccountEnt a) {
+        accounts.add(a);
+        a.setId(UUID.randomUUID().toString());
+        printState();
+    }
+
+    public void removeAccount(AccountEnt a) {
+        accounts.remove(a);
+        printState();
+    }
+
+    public AccountEnt getAccount(AccountEnt a) {
+        if (accounts.contains(a)) {
+            return a;
+        } else {
+            return null;
+        }
+    }
+
+    public AccountEnt getMovieSelectedViaUUID(MovieEnt movie) {
+        String compare = movie.getRentalUserUUID();
+        for(AccountEnt acc: accounts) {
+            if(acc.getId().equals(compare)){
+                return acc;
+            }
+        }
+        return null;
+    }
+
+    public AccountEnt getBookSelectedViaUUID(BookEnt book) {
+        String compare = book.getRentalUserUUID();
+        for(AccountEnt acc: accounts) {
+            if(acc.getId().equals(compare)){
+                return acc;
+            }
+        }
+        return null;
+    }
+
+    public AccountEnt getAccountViaUUID(String str) {
+        for(AccountEnt acc: accounts) {
+            if(acc.getId().equals(str)){
+                return acc;
+            }
+        }
+        return null;
+    }
+
+    public void updateSingleAcc(AccountEnt accToChange, AccountEnt accWithData) {
+        AccountEnt fromRepo = getAccount(accToChange);
+        fromRepo.setActive(accWithData.isActive());
+        fromRepo.setFirstName(accWithData.getFirstName());
+        fromRepo.setLastName(accWithData.getLastName());
+        fromRepo.setLogin(accWithData.getLogin());
+        fromRepo.setPassword(accWithData.getPassword());
+        fromRepo.setRoleOfUser(accWithData.getRoleOfUser());
+    }
+
+    private void printState() {
+        System.out.println(Arrays.toString(accounts.toArray()));
+    }
+
+    @Override
+    public CredentialValidationResult validate(Credential credential) {
+
+        UsernamePasswordCredential login = (UsernamePasswordCredential) credential;
+        CredentialValidationResult res = null;
+
+        for (AccountEnt acc: accounts) {
+            if (login.getCaller().equals(acc.getLogin()) && login.getPasswordAsString().equals(acc.getPassword())) {
+                res = new CredentialValidationResult(acc.getId(), new HashSet<>(Collections.singletonList(acc.getRoleOfUser())));
+                break;
+            }
+            else {
+                res = CredentialValidationResult.NOT_VALIDATED_RESULT;
+            }
+        }
+        return res;
+    }
+
+    public void checkIfUsernameExists(FacesContext context, UIComponent comp, Object value) throws ValidatorException {
+        String checked = (String) value;
+        for(AccountEnt acc: accounts){
+            if(acc.getLogin().equals(checked)){
+                ((UIInput) comp).setValid(false);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"User already exists, choose another login", "User already exists, choose another login");
+                context.addMessage(comp.getClientId(context), message);
+            }
+        }
+    }
+
+}
