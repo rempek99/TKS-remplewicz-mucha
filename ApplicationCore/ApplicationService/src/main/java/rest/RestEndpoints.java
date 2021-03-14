@@ -17,7 +17,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 @RequestScoped
-@Path("/")
+@Path("/rest")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
 public class RestEndpoints implements Serializable {
