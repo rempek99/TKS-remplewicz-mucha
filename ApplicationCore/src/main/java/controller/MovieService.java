@@ -1,10 +1,9 @@
 package controller;
 
 import model.Movie;
-import model.MovieRepo;
+import model.repositories.MovieRepo;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 

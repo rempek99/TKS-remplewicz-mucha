@@ -2,9 +2,8 @@ package controller;
 
 import model.BookRental;
 import model.MovieRental;
-import model.RentalRepo;
+import model.repositories.RentalRepo;
 
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import java.io.Serializable;

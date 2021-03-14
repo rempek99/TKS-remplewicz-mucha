@@ -1,4 +1,6 @@
-package model;
+package model.repositories;
+
+import model.Book;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;

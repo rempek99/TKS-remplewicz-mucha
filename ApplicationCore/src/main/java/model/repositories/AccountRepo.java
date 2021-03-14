@@ -1,4 +1,8 @@
-package model;
+package model.repositories;
+
+import model.Account;
+import model.Book;
+import model.Movie;
 
 import java.util.*;
 import javax.annotation.PostConstruct;

@@ -1,7 +1,7 @@
 package controller;
 
 import model.Book;
-import model.BookRepo;
+import model.repositories.BookRepo;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;

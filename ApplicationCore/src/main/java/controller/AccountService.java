@@ -1,7 +1,7 @@
 package controller;
 
 import model.Account;
-import model.AccountRepo;
+import model.repositories.AccountRepo;
 import model.Book;
 import model.Movie;
 

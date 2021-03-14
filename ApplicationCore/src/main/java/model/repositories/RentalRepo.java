@@ -1,4 +1,7 @@
-package model;
+package model.repositories;
+
+import model.BookRental;
+import model.MovieRental;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.*;

@@ -1,4 +1,6 @@
-package model;
+package model.repositories;
+
+import model.Movie;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
