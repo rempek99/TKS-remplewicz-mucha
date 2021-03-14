@@ -13,10 +13,10 @@ public class RentalRepo {
     private List<Date> invalidDates = new ArrayList<Date>();
 
     public List<MovieRental> getMovieRentals() {
-        return movieRentals;
+        return Collections.unmodifiableList(movieRentals);
     }
     public List<BookRental> getBookRentals() {
-        return bookRentals;
+        return Collections.unmodifiableList(bookRentals);
     }
 
     public void removeMovieRental(MovieRental r) {
@@ -26,16 +26,18 @@ public class RentalRepo {
             bookRentals.remove(r);
     }
 
-    public void addMovieRental(MovieRental r) {
+    public MovieRental addMovieRental(MovieRental r) {
             movieRentals.add(r);
             r.setId(UUID.randomUUID().toString());
-            printState();
+//            printState();
+        return r;
     }
 
-    public void addBookRental(BookRental r) {
+    public BookRental addBookRental(BookRental r) {
             bookRentals.add(r);
             r.setId(UUID.randomUUID().toString());
-            printState();
+//            printState();
+        return r;
     }
 
     public MovieRental getMovieRentalViaUUID(String str) {
@@ -72,30 +74,30 @@ public class RentalRepo {
         }
     }
 
-    public void updateSingleMovieRental(MovieRental movieRentalToChange, MovieRental movieRentalWithData) {
+    public MovieRental updateSingleMovieRental(MovieRental movieRentalToChange, MovieRental movieRentalWithData) {
         MovieRental fromRepo = getMovieRental(movieRentalToChange);
-        fromRepo.setId(movieRentalWithData.getId());
         fromRepo.setMovie(movieRentalWithData.getMovie());
         fromRepo.setAccount(movieRentalWithData.getAccount());
         fromRepo.setRange(movieRentalWithData.getRange());
         fromRepo.setRentalStart(movieRentalWithData.getRentalStart());
         fromRepo.setRentalEnd(movieRentalWithData.getRentalEnd());
+        return fromRepo;
     }
 
-    public void updateSingleBookRental(BookRental bookRentalToChange, BookRental bookRentalWithData) {
+    public BookRental updateSingleBookRental(BookRental bookRentalToChange, BookRental bookRentalWithData) {
         BookRental fromRepo = getBookRental(bookRentalToChange);
-        fromRepo.setId(bookRentalWithData.getId());
         fromRepo.setBook(bookRentalWithData.getBook());
         fromRepo.setAccount(bookRentalWithData.getAccount());
         fromRepo.setRange(bookRentalWithData.getRange());
         fromRepo.setRentalStart(bookRentalWithData.getRentalStart());
         fromRepo.setRentalEnd(bookRentalWithData.getRentalEnd());
+        return fromRepo;
     }
 
-    private void printState() {
-        System.out.println(Arrays.toString(movieRentals.toArray()));
-        System.out.println(Arrays.toString(bookRentals.toArray()));
-    }
+//    private void printState() {
+//        System.out.println(Arrays.toString(movieRentals.toArray()));
+//        System.out.println(Arrays.toString(bookRentals.toArray()));
+//    }
 
     public List<Date> getDisabledDays() {
         Date dt = new Date();

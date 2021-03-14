@@ -7,16 +7,16 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 @ApplicationScoped
-public class RentalRepo {
+public class RentalEntRepo {
     private List<MovieRentalEnt> movieRentals = Collections.synchronizedList(new ArrayList<MovieRentalEnt>());
     private List<BookRentalEnt> bookRentals = Collections.synchronizedList(new ArrayList<BookRentalEnt>());
     private List<Date> invalidDates = new ArrayList<>();
 
     public List<MovieRentalEnt> getMovieRentals() {
-        return movieRentals;
+        return Collections.unmodifiableList(movieRentals);
     }
     public List<BookRentalEnt> getBookRentals() {
-        return bookRentals;
+        return Collections.unmodifiableList(bookRentals);
     }
 
     public void removeMovieRental(MovieRentalEnt r) {
@@ -26,16 +26,18 @@ public class RentalRepo {
             bookRentals.remove(r);
     }
 
-    public void addMovieRental(MovieRentalEnt r) {
+    public MovieRentalEnt addMovieRental(MovieRentalEnt r) {
         r.setId(UUID.randomUUID().toString());
         movieRentals.add(r);
-        printState();
+//        printState();
+        return r;
     }
 
-    public void addBookRental(BookRentalEnt r) {
+    public BookRentalEnt addBookRental(BookRentalEnt r) {
         r.setId(UUID.randomUUID().toString());
         bookRentals.add(r);
-        printState();
+//        printState();
+        return r;
     }
 
     public MovieRentalEnt getMovieRentalViaUUID(String str) {
@@ -72,30 +74,30 @@ public class RentalRepo {
         }
     }
 
-    public void updateSingleMovieRental(MovieRentalEnt movieRentalToChange, MovieRentalEnt movieRentalWithData) {
+    public MovieRentalEnt updateSingleMovieRental(MovieRentalEnt movieRentalToChange, MovieRentalEnt movieRentalWithData) {
         MovieRentalEnt fromRepo = getMovieRental(movieRentalToChange);
-        fromRepo.setId(movieRentalWithData.getId());
         fromRepo.setMovieEnt(movieRentalWithData.getMovieEnt());
         fromRepo.setAccountEnt(movieRentalWithData.getAccountEnt());
         fromRepo.setRange(movieRentalWithData.getRange());
         fromRepo.setRentalStart(movieRentalWithData.getRentalStart());
         fromRepo.setRentalEnd(movieRentalWithData.getRentalEnd());
+        return fromRepo;
     }
 
-    public void updateSingleBookRental(BookRentalEnt bookRentalToChange, BookRentalEnt bookRentalWithData) {
+    public BookRentalEnt updateSingleBookRental(BookRentalEnt bookRentalToChange, BookRentalEnt bookRentalWithData) {
         BookRentalEnt fromRepo = getBookRental(bookRentalToChange);
-        fromRepo.setId(bookRentalWithData.getId());
         fromRepo.setBookEnt(bookRentalWithData.getBookEnt());
         fromRepo.setAccountEnt(bookRentalWithData.getAccountEnt());
         fromRepo.setRange(bookRentalWithData.getRange());
         fromRepo.setRentalStart(bookRentalWithData.getRentalStart());
         fromRepo.setRentalEnd(bookRentalWithData.getRentalEnd());
+        return fromRepo;
     }
 
-    private void printState() {
-        System.out.println(Arrays.toString(movieRentals.toArray()));
-        System.out.println(Arrays.toString(bookRentals.toArray()));
-    }
+//    private void printState() {
+//        System.out.println(Arrays.toString(movieRentals.toArray()));
+//        System.out.println(Arrays.toString(bookRentals.toArray()));
+//    }
 
     public List<Date> getDisabledDays() {
         Date dt = new Date();

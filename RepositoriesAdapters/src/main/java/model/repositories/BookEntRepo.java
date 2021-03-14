@@ -7,7 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 @ApplicationScoped
-public class BookRepo {
+public class BookEntRepo {
 
     private List<BookEnt> books = Collections.synchronizedList(new ArrayList<BookEnt>());
 
@@ -26,18 +26,19 @@ public class BookRepo {
     }
 
     public List<BookEnt> getAllBooks() {
-        return books;
+        return Collections.unmodifiableList(books);
     }
 
-    public void addBook(BookEnt b) {
+    public BookEnt addBook(BookEnt b) {
         b.setId(UUID.randomUUID().toString());
         books.add(b);
-        printState();
+//        printState();
+        return b;
     }
 
     public void removeBook(BookEnt b) {
         books.remove(b);
-        printState();
+//        printState();
     }
 
 
@@ -58,7 +59,7 @@ public class BookRepo {
         }
     }
 
-    public void updateSingleBook(BookEnt bookToChange, BookEnt bookWithData) {
+    public BookEnt updateSingleBook(BookEnt bookToChange, BookEnt bookWithData) {
         BookEnt fromRepo = getBook(bookToChange);
         fromRepo.setTitle(bookWithData.getTitle());
         fromRepo.setAuthor(bookWithData.getAuthor());
@@ -67,9 +68,10 @@ public class BookRepo {
         fromRepo.setRentalUserUUID(bookWithData.getRentalUserUUID());
         fromRepo.setRentalStart(bookWithData.getRentalStart());
         fromRepo.setRentalEnd(bookWithData.getRentalEnd());
+        return fromRepo;
     }
 
-    private void printState() {
-        System.out.println(Arrays.toString(books.toArray()));
-    }
+//    private void printState() {
+//        System.out.println(Arrays.toString(books.toArray()));
+//    }
 }

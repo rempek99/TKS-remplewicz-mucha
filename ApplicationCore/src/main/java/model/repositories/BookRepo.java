@@ -26,18 +26,19 @@ public class BookRepo {
     }
 
     public List<Book> getAllBooks() {
-        return books;
+        return Collections.unmodifiableList(books);
     }
 
-    public void addBook(Book b) {
+    public Book addBook(Book b) {
         books.add(b);
         b.setId(UUID.randomUUID().toString());
-        printState();
+//        printState();
+        return b;
     }
 
     public void removeBook(Book b) {
         books.remove(b);
-        printState();
+//        printState();
     }
 
 
@@ -58,7 +59,7 @@ public class BookRepo {
         }
     }
 
-    public void updateSingleBook(Book bookToChange, Book bookWithData) {
+    public Book updateSingleBook(Book bookToChange, Book bookWithData) {
         Book fromRepo = getBook(bookToChange);
         fromRepo.setTitle(bookWithData.getTitle());
         fromRepo.setAuthor(bookWithData.getAuthor());
@@ -67,9 +68,10 @@ public class BookRepo {
         fromRepo.setRentalUserUUID(bookWithData.getRentalUserUUID());
         fromRepo.setRentalStart(bookWithData.getRentalStart());
         fromRepo.setRentalEnd(bookWithData.getRentalEnd());
+        return fromRepo;
     }
 
-    private void printState() {
-        System.out.println(Arrays.toString(books.toArray()));
-    }
+    //private void printState() {
+//        System.out.println(Arrays.toString(books.toArray()));
+//    }
 }

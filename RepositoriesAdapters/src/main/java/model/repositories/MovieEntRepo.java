@@ -7,7 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 @ApplicationScoped
-public class MovieRepo {
+public class MovieEntRepo {
 
     private List<MovieEnt> movies = Collections.synchronizedList(new ArrayList<MovieEnt>());
 
@@ -26,13 +26,14 @@ public class MovieRepo {
     }
 
     public List<MovieEnt> getAllMovies() {
-        return movies;
+        return Collections.unmodifiableList(movies);
     }
 
-    public void addMovie(MovieEnt m) {
+    public MovieEnt addMovie(MovieEnt m) {
             m.setId(UUID.randomUUID().toString());
             movies.add(m);
             printState();
+        return m;
     }
 
     public void removeMovie(MovieEnt m) {
@@ -57,7 +58,7 @@ public class MovieRepo {
         }
     }
 
-    public void updateSingleMovie(MovieEnt movieToChange, MovieEnt movieWithData) {
+    public MovieEnt updateSingleMovie(MovieEnt movieToChange, MovieEnt movieWithData) {
         MovieEnt fromRepo = getMovie(movieToChange);
         fromRepo.setTitle(movieWithData.getTitle());
         fromRepo.setAuthor(movieWithData.getAuthor());
@@ -66,6 +67,7 @@ public class MovieRepo {
         fromRepo.setRentalUserUUID(movieWithData.getRentalUserUUID());
         fromRepo.setRentalStart(movieWithData.getRentalStart());
         fromRepo.setRentalEnd(movieWithData.getRentalEnd());
+        return fromRepo;
     }
 
     private void printState() {

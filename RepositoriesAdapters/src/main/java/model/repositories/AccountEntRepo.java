@@ -32,18 +32,17 @@ public class AccountEntRepo implements IdentityStore {
     }
 
     public List<AccountEnt> getAllAccounts() {
-            return accounts;
+            return Collections.unmodifiableList(accounts);
     }
 
-    public void addAccount(AccountEnt a) {
+    public AccountEnt addAccount(AccountEnt a) {
         a.setId(UUID.randomUUID().toString());
         accounts.add(a);
-        printState();
+        return a;
     }
 
     public void removeAccount(AccountEnt a) {
             accounts.remove(a);
-            printState();
     }
 
     public AccountEnt getAccount(AccountEnt a) {
@@ -85,7 +84,7 @@ public class AccountEntRepo implements IdentityStore {
         return null;
     }
 
-    public void updateSingleAcc(AccountEnt accToChange, AccountEnt accWithData) {
+    public AccountEnt updateSingleAcc(AccountEnt accToChange, AccountEnt accWithData) {
         AccountEnt fromRepo = getAccount(accToChange);
         fromRepo.setActive(accWithData.isActive());
         fromRepo.setFirstName(accWithData.getFirstName());
@@ -93,10 +92,7 @@ public class AccountEntRepo implements IdentityStore {
         fromRepo.setLogin(accWithData.getLogin());
         fromRepo.setPassword(accWithData.getPassword());
         fromRepo.setRoleOfUser(accWithData.getRoleOfUser());
-    }
-
-    private void printState() {
-        System.out.println(Arrays.toString(accounts.toArray()));
+        return fromRepo;
     }
 
     @Override
