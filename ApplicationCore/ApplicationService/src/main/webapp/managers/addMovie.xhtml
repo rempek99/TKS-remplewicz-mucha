@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en">
+<h:head>
+    <title>Add movieEnt</title>
+    <link rel="stylesheet" type="text/css" href="../styles/addMovie.css"/>
+</h:head>
+<h:body>
+    <div class="container">
+        <h:form>
+            <label for="title">Title</label>
+            <h:inputText id="title" value="#{addMovieController.movie.title}"
+                         required="true"
+                         requiredMessage="The field is empty"
+                         validatorMessage="String is not valid"/>
+            <h:message for="title" errorStyle="color:red; font-weight: bold; display:block"/>
+            <label for="author">Author</label>
+            <h:inputText id="author" value="#{addMovieController.movie.author}"
+                         required="true"
+                         requiredMessage="The field is empty"
+                         validatorMessage="String is not valid (only characters a-z A-Z)"/>
+            <h:message for="author" errorStyle="color:red; font-weight: bold; display:block"/>
+            <label for="rating">Rating</label>
+            <h:inputText id="rating" value="#{addMovieController.movie.rating}"
+                         required="true"
+                         converter="javax.faces.Double"
+                         requiredMessage="The field is empty"
+                         validatorMessage="Passed score is not valid (only range from 0.0 to 10.0)"/>
+            <h:message for="rating" errorStyle="color:red; font-weight: bold; display:block"/>
+            <br/><br/>
+            <h:commandButton value="Add movieEnt" action="/whole/index.xhtml"
+                             onclick="return window.confirm('Are you sure you want add this movieEnt?')">
+                <f:actionListener binding="#{restAPI.addMovie(addMovieController.movie)}"/>
+            </h:commandButton>
+        </h:form>
+        <h:button value="Cancel" class="button" outcome="/whole/index.xhtml"/>
+    </div>
+</h:body>
+</html>
