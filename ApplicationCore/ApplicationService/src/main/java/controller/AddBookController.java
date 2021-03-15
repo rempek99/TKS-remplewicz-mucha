@@ -1,6 +1,8 @@
 package controller;
 
 import model.Book;
+import services.BookService;
+
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

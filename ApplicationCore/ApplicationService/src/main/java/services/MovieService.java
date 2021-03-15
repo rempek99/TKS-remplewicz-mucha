@@ -1,4 +1,4 @@
-package controller;
+package services;
 
 import model.Movie;
 import repositories.MovieRepo;

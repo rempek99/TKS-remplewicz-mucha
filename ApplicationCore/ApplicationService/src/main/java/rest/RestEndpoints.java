@@ -1,10 +1,10 @@
 package rest;
 
 
-import controller.AccountService;
-import controller.BookService;
-import controller.MovieService;
-import controller.RentalService;
+import services.AccountService;
+import services.BookService;
+import services.MovieService;
+import services.RentalService;
 import model.*;
 
 import javax.enterprise.context.RequestScoped;

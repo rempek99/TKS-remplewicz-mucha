@@ -1,6 +1,8 @@
 package controller;
 
 import model.Movie;
+import services.MovieService;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.view.ViewScoped;

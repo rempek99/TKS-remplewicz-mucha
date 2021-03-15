@@ -1,4 +1,4 @@
-package controller;
+package services;
 
 import model.Account;
 import repositories.AccountRepo;
@@ -19,7 +19,9 @@ public class AccountService implements Serializable{
         return accountRepo.getAllAccounts();
     }
 
-    public Account getSingleMovieSelection(Movie m) {return accountRepo.getMovieSelectedViaUUID(m); }
+    public Account getSingleMovieSelection(Movie m) {
+        return accountRepo.getMovieSelectedViaUUID(m);
+    }
     public Account getSingleBookSelection(Book b) {return accountRepo.getBookSelectedViaUUID(b); }
     public Account getAccountViaUUID(String str) {return accountRepo.getAccountViaUUID(str); }
 

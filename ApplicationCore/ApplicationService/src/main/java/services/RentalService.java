@@ -1,4 +1,4 @@
-package controller;
+package services;
 
 import model.BookRental;
 import model.MovieRental;

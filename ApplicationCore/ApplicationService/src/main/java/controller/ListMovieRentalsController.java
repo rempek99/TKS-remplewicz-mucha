@@ -1,7 +1,8 @@
 package controller;
 
-import model.BookRental;
 import model.MovieRental;
+import services.RentalService;
+
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

@@ -1,6 +1,8 @@
 package controller;
 
 import model.Movie;
+import services.MovieService;
+
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

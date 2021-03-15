@@ -1,6 +1,8 @@
 package controller;
 
 import model.Book;
+import services.BookService;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.view.ViewScoped;

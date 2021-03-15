@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import services.RentalService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
