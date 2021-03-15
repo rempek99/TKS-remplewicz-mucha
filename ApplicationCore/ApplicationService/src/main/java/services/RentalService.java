@@ -1,8 +1,8 @@
 package services;
 
+import infrastructure.RentalPort;
 import model.BookRental;
 import model.MovieRental;
-import repositories.RentalRepo;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -13,7 +13,7 @@ import java.util.List;
 @SessionScoped
 public class RentalService implements Serializable {
     @Inject
-    private RentalRepo rentalRepo;
+    private RentalPort rentalRepo;
 
     public List<MovieRental> getAllMovieRentals() { return rentalRepo.getMovieRentals(); }
     public List<BookRental> getAllBookRentals() { return rentalRepo.getBookRentals(); }

@@ -1,7 +1,8 @@
 package services;
 
+import infrastructure.MoviePort;
 import model.Movie;
-import repositories.MovieRepo;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -10,7 +11,7 @@ import javax.inject.Inject;
 @SessionScoped
 public class MovieService implements Serializable{
     @Inject
-    private MovieRepo movieRepo;
+    private MoviePort movieRepo;
 
     public List<Movie> getAllMovies() {
         return movieRepo.getAllMovies();

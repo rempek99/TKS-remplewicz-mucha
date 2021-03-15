@@ -13,6 +13,6 @@ public interface AccountPort {
     Account getMovieSelectedViaUUID(Movie m);
     Account getBookSelectedViaUUID(Book b);
     void updateSingleAcc(Account income, Account outcome);
-    void addAccount(Account a);
+    Account addAccount(Account a);
     void removeAccount(Account a);
 }

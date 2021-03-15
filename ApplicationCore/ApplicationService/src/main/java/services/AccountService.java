@@ -1,7 +1,7 @@
 package services;
 
+import infrastructure.AccountPort;
 import model.Account;
-import repositories.AccountRepo;
 import model.Book;
 import model.Movie;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @SessionScoped
 public class AccountService implements Serializable{
     @Inject
-    private AccountRepo accountRepo;
+    private AccountPort accountRepo;
 
     public List<Account> getAllAccounts() {
         return accountRepo.getAllAccounts();
@@ -39,7 +39,4 @@ public class AccountService implements Serializable{
         return accountRepo.getAccount(a);
     }
 
-    public AccountRepo getAccountRepo() {
-        return accountRepo;
-    }
 }

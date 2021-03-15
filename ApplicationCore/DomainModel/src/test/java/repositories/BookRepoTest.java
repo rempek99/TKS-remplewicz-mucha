@@ -1,25 +1,24 @@
 package repositories;
 
-import model_ent.entities.BookEnt;
-import model_ent.repositories.BookEntRepo;
+import model.Book;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BookEntRepoTest {
+class BookRepoTest {
 
     private static final int NUMBER_OF_TESTERS = 3;
 
-    private BookEntRepo repo;
-    private final BookEnt tester = new BookEnt("Test", "Tester", 100,false);
-    private final BookEnt tester2 = new BookEnt("Test2", "Tester2", 200, true);
-    private final BookEnt tester3 = new BookEnt("Test3", "Tester3", 300, true);
+    private BookRepo repo;
+    private final Book tester = new Book("Test", "Tester", 100,false);
+    private final Book tester2 = new Book("Test2", "Tester2", 200, true);
+    private final Book tester3 = new Book("Test3", "Tester3", 300, true);
 
 
     @BeforeEach
     void initRepo() {
-        repo = new BookEntRepo();
+        repo = new BookRepo();
         assertTrue(repo.getAllBooks().isEmpty());
         repo.addBook(tester);
         repo.addBook(tester2);
@@ -35,7 +34,7 @@ class BookEntRepoTest {
     @Test
     void addBook() {
         final int repo_size = repo.getAllBooks().size();
-        BookEnt my_book = new BookEnt("Moja ksiazka", "Remplewicz", 1000, false);
+        Book my_book = new Book("Moja ksiazka", "Remplewicz", 1000, false);
         repo.addBook(my_book);
         assertEquals(repo_size + 1, repo.getAllBooks().size());
     }
@@ -49,24 +48,24 @@ class BookEntRepoTest {
 
     @Test
     void getBookViaUUID() {
-        BookEnt my_book = new BookEnt("Moja ksiazka", "Remplewicz", 1000, false);
-        BookEnt added = repo.addBook(my_book);
-        BookEnt found = repo.getBookViaUUID(added.getId());
+        Book my_book = new Book("Moja ksiazka", "Remplewicz", 1000, false);
+        Book added = repo.addBook(my_book);
+        Book found = repo.getBookViaUUID(added.getId());
         assertEquals(my_book, found);
     }
 
     @Test
     void getBook() {
-        BookEnt my_book = new BookEnt("Moja ksiazka", "Remplewicz", 1000, false);
+        Book my_book = new Book("Moja ksiazka", "Remplewicz", 1000, false);
         repo.addBook(my_book);
-        BookEnt found = repo.getBook(my_book);
+        Book found = repo.getBook(my_book);
         assertEquals(my_book, found);
     }
 
     @Test
     void updateSingleBook() {
-        BookEnt my_book = new BookEnt("Moja ksiazka", "Remplewicz", 1000, false);
-        BookEnt updated = repo.updateSingleBook(tester,my_book);
+        Book my_book = new Book("Moja ksiazka", "Remplewicz", 1000, false);
+        Book updated = repo.updateSingleBook(tester,my_book);
         assertEquals(my_book.getAuthor(), updated.getAuthor());
         assertNotEquals(my_book.getId(), updated.getId());
     }

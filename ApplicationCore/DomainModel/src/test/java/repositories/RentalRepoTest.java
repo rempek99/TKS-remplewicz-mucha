@@ -1,7 +1,6 @@
 package repositories;
 
-import model_ent.entities.*;
-import model_ent.repositories.RentalEntRepo;
+import model.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,40 +12,40 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class RentalEntRepoTest {
+class RentalRepoTest {
 
     private static final int NUMBER_OF_BOOK_RENTALS = 2;
     private static final int NUMBER_OF_MOVIE_RENTALS = 1;
 
 
-    private RentalEntRepo repo;
+    private RentalRepo repo;
 
-    private final MovieEnt testMovie = new MovieEnt("Test", "Tester", 100,false);
-    private final BookEnt testBook = new BookEnt("Test", "Tester", 100,false);
-    private final AccountEnt testAccount = new AccountEnt("Tester", "Testowy", "user", true, "test", "test123");
-    private MovieRentalEnt my_movie;
-    private BookRentalEnt my_book;
+    private final Movie testMovie = new Movie("Test", "Tester", 100,false);
+    private final Book testBook = new Book("Test", "Tester", 100,false);
+    private final Account testAccount = new Account("Tester", "Testowy", "user", true, "test", "test123");
+    private MovieRental my_movie;
+    private BookRental my_book;
 
-    private final BookRentalEnt tester = new BookRentalEnt();
-    private final BookRentalEnt tester2 = new BookRentalEnt();
-    private final MovieRentalEnt tester3 = new MovieRentalEnt();
+    private final BookRental tester = new BookRental();
+    private final BookRental tester2 = new BookRental();
+    private final MovieRental tester3 = new MovieRental();
 
     @BeforeAll
     void initTesters() {
-        tester.setBookEnt(testBook);
-        tester.setAccountEnt(testAccount);
+        tester.setBook(testBook);
+        tester.setAccount(testAccount);
         tester.setRentalStart(new Date());
         tester.setRange(new ArrayList<>());
         tester.setRentalEnd(new Date());
 
-        tester2.setBookEnt(testBook);
-        tester2.setAccountEnt(testAccount);
+        tester2.setBook(testBook);
+        tester2.setAccount(testAccount);
         tester2.setRentalStart(new Date());
         tester2.setRange(new ArrayList<>());
         tester2.setRentalEnd(new Date());
 
-        tester3.setMovieEnt(testMovie);
-        tester3.setAccountEnt(testAccount);
+        tester3.setMovie(testMovie);
+        tester3.setAccount(testAccount);
         tester3.setRentalStart(new Date());
         tester3.setRange(new ArrayList<>());
         tester3.setRentalEnd(new Date());
@@ -54,24 +53,22 @@ class RentalEntRepoTest {
 
     @BeforeEach
     void initRepo() {
-        my_movie = new MovieRentalEnt();
-        my_movie.setMovieEnt(new MovieEnt("trelo","morelo", 0.3,false));
-        my_movie.setAccountEnt(testAccount);
+        my_movie = new MovieRental();
+        my_movie.setMovie(new Movie("trelo","morelo", 0.3,false));
+        my_movie.setAccount(testAccount);
         my_movie.setRentalStart(new Date());
         my_movie.setRange(new ArrayList<>());
         my_movie.setRentalEnd(new Date());
-        my_movie.setId("0000-0000");
-//
-        my_book = new BookRentalEnt();
-        my_book.setBookEnt(new BookEnt("trelo","morelo", 103,false));
-        my_book.setAccountEnt(testAccount);
+
+        my_book = new BookRental();
+        my_book.setBook(new Book("trelo","morelo", 103,false));
+        my_book.setAccount(testAccount);
         my_book.setRentalStart(new Date());
         my_book.setRange(new ArrayList<>());
         my_book.setRentalEnd(new Date());
-        my_book.setId("0000-0001");
 
         ////
-        repo = new RentalEntRepo();
+        repo = new RentalRepo();
         assertTrue(repo.getBookRentals().isEmpty());
         assertTrue(repo.getMovieRentals().isEmpty());
         repo.addBookRental(tester);
@@ -115,52 +112,52 @@ class RentalEntRepoTest {
     @Test
     void addBookRental() {
         final int repo_size = repo.getBookRentals().size();
-        my_book = new BookRentalEnt();
+        my_book = new BookRental();
         repo.addBookRental(my_book);
         assertEquals(repo_size + 1, repo.getBookRentals().size());
     }
 
     @Test
     void getMovieRentalViaUUID() {
-        MovieRentalEnt added = repo.addMovieRental(my_movie);
-        MovieRentalEnt found = repo.getMovieRentalViaUUID(added.getId());
+        MovieRental added = repo.addMovieRental(my_movie);
+        MovieRental found = repo.getMovieRentalViaUUID(added.getId());
         assertEquals(my_movie, found);
     }
 
     @Test
     void getBookRentalViaUUID() {
-        BookRentalEnt added = repo.addBookRental(my_book);
-        BookRentalEnt found = repo.getBookRentalViaUUID(added.getId());
+        BookRental added = repo.addBookRental(my_book);
+        BookRental found = repo.getBookRentalViaUUID(added.getId());
         assertEquals(my_book, found);
     }
 
     @Test
     void getMovieRental() {
         repo.addMovieRental(my_movie);
-        MovieRentalEnt found = repo.getMovieRental(my_movie);
+        MovieRental found = repo.getMovieRental(my_movie);
         assertEquals(my_movie, found);
     }
 
     @Test
     void getBookRental() {
         repo.addBookRental(my_book);
-        BookRentalEnt found = repo.getBookRental(my_book);
+        BookRental found = repo.getBookRental(my_book);
         assertEquals(my_book, found);
     }
 
     @Test
     void updateSingleMovieRental() {
 
-        MovieRentalEnt updated = repo.updateSingleMovieRental(tester3,my_movie);
-        assertEquals(my_movie.getMovieEnt(), updated.getMovieEnt());
+        MovieRental updated = repo.updateSingleMovieRental(tester3,my_movie);
+        assertEquals(my_movie.getMovie(), updated.getMovie());
         assertNotEquals(my_movie.getId(), updated.getId());
     }
 
     @Test
     void updateSingleBookRental() {
 
-        BookRentalEnt updated = repo.updateSingleBookRental(tester2,my_book);
-        assertEquals(my_book.getBookEnt(), updated.getBookEnt());
+        BookRental updated = repo.updateSingleBookRental(tester2,my_book);
+        assertEquals(my_book.getBook(), updated.getBook());
         assertNotEquals(my_book.getId(), updated.getId());
     }
 

@@ -1,7 +1,7 @@
 package services;
 
+import infrastructure.BookPort;
 import model.Book;
-import repositories.BookRepo;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ import java.util.List;
 @SessionScoped
 public class BookService implements Serializable{
     @Inject
-    private BookRepo bookRepo;
+    private BookPort bookRepo;
 
     public List<Book> getAllBooks() {
         return bookRepo.getAllBooks();

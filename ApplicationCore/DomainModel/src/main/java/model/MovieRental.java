@@ -29,7 +29,7 @@ public class MovieRental {
     public MovieRental(Movie movie, Account account) {
         this.movie = movie;
         this.account = account;
-        this.id = UUID.randomUUID().toString();
+        rentalStart = new Date();
     }
     public void checkDateOrder() {
         if(getRentalStart().after(getRentalEnd())){
