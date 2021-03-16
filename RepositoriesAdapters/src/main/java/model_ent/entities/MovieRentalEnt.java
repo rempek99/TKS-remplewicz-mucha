@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -24,5 +25,91 @@ public class MovieRentalEnt {
         this.accountEnt = accountEnt;
         range = new ArrayList<>();
         rentalStart = new Date();
+    }
+
+    public MovieEnt getMovieEnt() {
+        return movieEnt;
+    }
+
+    public void setMovieEnt(MovieEnt movie) {
+        this.movieEnt = movie;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public AccountEnt getAccountEnt() {
+        return accountEnt;
+    }
+
+    public void setAccountEnt(AccountEnt account) {
+        this.accountEnt = account;
+    }
+
+    public List<Date> getRange() {
+        return range;
+    }
+
+    public void setRange(List<Date> range) {
+        this.range = range;
+    }
+
+    public Date getRentalStart() {
+        return rentalStart;
+    }
+
+    public void setRentalStart(Date rentalStart) {
+        this.rentalStart = rentalStart;
+    }
+
+    public Date getRentalEnd() {
+        return rentalEnd;
+    }
+
+    public void setRentalEnd(Date rentalEnd) {
+        this.rentalEnd = rentalEnd;
+    }
+
+    public void checkDateOrder() {
+        if(getRentalStart().after(getRentalEnd())){
+            Date tmp = getRentalStart();
+            setRentalStart(getRentalEnd());
+            setRentalEnd(tmp);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "MovieRental{" +
+                "movie=" + movieEnt +
+                ", account=" + accountEnt +
+                ", id='" + id + '\'' +
+                ", range=" + range +
+                ", rentalStart=" + rentalStart +
+                ", rentalEnd=" + rentalEnd +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MovieRentalEnt)) return false;
+        MovieRentalEnt that = (MovieRentalEnt) o;
+        return getMovieEnt().equals(that.getMovieEnt()) &&
+                getAccountEnt().equals(that.getAccountEnt()) &&
+                getId().equals(that.getId()) &&
+                Objects.equals(getRange(), that.getRange()) &&
+                getRentalStart().equals(that.getRentalStart()) &&
+                getRentalEnd().equals(that.getRentalEnd());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMovieEnt(), getAccountEnt(), getId(), getRange(), getRentalStart(), getRentalEnd());
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public class RestAPI implements Serializable {
 
     Client client = ClientBuilder.newClient();
-    private WebTarget baseURI = client.target("http://localhost:8081/ApplicationCore/rest");
+    private WebTarget baseURI = client.target("http://desktop-j93pug2:8080/UserInterface/rest");
 
     // GETs
 

@@ -26,7 +26,7 @@
                             <p:inputText id="globalFilter" onkeyup="PF('filtered').filter()" style="width:250px" placeholder="Enter keyword"/>
                         </p:outputPanel>
                     </f:facet>
-                    <p:column headerText="Title of bookEnt" filterBy="#{bookEnt.title}" sortBy="#{bookEnt.title}" filterMatchMode="contains" filterStyle="display:none">
+                    <p:column headerText="Title of book" filterBy="#{bookEnt.title}" sortBy="#{bookEnt.title}" filterMatchMode="contains" filterStyle="display:none">
                         <h:outputText id="title" value="#{bookEnt.title}"/>
                     </p:column>
                     <p:column headerText="Author" filterBy="#{bookEnt.author}" sortBy="#{bookEnt.author}" filterMatchMode="contains" filterStyle="display:none">

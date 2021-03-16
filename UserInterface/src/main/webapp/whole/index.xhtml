@@ -18,13 +18,13 @@
             <div class="topNavigationBar" id="navBar">
                 <ui:fragment><a href="#home" class="active" >Welcome page</a></ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
-                    <a href="../admins/addAccount.xhtml">Add accountEnt</a>
+                    <a href="../admins/addAccount.xhtml">Add account</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
-                    <a href="../managers/addMovie.xhtml">Add movieEnt</a>
+                    <a href="../managers/addMovie.xhtml">Add movie</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
-                    <a href="../managers/addBook.xhtml">Add bookEnt</a>
+                    <a href="../managers/addBook.xhtml">Add book</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                     <a href="../managers/listAccounts.xhtml">List all accounts</a>

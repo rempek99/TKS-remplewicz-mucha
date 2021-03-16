@@ -28,7 +28,7 @@
                                      placeholder="Enter keyword"/>
                     </p:outputPanel>
                 </f:facet>
-                <p:column headerText="Title of movieEnt" filterBy="#{movieEnt.title}" sortBy="#{movieEnt.title}"
+                <p:column headerText="Title of movie" filterBy="#{movieEnt.title}" sortBy="#{movieEnt.title}"
                           filterMatchMode="contains" filterStyle="display:none">
                     <h:outputText id="title" value="#{movieEnt.title}"/>
                 </p:column>
@@ -78,7 +78,7 @@
                           rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
                     <p:selectOneMenu
                             disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}"
-                            value="#{addRentalController.choosenAcount}" style="text-align:left; margin-left: -8px; width: 210px">
+                            value="#{movieEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                         <f:selectItem
                                 itemValue="#{listAccountsController.getDesiredAccount(request.userPrincipal.name)}"
                                 itemDisabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"

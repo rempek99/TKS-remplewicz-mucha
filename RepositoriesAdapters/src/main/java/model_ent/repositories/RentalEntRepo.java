@@ -20,10 +20,18 @@ public class RentalEntRepo {
     }
 
     public void removeMovieRental(MovieRentalEnt r) {
-            movieRentals.remove(r);
+        for(Iterator<MovieRentalEnt> iterator = movieRentals.iterator(); iterator.hasNext(); ) {
+            if(iterator.next().getId() == r.getId()) {
+                iterator.remove();
+            }
+        }
     }
     public void removeBookRental(BookRentalEnt r) {
-            bookRentals.remove(r);
+        for(Iterator<BookRentalEnt> iterator = bookRentals.iterator(); iterator.hasNext(); ) {
+            if(iterator.next().getId() == r.getId()) {
+                iterator.remove();
+            }
+        }
     }
 
     public MovieRentalEnt addMovieRental(MovieRentalEnt r) {
