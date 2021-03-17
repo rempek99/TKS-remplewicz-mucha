@@ -57,11 +57,10 @@ public class MovieEntRepo {
     }
 
     public MovieEnt getMovie(MovieEnt m) {
-        if (movies.contains(m)) {
-            return m;
-        } else {
-            return null;
-        }
+        return movies.stream()
+                .filter(x -> x.equals(m))
+                .findFirst()
+                .orElse(null);
     }
 
     public MovieEnt updateSingleMovie(MovieEnt movieToChange, MovieEnt movieWithData) {

@@ -1,5 +1,6 @@
 package aggregates.adapters;
 
+import aggregates.converters.MovieConverter;
 import infrastructure.MoviePort;
 import model.Movie;
 import model_ent.entities.MovieEnt;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static aggregates.converters.MovieConverter.convertEntToMovie;
 import static aggregates.converters.MovieConverter.convertMovieToEnt;
@@ -20,21 +22,26 @@ import static aggregates.converters.MovieConverter.convertMovieToEnt;
 public class MovieRepoAdapter implements MoviePort, Serializable {
 
     private final MovieEntRepo movieRepo;
-    private  List<MovieEnt> movies;
+    private  List<Movie> movies;
 
     @Inject
     public MovieRepoAdapter(MovieEntRepo movieRepo) {
         this.movieRepo = movieRepo;
-        movies = movieRepo.getAllMovies();
+        cahceData();
+    }
+
+    private void cahceData() {
+        movies = movieRepo.getAllMovies()
+                .stream()
+                .map(MovieConverter::convertEntToMovie)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Movie> getAllMovies() {
         List<Movie> temp = Collections.synchronizedList(new ArrayList<Movie>());
-        for (MovieEnt movie: movies) {
-            temp.add(convertEntToMovie(movie));
-        }
-        return temp;
+        cahceData();
+        return movies;
     }
 
 
@@ -57,16 +64,16 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
     @Override
     public Movie getMovieViaUUID(String str) {
-        for(MovieEnt movie: movies) {
-            if(movie.getId().equals(str)){
-                return convertEntToMovie(movie);
-            }
-        }
-        return null;
+        cahceData();
+        return movies.stream()
+                .filter(x -> x.getId().equals(str))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public Movie getMovie(Movie m) {
+        cahceData();
         if (movies.contains(m)) {
             return m;
         } else {
@@ -77,10 +84,8 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
     @Override
     public void updateSingleMovie(Movie movieToChange, Movie movieWithData) {
-        Movie fromRepo = getMovie(movieToChange);
-        fromRepo.setTitle(movieWithData.getTitle());
-        fromRepo.setAuthor(movieWithData.getAuthor());
-        fromRepo.setRating(movieWithData.getRating());
-        fromRepo.setRented(movieWithData.isRented());
+            movieRepo.updateSingleMovie(
+                    convertMovieToEnt(movieToChange),
+                    convertMovieToEnt(movieWithData));
     }
 }

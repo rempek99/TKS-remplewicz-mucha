@@ -10,8 +10,13 @@ import javax.inject.Inject;
 
 @SessionScoped
 public class MovieService implements Serializable{
-    @Inject
+
     private MoviePort movieRepo;
+
+    @Inject
+    public MovieService(MoviePort movieRepo) {
+        this.movieRepo = movieRepo;
+    }
 
     public List<Movie> getAllMovies() {
         return movieRepo.getAllMovies();

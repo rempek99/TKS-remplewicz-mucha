@@ -9,7 +9,7 @@ import java.util.*;
 @ApplicationScoped
 public class BookEntRepo {
 
-    private List<BookEnt> books = Collections.synchronizedList(new ArrayList<BookEnt>());
+    private final List<BookEnt> books = Collections.synchronizedList(new ArrayList<BookEnt>());
 
     @PostConstruct
     private void insertInitData() {
@@ -58,11 +58,10 @@ public class BookEntRepo {
     }
 
     public BookEnt getBook(BookEnt b) {
-        if (books.contains(b)) {
-            return b;
-        } else {
-            return null;
-        }
+        Optional<BookEnt> bookEnt = books.stream()
+                .filter(x -> x.equals(b))
+                .findFirst();
+        return bookEnt.orElse(null);
     }
 
     public BookEnt updateSingleBook(BookEnt bookToChange, BookEnt bookWithData) {

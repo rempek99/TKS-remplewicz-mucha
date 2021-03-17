@@ -1,5 +1,7 @@
 package aggregates.adapters;
 
+import aggregates.converters.BookRentalConverter;
+import aggregates.converters.MovieRentalConverter;
 import infrastructure.RentalPort;
 import model.BookRental;
 import model.MovieRental;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static aggregates.converters.BookRentalConverter.convertBookRentalToEnt;
 import static aggregates.converters.BookRentalConverter.convertEntToBookRental;
@@ -26,32 +29,36 @@ public class RentalRepoAdapter implements RentalPort, Serializable {
 
 
     private final RentalEntRepo rentalRepo;
-    private List<MovieRentalEnt> movieRentals;
-    private List<BookRentalEnt> bookRentals;
+    private List<MovieRental> movieRentals;
+    private List<BookRental> bookRentals;
 
     @Inject
     public RentalRepoAdapter(RentalEntRepo rentalRepo) {
         this.rentalRepo = rentalRepo;
-        movieRentals = rentalRepo.getMovieRentals();
-        bookRentals = rentalRepo.getBookRentals();
+        cacheData();
+    }
+
+    private void cacheData() {
+        movieRentals = rentalRepo.getMovieRentals()
+                .stream()
+                .map(MovieRentalConverter::convertEntToMovieRental)
+                .collect(Collectors.toList());
+        bookRentals = rentalRepo.getBookRentals()
+                .stream()
+                .map(BookRentalConverter::convertEntToBookRental)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<MovieRental> getMovieRentals() {
-        List<MovieRental> temp = Collections.synchronizedList(new ArrayList<MovieRental>());
-        for (MovieRentalEnt movieRental: movieRentals) {
-            temp.add(convertEntToMovieRental(movieRental));
-        }
-        return temp;
+        cacheData();
+        return movieRentals;
     }
 
     @Override
     public List<BookRental> getBookRentals() {
-        List<BookRental> temp = Collections.synchronizedList(new ArrayList<BookRental>());
-        for (BookRentalEnt bookRental: bookRentals) {
-            temp.add(convertEntToBookRental(bookRental));
-        }
-        return temp;
+        cacheData();
+        return bookRentals;
     }
 
     @Override
@@ -60,13 +67,12 @@ public class RentalRepoAdapter implements RentalPort, Serializable {
     }
 
     @Override
-    public void removeBookRental(BookRental r){
+    public void removeBookRental(BookRental r) {
         rentalRepo.removeBookRental(convertBookRentalToEnt(r));
     }
 
     @Override
     public void addMovieRental(MovieRental r) {
-
         rentalRepo.addMovieRental(convertMovieRentalToEnt(r));
     }
 
@@ -77,62 +83,51 @@ public class RentalRepoAdapter implements RentalPort, Serializable {
 
     @Override
     public MovieRental getMovieRentalViaUUID(String str) {
-        for(MovieRentalEnt movie: movieRentals) {
-            if(movie.getId().equals(str)){
-                return convertEntToMovieRental(movie);
-            }
-        }
-        return null;
+        cacheData();
+        return movieRentals.stream()
+                .filter(x -> x.getId().equals(str))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public BookRental getBookRentalViaUUID(String str) {
-        for(BookRentalEnt book: bookRentals) {
-            if(book.getId().equals(str)){
-                return convertEntToBookRental(book);
-            }
-        }
-        return null;
+        cacheData();
+        return bookRentals.stream()
+                .filter(x -> x.getId().equals(str))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public MovieRental getMovieRental(MovieRental m) {
-        if (movieRentals.contains(m)) {
-            return m;
-        } else {
-            return null;
-        }
+        return movieRentals.stream()
+                .filter(x -> x.equals(m))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public BookRental getBookRental(BookRental b) {
-        if (bookRentals.contains(b)) {
-            return b;
-        } else {
-            return null;
-        }
+        return bookRentals.stream()
+                .filter(x -> x.equals(b))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public void updateSingleMovieRental(MovieRental movieRentalToChange, MovieRental movieRentalWithData) {
-        MovieRental fromRepo = getMovieRental(movieRentalToChange);
-        fromRepo.setId(movieRentalWithData.getId());
-        fromRepo.setMovie(movieRentalWithData.getMovie());
-        fromRepo.setAccount(movieRentalWithData.getAccount());
-        fromRepo.setRange(movieRentalWithData.getRange());
-        fromRepo.setRentalStart(movieRentalWithData.getRentalStart());
-        fromRepo.setRentalEnd(movieRentalWithData.getRentalEnd());
+        rentalRepo.updateSingleMovieRental(
+                convertMovieRentalToEnt(movieRentalToChange),
+                convertMovieRentalToEnt(movieRentalWithData)
+        );
     }
 
     @Override
     public void updateSingleBookRental(BookRental bookRentalToChange, BookRental bookRentalWithData) {
-        BookRental fromRepo = getBookRental(bookRentalToChange);
-        fromRepo.setId(bookRentalWithData.getId());
-        fromRepo.setBook(bookRentalWithData.getBook());
-        fromRepo.setAccount(bookRentalWithData.getAccount());
-        fromRepo.setRange(bookRentalWithData.getRange());
-        fromRepo.setRentalStart(bookRentalWithData.getRentalStart());
-        fromRepo.setRentalEnd(bookRentalWithData.getRentalEnd());
+        rentalRepo.updateSingleBookRental(
+                convertBookRentalToEnt(bookRentalToChange),
+                convertBookRentalToEnt(bookRentalWithData));
     }
 
 

@@ -67,19 +67,17 @@ public class RentalEntRepo {
     }
 
     public MovieRentalEnt getMovieRental(MovieRentalEnt m) {
-        if (movieRentals.contains(m)) {
-            return m;
-        } else {
-            return null;
-        }
+        return movieRentals.stream()
+                .filter(x -> x.equals(m))
+                .findFirst()
+                .orElse(null);
     }
 
     public BookRentalEnt getBookRental(BookRentalEnt b) {
-        if (bookRentals.contains(b)) {
-            return b;
-        } else {
-            return null;
-        }
+        return bookRentals.stream()
+                .filter(x -> x.equals(b))
+                .findFirst()
+                .orElse(null);
     }
 
     public MovieRentalEnt updateSingleMovieRental(MovieRentalEnt movieRentalToChange, MovieRentalEnt movieRentalWithData) {

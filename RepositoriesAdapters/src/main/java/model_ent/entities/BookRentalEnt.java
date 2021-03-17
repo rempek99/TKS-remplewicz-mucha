@@ -100,12 +100,19 @@ public class BookRentalEnt {
         if (this == o) return true;
         if (!(o instanceof BookRentalEnt)) return false;
         BookRentalEnt that = (BookRentalEnt) o;
+        if(rentalEnd == null) {
+            if(that.getRentalEnd()!=null)
+                return false;
+        }
+        else{
+            if(that.getRentalEnd() == null || that.getRentalEnd()!=rentalEnd)
+                return false;
+        }
         return getBookEnt().equals(that.getBookEnt()) &&
                 getAccountEnt().equals(that.getAccountEnt()) &&
                 getId().equals(that.getId()) &&
                 Objects.equals(getRange(), that.getRange()) &&
-                getRentalStart().equals(that.getRentalStart()) &&
-                getRentalEnd().equals(that.getRentalEnd());
+                getRentalStart().equals(that.getRentalStart());
     }
 
     @Override

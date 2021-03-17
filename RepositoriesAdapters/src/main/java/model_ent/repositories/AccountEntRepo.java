@@ -46,11 +46,10 @@ public class AccountEntRepo implements IdentityStore {
     }
 
     public AccountEnt getAccount(AccountEnt a) {
-        if (accounts.contains(a)) {
-            return a;
-        } else {
-           return null;
-        }
+        Optional<AccountEnt> accountEnt = accounts.stream()
+                .filter(x -> x.equals(a))
+                .findFirst();
+        return accountEnt.orElse(null);
     }
 
     public AccountEnt getAccountViaUUID(String str) {

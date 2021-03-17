@@ -102,12 +102,19 @@ public class MovieRental {
         if (this == o) return true;
         if (!(o instanceof MovieRental)) return false;
         MovieRental that = (MovieRental) o;
+        if(rentalEnd == null) {
+            if(that.getRentalEnd()!=null)
+                return false;
+        }
+        else{
+            if(that.getRentalEnd() == null || that.getRentalEnd()!=rentalEnd)
+                return false;
+        }
         return getMovie().equals(that.getMovie()) &&
                 getAccount().equals(that.getAccount()) &&
                 getId().equals(that.getId()) &&
                 Objects.equals(getRange(), that.getRange()) &&
-                getRentalStart().equals(that.getRentalStart()) &&
-                getRentalEnd().equals(that.getRentalEnd());
+                getRentalStart().equals(that.getRentalStart());
     }
 
     @Override

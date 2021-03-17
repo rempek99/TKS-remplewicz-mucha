@@ -1,5 +1,6 @@
 package aggregates.adapters;
 
+import aggregates.converters.BookConverter;
 import infrastructure.BookPort;
 import model.Book;
 import model_ent.entities.BookEnt;
@@ -12,6 +13,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static aggregates.converters.BookConverter.convertBookToEnt;
 import static aggregates.converters.BookConverter.convertEntToBook;
@@ -21,21 +24,25 @@ public class BookRepoAdapter implements BookPort, Serializable {
 
     private final BookEntRepo bookRepo;
 
-    private List<BookEnt> books;
+    private List<Book> books;
 
     @Inject
     public BookRepoAdapter(BookEntRepo bookRepo) {
         this.bookRepo = bookRepo;
-        books = bookRepo.getAllBooks();
+        cacheData();
+    }
+
+    private void cacheData() {
+        books = bookRepo.getAllBooks()
+                .stream()
+                .map(BookConverter::convertEntToBook)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Book> getAllBooks() {
-        List<Book> temp = Collections.synchronizedList(new ArrayList<Book>());
-        for (BookEnt book: books) {
-            temp.add(convertEntToBook(book));
-        }
-        return temp;
+        cacheData();
+        return books;
     }
 
     @Override
@@ -53,16 +60,16 @@ public class BookRepoAdapter implements BookPort, Serializable {
 
     @Override
     public Book getBookViaUUID(String str) {
-        for(BookEnt book: books) {
-            if(book.getId().equals(str)){
-                return convertEntToBook(book);
-            }
-        }
-        return null;
+        cacheData();
+        return books.stream()
+                .filter(x -> x.getId().equals(str))
+                .findAny()
+                .orElse(null);
     }
 
     @Override
     public Book getBook(Book b) {
+        cacheData();
         if (books.contains(b)) {
             return b;
         } else {
@@ -72,10 +79,14 @@ public class BookRepoAdapter implements BookPort, Serializable {
 
     @Override
     public void updateSingleBook(Book bookToChange, Book bookWithData) {
-        Book fromRepo = getBook(bookToChange);
-        fromRepo.setTitle(bookWithData.getTitle());
-        fromRepo.setAuthor(bookWithData.getAuthor());
-        fromRepo.setPages(bookWithData.getPages());
-        fromRepo.setRented(bookWithData.isRented());
+        bookRepo.updateSingleBook(
+                convertBookToEnt(bookToChange),
+                convertBookToEnt(bookWithData)
+        );
+//        Book fromRepo = getBook(bookToChange);
+//        fromRepo.setTitle(bookWithData.getTitle());
+//        fromRepo.setAuthor(bookWithData.getAuthor());
+//        fromRepo.setPages(bookWithData.getPages());
+//        fromRepo.setRented(bookWithData.isRented());
     }
 }

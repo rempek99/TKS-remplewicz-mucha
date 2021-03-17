@@ -27,6 +27,7 @@ public class BookRental {
         this.book = book;
         this.account = account;
         this.id = UUID.randomUUID().toString();
+        rentalStart = new Date();
     }
 
     public Book getBook() {
@@ -70,6 +71,8 @@ public class BookRental {
     }
 
     public Date getRentalEnd() {
+        if(null == rentalEnd)
+            return null;
         return rentalEnd;
     }
 
@@ -102,12 +105,19 @@ public class BookRental {
         if (this == o) return true;
         if (!(o instanceof BookRental)) return false;
         BookRental that = (BookRental) o;
+        if(rentalEnd == null) {
+            if(that.getRentalEnd()!=null)
+                return false;
+        }
+        else{
+            if(that.getRentalEnd() == null || that.getRentalEnd()!=rentalEnd)
+                return false;
+        }
         return getBook().equals(that.getBook()) &&
                 getAccount().equals(that.getAccount()) &&
                 getId().equals(that.getId()) &&
                 Objects.equals(getRange(), that.getRange()) &&
-                getRentalStart().equals(that.getRentalStart()) &&
-                getRentalEnd().equals(that.getRentalEnd());
+                getRentalStart().equals(that.getRentalStart());
     }
 
     @Override

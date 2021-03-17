@@ -10,8 +10,13 @@ import java.util.List;
 
 @SessionScoped
 public class AccountService implements Serializable{
-    @Inject
+
     private AccountPort accountRepo;
+
+    @Inject
+    public AccountService(AccountPort accountRepo) {
+        this.accountRepo = accountRepo;
+    }
 
     public List<Account> getAllAccounts() {
         return accountRepo.getAllAccounts();
@@ -21,7 +26,9 @@ public class AccountService implements Serializable{
         return accountRepo.getMovieSelectedViaUUID(m);
     }
     public Account getSingleBookSelection(BookRental b) {return accountRepo.getBookSelectedViaUUID(b); }
-    public Account getAccountViaUUID(String str) {return accountRepo.getAccountViaUUID(str); }
+    public Account getAccountViaUUID(String str) {
+        return accountRepo.getAccountViaUUID(str);
+    }
 
     public void updateSingleAccount(Account income, Account outcome) {accountRepo.updateSingleAcc(income, outcome);}
 

@@ -26,6 +26,9 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
     @Inject
     public AccountRepoAdapter(AccountEntRepo accountRepo) {
         this.accountRepo = accountRepo;
+        cacheData();
+    }
+    private void cacheData() {
         accounts = accountRepo.getAllAccounts();
     }
 
@@ -34,6 +37,7 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
     @Override
     public List<Account> getAllAccounts(){
         List<Account> temp = Collections.synchronizedList(new ArrayList<Account>());
+        cacheData();
         for (AccountEnt account: accounts) {
             temp.add(convertEntToAccount(account));
         }
@@ -53,7 +57,8 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
 
     @Override
     public Account getAccount(Account a) {
-        if (accounts.contains(a)) {
+        cacheData();
+        if (accounts.contains(convertAccountToEnt(a))) {
             return a;
         } else {
             return null;
@@ -72,6 +77,7 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
 
     @Override
     public Account getAccountViaUUID(String str) {
+        cacheData();
         for(AccountEnt acc: accounts) {
             if(acc.getId().equals(str)){
                 return convertEntToAccount(acc);
@@ -82,12 +88,13 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
 
     @Override
     public void updateSingleAcc(Account accToChange, Account accWithData) {
-        Account fromRepo = getAccount(accToChange);
-        fromRepo.setActive(accWithData.isActive());
-        fromRepo.setFirstName(accWithData.getFirstName());
-        fromRepo.setLastName(accWithData.getLastName());
-        fromRepo.setLogin(accWithData.getLogin());
-        fromRepo.setPassword(accWithData.getPassword());
-        fromRepo.setRoleOfUser(accWithData.getRoleOfUser());
+        accountRepo.updateSingleAcc(convertAccountToEnt(accToChange),convertAccountToEnt(accWithData));
+        //        Account fromRepo = accountRepo;
+//        fromRepo.setActive(accWithData.isActive());
+//        fromRepo.setFirstName(accWithData.getFirstName());
+//        fromRepo.setLastName(accWithData.getLastName());
+//        fromRepo.setLogin(accWithData.getLogin());
+//        fromRepo.setPassword(accWithData.getPassword());
+//        fromRepo.setRoleOfUser(accWithData.getRoleOfUser());
     }
 }
