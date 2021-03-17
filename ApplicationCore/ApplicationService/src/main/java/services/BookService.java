@@ -10,10 +10,12 @@ import java.util.List;
 
 @SessionScoped
 public class BookService implements Serializable{
-
+    @Inject
     private BookPort bookRepo;
 
-    @Inject
+    public BookService() {
+    }
+
     public BookService(BookPort bookRepo) {
         this.bookRepo = bookRepo;
     }

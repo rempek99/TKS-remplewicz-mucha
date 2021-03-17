@@ -12,9 +12,12 @@ import java.util.List;
 
 @SessionScoped
 public class RentalService implements Serializable {
-
-    private RentalPort rentalRepo;
     @Inject
+    private RentalPort rentalRepo;
+
+    public RentalService() {
+    }
+
     public RentalService(RentalPort rentalRepo) {
         this.rentalRepo = rentalRepo;
     }
