@@ -32,13 +32,11 @@ public class BookRepo {
     public Book addBook(Book b) {
         books.add(b);
         b.setId(UUID.randomUUID().toString());
-//        printState();
         return b;
     }
 
     public void removeBook(Book b) {
         books.remove(b);
-//        printState();
     }
 
 
@@ -65,13 +63,6 @@ public class BookRepo {
         fromRepo.setAuthor(bookWithData.getAuthor());
         fromRepo.setPages(bookWithData.getPages());
         fromRepo.setRented(bookWithData.isRented());
-        fromRepo.setRentalUserUUID(bookWithData.getRentalUserUUID());
-        fromRepo.setRentalStart(bookWithData.getRentalStart());
-        fromRepo.setRentalEnd(bookWithData.getRentalEnd());
         return fromRepo;
     }
-
-    //private void printState() {
-//        System.out.println(Arrays.toString(books.toArray()));
-//    }
 }

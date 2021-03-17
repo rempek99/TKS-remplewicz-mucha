@@ -17,10 +17,6 @@ public class MovieEnt {
     private double rating;
     private boolean rented;
     private String id;
-    // this params are for rentals
-    private String rentalUserUUID;
-    private Date rentalStart;
-    private Date rentalEnd;
 
     public MovieEnt(String title, String author, double rating, boolean rented) {
         this.title = title;
@@ -59,30 +55,6 @@ public class MovieEnt {
         return rented;
     }
 
-    public String getRentalUserUUID() {
-        return rentalUserUUID;
-    }
-
-    public void setRentalUserUUID(String rentalUserUUID) {
-        this.rentalUserUUID = rentalUserUUID;
-    }
-
-    public Date getRentalStart() {
-        return rentalStart;
-    }
-
-    public void setRentalStart(Date rentalStart) {
-        this.rentalStart = rentalStart;
-    }
-
-    public Date getRentalEnd() {
-        return rentalEnd;
-    }
-
-    public void setRentalEnd(Date rentalEnd) {
-        this.rentalEnd = rentalEnd;
-    }
-
     @Override
     public String toString() {
         return "Movie{" +
@@ -90,10 +62,7 @@ public class MovieEnt {
                 ", author='" + author + '\'' +
                 ", rating=" + rating +
                 ", rented=" + rented +
-                ", id='" + id + '\'' +
-                ", rentalUserUUID='" + rentalUserUUID + '\'' +
-                ", rentalStart=" + rentalStart +
-                ", rentalEnd=" + rentalEnd +
+                ", id='" + id +
                 '}';
     }
 
@@ -106,14 +75,11 @@ public class MovieEnt {
                 isRented() == movie.isRented() &&
                 getTitle().equals(movie.getTitle()) &&
                 getAuthor().equals(movie.getAuthor()) &&
-                Objects.equals(getId(), movie.getId()) &&
-                Objects.equals(getRentalUserUUID(), movie.getRentalUserUUID()) &&
-                getRentalStart().equals(movie.getRentalStart()) &&
-                getRentalEnd().equals(movie.getRentalEnd());
+                Objects.equals(getId(), movie.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getAuthor(), getRating(), isRented(), getId(), getRentalUserUUID(), getRentalStart(), getRentalEnd());
+        return Objects.hash(getTitle(), getAuthor(), getRating(), isRented(), getId());
     }
 }

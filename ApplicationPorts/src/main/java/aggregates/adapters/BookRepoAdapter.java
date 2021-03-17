@@ -77,8 +77,5 @@ public class BookRepoAdapter implements BookPort, Serializable {
         fromRepo.setAuthor(bookWithData.getAuthor());
         fromRepo.setPages(bookWithData.getPages());
         fromRepo.setRented(bookWithData.isRented());
-        fromRepo.setRentalUserUUID(bookWithData.getRentalUserUUID());
-        fromRepo.setRentalStart(bookWithData.getRentalStart());
-        fromRepo.setRentalEnd(bookWithData.getRentalEnd());
     }
 }

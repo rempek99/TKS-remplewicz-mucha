@@ -1,9 +1,7 @@
 package services;
 
 import infrastructure.AccountPort;
-import model.Account;
-import model.Book;
-import model.Movie;
+import model.*;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -19,10 +17,10 @@ public class AccountService implements Serializable{
         return accountRepo.getAllAccounts();
     }
 
-    public Account getSingleMovieSelection(Movie m) {
+    public Account getSingleMovieSelection(MovieRental m) {
         return accountRepo.getMovieSelectedViaUUID(m);
     }
-    public Account getSingleBookSelection(Book b) {return accountRepo.getBookSelectedViaUUID(b); }
+    public Account getSingleBookSelection(BookRental b) {return accountRepo.getBookSelectedViaUUID(b); }
     public Account getAccountViaUUID(String str) {return accountRepo.getAccountViaUUID(str); }
 
     public void updateSingleAccount(Account income, Account outcome) {accountRepo.updateSingleAcc(income, outcome);}

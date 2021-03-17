@@ -53,28 +53,6 @@ public class AccountEntRepo implements IdentityStore {
         }
     }
 
-    public AccountEnt getMovieSelectedViaUUID(MovieEnt movie) {
-        String compare = movie.getRentalUserUUID();
-        for(AccountEnt acc: accounts) {
-            if(acc.getId().equals(compare)){
-                return acc;
-            }
-        }
-        return null;
-    }
-
-
-//    todo implement this
-//    public AccountEnt getBookSelectedViaUUID(BookEnt book) {
-//        String compare = book.getRentalUserUUID();
-//        for(Account acc: accounts) {
-//            if(acc.getId().equals(compare)){
-//                return acc;
-//            }
-//        }
-//        return null;
-//    }
-
     public AccountEnt getAccountViaUUID(String str) {
         for(AccountEnt acc: accounts) {
             if(acc.getId().equals(str)){

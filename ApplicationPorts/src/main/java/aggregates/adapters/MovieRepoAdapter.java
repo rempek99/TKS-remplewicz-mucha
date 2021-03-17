@@ -82,8 +82,5 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
         fromRepo.setAuthor(movieWithData.getAuthor());
         fromRepo.setRating(movieWithData.getRating());
         fromRepo.setRented(movieWithData.isRented());
-        fromRepo.setRentalUserUUID(movieWithData.getRentalUserUUID());
-        fromRepo.setRentalStart(movieWithData.getRentalStart());
-        fromRepo.setRentalEnd(movieWithData.getRentalEnd());
     }
 }

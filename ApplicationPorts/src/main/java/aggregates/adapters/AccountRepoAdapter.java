@@ -1,9 +1,7 @@
 package aggregates.adapters;
 
 import infrastructure.AccountPort;
-import model.Account;
-import model.Book;
-import model.Movie;
+import model.*;
 import model_ent.entities.AccountEnt;
 import model_ent.repositories.AccountEntRepo;
 
@@ -63,25 +61,13 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
     }
 
     @Override
-    public Account getMovieSelectedViaUUID(Movie movie) {
-        String compare = movie.getRentalUserUUID();
-        for(AccountEnt acc: accounts) {
-            if(acc.getId().equals(compare)){
-                return convertEntToAccount(acc);
-            }
-        }
-        return null;
+    public Account getMovieSelectedViaUUID(MovieRental movieRental) {
+        return movieRental.getAccount();
     }
 
     @Override
-    public Account getBookSelectedViaUUID(Book book) {
-        String compare = book.getRentalUserUUID();
-        for(AccountEnt acc: accounts) {
-            if(acc.getId().equals(compare)){
-                return convertEntToAccount(acc);
-            }
-        }
-        return null;
+    public Account getBookSelectedViaUUID(BookRental bookRental) {
+        return bookRental.getAccount();
     }
 
     @Override

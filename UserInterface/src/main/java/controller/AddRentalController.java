@@ -49,8 +49,8 @@ public class AddRentalController implements Serializable {
     public void setMovie(Movie movie) {
         this.movieRental.setMovie(movie);
 //        this.movieRental.setRange(movie.getRentalDateRange());
-        this.movieRental.setRentalStart(movie.getRentalStart());
-        this.movieRental.setRentalEnd(movie.getRentalEnd());
+        this.movieRental.setRentalStart(movieRental.getRentalStart());
+        this.movieRental.setRentalEnd(movieRental.getRentalEnd());
         //this.movieRental.checkDateOrder();
         this.movieRental.getMovie().setRented(true);
     }
@@ -58,8 +58,8 @@ public class AddRentalController implements Serializable {
     public void setBook(Book book) {
         this.bookRental.setBook(book);
 //        this.bookRental.setRange(book.getRentalDateRange());
-        this.bookRental.setRentalStart(book.getRentalStart());
-        this.bookRental.setRentalEnd(book.getRentalEnd());
+        this.bookRental.setRentalStart(bookRental.getRentalStart());
+        this.bookRental.setRentalEnd(bookRental.getRentalEnd());
         //this.bookRental.checkDateOrder();
         this.bookRental.getBook().setRented(true);
     }

@@ -55,26 +55,6 @@ public class AccountRepo implements IdentityStore {
         }
     }
 
-    public Account getMovieSelectedViaUUID(Movie movie) {
-        String compare = movie.getRentalUserUUID();
-        for(Account acc: accounts) {
-            if(acc.getId().equals(compare)){
-                return acc;
-            }
-        }
-        return null;
-    }
-
-    public Account getBookSelectedViaUUID(Book book) {
-        String compare = book.getRentalUserUUID();
-        for(Account acc: accounts) {
-            if(acc.getId().equals(compare)){
-                return acc;
-            }
-        }
-        return null;
-    }
-
     public Account getAccountViaUUID(String str) {
         for(Account acc: accounts) {
             if(acc.getId().equals(str)){

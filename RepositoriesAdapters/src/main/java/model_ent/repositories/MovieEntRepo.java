@@ -70,9 +70,6 @@ public class MovieEntRepo {
         fromRepo.setAuthor(movieWithData.getAuthor());
         fromRepo.setRating(movieWithData.getRating());
         fromRepo.setRented(movieWithData.isRented());
-        fromRepo.setRentalUserUUID(movieWithData.getRentalUserUUID());
-        fromRepo.setRentalStart(movieWithData.getRentalStart());
-        fromRepo.setRentalEnd(movieWithData.getRentalEnd());
         return fromRepo;
     }
 }

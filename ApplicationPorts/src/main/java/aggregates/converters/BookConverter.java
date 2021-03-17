@@ -16,15 +16,9 @@ public class BookConverter {
         int pages = book.getPages();
         boolean rented = book.isRented();
         String id = book.getId();
-        String rentalUserUUID = book.getRentalUserUUID();
-        Date rentalStart = book.getRentalStart();
-        Date rentalEnd = book.getRentalEnd();
 
         BookEnt newBook = new BookEnt(title, author, pages, rented);
         newBook.setId(id);
-        newBook.setRentalUserUUID(rentalUserUUID);
-        newBook.setRentalStart(rentalStart);
-        newBook.setRentalEnd(rentalEnd);
 
         return newBook;
     }
@@ -35,15 +29,9 @@ public class BookConverter {
         int pages = book.getPages();
         boolean rented = book.isRented();
         String id = book.getId();
-        String rentalUserUUID = book.getRentalUserUUID();
-        Date rentalStart = book.getRentalStart();
-        Date rentalEnd = book.getRentalEnd();
 
         Book newBook = new Book(title, author, pages, rented);
         newBook.setId(id);
-        newBook.setRentalUserUUID(rentalUserUUID);
-        newBook.setRentalStart(rentalStart);
-        newBook.setRentalEnd(rentalEnd);
 
         return newBook;
     }

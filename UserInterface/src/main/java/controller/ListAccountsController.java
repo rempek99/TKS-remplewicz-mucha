@@ -1,8 +1,6 @@
 package controller;
 
-import model.Account;
-import model.Book;
-import model.Movie;
+import model.*;
 import services.AccountService;
 
 import java.io.Serializable;
@@ -26,8 +24,8 @@ public class ListAccountsController implements Serializable{
         this.filteredAccounts = filteredAccounts;
     }
 
-    public Account getSelectedSingleMovieAccount(Movie m) {return accountService.getSingleMovieSelection(m); }
-    public Account getSelectedSingleBookAccount(Book b) {return accountService.getSingleBookSelection(b); }
+    public Account getSelectedSingleMovieAccount(MovieRental m) {return accountService.getSingleMovieSelection(m); }
+    public Account getSelectedSingleBookAccount(BookRental b) {return accountService.getSingleBookSelection(b); }
     public Account getDesiredAccount(String str) {return accountService.getAccountViaUUID(str); }
 
     public List<Account> getAccounts() {

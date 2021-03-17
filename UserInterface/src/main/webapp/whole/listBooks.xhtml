@@ -43,10 +43,10 @@
 <!--                    <p:datePicker id="range" selectionMode="range" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{bookEnt.rentalDateRange}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 200px" style="text-align:center; margin-left: -8px;"/>-->
 <!--                    </p:column>-->
                     <p:column headerText="Rental starts">
-                        <p:datePicker id="start" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{bookEnt.rentalStart}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
+                        <p:datePicker id="start" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
                     </p:column>
                     <p:column headerText="Rental ends">
-                        <p:datePicker id="end" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" value="#{bookEnt.rentalEnd}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
+                        <p:datePicker id="end" mindate="#{addRentalController.todayDate}" disabledDates="#{addRentalController.getDisabledDays()}" pattern="dd/MM/yyyy" readonlyInput="true" appendTo="@(body)" inputStyle="width: 70%" style="text-align:left" />
                     </p:column>
                     <p:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
                         <p:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}" value="#{addRentalController.userUUID}" style="text-align:left; margin-left: -8px; width: 210px">
@@ -54,17 +54,23 @@
                                            var="single"
                                            itemValue="#{single.id}"
                                            itemLabel="#{single.firstName} #{single.lastName} (#{single.roleOfUser})"
-                                           itemDisabled="#{!single.active}"
-                            />
+                                           itemDisabled="#{!single.active}"/>
                         </p:selectOneMenu>
                     </p:column>
-                    <p:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
-                        <p:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}" value="#{bookEnt.rentalUserUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                    <p:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
+                        <p:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}" value="#{addRentalController.userUUID}" style="text-align:left; margin-left: -8px; width: 210px">
                             <f:selectItem itemValue = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).id}"
                                           itemDisabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
                                           itemLabel = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).firstName}
                                            #{listAccountsController.getDesiredAccount(request.userPrincipal.name).lastName} (it's you)" />
-
+                        </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="Choose User" rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
+                        <p:selectOneMenu disabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}" value="#{addRentalController.userUUID}" style="text-align:left; margin-left: -8px; width: 210px">
+                            <f:selectItem itemValue = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).id}"
+                                          itemDisabled="#{!listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
+                                          itemLabel = "#{listAccountsController.getDesiredAccount(request.userPrincipal.name).firstName}
+                                           #{listAccountsController.getDesiredAccount(request.userPrincipal.name).lastName} (it's you)" />
                         </p:selectOneMenu>
                     </p:column>
                     <p:column headerText="Options">
@@ -73,7 +79,7 @@
                                              disabled="#{bookEnt.rented or not listAccountsController.getDesiredAccount(request.userPrincipal.name).active}"
                                              onclick="return window.confirm('Are you sure you want rent #{bookEnt.title}?')" style="margin-left: 0dp">
                                 <f:actionListener binding="#{addRentalController.setBook(bookEnt)}"/>
-                                <f:actionListener binding="#{addRentalController.setBookAccount(listAccountsController.getSelectedSingleBookAccount(bookEnt))}"/>
+                                <f:actionListener binding="#{addRentalController.setBookAccount(listAccountsController.getDesiredAccount(request.userPrincipal.name))}"/>
                                 <f:actionListener binding="#{listBooksController.setRentedSelectedBook(bookEnt, true)}" />
                             </h:commandButton>
                             <h:commandButton value="Remove"

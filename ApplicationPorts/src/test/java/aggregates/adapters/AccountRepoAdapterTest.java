@@ -3,6 +3,7 @@ package aggregates.adapters;
 import aggregates.converters.MovieConverter;
 import model.Account;
 import model.Movie;
+import model.MovieRental;
 import model_ent.entities.MovieEnt;
 import model_ent.repositories.AccountEntRepo;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,9 +48,9 @@ class AccountRepoAdapterTest {
         List<Account> allAccounts = accountRepoAdapter.getAllAccounts();
         System.out.println(allAccounts);
         Movie testMovie = new Movie("Test", "Tester", 100,false);
-        testMovie.setRentalUserUUID(temporary.getId());
+        MovieRental testRental = new MovieRental(testMovie, temporary);
         MovieEnt testMovieEnt = MovieConverter.convertMovieToEnt(testMovie);
-        accountRepoAdapter.getMovieSelectedViaUUID(testMovie);
+        accountRepoAdapter.getMovieSelectedViaUUID(testRental);
     }
 
     @Test

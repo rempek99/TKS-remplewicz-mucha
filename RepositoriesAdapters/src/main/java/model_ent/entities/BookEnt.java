@@ -17,11 +17,6 @@ public class BookEnt {
     private int pages;
     private boolean rented;
     private String id;
-    // this params are for rentals
-    // todo czy pola sa koniecznie?
-    private String rentalUserUUID;
-    private Date rentalStart;
-    private Date rentalEnd;
 
     public BookEnt(String title, String author, int pages, boolean rented) {
         this.title = title;
@@ -60,30 +55,6 @@ public class BookEnt {
         return rented;
     }
 
-    public String getRentalUserUUID() {
-        return rentalUserUUID;
-    }
-
-    public void setRentalUserUUID(String rentalUserUUID) {
-        this.rentalUserUUID = rentalUserUUID;
-    }
-
-    public Date getRentalStart() {
-        return rentalStart;
-    }
-
-    public void setRentalStart(Date rentalStart) {
-        this.rentalStart = rentalStart;
-    }
-
-    public Date getRentalEnd() {
-        return rentalEnd;
-    }
-
-    public void setRentalEnd(Date rentalEnd) {
-        this.rentalEnd = rentalEnd;
-    }
-
     @Override
     public String toString() {
         return "Book{" +
@@ -91,10 +62,7 @@ public class BookEnt {
                 ", author='" + author + '\'' +
                 ", pages=" + pages +
                 ", rented=" + rented +
-                ", id='" + id + '\'' +
-                ", rentalUserUUID='" + rentalUserUUID + '\'' +
-                ", rentalStart=" + rentalStart +
-                ", rentalEnd=" + rentalEnd +
+                ", id='" + id +
                 '}';
     }
 
@@ -107,14 +75,11 @@ public class BookEnt {
                 isRented() == book.isRented() &&
                 getTitle().equals(book.getTitle()) &&
                 getAuthor().equals(book.getAuthor()) &&
-                Objects.equals(getId(), book.getId()) &&
-                Objects.equals(getRentalUserUUID(), book.getRentalUserUUID()) &&
-                getRentalStart().equals(book.getRentalStart()) &&
-                getRentalEnd().equals(book.getRentalEnd());
+                Objects.equals(getId(), book.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getAuthor(), getPages(), isRented(), getId(), getRentalUserUUID(), getRentalStart(), getRentalEnd());
+        return Objects.hash(getTitle(), getAuthor(), getPages(), isRented(), getId());
     }
 }

@@ -32,13 +32,11 @@ public class MovieRepo {
     public Movie addMovie(Movie m) {
             movies.add(m);
             m.setId(UUID.randomUUID().toString());
-//            printState();
         return m;
     }
 
     public void removeMovie(Movie m) {
             movies.remove(m);
-//            printState();
     }
 
     public Movie getMovieViaUUID(String str) {
@@ -64,13 +62,6 @@ public class MovieRepo {
         fromRepo.setAuthor(movieWithData.getAuthor());
         fromRepo.setRating(movieWithData.getRating());
         fromRepo.setRented(movieWithData.isRented());
-        fromRepo.setRentalUserUUID(movieWithData.getRentalUserUUID());
-        fromRepo.setRentalStart(movieWithData.getRentalStart());
-        fromRepo.setRentalEnd(movieWithData.getRentalEnd());
         return fromRepo;
     }
-
-//    private void printState() {
-//        System.out.println(Arrays.toString(movies.toArray()));
-//    }
 }
