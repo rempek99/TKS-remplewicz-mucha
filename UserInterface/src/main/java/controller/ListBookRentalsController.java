@@ -1,6 +1,7 @@
 package controller;
 
 import model.BookRental;
+import services.BookService;
 import services.RentalService;
 
 import javax.faces.view.ViewScoped;
@@ -14,6 +15,8 @@ import java.util.List;
 public class ListBookRentalsController implements Serializable {
     @Inject
     private RentalService rentalService;
+    @Inject
+    private BookService bookService;
 
     private List<BookRental> filteredBooks;
 
@@ -35,8 +38,9 @@ public class ListBookRentalsController implements Serializable {
         this.filteredBooks = filteredBooks;
     }
 
-    public void removeSelectedBookRental(BookRental m) {
-        m.getBook().setRented(false);
-        rentalService.removeBookRental(m);
+    public void removeSelectedBookRental(BookRental b) {
+        b.getBook().setRented(false);
+        bookService.setBookRented(b.getBook(), false);
+        rentalService.removeBookRental(b);
     }
 }

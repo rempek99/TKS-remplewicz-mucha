@@ -31,4 +31,8 @@ public class ListBooksController implements Serializable{
     public void removeSelectedBook(Book b) {
         bookService.removeBook(b);
     }
+
+    public void setRentedSelectedBook(Book b, boolean value) {
+        bookService.setBookRented(b, value);
+    }
 }

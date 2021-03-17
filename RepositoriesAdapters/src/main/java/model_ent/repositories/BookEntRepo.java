@@ -32,13 +32,19 @@ public class BookEntRepo {
     public BookEnt addBook(BookEnt b) {
         b.setId(UUID.randomUUID().toString());
         books.add(b);
-//        printState();
         return b;
+    }
+
+    public void setBookRented(BookEnt b, boolean value) {
+        for(BookEnt book: books) {
+            if(book.getId().equals(b.getId())){
+                book.setRented(value);
+            }
+        }
     }
 
     public void removeBook(BookEnt b) {
         books.remove(b);
-//        printState();
     }
 
 
@@ -70,8 +76,4 @@ public class BookEntRepo {
         fromRepo.setRentalEnd(bookWithData.getRentalEnd());
         return fromRepo;
     }
-
-//    private void printState() {
-//        System.out.println(Arrays.toString(books.toArray()));
-//    }
 }

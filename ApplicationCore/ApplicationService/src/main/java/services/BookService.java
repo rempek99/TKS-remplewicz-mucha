@@ -20,9 +20,12 @@ public class BookService implements Serializable{
     public void updateSingleBook(Book income, Book outcome) {
         bookRepo.updateSingleBook(income, outcome);
     }
+
     public void addBook(Book b) {
         bookRepo.addBook(b);
     }
+
+    public void setBookRented(Book b, boolean value) { bookRepo.setBookRented(b, value); }
 
     public void removeBook(Book b) {
         bookRepo.removeBook(b);

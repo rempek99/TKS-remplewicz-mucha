@@ -32,13 +32,19 @@ public class MovieEntRepo {
     public MovieEnt addMovie(MovieEnt m) {
             m.setId(UUID.randomUUID().toString());
             movies.add(m);
-            printState();
         return m;
+    }
+
+    public void setMovieRented(MovieEnt m, boolean value) {
+        for(MovieEnt movie: movies) {
+            if(movie.getId().equals(m.getId())){
+                movie.setRented(value);
+            }
+        }
     }
 
     public void removeMovie(MovieEnt m) {
             movies.remove(m);
-            printState();
     }
 
     public MovieEnt getMovieViaUUID(String str) {
@@ -68,9 +74,5 @@ public class MovieEntRepo {
         fromRepo.setRentalStart(movieWithData.getRentalStart());
         fromRepo.setRentalEnd(movieWithData.getRentalEnd());
         return fromRepo;
-    }
-
-    private void printState() {
-        System.out.println(Arrays.toString(movies.toArray()));
     }
 }

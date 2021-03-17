@@ -21,6 +21,8 @@ public class MovieService implements Serializable{
         movieRepo.addMovie(m);
     }
 
+    public void setMovieRented(Movie m, boolean value) { movieRepo.setMovieRented(m, value); }
+
     public void removeMovie(Movie m) {
         movieRepo.removeMovie(m);
     }

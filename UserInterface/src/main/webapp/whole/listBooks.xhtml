@@ -74,6 +74,7 @@
                                              onclick="return window.confirm('Are you sure you want rent #{bookEnt.title}?')" style="margin-left: 0dp">
                                 <f:actionListener binding="#{addRentalController.setBook(bookEnt)}"/>
                                 <f:actionListener binding="#{addRentalController.setBookAccount(listAccountsController.getSelectedSingleBookAccount(bookEnt))}"/>
+                                <f:actionListener binding="#{listBooksController.setRentedSelectedBook(bookEnt, true)}" />
                             </h:commandButton>
                             <h:commandButton value="Remove"
                                              action="#{listBooksController.removeSelectedBook(bookEnt)}"

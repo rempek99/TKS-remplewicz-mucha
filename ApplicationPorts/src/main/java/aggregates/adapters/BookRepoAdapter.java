@@ -44,6 +44,9 @@ public class BookRepoAdapter implements BookPort, Serializable {
     }
 
     @Override
+    public void setBookRented(Book b, boolean value) { bookRepo.setBookRented(convertBookToEnt(b), value); }
+
+    @Override
     public void removeBook(Book b) {
         bookRepo.removeBook(convertBookToEnt(b));
     }

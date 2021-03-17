@@ -1,6 +1,7 @@
 package controller;
 
 import model.MovieRental;
+import services.MovieService;
 import services.RentalService;
 
 import javax.faces.view.ViewScoped;
@@ -14,6 +15,8 @@ import java.util.List;
 public class ListMovieRentalsController implements Serializable {
     @Inject
     private RentalService rentalService;
+    @Inject
+    private MovieService movieService;
 
     private List<MovieRental> filteredMovies;
 
@@ -37,6 +40,7 @@ public class ListMovieRentalsController implements Serializable {
 
     public void removeSelectedMovieRental(MovieRental m) {
         m.getMovie().setRented(false);
+        movieService.setMovieRented(m.getMovie(), false);
         rentalService.removeMovieRental(m);
     }
 }

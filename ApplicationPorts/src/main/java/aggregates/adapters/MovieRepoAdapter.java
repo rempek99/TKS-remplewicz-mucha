@@ -45,6 +45,11 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
 
     @Override
+    public void setMovieRented(Movie m, boolean value) {
+        movieRepo.setMovieRented(convertMovieToEnt(m), value);
+    }
+
+    @Override
     public void removeMovie(Movie m) {
         movieRepo.removeMovie(convertMovieToEnt(m));
     }

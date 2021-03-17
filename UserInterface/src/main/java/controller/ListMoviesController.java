@@ -35,4 +35,6 @@ public class ListMoviesController implements Serializable {
     public void removeSelectedMovie(Movie m) {
         movieService.removeMovie(m);
     }
+
+    public void setRentedSelectedMovie(Movie m, boolean value) { movieService.setMovieRented(m, value); }
 }
