@@ -1,12 +1,13 @@
 package aggregates.adapters;
 
 import infrastructure.AccountPort;
-import model.*;
+import model.Account;
+import model.BookRental;
+import model.MovieRental;
 import model_ent.entities.AccountEnt;
 import model_ent.repositories.AccountEntRepo;
 
 import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;

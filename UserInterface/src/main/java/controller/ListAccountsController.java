@@ -15,6 +15,8 @@ public class ListAccountsController implements Serializable{
     @Inject
     private AccountService accountService;
     private List<Account> filteredAccounts;
+    private boolean chooseStatus;
+    private String chooseRole;
 
     public List<Account> getFilteredAccounts() {
         return filteredAccounts;
@@ -41,4 +43,23 @@ public class ListAccountsController implements Serializable{
     public Account getSingleAccount(Account a) { return accountService.getAccount(a); }
 
 
+    public void updateStatusandRole(Account account) {
+        accountService.setAccountStatus(account.getId(),chooseStatus, chooseRole);
+    }
+
+    public boolean getChooseStatus() {
+        return chooseStatus;
+    }
+
+    public void setChooseStatus(boolean chooseStatus) {
+        this.chooseStatus = chooseStatus;
+    }
+
+    public String getChooseRole() {
+        return chooseRole;
+    }
+
+    public void setChooseRole(String chooseRole) {
+        this.chooseRole = chooseRole;
+    }
 }

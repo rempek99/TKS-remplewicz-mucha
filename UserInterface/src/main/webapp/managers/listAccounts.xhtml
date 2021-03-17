@@ -45,7 +45,7 @@
                 </p:column>
                 <p:column headerText="Set role of user"
                           rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
-                    <p:selectOneMenu value="#{accountEnt.roleOfUser}" id="roleOfUser">
+                    <p:selectOneMenu value="#{listAccountsController.chooseRole}" id="roleOfUser">
                         <f:selectItem itemValue="USER" itemLabel="Ordinary user"/>
                         <f:selectItem itemValue="MANAGER" itemLabel="System manager"/>
                         <f:selectItem itemValue="ADMIN" itemLabel="Admin"/>
@@ -53,7 +53,7 @@
                 </p:column>
                 <p:column headerText="Is user active?"
                           rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
-                    <p:selectOneMenu value="#{accountEnt.active}" id="activityStatus">
+                    <p:selectOneMenu value="#{listAccountsController.chooseStatus}" id="activityStatus">
                         <f:selectItem itemValue="true" itemLabel="User is active"/>
                         <f:selectItem itemValue="false" itemLabel="User is not active"/>
                         <f:converter converterId="javax.faces.Boolean"/>
@@ -68,7 +68,7 @@
                 <p:column headerText="Update user"
                           rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                     <h:commandButton value="Update status"
-                                     action="#{listAccountsController.getSingleAccount(accountEnt).setActive(accountEnt.active)}"
+                                     action="#{listAccountsController.updateStatusandRole(accountEnt)}"
                                      onclick="return window.confirm('Are you sure you want update #{accountEnt.firstName}?')"
                                      style="margin-left: 0dp"/>
                 </p:column>

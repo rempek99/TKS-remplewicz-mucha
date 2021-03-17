@@ -47,4 +47,9 @@ public class AccountService implements Serializable{
         return accountRepo.getAccount(a);
     }
 
+    public void setAccountStatus(String id, boolean status, String role) {
+        Account account = accountRepo.getAccountViaUUID(id);
+        Account newAccount = new Account(account.getFirstName(),account.getLastName(),role,status,account.getLogin(),account.getPassword());
+        accountRepo.updateSingleAcc(account,newAccount);
+    }
 }
