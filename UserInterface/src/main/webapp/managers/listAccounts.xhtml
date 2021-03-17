@@ -66,7 +66,14 @@
                                      style="margin-left: 0dp"/>
                 </p:column>
                 <p:column headerText="Update user"
-                          rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
+                          rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
+                    <h:commandButton value="Update status"
+                                     action="#{listAccountsController.updateStatusandRole(accountEnt)}"
+                                     onclick="return window.confirm('Are you sure you want update #{accountEnt.firstName}?')"
+                                     style="margin-left: 0dp"/>
+                </p:column>
+                <p:column headerText="Update user"
+                          rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                     <h:commandButton value="Update status"
                                      action="#{listAccountsController.updateStatusandRole(accountEnt)}"
                                      onclick="return window.confirm('Are you sure you want update #{accountEnt.firstName}?')"
