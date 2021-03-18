@@ -1,9 +1,6 @@
 package services;
 
-import aggregates.adapters.MovieRepoAdapter;
-import model.Book;
 import model.Movie;
-import model_ent.repositories.MovieEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +18,7 @@ class MovieServiceTest {
 
     @BeforeEach
     void initMovieService() {
-        movieService = new MovieService(new MovieRepoAdapter(new MovieEntRepo()));
+       // movieService = new MovieService(new MovieRepoAdapter(new MovieEntRepo()));
         movieService.addMovie(tester);
     }
 

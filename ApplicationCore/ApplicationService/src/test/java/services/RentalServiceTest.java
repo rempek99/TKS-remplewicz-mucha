@@ -1,8 +1,6 @@
 package services;
 
-import aggregates.adapters.RentalRepoAdapter;
 import model.*;
-import model_ent.repositories.RentalEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +26,7 @@ class RentalServiceTest {
 
     @BeforeEach
     void initRentalService() {
-        rentalService = new RentalService(new RentalRepoAdapter(new RentalEntRepo()));
+        //rentalService = new RentalService(new RentalRepoAdapter(new RentalEntRepo()));
         rentalService.addBookRental(new BookRental(testBook, tester));
         rentalService.addMovieRental(new MovieRental(testMovie, tester2));
     }

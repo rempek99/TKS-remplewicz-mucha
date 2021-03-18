@@ -1,15 +1,14 @@
 package services;
 
-import aggregates.adapters.AccountRepoAdapter;
 import model.Account;
-import model_ent.repositories.AccountEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class AccountServiceTest {
 
@@ -20,7 +19,7 @@ class AccountServiceTest {
 
     @BeforeEach
     void initServiceAndRepositories() {
-        accountService = new AccountService(new AccountRepoAdapter(new AccountEntRepo()));
+        //accountService = new AccountService(new AccountRepoAdapter(new AccountEntRepo()));
         accountService.addAccount(tester);
     }
 

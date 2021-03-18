@@ -1,9 +1,6 @@
 package services;
 
-import aggregates.adapters.BookRepoAdapter;
-import model.Account;
 import model.Book;
-import model_ent.repositories.BookEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +17,7 @@ class BookServiceTest {
 
     @BeforeEach
     void initBookService() {
-        bookService = new BookService(new BookRepoAdapter(new BookEntRepo()));
+       // bookService = new BookService(new BookRepoAdapter(new BookEntRepo()));
         bookService.addBook(tester);
     }
 
