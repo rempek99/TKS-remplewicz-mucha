@@ -10,7 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-public class MovieService implements Serializable, MovieUsecaseSuit {
+public class MovieService implements Serializable, MovieUsecaseSuit, IService<Movie> {
     @Inject
     private MoviePort movieRepo;
 
@@ -23,25 +23,26 @@ public class MovieService implements Serializable, MovieUsecaseSuit {
     }
 
     @Override
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAll() {
         return movieRepo.getAllMovies();
     }
 
     @Override
-    public void addMovie(Movie m) {
+    public void add(Movie m) {
         movieRepo.addMovie(m);
     }
 
     public void setMovieRented(Movie m, boolean value) { movieRepo.setMovieRented(m, value); }
 
     @Override
-    public void removeMovie(Movie m) {
-        movieRepo.removeMovie(m);
-    }
+    public Movie get(Movie m) { return movieRepo.getMovie(m); }
 
     @Override
-    public Movie getMovieViaUUID(String str) {return movieRepo.getMovieViaUUID(str);}
+    public void remove(Movie m) { movieRepo.removeMovie(m); }
 
     @Override
-    public void updateSingleMovie(Movie income, Movie outcome) {movieRepo.updateSingleMovie(income, outcome);}
+    public Movie getViaUUID(String str) {return movieRepo.getMovieViaUUID(str);}
+
+    @Override
+    public void update(Movie income, Movie outcome) {movieRepo.updateSingleMovie(income, outcome);}
 }

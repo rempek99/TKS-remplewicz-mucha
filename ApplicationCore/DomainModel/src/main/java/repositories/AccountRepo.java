@@ -18,7 +18,7 @@ import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStore;
 
 @ApplicationScoped
-public class AccountRepo implements IdentityStore {
+public class AccountRepo implements IdentityStore, IRepository<Account> {
 
     private List<Account> accounts = Collections.synchronizedList(new ArrayList<Account>());
 
@@ -31,23 +31,23 @@ public class AccountRepo implements IdentityStore {
         accounts.add(new Account("Mariusz", "Władczy", "ADMIN", true, "admin", "admin"));
     }
 
-    public List<Account> getAllAccounts() {
+    public List<Account> getAll() {
             return Collections.unmodifiableList(accounts);
     }
 
-    public Account addAccount(Account a) {
+    public Account add(Account a) {
             accounts.add(a);
             a.setId(UUID.randomUUID().toString());
 //            printState();
             return a;
     }
 
-    public void removeAccount(Account a) {
+    public void remove(Account a) {
             accounts.remove(a);
 //            printState();
     }
 
-    public Account getAccount(Account a) {
+    public Account get(Account a) {
         if (accounts.contains(a)) {
             return a;
         } else {
@@ -55,7 +55,7 @@ public class AccountRepo implements IdentityStore {
         }
     }
 
-    public Account getAccountViaUUID(String str) {
+    public Account getViaUUID(String str) {
         for(Account acc: accounts) {
             if(acc.getId().equals(str)){
                 return acc;
@@ -64,8 +64,8 @@ public class AccountRepo implements IdentityStore {
         return null;
     }
 
-    public Account updateSingleAcc(Account accToChange, Account accWithData) {
-        Account fromRepo = getAccount(accToChange);
+    public Account update(Account accToChange, Account accWithData) {
+        Account fromRepo = get(accToChange);
         fromRepo.setActive(accWithData.isActive());
         fromRepo.setFirstName(accWithData.getFirstName());
         fromRepo.setLastName(accWithData.getLastName());

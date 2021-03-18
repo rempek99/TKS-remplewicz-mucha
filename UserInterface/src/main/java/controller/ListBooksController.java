@@ -25,11 +25,11 @@ public class ListBooksController implements Serializable{
     }
 
     public List<Book> getBooks() {
-        return bookService.getAllBooks();
+        return bookService.getAll();
     }
 
     public void removeSelectedBook(Book b) {
-        bookService.removeBook(b);
+        bookService.remove(b);
     }
 
     public void setRentedSelectedBook(Book b, boolean value) {

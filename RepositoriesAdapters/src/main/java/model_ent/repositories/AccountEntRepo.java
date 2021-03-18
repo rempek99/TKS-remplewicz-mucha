@@ -3,6 +3,7 @@ package model_ent.repositories;
 
 import model_ent.entities.AccountEnt;
 import model_ent.entities.MovieEnt;
+import repositories.IRepository;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -18,41 +19,41 @@ import javax.security.enterprise.identitystore.IdentityStore;
 import java.util.*;
 
 @ApplicationScoped
-public class AccountEntRepo implements IdentityStore {
+public class AccountEntRepo implements IdentityStore, IRepositoryEnt<AccountEnt> {
 
     private final List<AccountEnt> accounts = Collections.synchronizedList(new ArrayList<AccountEnt>());
 
     @PostConstruct
     private void insertInitData() {
-        addAccount(new AccountEnt("Jan", "Kowalski", "USER", true, "jan12", "kowalski"));
-        addAccount(new AccountEnt("Tomasz", "Nowak", "USER", true, "tomasz", "nowak"));
-        addAccount(new AccountEnt("Artur", "Wiśniewski","USER", true, "artur", "wiśniewski"));
-        addAccount(new AccountEnt("Janusz", "Szybki", "MANAGER", true, "janusz", "szybki"));
-        addAccount(new AccountEnt("Mariusz", "Władczy", "ADMIN", true, "admin", "admin"));
+        add(new AccountEnt("Jan", "Kowalski", "USER", true, "jan12", "kowalski"));
+        add(new AccountEnt("Tomasz", "Nowak", "USER", true, "tomasz", "nowak"));
+        add(new AccountEnt("Artur", "Wiśniewski","USER", true, "artur", "wiśniewski"));
+        add(new AccountEnt("Janusz", "Szybki", "MANAGER", true, "janusz", "szybki"));
+        add(new AccountEnt("Mariusz", "Władczy", "ADMIN", true, "admin", "admin"));
     }
 
-    public List<AccountEnt> getAllAccounts() {
+    public List<AccountEnt> getAll() {
             return Collections.unmodifiableList(accounts);
     }
 
-    public AccountEnt addAccount(AccountEnt a) {
+    public AccountEnt add(AccountEnt a) {
         a.setId(UUID.randomUUID().toString());
         accounts.add(a);
         return a;
     }
 
-    public void removeAccount(AccountEnt a) {
+    public void remove(AccountEnt a) {
             accounts.remove(a);
     }
 
-    public AccountEnt getAccount(AccountEnt a) {
+    public AccountEnt get(AccountEnt a) {
         Optional<AccountEnt> accountEnt = accounts.stream()
                 .filter(x -> x.equals(a))
                 .findFirst();
         return accountEnt.orElse(null);
     }
 
-    public AccountEnt getAccountViaUUID(String str) {
+    public AccountEnt getViaUUID(String str) {
         for(AccountEnt acc: accounts) {
             if(acc.getId().equals(str)){
                 return acc;
@@ -61,8 +62,8 @@ public class AccountEntRepo implements IdentityStore {
         return null;
     }
 
-    public AccountEnt updateSingleAcc(AccountEnt accToChange, AccountEnt accWithData) {
-        AccountEnt fromRepo = getAccount(accToChange);
+    public AccountEnt update(AccountEnt accToChange, AccountEnt accWithData) {
+        AccountEnt fromRepo = get(accToChange);
         fromRepo.setActive(accWithData.isActive());
         fromRepo.setFirstName(accWithData.getFirstName());
         fromRepo.setLastName(accWithData.getLastName());

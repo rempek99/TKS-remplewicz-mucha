@@ -35,9 +35,9 @@ public class AddAccountController implements Serializable {
     }
 
     public void addConfirmed() {
-        accountService.addAccount(account);
+        accountService.add(account);
         init();
     }
 
-    public Account getSingleAccount(Account a) { return accountService.getAccount(a); }
+    public Account getSingleAccount(Account a) { return accountService.get(a); }
 }

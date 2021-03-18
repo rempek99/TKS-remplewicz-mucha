@@ -28,7 +28,7 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
     }
 
     private void cahceData() {
-        movies = movieRepo.getAllMovies()
+        movies = movieRepo.getAll()
                 .stream()
                 .map(MovieConverter::convertEntToMovie)
                 .collect(Collectors.toList());
@@ -44,7 +44,7 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
     @Override
     public void addMovie(Movie m) {
-        movieRepo.addMovie(convertMovieToEnt(m));
+        movieRepo.add(convertMovieToEnt(m));
     }
 
 
@@ -55,7 +55,7 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
     @Override
     public void removeMovie(Movie m) {
-        movieRepo.removeMovie(convertMovieToEnt(m));
+        movieRepo.remove(convertMovieToEnt(m));
     }
 
 
@@ -81,7 +81,7 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
     @Override
     public void updateSingleMovie(Movie movieToChange, Movie movieWithData) {
-            movieRepo.updateSingleMovie(
+            movieRepo.update(
                     convertMovieToEnt(movieToChange),
                     convertMovieToEnt(movieWithData));
     }

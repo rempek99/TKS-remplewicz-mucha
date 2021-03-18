@@ -18,50 +18,50 @@ class BookServiceTest {
     @BeforeEach
     void initBookService() {
        // bookService = new BookService(new BookRepoAdapter(new BookEntRepo()));
-        bookService.addBook(tester);
+        bookService.add(tester);
     }
 
     @Test
     void getAllBooks() {
-        List<Book> bookList = bookService.getAllBooks();
+        List<Book> bookList = bookService.getAll();
         assertFalse(bookList.isEmpty());
     }
 
     @Test
     void updateSingleBook() {
-        Book exampleBook = bookService.getAllBooks().get(0);
-        bookService.updateSingleBook(exampleBook, tester2);
-        Book foundBook = bookService.getBookViaUUID(exampleBook.getId());
+        Book exampleBook = bookService.getAll().get(0);
+        bookService.update(exampleBook, tester2);
+        Book foundBook = bookService.getViaUUID(exampleBook.getId());
         assertEquals(tester2.getTitle(), foundBook.getTitle());
     }
 
     @Test
     void addBook() {
-        int size = bookService.getAllBooks().size();
-        bookService.addBook(tester2);
-        assertEquals(size+1, bookService.getAllBooks().size());
+        int size = bookService.getAll().size();
+        bookService.add(tester2);
+        assertEquals(size+1, bookService.getAll().size());
     }
 
     @Test
     void setBookRented() {
-        Book exampleBook = bookService.getAllBooks().get(0);
+        Book exampleBook = bookService.getAll().get(0);
         assertFalse(exampleBook.isRented());
         bookService.setBookRented(exampleBook,true);
-        assertTrue(bookService.getBookViaUUID(exampleBook.getId()).isRented());
+        assertTrue(bookService.getViaUUID(exampleBook.getId()).isRented());
     }
 
     @Test
     void removeBook() {
-        int size = bookService.getAllBooks().size();
-        Book exampleBook = bookService.getAllBooks().get(0);
-        bookService.removeBook(exampleBook);
-        assertEquals(size-1, bookService.getAllBooks().size());
+        int size = bookService.getAll().size();
+        Book exampleBook = bookService.getAll().get(0);
+        bookService.remove(exampleBook);
+        assertEquals(size-1, bookService.getAll().size());
     }
 
     @Test
     void getBookViaUUID() {
-        Book exampleBook = bookService.getAllBooks().get(0);
-        Book exampleBookByID = bookService.getBookViaUUID(exampleBook.getId());
+        Book exampleBook = bookService.getAll().get(0);
+        Book exampleBookByID = bookService.getViaUUID(exampleBook.getId());
         assertEquals(exampleBook,exampleBookByID);
     }
 }

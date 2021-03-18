@@ -19,50 +19,50 @@ class MovieServiceTest {
     @BeforeEach
     void initMovieService() {
        // movieService = new MovieService(new MovieRepoAdapter(new MovieEntRepo()));
-        movieService.addMovie(tester);
+        movieService.add(tester);
     }
 
     @Test
     void getAllMovies() {
-        List<Movie> movieList = movieService.getAllMovies();
+        List<Movie> movieList = movieService.getAll();
         assertFalse(movieList.isEmpty());
     }
 
     @Test
     void addMovie() {
-        int size = movieService.getAllMovies().size();
-        movieService.addMovie(tester2);
-        assertEquals(size+1, movieService.getAllMovies().size());
+        int size = movieService.getAll().size();
+        movieService.add(tester2);
+        assertEquals(size+1, movieService.getAll().size());
     }
 
     @Test
     void setMovieRented() {
-        Movie exampleMovie = movieService.getAllMovies().get(0);
+        Movie exampleMovie = movieService.getAll().get(0);
         assertFalse(exampleMovie.isRented());
         movieService.setMovieRented(exampleMovie,true);
-        assertTrue(movieService.getMovieViaUUID(exampleMovie.getId()).isRented());
+        assertTrue(movieService.getViaUUID(exampleMovie.getId()).isRented());
     }
 
     @Test
     void removeMovie() {
-        int size = movieService.getAllMovies().size();
-        Movie exampleMovie = movieService.getAllMovies().get(0);
-        movieService.removeMovie(exampleMovie);
-        assertEquals(size-1, movieService.getAllMovies().size());
+        int size = movieService.getAll().size();
+        Movie exampleMovie = movieService.getAll().get(0);
+        movieService.remove(exampleMovie);
+        assertEquals(size-1, movieService.getAll().size());
     }
 
     @Test
     void getMovieViaUUID() {
-        Movie exampleMovie = movieService.getAllMovies().get(0);
-        Movie exampleMovieByID = movieService.getMovieViaUUID(exampleMovie.getId());
+        Movie exampleMovie = movieService.getAll().get(0);
+        Movie exampleMovieByID = movieService.getViaUUID(exampleMovie.getId());
         assertEquals(exampleMovie,exampleMovieByID);
     }
 
     @Test
     void updateSingleMovie() {
-        Movie exampleMovie = movieService.getAllMovies().get(0);
-        movieService.updateSingleMovie(exampleMovie, tester2);
-        Movie foundMovie = movieService.getMovieViaUUID(exampleMovie.getId());
+        Movie exampleMovie = movieService.getAll().get(0);
+        movieService.update(exampleMovie, tester2);
+        Movie foundMovie = movieService.getViaUUID(exampleMovie.getId());
         assertEquals(tester2.getTitle(), foundMovie.getTitle());
     }
 }

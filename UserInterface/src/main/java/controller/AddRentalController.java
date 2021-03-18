@@ -73,13 +73,13 @@ public class AddRentalController implements Serializable {
     }
 
     public void addMovieRentConfirmed() {
-        movieRental.setAccount(accountService.getAccountViaUUID(userUUID));
+        movieRental.setAccount(accountService.getViaUUID(userUUID));
         rentalService.addMovieRental(movieRental);
         init();
     }
 
     public void addBookRentConfirmed() {
-        bookRental.setAccount(accountService.getAccountViaUUID(userUUID));
+        bookRental.setAccount(accountService.getViaUUID(userUUID));
         rentalService.addBookRental(bookRental);
         init();
     }

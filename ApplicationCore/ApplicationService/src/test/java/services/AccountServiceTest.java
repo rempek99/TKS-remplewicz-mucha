@@ -20,12 +20,12 @@ class AccountServiceTest {
     @BeforeEach
     void initServiceAndRepositories() {
         //accountService = new AccountService(new AccountRepoAdapter(new AccountEntRepo()));
-        accountService.addAccount(tester);
+        accountService.add(tester);
     }
 
     @Test
     void getAllAccounts() {
-        List<Account> accountList = accountService.getAllAccounts();
+        List<Account> accountList = accountService.getAll();
         assertFalse(accountList.isEmpty());
     }
 
@@ -41,38 +41,38 @@ class AccountServiceTest {
 
     @Test
     void getAccountViaUUID() {
-        Account exampleAccount = accountService.getAllAccounts().get(0);
-        Account foundAccount = accountService.getAccountViaUUID(exampleAccount.getId());
+        Account exampleAccount = accountService.getAll().get(0);
+        Account foundAccount = accountService.getViaUUID(exampleAccount.getId());
         assertEquals(exampleAccount, foundAccount);
     }
 
     @Test
     void updateSingleAccount() {
-        Account exampleAccount = accountService.getAllAccounts().get(0);
-        accountService.updateSingleAccount(exampleAccount, tester2);
-        Account foundAccount = accountService.getAccountViaUUID(exampleAccount.getId());
+        Account exampleAccount = accountService.getAll().get(0);
+        accountService.update(exampleAccount, tester2);
+        Account foundAccount = accountService.getViaUUID(exampleAccount.getId());
         assertEquals(tester2.getFirstName(), foundAccount.getFirstName());
     }
 
     @Test
     void addAccount() {
-        int size = accountService.getAllAccounts().size();
-        accountService.addAccount(tester2);
-        assertEquals(size + 1, accountService.getAllAccounts().size());
+        int size = accountService.getAll().size();
+        accountService.add(tester2);
+        assertEquals(size + 1, accountService.getAll().size());
     }
 
     @Test
     void removeAccount() {
-        int size = accountService.getAllAccounts().size();
-        Account exampleAccount = accountService.getAllAccounts().get(0);
-        accountService.removeAccount(exampleAccount);
-        assertEquals(size - 1, accountService.getAllAccounts().size());
+        int size = accountService.getAll().size();
+        Account exampleAccount = accountService.getAll().get(0);
+        accountService.remove(exampleAccount);
+        assertEquals(size - 1, accountService.getAll().size());
     }
 
     @Test
     void getAccount() {
-        Account exampleAccount = accountService.getAllAccounts().get(0);
-        Account exampleAccountByID = accountService.getAccount(exampleAccount);
+        Account exampleAccount = accountService.getAll().get(0);
+        Account exampleAccountByID = accountService.get(exampleAccount);
         assertEquals(exampleAccount, exampleAccountByID);
     }
 }

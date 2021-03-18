@@ -7,7 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 @ApplicationScoped
-public class BookRepo {
+public class BookRepo implements IRepository<Book> {
 
     private List<Book> books = Collections.synchronizedList(new ArrayList<Book>());
 
@@ -25,22 +25,22 @@ public class BookRepo {
         books.add(new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", 322, false));
     }
 
-    public List<Book> getAllBooks() {
+    public List<Book> getAll() {
         return Collections.unmodifiableList(books);
     }
 
-    public Book addBook(Book b) {
+    public Book add(Book b) {
         books.add(b);
         b.setId(UUID.randomUUID().toString());
         return b;
     }
 
-    public void removeBook(Book b) {
+    public void remove(Book b) {
         books.remove(b);
     }
 
 
-    public Book getBookViaUUID(String str) {
+    public Book getViaUUID(String str) {
         for(Book book: books) {
             if(book.getId().equals(str)){
                 return book;
@@ -49,7 +49,7 @@ public class BookRepo {
         return null;
     }
 
-    public Book getBook(Book b) {
+    public Book get(Book b) {
         if (books.contains(b)) {
             return b;
         } else {
@@ -57,8 +57,8 @@ public class BookRepo {
         }
     }
 
-    public Book updateSingleBook(Book bookToChange, Book bookWithData) {
-        Book fromRepo = getBook(bookToChange);
+    public Book update(Book bookToChange, Book bookWithData) {
+        Book fromRepo = get(bookToChange);
         fromRepo.setTitle(bookWithData.getTitle());
         fromRepo.setAuthor(bookWithData.getAuthor());
         fromRepo.setPages(bookWithData.getPages());

@@ -28,19 +28,19 @@ public class ListAccountsController implements Serializable{
 
     public Account getSelectedSingleMovieAccount(MovieRental m) {return accountService.getSingleMovieSelection(m); }
     public Account getSelectedSingleBookAccount(BookRental b) {return accountService.getSingleBookSelection(b); }
-    public Account getDesiredAccount(String str) {return accountService.getAccountViaUUID(str); }
+    public Account getDesiredAccount(String str) {return accountService.getViaUUID(str); }
 
     public List<Account> getAccounts() {
-        return accountService.getAllAccounts();
+        return accountService.getAll();
     }
 
-    public void updateAccount(Account income, Account outcome) { accountService.updateSingleAccount(income, outcome);}
+    public void updateAccount(Account income, Account outcome) { accountService.update(income, outcome);}
 
     public void removeSelectedAccount(Account a) {
-        accountService.removeAccount(a);
+        accountService.remove(a);
     }
 
-    public Account getSingleAccount(Account a) { return accountService.getAccount(a); }
+    public Account getSingleAccount(Account a) { return accountService.get(a); }
 
 
     public void updateStatusandRole(Account account) {
