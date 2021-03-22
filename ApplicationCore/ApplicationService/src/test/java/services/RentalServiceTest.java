@@ -1,16 +1,30 @@
 package services;
 
+import aggregates.adapters.RentalRepoAdapter;
+import infrastructure.RentalPort;
 import model.*;
+import model_ent.repositories.RentalEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
+@ExtendWith(MockitoExtension.class)
 class RentalServiceTest {
 
+    @InjectMocks
     private RentalService rentalService;
+
+    @Mock(name = "rentalPort")
+    private RentalPort rentalPort;
 
     private final Movie testMovie = new Movie("Test", "Tester", 100, false);
     private final Movie testMovie2 = new Movie("Test2", "Tester2", 200, true);
@@ -23,86 +37,120 @@ class RentalServiceTest {
     private final Account tester = new Account("Tester", "Testowy", "user", true, "test", "test123");
     private final Account tester2 = new Account("Tester2", "Testowy2", "user", true, "test2", "test1234");
     private final Account tester3 = new Account("Tester3", "Testowy3", "user", true, "test3", "test12345");
-
-    @BeforeEach
-    void initRentalService() {
-        //rentalService = new RentalService(new RentalRepoAdapter(new RentalEntRepo()));
-        rentalService.addBookRental(new BookRental(testBook, tester));
-        rentalService.addMovieRental(new MovieRental(testMovie, tester2));
-    }
+    private final BookRental testBookRental = new BookRental(testBook, tester);
+    private final MovieRental testMovieRental = new MovieRental(testMovie, tester);
 
     @Test
     void getAllMovieRentals() {
-        List<MovieRental> allMovieRentals = rentalService.getAllMovieRentals();
-        assertFalse(allMovieRentals.isEmpty());
+        //given
+        //when
+        rentalService.getAllMovieRentals();
+        //then
+        then(rentalPort).should().getMovieRentals();
+        then(rentalPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void getAllBookRentals() {
-        List<BookRental> allBookRentals = rentalService.getAllBookRentals();
-        assertFalse(allBookRentals.isEmpty());
+        //given
+        //when
+        rentalService.getAllBookRentals();
+        //then
+        then(rentalPort).should().getBookRentals();
+        then(rentalPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void addMovieRental() {
-        int size = rentalService.getAllMovieRentals().size();
-        rentalService.addMovieRental(new MovieRental(testMovie2, tester3));
-        assertEquals(size+1, rentalService.getAllMovieRentals().size());
+        //given
+        MovieRental exampleMovieRental = testMovieRental;
+        //when
+        rentalService.addMovieRental(exampleMovieRental);
+        //then
+        then(rentalPort).should().addMovieRental(exampleMovieRental);
     }
 
     @Test
     void addBookRental() {
-        int size = rentalService.getAllBookRentals().size();
-        rentalService.addBookRental(new BookRental(testBook2, tester3));
-        assertEquals(size+1, rentalService.getAllBookRentals().size());
+        //given
+        BookRental exampleBookRental = testBookRental;
+        //when
+        rentalService.addBookRental(exampleBookRental);
+        //then
+        then(rentalPort).should().addBookRental(exampleBookRental);
+        then(rentalPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void removeMovieRental() {
-        int size = rentalService.getAllMovieRentals().size();
-        MovieRental exampleMovieRental = rentalService.getAllMovieRentals().get(0);
+        //given
+        MovieRental exampleMovieRental = testMovieRental;
+        //when
         rentalService.removeMovieRental(exampleMovieRental);
-        assertEquals(size-1, rentalService.getAllMovieRentals().size());
+        //then
+        then(rentalPort).should().removeMovieRental(exampleMovieRental);
+        then(rentalPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void removeBookRental() {
-        int size = rentalService.getAllBookRentals().size();
-        BookRental exampleBookRental = rentalService.getAllBookRentals().get(0);
+        //given
+        BookRental exampleBookRental = testBookRental;
+        //when
         rentalService.removeBookRental(exampleBookRental);
-        assertEquals(size-1, rentalService.getAllBookRentals().size());
+        //then
+        then(rentalPort).should().removeBookRental(exampleBookRental);
+        then(rentalPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void getMovieRentalViaUUID() {
-        MovieRental exampleMovieRental = rentalService.getAllMovieRentals().get(0);
+        //given
+        MovieRental exampleMovieRental = testMovieRental;
+        given(rentalPort.getMovieRentalViaUUID(exampleMovieRental.getId())).willReturn(exampleMovieRental);
+        //when
         MovieRental foundMovieRentalViaUUID = rentalService.getMovieRentalViaUUID(exampleMovieRental.getId());
+        //then
+        then(rentalPort).should().getMovieRentalViaUUID(exampleMovieRental.getId());
+        then(rentalPort).shouldHaveNoMoreInteractions();
         assertEquals(exampleMovieRental, foundMovieRentalViaUUID);
     }
 
     @Test
     void getBookRentalViaUUID() {
-        BookRental exampleBookRental = rentalService.getAllBookRentals().get(0);
+        //given
+        BookRental exampleBookRental = testBookRental;
+        given(rentalPort.getBookRentalViaUUID(exampleBookRental.getId())).willReturn(exampleBookRental);
+        //when
         BookRental foundBookRentalViaUUID = rentalService.getBookRentalViaUUID(exampleBookRental.getId());
+        //then
+        then(rentalPort).should().getBookRentalViaUUID(exampleBookRental.getId());
+        then(rentalPort).shouldHaveNoMoreInteractions();
         assertEquals(exampleBookRental, foundBookRentalViaUUID);
     }
 
     @Test
     void updateSingleBookRental() {
-        MovieRental exampleMovieRental = rentalService.getAllMovieRentals().get(0);
-        MovieRental newMovieRental = new MovieRental(testMovie2, tester);
-        rentalService.updateSingleMovieRental(exampleMovieRental, newMovieRental);
-        MovieRental foundMovieRental = rentalService.getMovieRentalViaUUID(exampleMovieRental.getId());
-        assertEquals(newMovieRental.getMovie(), foundMovieRental.getMovie());
+        //given
+        BookRental exampleBookRental = testBookRental;
+        BookRental newBookRental = new BookRental(testBook2, tester);
+        //when
+        rentalService.updateSingleBookRental(exampleBookRental, newBookRental);
+        //then
+        then(rentalPort).should().updateSingleBookRental(exampleBookRental,newBookRental);
+        then(rentalPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void updateSingleMovieRental() {
-        BookRental exampleBookRental = rentalService.getAllBookRentals().get(0);
-        BookRental newBookRental = new BookRental(testBook2, tester3);
-        rentalService.updateSingleBookRental(exampleBookRental, newBookRental);
-        BookRental foundBookRental = rentalService.getBookRentalViaUUID(exampleBookRental.getId());
-        assertEquals(newBookRental.getBook(), foundBookRental.getBook());
+        //given
+        MovieRental exampleMovieRental = testMovieRental;
+        MovieRental newMovieRental = new MovieRental(testMovie2, tester);
+        //when
+        rentalService.updateSingleMovieRental(exampleMovieRental, newMovieRental);
+        //then
+        then(rentalPort).should().updateSingleMovieRental(exampleMovieRental,newMovieRental);
+        then(rentalPort).shouldHaveNoMoreInteractions();
     }
 
     @Test

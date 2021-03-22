@@ -54,17 +54,6 @@ class AccountEntRepoTest {
         AccountEnt found_acc = repo.get(tester2);
         assertEquals(tester2, found_acc);
     }
-
-    @Test
-    @Disabled
-    void getMovieSelectedViaUUID() {
-    }
-
-    @Test
-    @Disabled
-    void getBookSelectedViaUUID() {
-    }
-
     @Test
     void getAccountViaUUID() {
         AccountEnt my_acc = new AccountEnt("Arek", "Remplewicz", "user", true, "ar", "rem1234");

@@ -55,16 +55,6 @@ class AccountRepoTest {
     }
 
     @Test
-    @Disabled
-    void getMovieSelectedViaUUID() {
-    }
-
-    @Test
-    @Disabled
-    void getBookSelectedViaUUID() {
-    }
-
-    @Test
     void getAccountViaUUID() {
         Account my_acc = new Account("Arek", "Remplewicz", "user", true, "ar", "rem1234");
         Account added = repo.add(my_acc);

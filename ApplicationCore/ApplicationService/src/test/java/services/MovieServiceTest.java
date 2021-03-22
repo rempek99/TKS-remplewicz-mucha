@@ -1,68 +1,105 @@
 package services;
 
+import aggregates.adapters.MovieRepoAdapter;
+import infrastructure.MoviePort;
 import model.Movie;
+import model_ent.repositories.MovieEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
+@ExtendWith(MockitoExtension.class)
 class MovieServiceTest {
 
+    @InjectMocks
     private MovieService movieService;
+
+    @Mock(name = "moviePort")
+    private MoviePort moviePort;
 
     private final Movie tester = new Movie("Test", "Tester", 100,false);
     private final Movie tester2 = new Movie("Test2", "Tester2", 200, true);
     private final Movie tester3 = new Movie("Test3", "Tester3", 300, true);
-
-    @BeforeEach
-    void initMovieService() {
-       // movieService = new MovieService(new MovieRepoAdapter(new MovieEntRepo()));
-        movieService.add(tester);
-    }
+    private final List<Movie> movieList = new ArrayList<>(List.of(tester,tester2,tester3));
 
     @Test
     void getAllMovies() {
+        //given
+        given(moviePort.getAllMovies()).willReturn(movieList);
+        //when
         List<Movie> movieList = movieService.getAll();
+        //then
+        then(moviePort).should().getAllMovies();
+        then(moviePort).shouldHaveNoMoreInteractions();
         assertFalse(movieList.isEmpty());
     }
 
     @Test
     void addMovie() {
-        int size = movieService.getAll().size();
+        //given
+            //tester2
+        //when
         movieService.add(tester2);
-        assertEquals(size+1, movieService.getAll().size());
+        //then
+        then(moviePort).should().addMovie(tester2);
+        then(moviePort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void setMovieRented() {
-        Movie exampleMovie = movieService.getAll().get(0);
+        //given
+        Movie exampleMovie = tester;
         assertFalse(exampleMovie.isRented());
+        //when
         movieService.setMovieRented(exampleMovie,true);
-        assertTrue(movieService.getViaUUID(exampleMovie.getId()).isRented());
+        //then
+        then(moviePort).should().setMovieRented(exampleMovie,true);
+        then(moviePort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void removeMovie() {
-        int size = movieService.getAll().size();
-        Movie exampleMovie = movieService.getAll().get(0);
+        //given
+        Movie exampleMovie = tester;
+        //when
         movieService.remove(exampleMovie);
-        assertEquals(size-1, movieService.getAll().size());
+        //then
+        then(moviePort).should().removeMovie(exampleMovie);
+        then(moviePort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void getMovieViaUUID() {
-        Movie exampleMovie = movieService.getAll().get(0);
+        //given
+        Movie exampleMovie = tester;
+        given(moviePort.getMovieViaUUID(exampleMovie.getId())).willReturn(exampleMovie);
+        //when
         Movie exampleMovieByID = movieService.getViaUUID(exampleMovie.getId());
+        //then
+        then(moviePort).should().getMovieViaUUID(exampleMovie.getId());
+        then(moviePort).shouldHaveNoMoreInteractions();
         assertEquals(exampleMovie,exampleMovieByID);
     }
 
     @Test
     void updateSingleMovie() {
-        Movie exampleMovie = movieService.getAll().get(0);
+        //given
+        Movie exampleMovie = tester;
+        //when
         movieService.update(exampleMovie, tester2);
-        Movie foundMovie = movieService.getViaUUID(exampleMovie.getId());
-        assertEquals(tester2.getTitle(), foundMovie.getTitle());
+        //then
+        then(moviePort).should().updateSingleMovie(exampleMovie,tester2);
+        then(moviePort).shouldHaveNoMoreInteractions();
     }
 }

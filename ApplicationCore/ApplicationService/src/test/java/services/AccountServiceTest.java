@@ -1,80 +1,131 @@
 package services;
 
 import aggregates.adapters.AccountRepoAdapter;
-import model.Account;
+import infrastructure.AccountPort;
+import model.*;
 import model_ent.repositories.AccountEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.times;
 
+@ExtendWith(MockitoExtension.class)
 class AccountServiceTest {
 
+    @InjectMocks
     private AccountService accountService;
+
+    @Mock(name = "accountPort")
+    private AccountPort accountPort;
+
     private final Account tester = new Account("Tester", "Testowy", "user", true, "test", "test123");
     private final Account tester2 = new Account("Tester2", "Testowy2", "user", true, "test2", "test1234");
     private final Account tester3 = new Account("Tester3", "Testowy3", "user", true, "test3", "test12345");
-
-    @BeforeEach
-    void initServiceAndRepositories() {
-        //accountService = new AccountService(new AccountRepoAdapter(new AccountEntRepo()));
-        accountService.addAccount(tester);
-    }
+    private final Movie testMovie = new Movie("Test3", "Tester3", 300, true);
+    private final Book testBook = new Book("Test", "Tester", 100, false);
+    private final BookRental testBookRental = new BookRental(testBook, tester);
+    private final MovieRental testMovieRental = new MovieRental(testMovie, tester);
 
     @Test
     void getAllAccounts() {
-        List<Account> accountList = accountService.getAllAccounts();
-        assertFalse(accountList.isEmpty());
+        //given
+        //when
+        List<Account> accountList = accountService.getAll();
+        //then
+        then(accountPort).should().getAllAccounts();
     }
 
     @Test
-    @Disabled
     void getSingleMovieSelection() {
+        //given
+        given(accountPort.getMovieSelectedViaUUID(testMovieRental)).willReturn(tester);
+        //when
+        Account found = accountService.getSingleMovieSelection(testMovieRental);
+        //then
+        then(accountPort).should().getMovieSelectedViaUUID(testMovieRental);
+        then(accountPort).shouldHaveNoMoreInteractions();
+        assertEquals(tester, found);
     }
 
     @Test
-    @Disabled
     void getSingleBookSelection() {
+        //given
+        given(accountPort.getBookSelectedViaUUID(testBookRental)).willReturn(tester);
+        //when
+        Account found = accountService.getSingleBookSelection(testBookRental);
+        //then
+        then(accountPort).should().getBookSelectedViaUUID(testBookRental);
+        then(accountPort).shouldHaveNoMoreInteractions();
+        assertEquals(tester, found);
     }
 
     @Test
     void getAccountViaUUID() {
-        Account exampleAccount = accountService.getAllAccounts().get(0);
-        Account foundAccount = accountService.getAccountViaUUID(exampleAccount.getId());
-        assertEquals(exampleAccount, foundAccount);
+        //given
+        String testID = tester.getId();
+        given(accountPort.getAccountViaUUID(tester.getId())).willReturn(tester);
+        //when
+        Account foundAccount = accountService.getViaUUID(testID);
+        //then
+        then(accountPort).should().getAccountViaUUID(testID);
+        then(accountPort).shouldHaveNoMoreInteractions();
+        ;
     }
 
     @Test
     void updateSingleAccount() {
-        Account exampleAccount = accountService.getAllAccounts().get(0);
-        accountService.updateSingleAccount(exampleAccount, tester2);
-        Account foundAccount = accountService.getAccountViaUUID(exampleAccount.getId());
-        assertEquals(tester2.getFirstName(), foundAccount.getFirstName());
+        //given
+        Account exampleAccount = tester;
+        //when
+        accountService.update(any(), any());
+        //then
+        then(accountPort).should().updateSingleAcc(any(), any());
+        then(accountPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void addAccount() {
-        int size = accountService.getAllAccounts().size();
-        accountService.addAccount(tester2);
-        assertEquals(size + 1, accountService.getAllAccounts().size());
+        //given
+        Account exampleAccount = tester;
+        //when
+        accountService.add(exampleAccount);
+        //then
+        then(accountPort).should().addAccount(exampleAccount);
+        then(accountPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void removeAccount() {
-        int size = accountService.getAllAccounts().size();
-        Account exampleAccount = accountService.getAllAccounts().get(0);
-        accountService.removeAccount(exampleAccount);
-        assertEquals(size - 1, accountService.getAllAccounts().size());
+        //given
+        Account exampleAccount = tester;
+        //when
+        accountService.remove(exampleAccount);
+        //then
+        then(accountPort).should().removeAccount(exampleAccount);
+        then(accountPort).shouldHaveNoMoreInteractions();
     }
 
     @Test
     void getAccount() {
-        Account exampleAccount = accountService.getAllAccounts().get(0);
-        Account exampleAccountByID = accountService.getAccount(exampleAccount);
-        assertEquals(exampleAccount, exampleAccountByID);
+        //given
+        Account exampleAccount = tester;
+        //when
+        Account exampleAccountByID = accountService.get(exampleAccount);
+        //then
+        then(accountPort).should().getAccount(exampleAccount);
+        then(accountPort).shouldHaveNoMoreInteractions();
     }
 }
