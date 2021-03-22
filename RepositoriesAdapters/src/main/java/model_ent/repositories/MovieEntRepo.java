@@ -7,29 +7,29 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 @ApplicationScoped
-public class MovieEntRepo {
+public class MovieEntRepo implements IRepositoryEnt<MovieEnt> {
 
     private List<MovieEnt> movies = Collections.synchronizedList(new ArrayList<MovieEnt>());
 
     @PostConstruct
     private void insertInitData() {
-        addMovie(new MovieEnt("The Godfather", "Francis Ford Coppola", 9.2, false));
-        addMovie(new MovieEnt("Goodfellas", "Martin Scorsese", 8.4, false));
-        addMovie(new MovieEnt("Joker", "Todd Phillips", 8.7, false));
-        addMovie(new MovieEnt("Fight Club", "David Fincher", 8.3, false));
-        addMovie(new MovieEnt("Pulp Fiction", "Quentin Tarantino", 8.5, false));
-        addMovie(new MovieEnt("Braveheart", "Mel Gibson", 8.1, false));
-        addMovie(new MovieEnt("V for Vendetta", "James McTeigue", 7.3, false));
-        addMovie(new MovieEnt("Requiem for a Dream", "Darren Aronofsky", 7.8, false));
-        addMovie(new MovieEnt("Interstellar", "Christopher Nolan", 7.9, false));
-        addMovie(new MovieEnt("Inglourious Basterds", "Quentin Tarantino", 8.0, false));
+        add(new MovieEnt("The Godfather", "Francis Ford Coppola", 9.2, false));
+        add(new MovieEnt("Goodfellas", "Martin Scorsese", 8.4, false));
+        add(new MovieEnt("Joker", "Todd Phillips", 8.7, false));
+        add(new MovieEnt("Fight Club", "David Fincher", 8.3, false));
+        add(new MovieEnt("Pulp Fiction", "Quentin Tarantino", 8.5, false));
+        add(new MovieEnt("Braveheart", "Mel Gibson", 8.1, false));
+        add(new MovieEnt("V for Vendetta", "James McTeigue", 7.3, false));
+        add(new MovieEnt("Requiem for a Dream", "Darren Aronofsky", 7.8, false));
+        add(new MovieEnt("Interstellar", "Christopher Nolan", 7.9, false));
+        add(new MovieEnt("Inglourious Basterds", "Quentin Tarantino", 8.0, false));
     }
 
-    public List<MovieEnt> getAllMovies() {
+    public List<MovieEnt> getAll() {
         return Collections.unmodifiableList(movies);
     }
 
-    public MovieEnt addMovie(MovieEnt m) {
+    public MovieEnt add(MovieEnt m) {
             m.setId(UUID.randomUUID().toString());
             movies.add(m);
         return m;
@@ -43,11 +43,11 @@ public class MovieEntRepo {
         }
     }
 
-    public void removeMovie(MovieEnt m) {
+    public void remove(MovieEnt m) {
             movies.remove(m);
     }
 
-    public MovieEnt getMovieViaUUID(String str) {
+    public MovieEnt getViaUUID(String str) {
         for(MovieEnt movie: movies) {
             if(movie.getId().equals(str)){
                 return movie;
@@ -56,15 +56,15 @@ public class MovieEntRepo {
         return null;
     }
 
-    public MovieEnt getMovie(MovieEnt m) {
+    public MovieEnt get(MovieEnt m) {
         return movies.stream()
                 .filter(x -> x.equals(m))
                 .findFirst()
                 .orElse(null);
     }
 
-    public MovieEnt updateSingleMovie(MovieEnt movieToChange, MovieEnt movieWithData) {
-        MovieEnt fromRepo = getMovie(movieToChange);
+    public MovieEnt update(MovieEnt movieToChange, MovieEnt movieWithData) {
+        MovieEnt fromRepo = get(movieToChange);
         fromRepo.setTitle(movieWithData.getTitle());
         fromRepo.setAuthor(movieWithData.getAuthor());
         fromRepo.setRating(movieWithData.getRating());

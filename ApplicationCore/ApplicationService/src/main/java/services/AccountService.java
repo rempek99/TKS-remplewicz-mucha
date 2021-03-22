@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @SessionScoped
-public class AccountService implements Serializable, AccountUsecaseSuit {
+public class AccountService implements Serializable, AccountUsecaseSuit, IService<Account> {
 
     @Inject
     private AccountPort accountRepo;
@@ -23,7 +23,7 @@ public class AccountService implements Serializable, AccountUsecaseSuit {
     }
 
     @Override
-    public List<Account> getAllAccounts() {
+    public List<Account> getAll() {
         return accountRepo.getAllAccounts();
     }
 
@@ -36,25 +36,25 @@ public class AccountService implements Serializable, AccountUsecaseSuit {
     public Account getSingleBookSelection(BookRental b) {return accountRepo.getBookSelectedViaUUID(b); }
 
     @Override
-    public Account getAccountViaUUID(String str) {
+    public Account getViaUUID(String str) {
         return accountRepo.getAccountViaUUID(str);
     }
 
     @Override
-    public void updateSingleAccount(Account income, Account outcome) {accountRepo.updateSingleAcc(income, outcome);}
+    public void update(Account income, Account outcome) {accountRepo.updateSingleAcc(income, outcome);}
 
     @Override
-    public void addAccount(Account a) {
+    public void add(Account a) {
         accountRepo.addAccount(a);
     }
 
     @Override
-    public void removeAccount(Account a) {
+    public void remove(Account a) {
         accountRepo.removeAccount(a);
     }
 
     @Override
-    public Account getAccount(Account a) {
+    public Account get(Account a) {
         return accountRepo.getAccount(a);
     }
 

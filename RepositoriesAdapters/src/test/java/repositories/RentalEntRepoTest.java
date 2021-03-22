@@ -27,9 +27,9 @@ class RentalEntRepoTest {
     private MovieRentalEnt my_movie;
     private BookRentalEnt my_book;
 
-    private final BookRentalEnt tester = new BookRentalEnt();
-    private final BookRentalEnt tester2 = new BookRentalEnt();
-    private final MovieRentalEnt tester3 = new MovieRentalEnt();
+    private final BookRentalEnt tester = new BookRentalEnt(null, null);
+    private final BookRentalEnt tester2 = new BookRentalEnt(null, null);
+    private final MovieRentalEnt tester3 = new MovieRentalEnt(null, null);
 
     @BeforeAll
     void initTesters() {
@@ -54,7 +54,7 @@ class RentalEntRepoTest {
 
     @BeforeEach
     void initRepo() {
-        my_movie = new MovieRentalEnt();
+        my_movie = new MovieRentalEnt(null, null);
         my_movie.setMovieEnt(new MovieEnt("trelo","morelo", 0.3,false));
         my_movie.setAccountEnt(testAccount);
         my_movie.setRentalStart(new Date());
@@ -62,7 +62,7 @@ class RentalEntRepoTest {
         my_movie.setRentalEnd(new Date());
         my_movie.setId("0000-0000");
 //
-        my_book = new BookRentalEnt();
+        my_book = new BookRentalEnt(null, null);
         my_book.setBookEnt(new BookEnt("trelo","morelo", 103,false));
         my_book.setAccountEnt(testAccount);
         my_book.setRentalStart(new Date());
@@ -115,7 +115,7 @@ class RentalEntRepoTest {
     @Test
     void addBookRental() {
         final int repo_size = repo.getBookRentals().size();
-        my_book = new BookRentalEnt();
+        my_book = new BookRentalEnt(null, null);
         repo.addBookRental(my_book);
         assertEquals(repo_size + 1, repo.getBookRentals().size());
     }

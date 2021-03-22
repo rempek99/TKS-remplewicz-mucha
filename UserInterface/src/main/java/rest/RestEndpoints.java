@@ -37,28 +37,28 @@ public class RestEndpoints implements Serializable {
     @Path("accounts")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccFromStorage() {
-        return Response.ok().entity(accountService.getAllAccounts()).status(Response.Status.OK).build();
+        return Response.ok().entity(accountService.getAll()).status(Response.Status.OK).build();
     }
 
     @GET
     @Path("accounts/{str}")
     public Response getSingleAccFromStorage(@PathParam("str") String str) {
-        return Response.ok().entity(accountService.getAccountViaUUID(str)).status(Response.Status.OK).build();
+        return Response.ok().entity(accountService.getViaUUID(str)).status(Response.Status.OK).build();
     }
 
     @POST
     @Path("accounts")
     public Response addSingleAccToStorage(@Valid Account account) {
-        accountService.addAccount(account);
+        accountService.add(account);
         return Response.ok().entity("Success").status(Response.Status.CREATED).build();
     }
 
     @DELETE
     @Path("accounts/del/{str}")
     public Response removeSingleAccFromStorage(@PathParam("str") String str) {
-        Optional<Account> acc = Optional.ofNullable(accountService.getAccountViaUUID(str));
+        Optional<Account> acc = Optional.ofNullable(accountService.getViaUUID(str));
         if(acc.isPresent()){
-            accountService.removeAccount(acc.get());
+            accountService.remove(acc.get());
             return Response.ok().entity("Success").status(Response.Status.OK).build();
         }
         else{
@@ -69,8 +69,8 @@ public class RestEndpoints implements Serializable {
     @PUT
     @Path("accounts/update/{str}")
     public Response updateSingleAccount(@PathParam("str") String str, @Valid Account desiredAccount) {
-        Account accountToChange = accountService.getAccountViaUUID(str);
-        accountService.updateSingleAccount(accountToChange, desiredAccount);
+        Account accountToChange = accountService.getViaUUID(str);
+        accountService.update(accountToChange, desiredAccount);
         return Response.ok().entity("Account updated succesfully!").status(Response.Status.OK).build();
     }
 
@@ -79,22 +79,22 @@ public class RestEndpoints implements Serializable {
     @GET
     @Path("movies")
     public Response getMoviesFromStorage() {
-        return Response.ok().entity(movieService.getAllMovies()).status(Response.Status.OK).build();
+        return Response.ok().entity(movieService.getAll()).status(Response.Status.OK).build();
     }
 
     @POST
     @Path("movies")
     public Response addSingleMovieToStorage(Movie movie) {
-        movieService.addMovie(movie);
+        movieService.add(movie);
         return Response.ok().entity("Success").status(Response.Status.CREATED).build();
     }
 
     @DELETE
     @Path("movies/del/{str}")
     public Response removeSingleMovieFromStorage(@PathParam("str") String str) {
-        Optional<Movie> movie = Optional.ofNullable(movieService.getMovieViaUUID(str));
+        Optional<Movie> movie = Optional.ofNullable(movieService.getViaUUID(str));
         if(movie.isPresent()){
-            movieService.removeMovie(movie.get());
+            movieService.remove(movie.get());
             return Response.ok().entity("Success").status(Response.Status.OK).build();
         }
         else{
@@ -105,8 +105,8 @@ public class RestEndpoints implements Serializable {
     @PUT
     @Path("movies/update/{str}")
     public Response updateSingleMovie(@PathParam("str") String str, Movie desiredMovie) {
-        Movie movieToChange = movieService.getMovieViaUUID(str);
-        movieService.updateSingleMovie(movieToChange, desiredMovie);
+        Movie movieToChange = movieService.getViaUUID(str);
+        movieService.update(movieToChange, desiredMovie);
         return Response.ok().entity("Movie updated succesfully!").status(Response.Status.OK).build();
     }
 
@@ -115,22 +115,22 @@ public class RestEndpoints implements Serializable {
     @GET
     @Path("books")
     public Response getBooksFromStorage() {
-        return Response.ok().entity(bookService.getAllBooks()).status(Response.Status.OK).build();
+        return Response.ok().entity(bookService.getAll()).status(Response.Status.OK).build();
     }
 
     @POST
     @Path("books")
     public Response addSingleBookToStorage(Book book) {
-        bookService.addBook(book);
+        bookService.add(book);
         return Response.ok().entity("Success").status(Response.Status.CREATED).build();
     }
 
     @DELETE
     @Path("books/del/{str}")
     public Response removeSingleBookFromStorage(@PathParam("str") String str) {
-        Optional<Book> book = Optional.ofNullable(bookService.getBookViaUUID(str));
+        Optional<Book> book = Optional.ofNullable(bookService.getViaUUID(str));
         if(book.isPresent()){
-            bookService.removeBook(book.get());
+            bookService.remove(book.get());
             return Response.ok().entity("Success").status(Response.Status.OK).build();
         }
         else{
@@ -141,8 +141,8 @@ public class RestEndpoints implements Serializable {
     @PUT
     @Path("books/update/{str}")
     public Response updateSingleBook(@PathParam("str") String str, Book desiredBook) {
-        Book bookToChange = bookService.getBookViaUUID(str);
-        bookService.updateSingleBook(bookToChange, desiredBook);
+        Book bookToChange = bookService.getViaUUID(str);
+        bookService.update(bookToChange, desiredBook);
         return Response.ok().entity("Book updated succesfully!").status(Response.Status.OK).build();
     }
 

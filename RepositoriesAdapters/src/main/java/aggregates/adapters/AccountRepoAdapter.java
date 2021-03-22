@@ -30,7 +30,7 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
         cacheData();
     }
     private void cacheData() {
-        accounts = accountRepo.getAllAccounts();
+        accounts = accountRepo.getAll();
     }
 
 
@@ -47,13 +47,13 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
 
     @Override
     public Account addAccount(Account a) {
-        accountRepo.addAccount(convertAccountToEnt(a));
+        accountRepo.add(convertAccountToEnt(a));
         return a;
     }
 
     @Override
     public void removeAccount(Account a) {
-        accountRepo.removeAccount(convertAccountToEnt(a));
+        accountRepo.remove(convertAccountToEnt(a));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
 
     @Override
     public void updateSingleAcc(Account accToChange, Account accWithData) {
-        accountRepo.updateSingleAcc(convertAccountToEnt(accToChange),convertAccountToEnt(accWithData));
+        accountRepo.update(convertAccountToEnt(accToChange),convertAccountToEnt(accWithData));
         //        Account fromRepo = accountRepo;
 //        fromRepo.setActive(accWithData.isActive());
 //        fromRepo.setFirstName(accWithData.getFirstName());

@@ -20,37 +20,37 @@ class AccountRepoTest {
     @BeforeEach
     void initRepo() {
         repo = new AccountRepo();
-        assertTrue(repo.getAllAccounts().isEmpty());
-        repo.addAccount(tester);
-        repo.addAccount(tester2);
-        repo.addAccount(tester3);
+        assertTrue(repo.getAll().isEmpty());
+        repo.add(tester);
+        repo.add(tester2);
+        repo.add(tester3);
     }
 
 
     @Test
     void getAllAccounts() {
-        assertFalse(repo.getAllAccounts().isEmpty());
-        assertEquals(NUMBER_OF_TESTERS, repo.getAllAccounts().size());
+        assertFalse(repo.getAll().isEmpty());
+        assertEquals(NUMBER_OF_TESTERS, repo.getAll().size());
     }
 
     @Test
     void addAccount() {
-        final int repo_size = repo.getAllAccounts().size();
+        final int repo_size = repo.getAll().size();
         Account my_acc = new Account("Arek", "Remplewicz", "user", true, "ar", "rem1234");
-        repo.addAccount(my_acc);
-        assertEquals(repo_size + 1, repo.getAllAccounts().size());
+        repo.add(my_acc);
+        assertEquals(repo_size + 1, repo.getAll().size());
     }
 
     @Test
     void removeAccount() {
-        final int repo_size = repo.getAllAccounts().size();
-        repo.removeAccount(tester3);
-        assertEquals(repo_size - 1, repo.getAllAccounts().size());
+        final int repo_size = repo.getAll().size();
+        repo.remove(tester3);
+        assertEquals(repo_size - 1, repo.getAll().size());
     }
 
     @Test
     void getAccount() {
-        Account found_acc = repo.getAccount(tester2);
+        Account found_acc = repo.get(tester2);
         assertEquals(tester2, found_acc);
     }
 
@@ -67,15 +67,15 @@ class AccountRepoTest {
     @Test
     void getAccountViaUUID() {
         Account my_acc = new Account("Arek", "Remplewicz", "user", true, "ar", "rem1234");
-        Account added = repo.addAccount(my_acc);
-        Account found = repo.getAccountViaUUID(added.getId());
+        Account added = repo.add(my_acc);
+        Account found = repo.getViaUUID(added.getId());
         assertEquals(my_acc, found);
     }
 
     @Test
     void updateSingleAcc() {
         Account my_acc = new Account("Arek", "Remplewicz", "user", true, "ar", "rem1234");
-        Account updated = repo.updateSingleAcc(tester, my_acc);
+        Account updated = repo.update(tester, my_acc);
         assertEquals(my_acc.getFirstName(), updated.getFirstName());
         assertNotEquals(my_acc.getId(), updated.getId());
     }

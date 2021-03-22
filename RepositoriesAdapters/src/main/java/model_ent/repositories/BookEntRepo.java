@@ -7,29 +7,29 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 @ApplicationScoped
-public class BookEntRepo {
+public class BookEntRepo implements IRepositoryEnt<BookEnt> {
 
     private final List<BookEnt> books = Collections.synchronizedList(new ArrayList<BookEnt>());
 
     @PostConstruct
     private void insertInitData() {
-        addBook(new BookEnt("Doctor Sleep", "Stephen King", 656, false));
-        addBook(new BookEnt("Nineteen Eighty-Four", "George Orwell", 360, false));
-        addBook(new BookEnt("A Brief History of Time", "Stephen Hawking", 296, false));
-        addBook(new BookEnt("One Flew Over the Cuckoo’s Nest", "Ken Kesey", 368, false));
-        addBook(new BookEnt("The Lord of the Rings", "J.R.R. Tolkien", 1422, false));
-        addBook(new BookEnt("Bieguni", "Olga Tokarczuk", 456 , false));
-        addBook(new BookEnt("Animal Farm", "George Orwell", 176, false));
-        addBook(new BookEnt("Solaris", "Stanisław Lem", 340, false));
-        addBook(new BookEnt("Harry Potter and the Goblet of Fire", "J.K. Rowling", 765, false));
-        addBook(new BookEnt("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", 322, false));
+        add(new BookEnt("Doctor Sleep", "Stephen King", 656, false));
+        add(new BookEnt("Nineteen Eighty-Four", "George Orwell", 360, false));
+        add(new BookEnt("A Brief History of Time", "Stephen Hawking", 296, false));
+        add(new BookEnt("One Flew Over the Cuckoo’s Nest", "Ken Kesey", 368, false));
+        add(new BookEnt("The Lord of the Rings", "J.R.R. Tolkien", 1422, false));
+        add(new BookEnt("Bieguni", "Olga Tokarczuk", 456 , false));
+        add(new BookEnt("Animal Farm", "George Orwell", 176, false));
+        add(new BookEnt("Solaris", "Stanisław Lem", 340, false));
+        add(new BookEnt("Harry Potter and the Goblet of Fire", "J.K. Rowling", 765, false));
+        add(new BookEnt("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", 322, false));
     }
 
-    public List<BookEnt> getAllBooks() {
+    public List<BookEnt> getAll() {
         return Collections.unmodifiableList(books);
     }
 
-    public BookEnt addBook(BookEnt b) {
+    public BookEnt add(BookEnt b) {
         b.setId(UUID.randomUUID().toString());
         books.add(b);
         return b;
@@ -43,12 +43,12 @@ public class BookEntRepo {
         }
     }
 
-    public void removeBook(BookEnt b) {
+    public void remove(BookEnt b) {
         books.remove(b);
     }
 
 
-    public BookEnt getBookViaUUID(String str) {
+    public BookEnt getViaUUID(String str) {
         for(BookEnt book: books) {
             if(book.getId().equals(str)){
                 return book;
@@ -57,15 +57,15 @@ public class BookEntRepo {
         return null;
     }
 
-    public BookEnt getBook(BookEnt b) {
+    public BookEnt get(BookEnt b) {
         Optional<BookEnt> bookEnt = books.stream()
                 .filter(x -> x.equals(b))
                 .findFirst();
         return bookEnt.orElse(null);
     }
 
-    public BookEnt updateSingleBook(BookEnt bookToChange, BookEnt bookWithData) {
-        BookEnt fromRepo = getBook(bookToChange);
+    public BookEnt update(BookEnt bookToChange, BookEnt bookWithData) {
+        BookEnt fromRepo = get(bookToChange);
         fromRepo.setTitle(bookWithData.getTitle());
         fromRepo.setAuthor(bookWithData.getAuthor());
         fromRepo.setPages(bookWithData.getPages());

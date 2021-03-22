@@ -7,7 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 
 @ApplicationScoped
-public class MovieRepo {
+public class MovieRepo implements IRepository<Movie> {
 
     private List<Movie> movies = Collections.synchronizedList(new ArrayList<Movie>());
 
@@ -25,21 +25,21 @@ public class MovieRepo {
         movies.add(new Movie("Inglourious Basterds", "Quentin Tarantino", 8.0, false));
     }
 
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAll() {
         return movies;
     }
 
-    public Movie addMovie(Movie m) {
+    public Movie add(Movie m) {
             movies.add(m);
             m.setId(UUID.randomUUID().toString());
         return m;
     }
 
-    public void removeMovie(Movie m) {
+    public void remove(Movie m) {
             movies.remove(m);
     }
 
-    public Movie getMovieViaUUID(String str) {
+    public Movie getViaUUID(String str) {
         for(Movie movie: movies) {
             if(movie.getId().equals(str)){
                 return movie;
@@ -48,7 +48,7 @@ public class MovieRepo {
         return null;
     }
 
-    public Movie getMovie(Movie m) {
+    public Movie get(Movie m) {
         if (movies.contains(m)) {
             return m;
         } else {
@@ -56,8 +56,8 @@ public class MovieRepo {
         }
     }
 
-    public Movie updateSingleMovie(Movie movieToChange, Movie movieWithData) {
-        Movie fromRepo = getMovie(movieToChange);
+    public Movie update(Movie movieToChange, Movie movieWithData) {
+        Movie fromRepo = get(movieToChange);
         fromRepo.setTitle(movieWithData.getTitle());
         fromRepo.setAuthor(movieWithData.getAuthor());
         fromRepo.setRating(movieWithData.getRating());

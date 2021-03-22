@@ -27,7 +27,7 @@ public class AddMovieController implements Serializable {
     }
 
     public void addConfirmed() {
-        movieService.addMovie(movie);
+        movieService.add(movie);
         init();
     }
 }

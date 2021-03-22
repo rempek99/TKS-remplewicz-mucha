@@ -21,7 +21,7 @@ class AccountServiceTest {
 
     @BeforeEach
     void initServiceAndRepositories() {
-        accountService = new AccountService(new AccountRepoAdapter(new AccountEntRepo()));
+        //accountService = new AccountService(new AccountRepoAdapter(new AccountEntRepo()));
         accountService.addAccount(tester);
     }
 

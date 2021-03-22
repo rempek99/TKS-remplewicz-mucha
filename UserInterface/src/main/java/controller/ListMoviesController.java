@@ -25,7 +25,7 @@ public class ListMoviesController implements Serializable {
     }
 
     public List<Movie> getMovies() {
-        return movieService.getAllMovies();
+        return movieService.getAll();
     }
 
     public void printSelectedMovie(Movie m) {
@@ -33,7 +33,7 @@ public class ListMoviesController implements Serializable {
     }
 
     public void removeSelectedMovie(Movie m) {
-        movieService.removeMovie(m);
+        movieService.remove(m);
     }
 
     public void setRentedSelectedMovie(Movie m, boolean value) { movieService.setMovieRented(m, value); }

@@ -27,7 +27,7 @@ public class BookRepoAdapter implements BookPort, Serializable {
     }
 
     private void cacheData() {
-        books = bookRepo.getAllBooks()
+        books = bookRepo.getAll()
                 .stream()
                 .map(BookConverter::convertEntToBook)
                 .collect(Collectors.toList());
@@ -41,7 +41,7 @@ public class BookRepoAdapter implements BookPort, Serializable {
 
     @Override
     public void addBook(Book b) {
-        bookRepo.addBook(convertBookToEnt(b));
+        bookRepo.add(convertBookToEnt(b));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class BookRepoAdapter implements BookPort, Serializable {
 
     @Override
     public void removeBook(Book b) {
-        bookRepo.removeBook(convertBookToEnt(b));
+        bookRepo.remove(convertBookToEnt(b));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class BookRepoAdapter implements BookPort, Serializable {
 
     @Override
     public void updateSingleBook(Book bookToChange, Book bookWithData) {
-        bookRepo.updateSingleBook(
+        bookRepo.update(
                 convertBookToEnt(bookToChange),
                 convertBookToEnt(bookWithData)
         );

@@ -27,7 +27,7 @@ public class AddBookController implements Serializable {
     }
 
     public void addConfirmed() {
-        bookService.addBook(book);
+        bookService.add(book);
         init();
     }
 }

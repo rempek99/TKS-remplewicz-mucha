@@ -19,54 +19,54 @@ class MovieRepoTest {
     @BeforeEach
     void initRepo() {
         repo = new MovieRepo();
-        assertTrue(repo.getAllMovies().isEmpty());
-        repo.addMovie(tester);
-        repo.addMovie(tester2);
-        repo.addMovie(tester3);
+        assertTrue(repo.getAll().isEmpty());
+        repo.add(tester);
+        repo.add(tester2);
+        repo.add(tester3);
     }
 
 
     @Test
     void getAllMovies() {
-        assertFalse(repo.getAllMovies().isEmpty());
-        assertEquals(NUMBER_OF_TESTERS, repo.getAllMovies().size());
+        assertFalse(repo.getAll().isEmpty());
+        assertEquals(NUMBER_OF_TESTERS, repo.getAll().size());
     }
 
     @Test
     void addMovie() {
-        final int repo_size = repo.getAllMovies().size();
+        final int repo_size = repo.getAll().size();
         Movie my_movie = new Movie("Moj film", "Remplewicz", 1000, false);
-        repo.addMovie(my_movie);
-        assertEquals(repo_size + 1, repo.getAllMovies().size());
+        repo.add(my_movie);
+        assertEquals(repo_size + 1, repo.getAll().size());
     }
 
     @Test
     void removeMovie() {
-        final int repo_size = repo.getAllMovies().size();
-        repo.removeMovie(tester3);
-        assertEquals(repo_size - 1, repo.getAllMovies().size());
+        final int repo_size = repo.getAll().size();
+        repo.remove(tester3);
+        assertEquals(repo_size - 1, repo.getAll().size());
     }
 
     @Test
     void getMovieViaUUID() {
         Movie my_movie = new Movie("Moj film", "Remplewicz", 1000, false);
-        Movie added = repo.addMovie(my_movie);
-        Movie found = repo.getMovieViaUUID(added.getId());
+        Movie added = repo.add(my_movie);
+        Movie found = repo.getViaUUID(added.getId());
         assertEquals(my_movie, found);
     }
 
     @Test
     void getMovie() {
         Movie my_movie = new Movie("Moj film", "Remplewicz", 1000, false);
-        repo.addMovie(my_movie);
-        Movie found = repo.getMovie(my_movie);
+        repo.add(my_movie);
+        Movie found = repo.get(my_movie);
         assertEquals(my_movie, found);
     }
 
     @Test
     void updateSingleMovie() {
         Movie my_movie = new Movie("Moj film", "Remplewicz", 1000, false);
-        Movie updated = repo.updateSingleMovie(tester,my_movie);
+        Movie updated = repo.update(tester,my_movie);
         assertEquals(my_movie.getAuthor(), updated.getAuthor());
         assertNotEquals(my_movie.getId(), updated.getId());
     }
