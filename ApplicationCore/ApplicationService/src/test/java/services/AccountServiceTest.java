@@ -1,6 +1,8 @@
 package services;
 
+import aggregates.adapters.AccountRepoAdapter;
 import model.Account;
+import model_ent.repositories.AccountEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -19,7 +21,7 @@ class AccountServiceTest {
 
     @BeforeEach
     void initServiceAndRepositories() {
-        //accountService = new AccountService(new AccountRepoAdapter(new AccountEntRepo()));
+        accountService = new AccountService(new AccountRepoAdapter(new AccountEntRepo()));
         accountService.addAccount(tester);
     }
 
