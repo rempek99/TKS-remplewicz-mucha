@@ -1,8 +1,9 @@
 package controller;
 
-import model.BookRental;
-import services.BookService;
-import services.RentalService;
+import book.SetBookRentedUsecase;
+import modelDTO.BookRentalDTO;
+import rentals.GetAllBookRentalsUsecase;
+import rentals.RemoveBookRentalUsecase;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,33 +15,35 @@ import java.util.List;
 @ViewScoped
 public class ListBookRentalsController implements Serializable {
     @Inject
-    private RentalService rentalService;
+    private GetAllBookRentalsUsecase getRentalsService;
     @Inject
-    private BookService bookService;
+    private SetBookRentedUsecase setRentedService;
+    @Inject
+    private RemoveBookRentalUsecase removeRentalService;
 
-    private List<BookRental> filteredBooks;
+    private List<BookRentalDTO> filteredBooks;
 
-    public List<BookRental> getBookRentals() {return rentalService.getAllBookRentals(); }
+    public List<BookRentalDTO> getBookRentals() {return getRentalsService.getAllBookRentals(); }
 
-    public RentalService getRentalService() {
-        return rentalService;
+    public GetAllBookRentalsUsecase getRentalService() {
+        return getRentalsService;
     }
 
-    public void setRentalService(RentalService rentalService) {
-        this.rentalService = rentalService;
+    public void setRentalService(GetAllBookRentalsUsecase rentalService) {
+        this.getRentalsService = rentalService;
     }
 
-    public List<BookRental> getFilteredBooks() {
+    public List<BookRentalDTO> getFilteredBooks() {
         return filteredBooks;
     }
 
-    public void setFilteredBooks(List<BookRental> filteredBooks) {
+    public void setFilteredBooks(List<BookRentalDTO> filteredBooks) {
         this.filteredBooks = filteredBooks;
     }
 
-    public void removeSelectedBookRental(BookRental b) {
-        b.getBook().setRented(false);
-        bookService.setBookRented(b.getBook(), false);
-        rentalService.removeBookRental(b);
+    public void removeSelectedBookRental(BookRentalDTO b) {
+        b.getBookDTO().setRented(false);
+        setRentedService.setBookRented(b.getBookDTO(), false);
+        removeRentalService.removeBookRental(b);
     }
 }

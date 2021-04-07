@@ -75,4 +75,9 @@ public class AccountRepoAdapter implements AccountUsecaseSuit, Serializable{
 //        fromRepo.setPassword(accWithData.getPassword());
 //        fromRepo.setRoleOfUser(accWithData.getRoleOfUser());
     }
+
+    @Override
+    public void setAccountStatus(String id, boolean status, String role) {
+        accountService.setAccountStatus(id, status, role);
+    }
 }

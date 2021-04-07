@@ -1,14 +1,13 @@
 package controller;
 
-import lombok.Getter;
-import lombok.Setter;
-import model.*;
-import services.AccountService;
-import services.RentalService;
+import account.GetAccountViaUUIDUsecase;
+import modelDTO.*;
+import rentals.AddBookRentalUsecase;
+import rentals.AddMovieRentalUsecase;
+import rentals.GetDisabledDaysUsecase;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -21,18 +20,22 @@ import java.util.List;
 public class AddRentalController implements Serializable {
 
     @Inject
-    private RentalService rentalService;
+    private AddBookRentalUsecase bookRentalService;
     @Inject
-    private AccountService accountService;
-    private MovieRental movieRental;
-    private BookRental bookRental;
+    private AddMovieRentalUsecase movieRentalService;
+    @Inject
+    private GetDisabledDaysUsecase disabledDaysService;
+    @Inject
+    private GetAccountViaUUIDUsecase accountService;
+    private MovieRentalDTO movieRentalDTO;
+    private BookRentalDTO bookRentalDTO;
     private Date todayDate;
     private String userUUID;
 
     @PostConstruct
     private void init() {
-        movieRental = new MovieRental();
-        bookRental = new BookRental();
+        movieRentalDTO = new MovieRentalDTO();
+        bookRentalDTO = new BookRentalDTO();
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -40,47 +43,47 @@ public class AddRentalController implements Serializable {
         todayDate = c.getTime();
     }
 
-    public MovieRental getMovieRental() { return movieRental; }
-    public BookRental getBookRental() { return bookRental; }
+    public MovieRentalDTO getMovieRental() { return movieRentalDTO; }
+    public BookRentalDTO getBookRental() { return bookRentalDTO; }
     public Date getTodayDate() {return todayDate; }
 
-    public List<Date> getDisabledDays() { return rentalService.getDisabledDays();}
+    public List<Date> getDisabledDays() { return disabledDaysService.getDisabledDays();}
 
-    public void setMovie(Movie movie) {
-        this.movieRental.setMovie(movie);
+    public void setMovie(MovieDTO movieDTO) {
+        this.movieRentalDTO.setMovieDTO(movieDTO);
 //        this.movieRental.setRange(movie.getRentalDateRange());
-        this.movieRental.setRentalStart(movieRental.getRentalStart());
-        this.movieRental.setRentalEnd(movieRental.getRentalEnd());
+        this.movieRentalDTO.setRentalStart(movieRentalDTO.getRentalStart());
+        this.movieRentalDTO.setRentalEnd(movieRentalDTO.getRentalEnd());
         //this.movieRental.checkDateOrder();
-        this.movieRental.getMovie().setRented(true);
+        this.movieRentalDTO.getMovieDTO().setRented(true);
     }
 
-    public void setBook(Book book) {
-        this.bookRental.setBook(book);
+    public void setBook(BookDTO bookDTO) {
+        this.bookRentalDTO.setBookDTO(bookDTO);
 //        this.bookRental.setRange(book.getRentalDateRange());
-        this.bookRental.setRentalStart(bookRental.getRentalStart());
-        this.bookRental.setRentalEnd(bookRental.getRentalEnd());
+        this.bookRentalDTO.setRentalStart(bookRentalDTO.getRentalStart());
+        this.bookRentalDTO.setRentalEnd(bookRentalDTO.getRentalEnd());
         //this.bookRental.checkDateOrder();
-        this.bookRental.getBook().setRented(true);
+        this.bookRentalDTO.getBookDTO().setRented(true);
     }
 
-    public void setMovieAccount(Account account) {
-        this.movieRental.setAccount(account);
+    public void setMovieAccount(AccountDTO account) {
+        this.movieRentalDTO.setAccountDTO(account);
     }
 
-    public void setBookAccount(Account account) {
-        this.bookRental.setAccount(account);
+    public void setBookAccount(AccountDTO account) {
+        this.bookRentalDTO.setAccountDTO(account);
     }
 
     public void addMovieRentConfirmed() {
-        movieRental.setAccount(accountService.getViaUUID(userUUID));
-        rentalService.addMovieRental(movieRental);
+        movieRentalDTO.setAccountDTO(accountService.getAccountViaUUID(userUUID));
+        movieRentalService.addMovieRental(movieRentalDTO);
         init();
     }
 
     public void addBookRentConfirmed() {
-        bookRental.setAccount(accountService.getViaUUID(userUUID));
-        rentalService.addBookRental(bookRental);
+        bookRentalDTO.setAccountDTO(accountService.getAccountViaUUID(userUUID));
+        bookRentalService.addBookRental(bookRentalDTO);
         init();
     }
 

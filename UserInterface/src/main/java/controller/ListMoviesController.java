@@ -1,7 +1,9 @@
 package controller;
 
-import model.Movie;
-import services.MovieService;
+import modelDTO.MovieDTO;
+import movie.GetAllMoviesUsecase;
+import movie.RemoveMovieUsecase;
+import movie.SetMovieRentedUsecase;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,28 +15,32 @@ import javax.inject.Named;
 @ViewScoped
 public class ListMoviesController implements Serializable {
     @Inject
-    private MovieService movieService;
-    private List<Movie> filteredMovies;
+    private GetAllMoviesUsecase getAllMoviesService;
+    @Inject
+    private RemoveMovieUsecase removeMovieService;
+    @Inject
+    private SetMovieRentedUsecase setMovieRentedService;
+    private List<MovieDTO> filteredMovies;
 
-    public List<Movie> getFilteredMovies() {
+    public List<MovieDTO> getFilteredMovies() {
         return filteredMovies;
     }
 
-    public void setFilteredMovies(List<Movie> filteredMovies) {
+    public void setFilteredMovies(List<MovieDTO> filteredMovies) {
         this.filteredMovies = filteredMovies;
     }
 
-    public List<Movie> getMovies() {
-        return movieService.getAll();
+    public List<MovieDTO> getMovies() {
+        return getAllMoviesService.getAllMovies();
     }
 
-    public void printSelectedMovie(Movie m) {
+    public void printSelectedMovie(MovieDTO m) {
         System.out.println("Selected movie: " + m);
     }
 
-    public void removeSelectedMovie(Movie m) {
-        movieService.remove(m);
+    public void removeSelectedMovie(MovieDTO m) {
+        removeMovieService.removeMovie(m);
     }
 
-    public void setRentedSelectedMovie(Movie m, boolean value) { movieService.setMovieRented(m, value); }
+    public void setRentedSelectedMovie(MovieDTO m, boolean value) { setMovieRentedService.setMovieRented(m, value); }
 }

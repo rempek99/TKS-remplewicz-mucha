@@ -1,7 +1,7 @@
 package controller;
 
-import model.Movie;
-import services.MovieService;
+import modelDTO.MovieDTO;
+import movie.AddMovieUsecase;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -14,20 +14,20 @@ import javax.inject.Named;
 public class AddMovieController implements Serializable {
 
     @Inject
-    private MovieService movieService;
-    private Movie movie;
+    private AddMovieUsecase addMovieService;
+    private MovieDTO movieDTO;
 
     @PostConstruct
     private void init() {
-        movie = new Movie();
+        movieDTO = new MovieDTO();
     }
 
-    public Movie getMovie() {
-        return movie;
+    public MovieDTO getMovie() {
+        return movieDTO;
     }
 
     public void addConfirmed() {
-        movieService.add(movie);
+        addMovieService.addMovie(movieDTO);
         init();
     }
 }

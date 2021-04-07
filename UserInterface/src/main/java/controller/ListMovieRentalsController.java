@@ -1,8 +1,9 @@
 package controller;
 
-import model.MovieRental;
-import services.MovieService;
-import services.RentalService;
+import modelDTO.MovieRentalDTO;
+import movie.SetMovieRentedUsecase;
+import rentals.GetAllMovieRentalsUsecase;
+import rentals.RemoveMovieRentalUsecase;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,33 +15,35 @@ import java.util.List;
 @ViewScoped
 public class ListMovieRentalsController implements Serializable {
     @Inject
-    private RentalService rentalService;
+    private GetAllMovieRentalsUsecase getAllMovieRentalsService;
     @Inject
-    private MovieService movieService;
+    private RemoveMovieRentalUsecase removeMovieRentalService;
+    @Inject
+    private SetMovieRentedUsecase movieService;
 
-    private List<MovieRental> filteredMovies;
+    private List<MovieRentalDTO> filteredMovies;
 
-    public List<MovieRental> getMovieRentals() {return rentalService.getAllMovieRentals(); }
+    public List<MovieRentalDTO> getMovieRentals() {return getAllMovieRentalsService.getAllMovieRentals(); }
 
-    public RentalService getRentalService() {
-        return rentalService;
+    public GetAllMovieRentalsUsecase getRentalService() {
+        return getAllMovieRentalsService;
     }
 
-    public void setRentalService(RentalService rentalService) {
-        this.rentalService = rentalService;
+    public void setRentalService(GetAllMovieRentalsUsecase rentalService) {
+        this.getAllMovieRentalsService = rentalService;
     }
 
-    public List<MovieRental> getFilteredMovies() {
+    public List<MovieRentalDTO> getFilteredMovies() {
         return filteredMovies;
     }
 
-    public void setFilteredMovies(List<MovieRental> filteredMovies) {
+    public void setFilteredMovies(List<MovieRentalDTO> filteredMovies) {
         this.filteredMovies = filteredMovies;
     }
 
-    public void removeSelectedMovieRental(MovieRental m) {
-        m.getMovie().setRented(false);
-        movieService.setMovieRented(m.getMovie(), false);
-        rentalService.removeMovieRental(m);
+    public void removeSelectedMovieRental(MovieRentalDTO m) {
+        m.getMovieDTO().setRented(false);
+        movieService.setMovieRented(m.getMovieDTO(), false);
+        removeMovieRentalService.removeMovieRental(m);
     }
 }

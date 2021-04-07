@@ -9,6 +9,7 @@ public interface AccountUsecaseSuit
         GetSingleBookSelectionUsecase,
         GetSingleMovieSelectionUsecase,
         RemoveAccountUsecase,
-        UpdateSingleAccountUsecase
+        UpdateSingleAccountUsecase,
+        SetAccountStatusUsecase
 {
 }

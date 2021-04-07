@@ -1,7 +1,9 @@
 package controller;
 
-import model.Account;
+import account.GetAccountUsecase;
+import modelDTO.AccountDTO;
 import services.AccountService;
+import account.AddAccountUsecase;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -14,30 +16,32 @@ import javax.inject.Named;
 public class AddAccountController implements Serializable {
 
     @Inject
-    private AccountService accountService;
-    private Account account;
+    private AddAccountUsecase addAccountService;
+    @Inject
+    private GetAccountUsecase getAccountService;
+    private AccountDTO accountDTO;
 
     @PostConstruct
     private void init() {
-        account = new Account();
+        accountDTO = new AccountDTO();
     }
 
-    public Account getAccount() {
-        return account;
+    public AccountDTO getAccount() {
+        return accountDTO;
     }
 
-    public AccountService getAccountService() {
-        return accountService;
+    public AddAccountUsecase getAccountService() {
+        return addAccountService;
     }
 
     public void setAccountService(AccountService accountService) {
-        this.accountService = accountService;
+        this.addAccountService = addAccountService;
     }
 
     public void addConfirmed() {
-        accountService.add(account);
+        addAccountService.addAccount(accountDTO);
         init();
     }
 
-    public Account getSingleAccount(Account a) { return accountService.get(a); }
+    public AccountDTO getSingleAccount(AccountDTO a) { return getAccountService.getAccount(a); }
 }

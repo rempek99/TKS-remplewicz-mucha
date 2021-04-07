@@ -1,7 +1,7 @@
 package controller;
 
-import model.*;
-import services.AccountService;
+import account.*;
+import modelDTO.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,38 +13,52 @@ import javax.inject.Named;
 @ViewScoped
 public class ListAccountsController implements Serializable{
     @Inject
-    private AccountService accountService;
-    private List<Account> filteredAccounts;
+    private GetSingleBookSelectionUsecase getSingleBookService;
+    @Inject
+    private GetSingleMovieSelectionUsecase getSingleMovieService;
+    @Inject
+    private GetAccountViaUUIDUsecase getAccountViaUUIDService;
+    @Inject
+    private GetAllAccountsUsecase getAllAccountsService;
+    @Inject
+    private UpdateSingleAccountUsecase updateAccountService;
+    @Inject
+    private RemoveAccountUsecase removeAccountService;
+    @Inject
+    private GetAccountUsecase getAccountService;
+    @Inject
+    private SetAccountStatusUsecase setAccountStatusService;
+    private List<AccountDTO> filteredAccounts;
     private boolean chooseStatus;
     private String chooseRole;
 
-    public List<Account> getFilteredAccounts() {
+    public List<AccountDTO> getFilteredAccounts() {
         return filteredAccounts;
     }
 
-    public void setFilteredAccounts(List<Account> filteredAccounts) {
+    public void setFilteredAccounts(List<AccountDTO> filteredAccounts) {
         this.filteredAccounts = filteredAccounts;
     }
 
-    public Account getSelectedSingleMovieAccount(MovieRental m) {return accountService.getSingleMovieSelection(m); }
-    public Account getSelectedSingleBookAccount(BookRental b) {return accountService.getSingleBookSelection(b); }
-    public Account getDesiredAccount(String str) {return accountService.getViaUUID(str); }
+    public AccountDTO getSelectedSingleMovieAccount(MovieRentalDTO m) {return getSingleMovieService.getSingleMovieSelection(m); }
+    public AccountDTO getSelectedSingleBookAccount(BookRentalDTO b) {return getSingleBookService.getSingleBookSelection(b); }
+    public AccountDTO getDesiredAccount(String str) {return getAccountViaUUIDService.getAccountViaUUID(str); }
 
-    public List<Account> getAccounts() {
-        return accountService.getAll();
+    public List<AccountDTO> getAccounts() {
+        return getAllAccountsService.getAllAccounts();
     }
 
-    public void updateAccount(Account income, Account outcome) { accountService.update(income, outcome);}
+    public void updateAccount(AccountDTO income, AccountDTO outcome) { updateAccountService.updateSingleAccount(income, outcome);}
 
-    public void removeSelectedAccount(Account a) {
-        accountService.remove(a);
+    public void removeSelectedAccount(AccountDTO a) {
+        removeAccountService.removeAccount(a);
     }
 
-    public Account getSingleAccount(Account a) { return accountService.get(a); }
+    public AccountDTO getSingleAccount(AccountDTO a) { return getAccountService.getAccount(a); }
 
 
-    public void updateStatusandRole(Account account) {
-        accountService.setAccountStatus(account.getId(),chooseStatus, chooseRole);
+    public void updateStatusandRole(AccountDTO account) {
+        setAccountStatusService.setAccountStatus(account.getId(), chooseStatus, chooseRole);
     }
 
     public boolean getChooseStatus() {

@@ -1,7 +1,7 @@
 package controller;
 
-import model.Book;
-import services.BookService;
+import book.AddBookUsecase;
+import modelDTO.BookDTO;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -14,20 +14,20 @@ import javax.inject.Named;
 public class AddBookController implements Serializable {
 
     @Inject
-    private BookService bookService;
-    private Book book;
+    private AddBookUsecase addBookService;
+    private BookDTO bookDTO;
 
     @PostConstruct
     private void init() {
-        book = new Book();
+        bookDTO = new BookDTO();
     }
 
-    public Book getBook() {
-        return book;
+    public BookDTO getBook() {
+        return bookDTO;
     }
 
     public void addConfirmed() {
-        bookService.add(book);
+        addBookService.addBook(bookDTO);
         init();
     }
 }

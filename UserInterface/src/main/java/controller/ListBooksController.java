@@ -1,7 +1,9 @@
 package controller;
 
-import model.Book;
-import services.BookService;
+import book.GetAllBooksUsecase;
+import book.RemoveBookUsecase;
+import book.SetBookRentedUsecase;
+import modelDTO.BookDTO;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,26 +15,30 @@ import javax.inject.Named;
 @ViewScoped
 public class ListBooksController implements Serializable{
     @Inject
-    private BookService bookService;
-    private List<Book> filteredBooks;
+    private GetAllBooksUsecase getBooksService;
+    @Inject
+    private RemoveBookUsecase removeBookService;
+    @Inject
+    private SetBookRentedUsecase setBookRentedService;
+    private List<BookDTO> filteredBooks;
 
-    public List<Book> getFilteredBooks() {
+    public List<BookDTO> getFilteredBooks() {
         return filteredBooks;
     }
 
-    public void setFilteredBooks(List<Book> filteredBooks) {
+    public void setFilteredBooks(List<BookDTO> filteredBooks) {
         this.filteredBooks = filteredBooks;
     }
 
-    public List<Book> getBooks() {
-        return bookService.getAll();
+    public List<BookDTO> getBooks() {
+        return getBooksService.getAllBooks();
     }
 
-    public void removeSelectedBook(Book b) {
-        bookService.remove(b);
+    public void removeSelectedBook(BookDTO b) {
+        removeBookService.removeBook(b);
     }
 
-    public void setRentedSelectedBook(Book b, boolean value) {
-        bookService.setBookRented(b, value);
+    public void setRentedSelectedBook(BookDTO b, boolean value) {
+        setBookRentedService.setBookRented(b, value);
     }
 }
