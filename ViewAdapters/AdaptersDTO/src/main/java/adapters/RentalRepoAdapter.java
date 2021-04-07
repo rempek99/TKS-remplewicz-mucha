@@ -9,6 +9,7 @@ import modelDTO.MovieDTO;
 import modelDTO.MovieRentalDTO;
 import rentals.RentalUsecaseSuit;
 import repositoriesDTO.RentalRepoDTO;
+import services.RentalService;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -19,126 +20,88 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static converters.BookRentalConverter.convertBookRentalToDTO;
-import static converters.MovieRentalConverter.convertMovieRentalToDTO;
-
 @Dependent
 public class RentalRepoAdapter implements RentalUsecaseSuit, Serializable {
 
-
-    private final RentalRepoDTO rentalRepo;
-    private List<MovieRental> movieRentals;
-    private List<BookRental> bookRentals;
+    private RentalService rentalService;
+    private BookRentalConverter bookRentalConverter;
+    private MovieRentalConverter movieRentalConverter;
 
     @Inject
-    public RentalRepoAdapter(RentalRepoDTO rentalRepo) {
-        this.rentalRepo = rentalRepo;
-        cacheData();
+    public RentalRepoAdapter(RentalService rentalService) {
+        this.rentalService = rentalService;
+        bookRentalConverter = new BookRentalConverter();
+        movieRentalConverter = new MovieRentalConverter();
     }
 
-    private void cacheData() {
-        movieRentals = rentalRepo.getMovieRentals()
-                .stream()
-                .map(MovieRentalConverter::convertDTOToMovieRental)
-                .collect(Collectors.toList());
-        bookRentals = rentalRepo.getBookRentals()
-                .stream()
-                .map(BookRentalConverter::convertDTOToBookRental)
-                .collect(Collectors.toList());
-    }
 
     @Override
     public List<MovieRentalDTO> getAllMovieRentals() {
-        List<MovieRentalDTO> temp = Collections.synchronizedList(new ArrayList<MovieRentalDTO>());
-        cacheData();
-        for (MovieRental movieRental: movieRentals) {
-            temp.add(convertMovieRentalToDTO(movieRental));
-        }
-        return temp;
+        List<MovieRentalDTO> movieRentalDTOS = new ArrayList<>();
+        rentalService.getAllMovieRentals().forEach(r -> movieRentalDTOS.add(getMovieRentalViaUUID(r.getId())));
+        return movieRentalDTOS;
     }
 
     @Override
     public List<BookRentalDTO> getAllBookRentals() {
-        List<BookRentalDTO> temp = Collections.synchronizedList(new ArrayList<BookRentalDTO>());
-        cacheData();
-        for (BookRental bookRental: bookRentals) {
-            temp.add(convertBookRentalToDTO(bookRental));
-        }
-        return temp;
+        List<BookRentalDTO> bookRentalDTOS = new ArrayList<>();
+        rentalService.getAllBookRentals().forEach(r -> bookRentalDTOS.add(getBookRentalViaUUID(r.getId())));
+        return bookRentalDTOS;
     }
 
     @Override
     public void removeMovieRental(MovieRentalDTO r) {
-        rentalRepo.removeMovieRental(convertMovieRentalToDTO(r));
+        rentalService.removeMovieRental(movieRentalConverter.convertDTOToMovieRental(r));
     }
 
     @Override
     public void removeBookRental(BookRentalDTO r) {
-        rentalRepo.removeBookRental(convertBookRentalToDTO(r));
+        rentalService.removeBookRental(bookRentalConverter.convertDTOToBookRental(r));
     }
 
     @Override
     public void addMovieRental(MovieRentalDTO r) {
-        rentalRepo.addMovieRental(convertMovieRentalToDTO(r));
+        rentalService.addMovieRental(movieRentalConverter.convertDTOToMovieRental(r));
     }
 
     @Override
     public void addBookRental(BookRentalDTO r) {
-        rentalRepo.addBookRental(convertBookRentalToDTO(r));
+        rentalService.addBookRental(bookRentalConverter.convertDTOToBookRental(r));
     }
 
     @Override
     public MovieRentalDTO getMovieRentalViaUUID(String str) {
-        cacheData();
-        return movieRentals.stream()
-                .filter(x -> x.getId().equals(str))
-                .findFirst()
-                .orElse(null);
+        return movieRentalConverter.convertMovieRentalToDTO(rentalService.getMovieRentalViaUUID(str));
     }
 
     @Override
     public BookRentalDTO getBookRentalViaUUID(String str) {
-        cacheData();
-        return bookRentals.stream()
-                .filter(x -> x.getId().equals(str))
-                .findFirst()
-                .orElse(null);
+        return bookRentalConverter.convertBookRentalToDTO(rentalService.getBookRentalViaUUID(str));
     }
 
     @Override
     public MovieRentalDTO getMovieRental(MovieRentalDTO m) {
-        return movieRentals.stream()
-                .filter(x -> x.equals(m))
-                .findFirst()
-                .orElse(null);
+        return movieRentalConverter.convertMovieRentalToDTO(rentalService.getMovieRentalViaUUID(m.getId()));
     }
 
     @Override
     public BookRentalDTO getBookRental(BookRentalDTO b) {
-        return bookRentals.stream()
-                .filter(x -> x.equals(b))
-                .findFirst()
-                .orElse(null);
+        return bookRentalConverter.convertBookRentalToDTO(rentalService.getBookRentalViaUUID(b.getId()));
     }
 
     @Override
     public void updateSingleMovieRental(MovieRentalDTO movieRentalToChange, MovieRentalDTO movieRentalWithData) {
-        rentalRepo.updateSingleMovieRental(
-                convertMovieRentalToDTO(movieRentalToChange),
-                convertMovieRentalToDTO(movieRentalWithData)
-        );
+        rentalService.updateSingleMovieRental(movieRentalConverter.convertDTOToMovieRental(movieRentalToChange), movieRentalConverter.convertDTOToMovieRental(movieRentalWithData));
     }
 
     @Override
     public void updateSingleBookRental(BookRentalDTO bookRentalToChange, BookRentalDTO bookRentalWithData) {
-        rentalRepo.updateSingleBookRental(
-                convertBookRentalToDTO(bookRentalToChange),
-                convertBookRentalToDTO(bookRentalWithData));
+        rentalService.updateSingleBookRental(bookRentalConverter.convertDTOToBookRental(bookRentalToChange), bookRentalConverter.convertDTOToBookRental(bookRentalWithData));
     }
 
 
     @Override
     public List<Date> getDisabledDays() {
-        return rentalRepo.getDisabledDays();
+        return rentalService.getDisabledDays();
     }
 }

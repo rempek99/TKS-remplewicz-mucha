@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BookRentalConverter {
 
-    private BookRentalConverter() {
+    public BookRentalConverter() {
     }
 
     public static BookRentalDTO convertBookRentalToDTO(BookRental bookRental) {

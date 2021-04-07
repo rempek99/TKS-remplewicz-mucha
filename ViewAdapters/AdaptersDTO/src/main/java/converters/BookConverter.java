@@ -5,7 +5,7 @@ import modelDTO.BookDTO;
 
 public class BookConverter {
 
-    private BookConverter() {
+    public BookConverter() {
     }
 
     public static BookDTO convertBookToDTO(Book book){

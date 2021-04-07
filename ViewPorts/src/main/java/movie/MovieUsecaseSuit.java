@@ -6,6 +6,8 @@ extends
         GetAllMoviesUsecase,
         GetMovieViaUUIDUsecase,
         RemoveMovieUsecase,
-        UpdateSingleMovieUsecase
+        UpdateSingleMovieUsecase,
+        SetMovieRentedUsecase,
+        GetMovieUsecase
 {
 }

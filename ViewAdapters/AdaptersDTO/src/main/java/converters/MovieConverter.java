@@ -5,8 +5,7 @@ import modelDTO.MovieDTO;
 
 public class MovieConverter {
 
-    private MovieConverter() {
-
+    public MovieConverter() {
     }
 
     public static MovieDTO convertMovieToDTO(Movie movie) {

@@ -7,7 +7,7 @@ public interface BookUsecaseSuit
         GetBookUsecase,
         GetBookViaUUIDUsecase,
         RemoveBookUsecase,
-        UpdateSingleBookUsecase
-
+        UpdateSingleBookUsecase,
+        SetBookRentedUsecase
 {
 }

@@ -12,6 +12,8 @@ extends
         RemoveMovieRentalUsecase,
         RemoveBookRentalUsecase,
         UpdateSingleBookRentalUsecase,
-        UpdateSingleMovieRentalUsecase
+        UpdateSingleMovieRentalUsecase,
+        GetMovieRentalUsecase,
+        GetBookRentalUsecase
 {
 }

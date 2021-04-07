@@ -2,73 +2,51 @@ package adapters;
 
 import account.AccountUsecaseSuit;
 import converters.AccountConverter;
-import model.Account;
 import modelDTO.AccountDTO;
 import modelDTO.BookRentalDTO;
 import modelDTO.MovieRentalDTO;
-import repositories.AccountRepo;
-import repositoriesDTO.AccountRepoDTO;
+import services.AccountService;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static converters.AccountConverter.convertAccountToDTO;
-import static converters.AccountConverter.convertDTOToAccount;
 
 @Dependent
 public class AccountRepoAdapter implements AccountUsecaseSuit, Serializable{
 
-    private final AccountRepoDTO accountRepo;
-    private List<Account> accounts;
+    private AccountService accountService;
+    private AccountConverter accountConverter;
 
 
     @Inject
-    public AccountRepoAdapter(AccountRepoDTO accountRepo) {
-        this.accountRepo = accountRepo;
-        cacheData();
+    public AccountRepoAdapter(AccountService accountService) {
+        this.accountService = accountService;
+        accountConverter = new AccountConverter();
     }
-    private void cacheData() {
-        accounts = accountRepo.getAll()
-                .stream()
-                .map(AccountConverter::convertDTOToAccount)
-                .collect(Collectors.toList());
-    }
-
 
 
     @Override
     public List<AccountDTO> getAllAccounts(){
-        List<AccountDTO> temp = Collections.synchronizedList(new ArrayList<AccountDTO>());
-        cacheData();
-        for (Account account: accounts) {
-            temp.add(convertAccountToDTO(account));
-        }
-        return temp;
+        List<AccountDTO> accountDTOS = new ArrayList<>();
+        accountService.getAll().forEach(r -> accountDTOS.add(getAccountViaUUID(r.getId())));
+        return accountDTOS;
     }
 
     @Override
     public void addAccount(AccountDTO a) {
-        accountRepo.add(convertDTOToAccount(a));
+        accountService.add(accountConverter.convertDTOToAccount(a));
     }
 
     @Override
     public void removeAccount(AccountDTO a) {
-        accountRepo.remove(convertDTOToAccount(a));
+        accountService.remove(accountConverter.convertDTOToAccount(a));
     }
 
     @Override
     public AccountDTO getAccount(AccountDTO a) {
-        cacheData();
-        if (accounts.contains(convertDTOToAccount(a))) {
-            return a;
-        } else {
-            return null;
-        }
+        return accountConverter.convertAccountToDTO(accountService.get(accountConverter.convertDTOToAccount(a)));
     }
 
     @Override
@@ -83,18 +61,12 @@ public class AccountRepoAdapter implements AccountUsecaseSuit, Serializable{
 
     @Override
     public AccountDTO getAccountViaUUID(String str) {
-        cacheData();
-        for(Account acc: accounts) {
-            if(acc.getId().equals(str)){
-                return convertAccountToDTO(acc);
-            }
-        }
-        return null;
+        return accountConverter.convertAccountToDTO(accountService.getViaUUID(str));
     }
 
     @Override
     public void updateSingleAccount(AccountDTO accToChange, AccountDTO accWithData) {
-        accountRepo.update(convertDTOToAccount(accToChange),convertDTOToAccount(accWithData));
+        accountService.update(accountConverter.convertDTOToAccount(accToChange), accountConverter.convertDTOToAccount(accWithData));
         //        Account fromRepo = accountRepo;
 //        fromRepo.setActive(accWithData.isActive());
 //        fromRepo.setFirstName(accWithData.getFirstName());

@@ -12,8 +12,7 @@ import java.util.List;
 
 public class MovieRentalConverter {
 
-    private MovieRentalConverter() {
-
+    public MovieRentalConverter() {
     }
 
     public static MovieRentalDTO convertMovieRentalToDTO(MovieRental movieRental) {

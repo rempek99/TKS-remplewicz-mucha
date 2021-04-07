@@ -5,7 +5,7 @@ import modelDTO.AccountDTO;
 
 public class AccountConverter {
 
-    private AccountConverter() {
+    public AccountConverter() {
     }
 
     public static AccountDTO convertAccountToDTO(Account account){
