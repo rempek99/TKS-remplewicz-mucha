@@ -12,12 +12,10 @@ import java.util.List;
 @SessionScoped
 public class AccountService implements Serializable, AccountUsecaseSuit, IService<Account> {
 
-    @Inject
+
     private AccountPort accountRepo;
 
-    public AccountService() {
-    }
-
+    @Inject
     public AccountService(AccountPort accountRepo) {
         this.accountRepo = accountRepo;
     }

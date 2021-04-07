@@ -2,8 +2,6 @@ package model_ent.repositories;
 
 
 import model_ent.entities.AccountEnt;
-import model_ent.entities.MovieEnt;
-import repositories.IRepository;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
