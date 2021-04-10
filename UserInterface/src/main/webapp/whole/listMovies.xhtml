@@ -26,7 +26,7 @@
                         <p:inputText id="globalFilter" onkeyup="PF('filtered').filter()" style="width:250px" placeholder="Enter keyword"/>
                     </p:outputPanel>
                 </f:facet>
-                <p:column headerText="Title of movie" filterBy="#{movieEnt.title}" sortBy="#{movieEnt.title}" filterMatchMode="contains" filterStyle="display:none">
+                <p:column headerText="Title of pl.lodz.p.it.viewports.movie" filterBy="#{movieEnt.title}" sortBy="#{movieEnt.title}" filterMatchMode="contains" filterStyle="display:none">
                     <h:outputText id="title" value="#{movieEnt.title}"/>
                 </p:column>
                 <p:column headerText="Author" filterBy="#{movieEnt.author}" sortBy="#{movieEnt.author}" filterMatchMode="contains" filterStyle="display:none">

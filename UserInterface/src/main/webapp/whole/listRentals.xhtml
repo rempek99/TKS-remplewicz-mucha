@@ -66,18 +66,18 @@
                 <!--                            value="#{listAccountsController.getDesiredAccount((request.userPrincipal.name)).firstName} #{listAccountsController.getDesiredAccount((request.userPrincipal.name)).lastName} (you)" /></div>-->
                 <!--                </p:column>-->
                 <p:column headerText="Options">
-                    <h:commandButton value="Release rented movie"
+                    <h:commandButton value="Release rented pl.lodz.p.it.viewports.movie"
                                      rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}"
                                      action="#{listMovieRentalsController.removeSelectedMovieRental(movieRental)}"
-                                     onclick="return window.confirm('Are you sure you want return #{movieRental.movie.title}?')"
+                                     onclick="return window.confirm('Are you sure you want return #{movieRental.pl.lodz.p.it.viewports.movie.title}?')"
                                      style="margin-left: 0dp">
                     </h:commandButton>
                     <h:commandButton
-                            value="#{movieRental.account.id==request.userPrincipal.name? 'Release rented movie' : 'Not your rental'}"
+                            value="#{movieRental.account.id==request.userPrincipal.name? 'Release rented pl.lodz.p.it.viewports.movie' : 'Not your rental'}"
                             rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}"
                             action="#{listMovieRentalsController.removeSelectedMovieRental(movieRental)}"
                             disabled="#{movieRental.account.id ne request.userPrincipal.name}"
-                            onclick="return window.confirm('Are you sure you want return #{movieRental.movie.title}?')"
+                            onclick="return window.confirm('Are you sure you want return #{movieRental.pl.lodz.p.it.viewports.movie.title}?')"
                             style="margin-left: 0dp">
                     </h:commandButton>
                 </p:column>
@@ -135,18 +135,18 @@
                 <!--                            value="#{listAccountsController.getDesiredAccount((request.userPrincipal.name)).firstName} #{listAccountsController.getDesiredAccount((request.userPrincipal.name)).lastName} (you)" /></div>-->
                 <!--                </p:column>-->
                 <p:column headerText="Options">
-                    <h:commandButton value="Release rented book"
+                    <h:commandButton value="Release rented pl.lodz.p.it.viewports.book"
                                      rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}"
                                      action="#{listBookRentalsController.removeSelectedBookRental(bookRental)}"
-                                     onclick="return window.confirm('Are you sure you want return #{bookRental.book.title}?')"
+                                     onclick="return window.confirm('Are you sure you want return #{bookRental.pl.lodz.p.it.viewports.book.title}?')"
                                      style="margin-left: 0dp">
                     </h:commandButton>
                     <h:commandButton
-                            value="#{bookRental.account.id==request.userPrincipal.name? 'Release rented book' : 'Not your rental'}"
+                            value="#{bookRental.account.id==request.userPrincipal.name? 'Release rented pl.lodz.p.it.viewports.book' : 'Not your rental'}"
                             rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}"
                             action="#{listBookRentalsController.removeSelectedBookRental(bookRental)}"
                             disabled="#{bookRental.account.id ne request.userPrincipal.name}"
-                            onclick="return window.confirm('Are you sure you want return #{bookRental.book.title}?')"
+                            onclick="return window.confirm('Are you sure you want return #{bookRental.pl.lodz.p.it.viewports.book.title}?')"
                             style="margin-left: 0dp">
                     </h:commandButton>
                 </p:column>
