@@ -1,20 +1,21 @@
 package pl.lodz.p.it.viewadapters.adapters;
 
-import pl.lodz.p.it.viewadapters.converters.BookConverter;
-import pl.lodz.p.it.viewports.book.BookViewPortUsecaseSuit;
-import pl.lodz.p.it.viewmodel.modelDTO.BookDTO;
 import pl.lodz.p.it.applicationcore.applicationservice.services.BookService;
+import pl.lodz.p.it.applicationports.usecase.book.BookUsecaseSuit;
+import pl.lodz.p.it.viewadapters.converters.BookConverter;
+import pl.lodz.p.it.viewmodel.modelDTO.BookDTO;
+import pl.lodz.p.it.viewports.book.BookViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Dependent
 public class BookServiceAdapter implements BookViewPortUsecaseSuit, Serializable {
 
-    private BookService bookService;
+    private BookUsecaseSuit bookService;
 
     @Inject
     public BookServiceAdapter(BookService bookService) {
@@ -23,9 +24,11 @@ public class BookServiceAdapter implements BookViewPortUsecaseSuit, Serializable
 
     @Override
     public List<BookDTO> getAllBooks() {
-        List<BookDTO> bookDTOS = new ArrayList<>();
-        bookService.getAll().forEach(r -> bookDTOS.add(getBookViaUUID(r.getId())));
-        return bookDTOS;
+        return bookService
+                .getAll()
+                .stream()
+                .map(BookConverter::convertBookToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

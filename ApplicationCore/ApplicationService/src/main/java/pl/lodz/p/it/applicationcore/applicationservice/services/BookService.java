@@ -36,6 +36,7 @@ public class BookService implements Serializable, BookUsecaseSuit, IService<Book
         bookRepo.addBook(b);
     }
 
+    @Override
     public void setBookRented(Book b, boolean value) { bookRepo.setBookRented(b, value); }
 
     @Override

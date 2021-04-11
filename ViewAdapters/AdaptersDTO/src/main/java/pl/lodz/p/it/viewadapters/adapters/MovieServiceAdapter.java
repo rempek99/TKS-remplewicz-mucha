@@ -1,20 +1,21 @@
 package pl.lodz.p.it.viewadapters.adapters;
 
+import pl.lodz.p.it.applicationcore.applicationservice.services.MovieService;
+import pl.lodz.p.it.applicationports.usecase.movie.MovieUsecaseSuit;
 import pl.lodz.p.it.viewadapters.converters.MovieConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
 import pl.lodz.p.it.viewports.movie.MovieViewPortUsecaseSuit;
-import pl.lodz.p.it.applicationcore.applicationservice.services.MovieService;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Dependent
 public class MovieServiceAdapter implements MovieViewPortUsecaseSuit, Serializable {
 
-    private MovieService movieService;
+    private MovieUsecaseSuit movieService;
 
     @Inject
     public MovieServiceAdapter(MovieService movieService) {
@@ -23,13 +24,11 @@ public class MovieServiceAdapter implements MovieViewPortUsecaseSuit, Serializab
     
     @Override
     public List<MovieDTO> getAllMovies() {
-        List<MovieDTO> movieDTOS = new ArrayList<>();
-        movieService
+        return movieService
                 .getAll()
-                .forEach(
-                        r -> movieDTOS.add(getMovieViaUUID(r.getId()))
-                );
-        return movieDTOS;
+                .stream()
+                .map(MovieConverter::convertMovieToDTO)
+                .collect(Collectors.toList());
     }
     
     @Override

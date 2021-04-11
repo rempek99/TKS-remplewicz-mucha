@@ -10,8 +10,8 @@ import pl.lodz.p.it.viewports.account.AccountViewPortUsecaseSuit;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Dependent
 public class AccountServiceAdapter implements AccountViewPortUsecaseSuit, Serializable{
@@ -26,9 +26,11 @@ public class AccountServiceAdapter implements AccountViewPortUsecaseSuit, Serial
 
     @Override
     public List<AccountDTO> getAllAccounts(){
-        List<AccountDTO> accountDTOS = new ArrayList<>();
-        accountService.getAll().forEach(r -> accountDTOS.add(getAccountViaUUID(r.getId())));
-        return accountDTOS;
+        return accountService
+                .getAll()
+                .stream()
+                .map(AccountConverter::convertAccountToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

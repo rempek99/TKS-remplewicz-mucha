@@ -32,6 +32,7 @@ public class MovieService implements Serializable, MovieUsecaseSuit, IService<Mo
         movieRepo.addMovie(m);
     }
 
+    @Override
     public void setMovieRented(Movie m, boolean value) { movieRepo.setMovieRented(m, value); }
 
     @Override

@@ -5,7 +5,9 @@ extends
         AddMovieUsecase,
         GetAllMoviesUsecase,
         GetMovieViaUUIDUsecase,
+        GetMovieUsecase,
         RemoveMovieUsecase,
-        UpdateSingleMovieUsecase
+        UpdateSingleMovieUsecase,
+        SetMovieRentedUsecase
 {
 }
