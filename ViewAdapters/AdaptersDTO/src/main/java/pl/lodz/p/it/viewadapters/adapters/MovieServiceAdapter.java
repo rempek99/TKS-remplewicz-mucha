@@ -1,8 +1,8 @@
-package pl.lodz.p.it.applicationcore.domainmodel.adapters;
+package pl.lodz.p.it.viewadapters.adapters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.converters.MovieConverter;
+import pl.lodz.p.it.viewadapters.converters.MovieConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
-import pl.lodz.p.it.viewports.movie.MovieUsecaseSuit;
+import pl.lodz.p.it.viewports.movie.MovieViewPortUsecaseSuit;
 import pl.lodz.p.it.applicationcore.applicationservice.services.MovieService;
 
 import javax.enterprise.context.Dependent;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Dependent
-public class MovieRepoAdapter implements MovieUsecaseSuit, Serializable {
+public class MovieServiceAdapter implements MovieViewPortUsecaseSuit, Serializable {
 
     private MovieService movieService;
 
     @Inject
-    public MovieRepoAdapter(MovieService movieService) {
+    public MovieServiceAdapter(MovieService movieService) {
         this.movieService = movieService;
     }
     

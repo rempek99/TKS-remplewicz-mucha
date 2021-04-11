@@ -50,39 +50,39 @@ public class AddRentalController implements Serializable {
     public List<Date> getDisabledDays() { return disabledDaysService.getDisabledDays();}
 
     public void setMovie(MovieDTO movieDTO) {
-        this.movieRentalDTO.setMovieDTO(movieDTO);
+        this.movieRentalDTO.setMovie(movieDTO);
 //        this.movieRental.setRange(pl.lodz.p.it.viewports.movie.getRentalDateRange());
         this.movieRentalDTO.setRentalStart(movieRentalDTO.getRentalStart());
         this.movieRentalDTO.setRentalEnd(movieRentalDTO.getRentalEnd());
         //this.movieRental.checkDateOrder();
-        this.movieRentalDTO.getMovieDTO().setRented(true);
+        this.movieRentalDTO.getMovie().setRented(true);
     }
 
     public void setBook(BookDTO bookDTO) {
-        this.bookRentalDTO.setBookDTO(bookDTO);
+        this.bookRentalDTO.setBook(bookDTO);
 //        this.bookRental.setRange(pl.lodz.p.it.viewports.book.getRentalDateRange());
         this.bookRentalDTO.setRentalStart(bookRentalDTO.getRentalStart());
         this.bookRentalDTO.setRentalEnd(bookRentalDTO.getRentalEnd());
         //this.bookRental.checkDateOrder();
-        this.bookRentalDTO.getBookDTO().setRented(true);
+        this.bookRentalDTO.getBook().setRented(true);
     }
 
     public void setMovieAccount(AccountDTO account) {
-        this.movieRentalDTO.setAccountDTO(account);
+        this.movieRentalDTO.setAccount(account);
     }
 
     public void setBookAccount(AccountDTO account) {
-        this.bookRentalDTO.setAccountDTO(account);
+        this.bookRentalDTO.setAccount(account);
     }
 
     public void addMovieRentConfirmed() {
-        movieRentalDTO.setAccountDTO(accountService.getAccountViaUUID(userUUID));
+        movieRentalDTO.setAccount(accountService.getAccountViaUUID(userUUID));
         movieRentalService.addMovieRental(movieRentalDTO);
         init();
     }
 
     public void addBookRentConfirmed() {
-        bookRentalDTO.setAccountDTO(accountService.getAccountViaUUID(userUUID));
+        bookRentalDTO.setAccount(accountService.getAccountViaUUID(userUUID));
         bookRentalService.addBookRental(bookRentalDTO);
         init();
     }

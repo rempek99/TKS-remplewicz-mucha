@@ -1,4 +1,4 @@
-package pl.lodz.p.it.applicationcore.domainmodel.converters;
+package pl.lodz.p.it.viewadapters.converters;
 
 import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
 import pl.lodz.p.it.applicationcore.domainmodel.model.Book;
@@ -35,9 +35,9 @@ public class BookRentalConverter {
     }
 
     public static BookRental convertDTOToBookRental(BookRentalDTO bookRental) {
-        BookDTO bookDTO = bookRental.getBookDTO();
+        BookDTO bookDTO = bookRental.getBook();
         Book book = BookConverter.convertDTOToBook(bookDTO);
-        AccountDTO accountDTO = bookRental.getAccountDTO();
+        AccountDTO accountDTO = bookRental.getAccount();
         Account account = AccountConverter.convertDTOToAccount(accountDTO);
         String id = bookRental.getId();
         List<Date> range = bookRental.getRange();

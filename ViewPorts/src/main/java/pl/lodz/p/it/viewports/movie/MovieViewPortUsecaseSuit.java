@@ -1,6 +1,6 @@
 package pl.lodz.p.it.viewports.movie;
 
-public interface MovieUsecaseSuit
+public interface MovieViewPortUsecaseSuit
 extends
         AddMovieUsecase,
         GetAllMoviesUsecase,

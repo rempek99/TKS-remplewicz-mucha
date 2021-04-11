@@ -42,8 +42,8 @@ public class ListBookRentalsController implements Serializable {
     }
 
     public void removeSelectedBookRental(BookRentalDTO b) {
-        b.getBookDTO().setRented(false);
-        setRentedService.setBookRented(b.getBookDTO(), false);
+        b.getBook().setRented(false);
+        setRentedService.setBookRented(b.getBook(), false);
         removeRentalService.removeBookRental(b);
     }
 }

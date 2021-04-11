@@ -1,50 +1,48 @@
-package pl.lodz.p.it.applicationcore.domainmodel.adapters;
+package pl.lodz.p.it.viewadapters.adapters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.converters.MovieRentalConverter;
-import pl.lodz.p.it.applicationcore.domainmodel.converters.BookRentalConverter;
+import pl.lodz.p.it.applicationcore.applicationservice.services.RentalService;
+import pl.lodz.p.it.viewadapters.converters.BookRentalConverter;
+import pl.lodz.p.it.viewadapters.converters.MovieRentalConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.BookRentalDTO;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieRentalDTO;
-import pl.lodz.p.it.viewports.rentals.RentalUsecaseSuit;
-import pl.lodz.p.it.applicationcore.applicationservice.services.RentalService;
+import pl.lodz.p.it.viewports.rentals.RentalViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Dependent
-public class RentalRepoAdapter implements RentalUsecaseSuit, Serializable {
+public class RentalServiceAdapter implements RentalViewPortUsecaseSuit, Serializable {
 
     private final RentalService rentalService;
 
     @Inject
-    public RentalRepoAdapter(RentalService rentalService) {
+    public RentalServiceAdapter(RentalService rentalService) {
         this.rentalService = rentalService;
     }
 
 
     @Override
     public List<MovieRentalDTO> getAllMovieRentals() {
-        List<MovieRentalDTO> movieRentalDTOS = new ArrayList<>();
-        rentalService
+        return rentalService
                 .getAllMovieRentals()
-                .forEach(
-                        r -> movieRentalDTOS.add(getMovieRentalViaUUID(r.getId()))
-                );
-        return movieRentalDTOS;
+                .stream()
+                .map(MovieRentalConverter::convertMovieRentalToDTO)
+                .collect(Collectors.toList());
+
     }
 
     @Override
     public List<BookRentalDTO> getAllBookRentals() {
-        List<BookRentalDTO> bookRentalDTOS = new ArrayList<>();
-        rentalService
+        return rentalService
                 .getAllBookRentals()
-                .forEach(
-                        r -> bookRentalDTOS.add(getBookRentalViaUUID(r.getId()))
-                );
-        return bookRentalDTOS;
+                .stream()
+                .map(BookRentalConverter::convertBookRentalToDTO)
+                .collect(Collectors.toList());
+
     }
 
     @Override

@@ -1,6 +1,6 @@
 package pl.lodz.p.it.viewports.rentals;
 
-public interface RentalUsecaseSuit
+public interface RentalViewPortUsecaseSuit
 extends
         AddBookRentalUsecase,
         AddMovieRentalUsecase,

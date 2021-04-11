@@ -1,6 +1,6 @@
 package pl.lodz.p.it.viewports.account;
 
-public interface AccountUsecaseSuit
+public interface AccountViewPortUsecaseSuit
         extends
         AddAccountUsecase,
         GetAccountUsecase,

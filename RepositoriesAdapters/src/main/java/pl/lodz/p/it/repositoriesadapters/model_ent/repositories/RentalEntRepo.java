@@ -1,8 +1,8 @@
 package pl.lodz.p.it.repositoriesadapters.model_ent.repositories;
 
-import pl.lodz.p.it.repositoriesadapters.model_ent.entities.BookRentalEnt;
-import pl.lodz.p.it.repositoriesadapters.model_ent.entities.MovieRentalEnt;
+import pl.lodz.p.it.repositoriesadapters.model_ent.entities.*;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.*;
 
@@ -15,20 +15,34 @@ public class RentalEntRepo {
     public List<MovieRentalEnt> getMovieRentals() {
         return Collections.unmodifiableList(movieRentals);
     }
+
     public List<BookRentalEnt> getBookRentals() {
         return Collections.unmodifiableList(bookRentals);
     }
 
+    @PostConstruct
+    private void insertInitData() {
+        addBookRental(new BookRentalEnt(
+                new BookEnt("Doctor Sleep", "Stephen King", 656, false),
+                new AccountEnt("Jan", "Kowalski", "USER", true, "jan12", "kowalski")
+        ));
+        addMovieRental(new MovieRentalEnt(
+                new MovieEnt("The Godfather", "Francis Ford Coppola", 9.2, false),
+                new AccountEnt("Jan2", "Kowalski2", "USER", true, "jan12", "kowalski")
+        ));
+    }
+
     public void removeMovieRental(MovieRentalEnt r) {
-        for(Iterator<MovieRentalEnt> iterator = movieRentals.iterator(); iterator.hasNext(); ) {
-            if(iterator.next().getId() == r.getId()) {
+        for (Iterator<MovieRentalEnt> iterator = movieRentals.iterator(); iterator.hasNext(); ) {
+            if (iterator.next().getId() == r.getId()) {
                 iterator.remove();
             }
         }
     }
+
     public void removeBookRental(BookRentalEnt r) {
-        for(Iterator<BookRentalEnt> iterator = bookRentals.iterator(); iterator.hasNext(); ) {
-            if(iterator.next().getId() == r.getId()) {
+        for (Iterator<BookRentalEnt> iterator = bookRentals.iterator(); iterator.hasNext(); ) {
+            if (iterator.next().getId() == r.getId()) {
                 iterator.remove();
             }
         }
@@ -49,8 +63,8 @@ public class RentalEntRepo {
     }
 
     public MovieRentalEnt getMovieRentalViaUUID(String str) {
-        for(MovieRentalEnt movie: movieRentals) {
-            if(movie.getId().equals(str)){
+        for (MovieRentalEnt movie : movieRentals) {
+            if (movie.getId().equals(str)) {
                 return movie;
             }
         }
@@ -58,8 +72,8 @@ public class RentalEntRepo {
     }
 
     public BookRentalEnt getBookRentalViaUUID(String str) {
-        for(BookRentalEnt book: bookRentals) {
-            if(book.getId().equals(str)){
+        for (BookRentalEnt book : bookRentals) {
+            if (book.getId().equals(str)) {
                 return book;
             }
         }

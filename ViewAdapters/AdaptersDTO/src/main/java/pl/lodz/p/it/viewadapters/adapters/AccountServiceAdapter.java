@@ -1,10 +1,11 @@
-package pl.lodz.p.it.applicationcore.domainmodel.adapters;
+package pl.lodz.p.it.viewadapters.adapters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.converters.AccountConverter;
+import pl.lodz.p.it.applicationports.usecase.account.AccountUsecaseSuit;
+import pl.lodz.p.it.viewadapters.converters.AccountConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.AccountDTO;
 import pl.lodz.p.it.viewmodel.modelDTO.BookRentalDTO;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieRentalDTO;
-import pl.lodz.p.it.applicationports.usecase.account.AccountUsecaseSuit;
+import pl.lodz.p.it.viewports.account.AccountViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -13,12 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Dependent
-public class AccountRepoAdapter implements pl.lodz.p.it.viewports.account.AccountUsecaseSuit, Serializable{
+public class AccountServiceAdapter implements AccountViewPortUsecaseSuit, Serializable{
 
     AccountUsecaseSuit accountService;
 
     @Inject
-    public AccountRepoAdapter(AccountUsecaseSuit accountService) {
+    public AccountServiceAdapter(AccountUsecaseSuit accountService) {
         this.accountService = accountService;
     }
 
@@ -49,12 +50,12 @@ public class AccountRepoAdapter implements pl.lodz.p.it.viewports.account.Accoun
 
     @Override
     public AccountDTO getSingleMovieSelection(MovieRentalDTO movieRental) {
-        return movieRental.getAccountDTO();
+        return movieRental.getAccount();
     }
 
     @Override
     public AccountDTO getSingleBookSelection(BookRentalDTO bookRental) {
-        return bookRental.getAccountDTO();
+        return bookRental.getAccount();
     }
 
     @Override

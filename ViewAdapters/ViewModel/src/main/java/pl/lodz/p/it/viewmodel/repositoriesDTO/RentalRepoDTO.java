@@ -76,8 +76,8 @@ public class RentalRepoDTO {
 
     public MovieRentalDTO updateSingleMovieRental(MovieRentalDTO movieRentalToChange, MovieRentalDTO movieRentalWithData) {
         MovieRentalDTO fromRepo = getMovieRental(movieRentalToChange);
-        fromRepo.setMovieDTO(movieRentalWithData.getMovieDTO());
-        fromRepo.setAccountDTO(movieRentalWithData.getAccountDTO());
+        fromRepo.setMovie(movieRentalWithData.getMovie());
+        fromRepo.setAccount(movieRentalWithData.getAccount());
         fromRepo.setRange(movieRentalWithData.getRange());
         fromRepo.setRentalStart(movieRentalWithData.getRentalStart());
         fromRepo.setRentalEnd(movieRentalWithData.getRentalEnd());
@@ -86,8 +86,8 @@ public class RentalRepoDTO {
 
     public BookRentalDTO updateSingleBookRental(BookRentalDTO bookRentalToChange, BookRentalDTO bookRentalWithData) {
         BookRentalDTO fromRepo = getBookRental(bookRentalToChange);
-        fromRepo.setBookDTO(bookRentalWithData.getBookDTO());
-        fromRepo.setAccountDTO(bookRentalWithData.getAccountDTO());
+        fromRepo.setBook(bookRentalWithData.getBook());
+        fromRepo.setAccount(bookRentalWithData.getAccount());
         fromRepo.setRange(bookRentalWithData.getRange());
         fromRepo.setRentalStart(bookRentalWithData.getRentalStart());
         fromRepo.setRentalEnd(bookRentalWithData.getRentalEnd());

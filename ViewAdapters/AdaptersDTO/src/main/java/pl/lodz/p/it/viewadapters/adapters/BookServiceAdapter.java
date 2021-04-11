@@ -1,7 +1,7 @@
-package pl.lodz.p.it.applicationcore.domainmodel.adapters;
+package pl.lodz.p.it.viewadapters.adapters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.converters.BookConverter;
-import pl.lodz.p.it.viewports.book.BookUsecaseSuit;
+import pl.lodz.p.it.viewadapters.converters.BookConverter;
+import pl.lodz.p.it.viewports.book.BookViewPortUsecaseSuit;
 import pl.lodz.p.it.viewmodel.modelDTO.BookDTO;
 import pl.lodz.p.it.applicationcore.applicationservice.services.BookService;
 
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Dependent
-public class BookRepoAdapter implements BookUsecaseSuit, Serializable {
+public class BookServiceAdapter implements BookViewPortUsecaseSuit, Serializable {
 
     private BookService bookService;
 
     @Inject
-    public BookRepoAdapter(BookService bookService) {
+    public BookServiceAdapter(BookService bookService) {
         this.bookService = bookService;
     }
 

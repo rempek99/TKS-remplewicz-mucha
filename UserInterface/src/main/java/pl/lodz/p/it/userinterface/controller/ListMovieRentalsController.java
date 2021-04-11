@@ -42,8 +42,8 @@ public class ListMovieRentalsController implements Serializable {
     }
 
     public void removeSelectedMovieRental(MovieRentalDTO m) {
-        m.getMovieDTO().setRented(false);
-        movieService.setMovieRented(m.getMovieDTO(), false);
+        m.getMovie().setRented(false);
+        movieService.setMovieRented(m.getMovie(), false);
         removeMovieRentalService.removeMovieRental(m);
     }
 }

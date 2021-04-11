@@ -4,7 +4,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 //@ApplicationScoped
-@ApplicationPath("/pl/lodz/p/it/userinterface/rest")
+@ApplicationPath("/rest")
 public class JaxRsActivator extends Application {
 //    @Override
 //    public Set<Class<?>> getClasses() {

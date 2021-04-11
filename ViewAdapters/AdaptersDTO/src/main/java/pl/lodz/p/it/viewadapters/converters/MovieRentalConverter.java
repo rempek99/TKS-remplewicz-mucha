@@ -1,4 +1,4 @@
-package pl.lodz.p.it.applicationcore.domainmodel.converters;
+package pl.lodz.p.it.viewadapters.converters;
 
 import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
 import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
@@ -35,9 +35,9 @@ public class MovieRentalConverter {
     }
 
     public static MovieRental convertDTOToMovieRental(MovieRentalDTO movieRental) {
-        MovieDTO movieDTO = movieRental.getMovieDTO();
+        MovieDTO movieDTO = movieRental.getMovie();
         Movie movie = MovieConverter.convertDTOToMovie(movieDTO);
-        AccountDTO accountDTO = movieRental.getAccountDTO();
+        AccountDTO accountDTO = movieRental.getAccount();
         Account account = AccountConverter.convertDTOToAccount(accountDTO);
         String id = movieRental.getId();
         List<Date> range = movieRental.getRange();
