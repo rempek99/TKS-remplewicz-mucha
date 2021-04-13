@@ -1,4 +1,4 @@
-package pl.lodz.p.it.soaptests.aggregates.api;
+package pl.lodz.p.it.soaptests.api;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
@@ -24,7 +24,7 @@ import org.apache.http.util.EntityUtils;
 
 class AccountSoapAPITest {
 
-    protected static String address = "http://desktop-j93pug2:8080/ws";
+    protected static String address = "http://localhost:8080/ws";
 
     private Element executePost(String resource) throws IOException, ParserConfigurationException, SAXException {
         //Wczytanie z pliku xml:

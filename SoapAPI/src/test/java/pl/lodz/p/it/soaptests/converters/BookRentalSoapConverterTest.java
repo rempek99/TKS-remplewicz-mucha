@@ -1,4 +1,4 @@
-package pl.lodz.p.it.soaptests.aggregates.converters;
+package pl.lodz.p.it.soaptests.converters;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
