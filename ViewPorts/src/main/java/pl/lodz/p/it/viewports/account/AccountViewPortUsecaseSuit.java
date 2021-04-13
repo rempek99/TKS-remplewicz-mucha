@@ -1,15 +1,15 @@
 package pl.lodz.p.it.viewports.account;
 
-public interface AccountViewPortUsecaseSuit
+public interface AccountViewPortUsecaseSuit<A,BR,MR>
         extends
-        AddAccountUsecase,
-        GetAccountUsecase,
-        GetAccountViaUUIDUsecase,
-        GetAllAccountsUsecase,
-        GetSingleBookSelectionUsecase,
-        GetSingleMovieSelectionUsecase,
-        RemoveAccountUsecase,
-        UpdateSingleAccountUsecase,
+        AddAccountUsecase<A>,
+        GetAccountUsecase<A>,
+        GetAccountViaUUIDUsecase<A>,
+        GetAllAccountsUsecase<A>,
+        GetSingleBookSelectionUsecase<A,BR>,
+        GetSingleMovieSelectionUsecase<A,MR>,
+        RemoveAccountUsecase<A>,
+        UpdateSingleAccountUsecase<A>,
         SetAccountStatusUsecase
 {
 }

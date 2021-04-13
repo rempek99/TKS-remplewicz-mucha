@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Dependent
-public class RentalServiceAdapter implements RentalViewPortUsecaseSuit, Serializable {
+public class RentalServiceAdapter implements RentalViewPortUsecaseSuit<BookRentalDTO,MovieRentalDTO>, Serializable {
 
     private final RentalService rentalService;
 

@@ -1,19 +1,19 @@
 package pl.lodz.p.it.viewports.rentals;
 
-public interface RentalViewPortUsecaseSuit
+public interface RentalViewPortUsecaseSuit<BR,MR>
 extends
-        AddBookRentalUsecase,
-        AddMovieRentalUsecase,
-        GetAllBookRentalsUsecase,
-        GetAllMovieRentalsUsecase,
-        GetBookRentalViaUUIDUsecase,
+        AddBookRentalUsecase<BR>,
+        AddMovieRentalUsecase<MR>,
+        GetAllBookRentalsUsecase<BR>,
+        GetAllMovieRentalsUsecase<MR>,
+        GetBookRentalViaUUIDUsecase<BR>,
         GetDisabledDaysUsecase,
-        GetMovieRentalViaUUIDUsecase,
-        RemoveMovieRentalUsecase,
-        RemoveBookRentalUsecase,
-        UpdateSingleBookRentalUsecase,
-        UpdateSingleMovieRentalUsecase,
-        GetMovieRentalUsecase,
-        GetBookRentalUsecase
+        GetMovieRentalViaUUIDUsecase<MR>,
+        RemoveMovieRentalUsecase<MR>,
+        RemoveBookRentalUsecase<BR>,
+        UpdateSingleBookRentalUsecase<BR>,
+        UpdateSingleMovieRentalUsecase<MR>,
+        GetMovieRentalUsecase<MR>,
+        GetBookRentalUsecase<BR>
 {
 }

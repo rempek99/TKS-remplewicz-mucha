@@ -1,13 +1,13 @@
 package pl.lodz.p.it.viewports.book;
 
-public interface BookViewPortUsecaseSuit
+public interface BookViewPortUsecaseSuit<B>
     extends
-        AddBookUsecase,
-        GetAllBooksUsecase,
-        GetBookUsecase,
-        GetBookViaUUIDUsecase,
-        RemoveBookUsecase,
-        UpdateSingleBookUsecase,
-        SetBookRentedUsecase
+        AddBookUsecase<B>,
+        GetAllBooksUsecase<B>,
+        GetBookUsecase<B>,
+        GetBookViaUUIDUsecase<B>,
+        RemoveBookUsecase<B>,
+        UpdateSingleBookUsecase<B>,
+        SetBookRentedUsecase<B>
 {
 }

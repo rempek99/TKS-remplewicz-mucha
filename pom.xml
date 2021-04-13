@@ -17,6 +17,7 @@
         <module>UserInterface</module>
         <module>ViewPorts</module>
         <module>ViewAdapters</module>
+        <module>SoapAPI</module>
     </modules>
 
     <properties>

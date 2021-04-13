@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Dependent
-public class MovieServiceAdapter implements MovieViewPortUsecaseSuit, Serializable {
+public class MovieServiceAdapter implements MovieViewPortUsecaseSuit<MovieDTO>, Serializable {
 
     private MovieUsecaseSuit movieService;
 

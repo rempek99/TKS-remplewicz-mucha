@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Dependent
-public class BookServiceAdapter implements BookViewPortUsecaseSuit, Serializable {
+public class BookServiceAdapter implements BookViewPortUsecaseSuit<BookDTO>, Serializable {
 
     private BookUsecaseSuit bookService;
 

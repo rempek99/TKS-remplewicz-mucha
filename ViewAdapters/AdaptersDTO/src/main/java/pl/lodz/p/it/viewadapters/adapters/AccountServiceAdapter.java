@@ -2,9 +2,7 @@ package pl.lodz.p.it.viewadapters.adapters;
 
 import pl.lodz.p.it.applicationports.usecase.account.AccountUsecaseSuit;
 import pl.lodz.p.it.viewadapters.converters.AccountConverter;
-import pl.lodz.p.it.viewmodel.modelDTO.AccountDTO;
-import pl.lodz.p.it.viewmodel.modelDTO.BookRentalDTO;
-import pl.lodz.p.it.viewmodel.modelDTO.MovieRentalDTO;
+import pl.lodz.p.it.viewmodel.modelDTO.*;
 import pl.lodz.p.it.viewports.account.AccountViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
@@ -14,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Dependent
-public class AccountServiceAdapter implements AccountViewPortUsecaseSuit, Serializable{
+public class AccountServiceAdapter implements AccountViewPortUsecaseSuit<AccountDTO, BookRentalDTO, MovieRentalDTO>, Serializable{
 
     AccountUsecaseSuit accountService;
 
