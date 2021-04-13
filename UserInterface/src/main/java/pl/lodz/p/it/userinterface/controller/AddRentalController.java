@@ -20,13 +20,13 @@ import java.util.List;
 public class AddRentalController implements Serializable {
 
     @Inject
-    private AddBookRentalUsecase bookRentalService;
+    private AddBookRentalUsecase<BookRentalDTO> bookRentalService;
     @Inject
-    private AddMovieRentalUsecase movieRentalService;
+    private AddMovieRentalUsecase<MovieRentalDTO> movieRentalService;
     @Inject
     private GetDisabledDaysUsecase disabledDaysService;
     @Inject
-    private GetAccountViaUUIDUsecase accountService;
+    private GetAccountViaUUIDUsecase<AccountDTO> accountService;
     private MovieRentalDTO movieRentalDTO;
     private BookRentalDTO bookRentalDTO;
     private Date todayDate;

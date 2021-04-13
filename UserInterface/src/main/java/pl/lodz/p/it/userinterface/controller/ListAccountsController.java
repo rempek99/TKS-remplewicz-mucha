@@ -13,19 +13,19 @@ import javax.inject.Named;
 @ViewScoped
 public class ListAccountsController implements Serializable{
     @Inject
-    private GetSingleBookSelectionUsecase getSingleBookService;
+    private GetSingleBookSelectionUsecase<AccountDTO,BookRentalDTO> getSingleBookService;
     @Inject
-    private GetSingleMovieSelectionUsecase getSingleMovieService;
+    private GetSingleMovieSelectionUsecase<AccountDTO, MovieRentalDTO> getSingleMovieService;
     @Inject
-    private GetAccountViaUUIDUsecase getAccountViaUUIDService;
+    private GetAccountViaUUIDUsecase<AccountDTO> getAccountViaUUIDService;
     @Inject
-    private GetAllAccountsUsecase getAllAccountsService;
+    private GetAllAccountsUsecase<AccountDTO> getAllAccountsService;
     @Inject
-    private UpdateSingleAccountUsecase updateAccountService;
+    private UpdateSingleAccountUsecase<AccountDTO> updateAccountService;
     @Inject
-    private RemoveAccountUsecase removeAccountService;
+    private RemoveAccountUsecase<AccountDTO> removeAccountService;
     @Inject
-    private GetAccountUsecase getAccountService;
+    private GetAccountUsecase<AccountDTO> getAccountService;
     @Inject
     private SetAccountStatusUsecase setAccountStatusService;
     private List<AccountDTO> filteredAccounts;

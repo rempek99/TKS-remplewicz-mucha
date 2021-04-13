@@ -16,9 +16,9 @@ import javax.inject.Named;
 public class AddAccountController implements Serializable {
 
     @Inject
-    private AddAccountUsecase addAccountService;
+    private AddAccountUsecase<AccountDTO> addAccountService;
     @Inject
-    private GetAccountUsecase getAccountService;
+    private GetAccountUsecase<AccountDTO> getAccountService;
     private AccountDTO accountDTO;
 
     @PostConstruct
