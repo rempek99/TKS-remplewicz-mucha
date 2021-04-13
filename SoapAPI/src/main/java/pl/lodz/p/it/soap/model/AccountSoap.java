@@ -2,12 +2,25 @@ package pl.lodz.p.it.soap.model;
 
 import lombok.*;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 import java.util.UUID;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "accountSoap", propOrder = {
+        "firstName",
+        "lastName",
+        "roleOfUser",
+        "isActive",
+        "id",
+        "login",
+        "password"
+})
 public class AccountSoap {
     private String firstName;
     private String lastName;

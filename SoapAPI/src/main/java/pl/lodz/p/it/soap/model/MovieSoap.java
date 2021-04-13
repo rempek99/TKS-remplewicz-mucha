@@ -5,12 +5,23 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 import java.util.UUID;
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "movieSoap", propOrder = {
+        "title",
+        "author",
+        "rating",
+        "rented",
+        "id"
+})
 public class MovieSoap {
     private String title;
     private String author;

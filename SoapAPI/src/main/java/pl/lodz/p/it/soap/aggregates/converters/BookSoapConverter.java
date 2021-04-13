@@ -15,7 +15,7 @@ public class BookSoapConverter {
                 book.getAuthor(),
                 book.getPages(),
                 book.isRented());
-        newBook.setId(newBook.getId());
+        newBook.setId(book.getId());
         return newBook;
     }
 
@@ -25,7 +25,7 @@ public class BookSoapConverter {
                 book.getAuthor(),
                 book.getPages(),
                 book.isRented());
-        newBook.setId(newBook.getId());
+        newBook.setId(book.getId());
         return newBook;
     }
 }

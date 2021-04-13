@@ -6,6 +6,9 @@ import lombok.ToString;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +17,14 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "movieRentalSoap", propOrder = {
+        "movie",
+        "account",
+        "id",
+        "rentalStart",
+        "rentalEnd"
+})
 public class MovieRentalSoap {
     private MovieSoap movie;
     private AccountSoap account;

@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="http://www.soap.tks.it.p.lodz.pl">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:deleteAccountRequest>
+            <gs:id>test1</gs:id>
+        </gs:deleteAccountRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

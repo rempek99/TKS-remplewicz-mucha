@@ -15,7 +15,7 @@ public class MovieSoapConverter {
                 movie.getAuthor(),
                 movie.getRating(),
                 movie.isRented());
-        newMovie.setId(newMovie.getId());
+        newMovie.setId(movie.getId());
         return newMovie;
     }
 
@@ -25,7 +25,7 @@ public class MovieSoapConverter {
                 movie.getAuthor(),
                 movie.getRating(),
                 movie.isRented());
-        newMovie.setId(newMovie.getId());
+        newMovie.setId(movie.getId());
         return newMovie;
     }
 }
