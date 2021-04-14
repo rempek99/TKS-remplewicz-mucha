@@ -4,6 +4,8 @@ package pl.lodz.p.it.soap.api;
 import pl.lodz.p.it.soap.aggregates.adapters.RentalSoapAdapter;
 import pl.lodz.p.it.soap.model.BookRentalSoap;
 import pl.lodz.p.it.soap.model.MovieRentalSoap;
+import pl.lodz.p.it.soap.model.MovieSoap;
+import pl.lodz.p.it.soap.model.SoapException;
 
 import javax.inject.Inject;
 import javax.jws.WebService;
@@ -20,6 +22,19 @@ public class RentalSoapAPI {
     public List<BookRentalSoap> getBooksRentalsFromStorage() {
         return rentalAdapter.getAllBookRentals();
     }
+
+
+    public BookRentalSoap getSingleBookRentalFromStorage(String str) throws SoapException {
+        try {
+            return rentalAdapter.getBookRentalViaUUID(str);
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals(SoapException.NOT_FOUND))
+                throw new SoapException(SoapException.NOT_FOUND);
+            else
+                throw e;
+        }
+    }
+
 
 
     public void addSingleBookRentalToStorage(BookRentalSoap bookRental) {
@@ -51,8 +66,21 @@ public class RentalSoapAPI {
     }
 
 
-    public void addSingleMovieRentalToStorage(MovieRentalSoap movieRental) {
-        rentalAdapter.addMovieRental(movieRental);
+    public MovieRentalSoap getSingleMovieRentalFromStorage(String str) throws SoapException {
+        try {
+            return rentalAdapter.getMovieRentalViaUUID(str);
+        } catch (IllegalArgumentException e) {
+            if (e.getMessage().equals(SoapException.NOT_FOUND))
+                throw new SoapException(SoapException.NOT_FOUND);
+            else
+                throw e;
+        }
+    }
+
+
+
+    public MovieRentalSoap addSingleMovieRentalToStorage(MovieRentalSoap movieRental) {
+        return rentalAdapter.addMovieRental(movieRental);
     }
 
     public void removeSingleMovieRentalFromStorage(String str) {

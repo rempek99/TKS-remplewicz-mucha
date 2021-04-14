@@ -1,6 +1,7 @@
 package pl.lodz.p.it.viewadapters.adapters;
 
 import pl.lodz.p.it.applicationports.usecase.account.AccountUsecaseSuit;
+import pl.lodz.p.it.viewadapters.RestException;
 import pl.lodz.p.it.viewadapters.converters.AccountConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.*;
 import pl.lodz.p.it.viewports.account.AccountViewPortUsecaseSuit;
@@ -32,8 +33,10 @@ public class AccountServiceAdapter implements AccountViewPortUsecaseSuit<Account
     }
 
     @Override
-    public void addAccount(AccountDTO a) {
-        accountService.add(AccountConverter.convertDTOToAccount(a));
+    public AccountDTO addAccount(AccountDTO a) {
+        return AccountConverter.convertAccountToDTO(
+                accountService.add(AccountConverter.convertDTOToAccount(a))
+        );
     }
 
     @Override
@@ -60,7 +63,12 @@ public class AccountServiceAdapter implements AccountViewPortUsecaseSuit<Account
 
     @Override
     public AccountDTO getAccountViaUUID(String str) {
-        return AccountConverter.convertAccountToDTO(accountService.getViaUUID(str));
+        if(accountService.getViaUUID(str).isPresent()) {
+            return AccountConverter.convertAccountToDTO(accountService.getViaUUID(str).get());
+        }
+        else{
+            throw new IllegalArgumentException(RestException.NOT_FOUND);
+        }
     }
 
     @Override

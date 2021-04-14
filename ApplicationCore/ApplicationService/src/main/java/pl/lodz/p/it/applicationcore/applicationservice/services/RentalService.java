@@ -29,7 +29,8 @@ public class RentalService implements Serializable, RentalUsecaseSuit {
     public List<BookRental> getAllBookRentals() { return rentalRepo.getBookRentals(); }
 
     @Override
-    public void addMovieRental(MovieRental r) { rentalRepo.addMovieRental(r); }
+    public MovieRental addMovieRental(MovieRental r) {
+        return rentalRepo.addMovieRental(r); }
     @Override
     public void addBookRental(BookRental r) { rentalRepo.addBookRental(r); }
 

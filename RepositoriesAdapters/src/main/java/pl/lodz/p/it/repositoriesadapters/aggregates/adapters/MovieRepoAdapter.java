@@ -4,6 +4,7 @@ import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.MovieEntRepo;
 import pl.lodz.p.it.repositoriesadapters.aggregates.converters.MovieConverter;
 import pl.lodz.p.it.applicationports.infrastructure.MoviePort;
 import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
+import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.RepositoryException;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -46,7 +47,11 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
     @Override
     public Movie addMovie(Movie m) {
-        return convertEntToMovie(movieRepo.add(convertMovieToEnt(m)));
+        try {
+            return convertEntToMovie(movieRepo.add(convertMovieToEnt(m)));
+        } catch (RepositoryException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
 

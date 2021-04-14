@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.BookRentalConverter.convertBookRentalToEnt;
+import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.MovieRentalConverter.convertEntToMovieRental;
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.MovieRentalConverter.convertMovieRentalToEnt;
 
 @Dependent
@@ -65,8 +66,9 @@ public class RentalRepoAdapter implements RentalPort, Serializable {
     }
 
     @Override
-    public void addMovieRental(MovieRental r) {
-        rentalRepo.addMovieRental(convertMovieRentalToEnt(r));
+    public MovieRental addMovieRental(MovieRental r) {
+
+        return convertEntToMovieRental(rentalRepo.addMovieRental(convertMovieRentalToEnt(r)));
     }
 
     @Override

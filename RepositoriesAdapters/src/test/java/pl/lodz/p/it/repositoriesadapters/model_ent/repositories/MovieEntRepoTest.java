@@ -18,7 +18,7 @@ class MovieEntRepoTest {
 
 
     @BeforeEach
-    void initRepo() {
+    void initRepo() throws RepositoryException {
         repo = new MovieEntRepo();
         assertTrue(repo.getAll().isEmpty());
         repo.add(tester);
@@ -34,7 +34,7 @@ class MovieEntRepoTest {
     }
 
     @Test
-    void addMovie() {
+    void addMovie() throws RepositoryException {
         final int repo_size = repo.getAll().size();
         MovieEnt my_movie = new MovieEnt("Moj film", "Remplewicz", 1000, false);
         repo.add(my_movie);
@@ -49,7 +49,7 @@ class MovieEntRepoTest {
     }
 
     @Test
-    void getMovieViaUUID() {
+    void getMovieViaUUID() throws RepositoryException {
         MovieEnt my_movie = new MovieEnt("Moj film", "Remplewicz", 1000, false);
         MovieEnt added = repo.add(my_movie);
         MovieEnt found = repo.getViaUUID(added.getId());
@@ -57,7 +57,7 @@ class MovieEntRepoTest {
     }
 
     @Test
-    void getMovie() {
+    void getMovie() throws RepositoryException {
         MovieEnt my_movie = new MovieEnt("Moj film", "Remplewicz", 1000, false);
         repo.add(my_movie);
         MovieEnt found = repo.get(my_movie);

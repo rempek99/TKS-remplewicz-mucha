@@ -4,6 +4,7 @@ import pl.lodz.p.it.applicationcore.domainmodel.model.Book;
 import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.BookEntRepo;
 import pl.lodz.p.it.repositoriesadapters.aggregates.converters.BookConverter;
 import pl.lodz.p.it.applicationports.infrastructure.BookPort;
+import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.RepositoryException;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -43,7 +44,11 @@ public class BookRepoAdapter implements BookPort, Serializable {
 
     @Override
     public Book addBook(Book b) {
-        return convertEntToBook(bookRepo.add(convertBookToEnt(b)));
+        try {
+            return convertEntToBook(bookRepo.add(convertBookToEnt(b)));
+        } catch (RepositoryException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @Override

@@ -56,8 +56,10 @@ public class RentalServiceAdapter implements RentalViewPortUsecaseSuit<BookRenta
     }
 
     @Override
-    public void addMovieRental(MovieRentalDTO r) {
-        rentalService.addMovieRental(MovieRentalConverter.convertDTOToMovieRental(r));
+    public MovieRentalDTO addMovieRental(MovieRentalDTO r) {
+        return MovieRentalConverter.convertMovieRentalToDTO(
+                rentalService.addMovieRental(MovieRentalConverter.convertDTOToMovieRental(r))
+        );
     }
 
     @Override

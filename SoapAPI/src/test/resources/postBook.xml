@@ -1,0 +1,18 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="http://api.soap.it.p.lodz.pl/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <api:addSingleBookToStorage>
+            <!--Optional:-->
+            <arg0>
+                <!--Optional:-->
+                <title>test123</title>
+                <!--Optional:-->
+                <author>Testowy</author>
+                <pages>100</pages>
+                <rented>false</rented>
+                <!--Optional:-->
+                <id>testArg0</id>
+            </arg0>
+        </api:addSingleBookToStorage>
+    </soapenv:Body>
+</soapenv:Envelope>

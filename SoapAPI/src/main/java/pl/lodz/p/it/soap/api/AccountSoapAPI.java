@@ -3,6 +3,8 @@ package pl.lodz.p.it.soap.api;
 import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.RepositoryException;
 import pl.lodz.p.it.soap.aggregates.adapters.AccountSoapAdapter;
 import pl.lodz.p.it.soap.model.AccountSoap;
+import pl.lodz.p.it.soap.model.SoapException;
+import pl.lodz.p.it.soap.model.SoapMessage;
 
 import javax.inject.Inject;
 import javax.jws.WebService;
@@ -44,7 +46,7 @@ public class AccountSoapAPI {
         catch (IllegalArgumentException e)
         {
             if(e.getCause().getMessage().equals(RepositoryException.DUPLICATED)) {
-                throw new SoapException("Duplicated");
+                throw new SoapException(SoapException.DUPLICATED);
             }
             else {
                 throw e;

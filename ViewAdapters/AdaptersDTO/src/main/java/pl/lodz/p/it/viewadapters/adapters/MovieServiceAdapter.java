@@ -2,6 +2,7 @@ package pl.lodz.p.it.viewadapters.adapters;
 
 import pl.lodz.p.it.applicationcore.applicationservice.services.MovieService;
 import pl.lodz.p.it.applicationports.usecase.movie.MovieUsecaseSuit;
+import pl.lodz.p.it.viewadapters.RestException;
 import pl.lodz.p.it.viewadapters.converters.MovieConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
 import pl.lodz.p.it.viewports.movie.MovieViewPortUsecaseSuit;
@@ -32,8 +33,11 @@ public class MovieServiceAdapter implements MovieViewPortUsecaseSuit<MovieDTO>, 
     }
     
     @Override
-    public void addMovie(MovieDTO m) {
-        movieService.add(MovieConverter.convertDTOToMovie(m));
+    public MovieDTO addMovie(MovieDTO m) {
+
+        return MovieConverter.convertMovieToDTO(
+                movieService.add(MovieConverter.convertDTOToMovie(m))
+        );
     }
 
     @Override
@@ -48,7 +52,11 @@ public class MovieServiceAdapter implements MovieViewPortUsecaseSuit<MovieDTO>, 
 
     @Override
     public MovieDTO getMovieViaUUID(String str) {
-        return MovieConverter.convertMovieToDTO(movieService.getViaUUID(str));
+        if(movieService.getViaUUID(str).isPresent()) {
+            return MovieConverter.convertMovieToDTO(movieService.getViaUUID(str).get());
+        }
+        else
+            throw new IllegalArgumentException(RestException.NOT_FOUND);
     }
 
     @Override

@@ -18,7 +18,7 @@ class BookEntRepoTest {
 
 
     @BeforeEach
-    void initRepo() {
+    void initRepo() throws RepositoryException {
         repo = new BookEntRepo();
         assertTrue(repo.getAll().isEmpty());
         repo.add(tester);
@@ -33,7 +33,7 @@ class BookEntRepoTest {
     }
 
     @Test
-    void addBook() {
+    void addBook() throws RepositoryException {
         final int repo_size = repo.getAll().size();
         BookEnt my_book = new BookEnt("Moja ksiazka", "Remplewicz", 1000, false);
         repo.add(my_book);
@@ -48,7 +48,7 @@ class BookEntRepoTest {
     }
 
     @Test
-    void getBookViaUUID() {
+    void getBookViaUUID() throws RepositoryException {
         BookEnt my_book = new BookEnt("Moja ksiazka", "Remplewicz", 1000, false);
         BookEnt added = repo.add(my_book);
         BookEnt found = repo.getViaUUID(added.getId());
@@ -56,7 +56,7 @@ class BookEntRepoTest {
     }
 
     @Test
-    void getBook() {
+    void getBook() throws RepositoryException {
         BookEnt my_book = new BookEnt("Moja ksiazka", "Remplewicz", 1000, false);
         repo.add(my_book);
         BookEnt found = repo.get(my_book);

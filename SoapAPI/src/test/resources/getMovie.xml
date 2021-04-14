@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="http://api.soap.it.p.lodz.pl/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <api:getSingleMovieFromStorage>
+            <!--Optional:-->
+            <arg0>testArg0</arg0>
+        </api:getSingleMovieFromStorage>
+    </soapenv:Body>
+</soapenv:Envelope>

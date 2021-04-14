@@ -23,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AccountSoapAPITest {
+class MovieSoapAPITest {
 
-    protected static String address = "http://localhost:8080/SoapAPI-1.0-SNAPSHOT/AccountAPI";
+    protected static String address = "http://localhost:8080/SoapAPI-1.0-SNAPSHOT/MovieAPI";
 
     private String cachedId = "";
 
@@ -55,55 +55,47 @@ class AccountSoapAPITest {
     }
 
     @Test
-    @Order(1)
-    public void helloTest() throws IOException, ParserConfigurationException, SAXException {
-        Element element = executePost("hello.xml", null);
-        assertEquals("Hello Soap"
-                , element.getElementsByTagName("ns2:helloResponse").item(0).getTextContent());
-    }
-
-    @Test
     @Order(2)
-    public void postTest() throws IOException, ParserConfigurationException, SAXException {
+    public void postMovieRentalTest() throws IOException, ParserConfigurationException, SAXException {
 
-        Element element = executePost("postAccount.xml",null);
+        Element element = executePost("postMovieRental.xml",null);
         cachedId = element.getElementsByTagName("id").item(0).getTextContent();
         //Asercje
-        assertEquals("test123",element.getElementsByTagName("login").item(0).getTextContent());
+        assertEquals("test123",element.getElementsByTagName("title").item(0).getTextContent());
 
         //Sprawdzanie poprawnego dodania
-        element = executePost("getAccount.xml",cachedId);
-        assertEquals("Testowy",element.getElementsByTagName("lastName").item(0).getTextContent());
+        element = executePost("getMovie.xml",cachedId);
+        assertEquals("Testowy",element.getElementsByTagName("author").item(0).getTextContent());
     }
 
     @Test
     @Order(3)
     public void getTest() throws IOException, ParserConfigurationException, SAXException {
         //Wczytanie z pliku xml
-        Element element = executePost("getAccount.xml",cachedId);
+        Element element = executePost("getMovie.xml",cachedId);
         //Asercje
-        assertEquals("Testowy",element.getElementsByTagName("lastName").item(0).getTextContent());
+        assertEquals("Testowy",element.getElementsByTagName("author").item(0).getTextContent());
     }
 
     @Test
     @Order(4)
     public void wrongPostTest() throws IOException, ParserConfigurationException, SAXException {
-        Element element = executePost("postAccount.xml",null);
+        Element element = executePost("postMovie.xml",null);
         //Asercje
-        assertEquals("Duplicated",element.getElementsByTagName("message").item(0).getTextContent());
+        assertEquals(element.getElementsByTagName("message").item(0).getTextContent(), "Duplicated");
         //Sprawdzenie niedodania elementu
-        element = executePost("getAccounts.xml",null);
-        assertEquals(6,element.getElementsByTagName("return").getLength());
+        element = executePost("getMovies.xml",null);
+        assertEquals(11, element.getElementsByTagName("return").getLength());
     }
 
     @Test
     @Order(5)
     public void deleteTest() throws IOException, ParserConfigurationException, SAXException {
-        Element element = executePost("deleteAccount.xml",cachedId);
+        Element element = executePost("deleteMovie.xml",cachedId);
         //Asercje
         assertEquals("OK",element.getElementsByTagName("return").item(0).getTextContent());
 
-        element = executePost("getAccounts.xml",null);
-        assertEquals(5,element.getElementsByTagName("return").getLength());
+        element = executePost("getMovies.xml",null);
+        assertEquals(10,element.getElementsByTagName("return").getLength());
     }
 }

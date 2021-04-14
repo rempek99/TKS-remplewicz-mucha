@@ -2,7 +2,7 @@ package pl.lodz.p.it.soap.aggregates.adapters;
 
 import pl.lodz.p.it.applicationports.usecase.book.BookUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.BookSoapConverter;
-import pl.lodz.p.it.soap.api.SoapException;
+import pl.lodz.p.it.soap.model.SoapException;
 import pl.lodz.p.it.soap.model.BookSoap;
 import pl.lodz.p.it.viewports.book.BookViewPortUsecaseSuit;
 
@@ -23,8 +23,10 @@ public class BookSoapAdapter implements BookViewPortUsecaseSuit<BookSoap>, Seria
     }
 
     @Override
-    public void addBook(BookSoap bookSoap) {
-        bookService.add(BookSoapConverter.convertBookSoapToBook(bookSoap));
+    public BookSoap addBook(BookSoap bookSoap) {
+        return BookSoapConverter.convertBookToBookSoap(
+                bookService.add(BookSoapConverter.convertBookSoapToBook(bookSoap))
+        );
     }
 
     @Override

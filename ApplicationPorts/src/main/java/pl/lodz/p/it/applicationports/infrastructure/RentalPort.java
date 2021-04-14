@@ -8,7 +8,7 @@ import java.util.List;
 public interface RentalPort {
     List<MovieRental> getMovieRentals();
     List<BookRental> getBookRentals();
-    void addMovieRental(MovieRental r);
+    MovieRental addMovieRental(MovieRental r);
     void addBookRental(BookRental r);
     void removeMovieRental(MovieRental r);
     void removeBookRental(BookRental r);

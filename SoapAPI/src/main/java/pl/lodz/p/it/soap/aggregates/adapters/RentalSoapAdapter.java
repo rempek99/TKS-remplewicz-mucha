@@ -57,8 +57,10 @@ public class RentalSoapAdapter implements RentalViewPortUsecaseSuit<BookRentalSo
     }
 
     @Override
-    public void addMovieRental(MovieRentalSoap r) {
-        rentalService.addMovieRental(MovieRentalSoapConverter.convertMovieRentalSoapToMovieRental(r));
+    public MovieRentalSoap addMovieRental(MovieRentalSoap r) {
+        return MovieRentalSoapConverter.convertMovieRentalToMovieRentalSoap(
+                rentalService.addMovieRental(MovieRentalSoapConverter.convertMovieRentalSoapToMovieRental(r))
+        );
     }
 
     @Override

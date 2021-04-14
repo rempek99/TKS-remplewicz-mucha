@@ -2,6 +2,7 @@ package pl.lodz.p.it.viewadapters.adapters;
 
 import pl.lodz.p.it.applicationcore.applicationservice.services.BookService;
 import pl.lodz.p.it.applicationports.usecase.book.BookUsecaseSuit;
+import pl.lodz.p.it.viewadapters.RestException;
 import pl.lodz.p.it.viewadapters.converters.BookConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.BookDTO;
 import pl.lodz.p.it.viewports.book.BookViewPortUsecaseSuit;
@@ -32,8 +33,10 @@ public class BookServiceAdapter implements BookViewPortUsecaseSuit<BookDTO>, Ser
     }
 
     @Override
-    public void addBook(BookDTO b) {
-        bookService.add(BookConverter.convertDTOToBook(b));
+    public BookDTO addBook(BookDTO b) {
+        return BookConverter.convertBookToDTO(
+                bookService.add(BookConverter.convertDTOToBook(b))
+        );
     }
 
     @Override
@@ -48,7 +51,12 @@ public class BookServiceAdapter implements BookViewPortUsecaseSuit<BookDTO>, Ser
 
     @Override
     public BookDTO getBookViaUUID(String str) {
-        return BookConverter.convertBookToDTO(bookService.getViaUUID(str));
+        if(bookService.getViaUUID(str).isPresent()) {
+            return BookConverter.convertBookToDTO(bookService.getViaUUID(str).get());
+        }
+        else {
+            throw new IllegalArgumentException(RestException.NOT_FOUND);
+        }
     }
 
     @Override
