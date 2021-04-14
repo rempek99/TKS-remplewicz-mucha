@@ -6,6 +6,7 @@ import pl.lodz.p.it.applicationcore.domainmodel.model.MovieRental;
 import pl.lodz.p.it.repositoriesadapters.model_ent.entities.AccountEnt;
 import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.AccountEntRepo;
 import pl.lodz.p.it.applicationports.infrastructure.AccountPort;
+import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.RepositoryException;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -47,8 +48,11 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
 
     @Override
     public Account addAccount(Account a) {
-        accountRepo.add(convertAccountToEnt(a));
-        return a;
+        try {
+            return convertEntToAccount(accountRepo.add(convertAccountToEnt(a)));
+        } catch (RepositoryException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @Override

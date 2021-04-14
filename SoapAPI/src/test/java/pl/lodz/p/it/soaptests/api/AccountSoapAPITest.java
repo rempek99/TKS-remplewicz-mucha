@@ -1,10 +1,15 @@
 package pl.lodz.p.it.soaptests.api;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.junit.jupiter.api.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,20 +20,22 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AccountSoapAPITest {
 
-    protected static String address = "http://localhost:8080/ws";
+    protected static String address = "http://localhost:8080/SoapAPI-1.0-SNAPSHOT/AccountAPI";
 
-    private Element executePost(String resource) throws IOException, ParserConfigurationException, SAXException {
+    private String cachedId = "";
+
+    private Element executePost(String resource, String arg0) throws IOException, ParserConfigurationException, SAXException {
         //Wczytanie z pliku xml:
         String content = new Scanner(new File(getClass().getClassLoader().getResource(resource).getFile())).useDelimiter("\\Z").next();
+        if(null!=arg0)
+            content = content.replaceAll("testArg0",arg0);
         //Przygotwanie post-a
         HttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(address);
@@ -51,45 +58,54 @@ class AccountSoapAPITest {
 
     @Test
     @Order(1)
-    public void postTest() throws IOException, ParserConfigurationException, SAXException {
-
-        Element element = executePost("postAccount.xml");
-        //Asercje
-        Assertions.assertEquals(element.getElementsByTagName("ns2:id").item(0).getTextContent(), "test1");
-
-        //Sprawdzanie poprawnego dodania
-        element = executePost("getAccounts.xml");
-        Assertions.assertEquals(element.getElementsByTagName("ns2:account").getLength(), 6);
+    public void helloTest() throws IOException, ParserConfigurationException, SAXException {
+        Element element = executePost("hello.xml", null);
+        assertEquals("Hello Soap"
+                , element.getElementsByTagName("ns2:helloResponse").item(0).getTextContent());
     }
 
     @Test
     @Order(2)
-    public void getTest() throws IOException, ParserConfigurationException, SAXException {
-        //Wczytanie z pliku xml
-        Element element = executePost("getAccount.xml");
+    public void postTest() throws IOException, ParserConfigurationException, SAXException {
+
+        Element element = executePost("postAccount.xml",null);
+        cachedId = element.getElementsByTagName("id").item(0).getTextContent();
         //Asercje
-        Assertions.assertEquals(element.getElementsByTagName("ns2:lastName").item(0).getTextContent(), "Testowy");
+        assertEquals("test123",element.getElementsByTagName("login").item(0).getTextContent());
+
+        //Sprawdzanie poprawnego dodania
+        element = executePost("getAccount.xml",cachedId);
+        assertEquals("Testowy",element.getElementsByTagName("lastName").item(0).getTextContent());
     }
 
     @Test
     @Order(3)
-    public void wrongPostTest() throws IOException, ParserConfigurationException, SAXException {
-        Element element = executePost("postAccount.xml");
+    public void getTest() throws IOException, ParserConfigurationException, SAXException {
+        //Wczytanie z pliku xml
+        Element element = executePost("getAccount.xml",cachedId);
         //Asercje
-        Assertions.assertEquals(element.getElementsByTagName("ns2:id").item(0).getTextContent(), "IM SO SORRY");
-        //Sprawdzenie niedodania elementu
-        element = executePost("getAccounts.xml");
-        Assertions.assertEquals(element.getElementsByTagName("ns2:account").getLength(), 6);
+        assertEquals("Testowy",element.getElementsByTagName("lastName").item(0).getTextContent());
     }
 
     @Test
     @Order(4)
-    public void deleteTest() throws IOException, ParserConfigurationException, SAXException {
-        Element element = executePost("deleteAccount.xml");
+    public void wrongPostTest() throws IOException, ParserConfigurationException, SAXException {
+        Element element = executePost("postAccount.xml",null);
         //Asercje
-        Assertions.assertEquals(element.getElementsByTagName("ns2:info").item(0).getTextContent(), "OK");
+        assertEquals(element.getElementsByTagName("message").item(0).getTextContent(), "Duplicated");
+        //Sprawdzenie niedodania elementu
+        element = executePost("getAccounts.xml",null);
+        assertEquals(element.getElementsByTagName("return").getLength(), 6);
+    }
 
-        element = executePost("getAccounts.xml");
-        Assertions.assertEquals(element.getElementsByTagName("ns2:account").getLength(), 5);
+    @Test
+    @Order(5)
+    public void deleteTest() throws IOException, ParserConfigurationException, SAXException {
+        Element element = executePost("deleteAccount.xml",cachedId);
+        //Asercje
+        assertEquals(element.getElementsByTagName("return").item(0).getTextContent(), "OK");
+
+        element = executePost("getAccounts.xml",null);
+        assertEquals(element.getElementsByTagName("return").getLength(), 5);
     }
 }

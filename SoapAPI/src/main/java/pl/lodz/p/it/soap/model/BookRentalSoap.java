@@ -22,6 +22,7 @@ import java.util.UUID;
         "book",
         "account",
         "id",
+        "range",
         "rentalStart",
         "rentalEnd"
 })

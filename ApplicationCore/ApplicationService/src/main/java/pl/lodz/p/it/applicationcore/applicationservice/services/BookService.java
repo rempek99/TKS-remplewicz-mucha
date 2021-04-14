@@ -32,8 +32,8 @@ public class BookService implements Serializable, BookUsecaseSuit, IService<Book
     }
 
     @Override
-    public void add(Book b) {
-        bookRepo.addBook(b);
+    public Book add(Book b) {
+        return bookRepo.addBook(b);
     }
 
     @Override

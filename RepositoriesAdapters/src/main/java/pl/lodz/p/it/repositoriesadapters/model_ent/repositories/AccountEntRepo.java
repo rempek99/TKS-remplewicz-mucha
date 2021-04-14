@@ -22,18 +22,27 @@ public class AccountEntRepo implements IdentityStore, IRepositoryEnt<AccountEnt>
 
     @PostConstruct
     private void insertInitData() {
-        add(new AccountEnt("Jan", "Kowalski", "USER", true, "jan12", "kowalski"));
-        add(new AccountEnt("Tomasz", "Nowak", "USER", true, "tomasz", "nowak"));
-        add(new AccountEnt("Artur", "Wiśniewski", "USER", true, "artur", "wiśniewski"));
-        add(new AccountEnt("Janusz", "Szybki", "MANAGER", true, "janusz", "szybki"));
-        add(new AccountEnt("Mariusz", "Władczy", "ADMIN", true, "admin", "admin"));
+        try {
+            add(new AccountEnt("Jan", "Kowalski", "USER", true, "jan12", "kowalski"));
+            add(new AccountEnt("Tomasz", "Nowak", "USER", true, "tomasz", "nowak"));
+            add(new AccountEnt("Artur", "Wiśniewski", "USER", true, "artur", "wiśniewski"));
+            add(new AccountEnt("Janusz", "Szybki", "MANAGER", true, "janusz", "szybki"));
+            add(new AccountEnt("Mariusz", "Władczy", "ADMIN", true, "admin", "admin"));
+        } catch (RepositoryException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public List<AccountEnt> getAll() {
         return Collections.unmodifiableList(accounts);
     }
 
-    public AccountEnt add(AccountEnt a) {
+    public AccountEnt add(AccountEnt a) throws RepositoryException {
+        if(accounts
+                .stream()
+                .anyMatch(account -> account.getLogin().equals(a.getLogin())))
+            throw new RepositoryException(RepositoryException.DUPLICATED);
         a.setId(UUID.randomUUID().toString());
         accounts.add(a);
         return a;

@@ -25,8 +25,12 @@ public class AccountSoapAdapter implements AccountViewPortUsecaseSuit<AccountSoa
     }
 
     @Override
-    public void addAccount(AccountSoap a) {
-        accountService.add(AccountSoapConverter.convertAccountSoapToAccount(a));
+    public AccountSoap addAccount(AccountSoap a) {
+        return AccountSoapConverter.convertAccountToAccountSoap(
+                accountService.add(
+                        AccountSoapConverter.convertAccountSoapToAccount(a)
+                )
+        );
     }
 
     @Override

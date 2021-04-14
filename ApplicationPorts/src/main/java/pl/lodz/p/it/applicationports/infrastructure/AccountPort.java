@@ -13,6 +13,6 @@ public interface AccountPort {
     Account getMovieSelectedViaUUID(MovieRental m);
     Account getBookSelectedViaUUID(BookRental b);
     void updateSingleAcc(Account income, Account outcome);
-    Account addAccount(Account a);
+    Account addAccount(Account a) throws IllegalArgumentException;
     void removeAccount(Account a);
 }

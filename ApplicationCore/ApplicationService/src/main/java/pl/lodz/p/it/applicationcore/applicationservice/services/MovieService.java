@@ -28,8 +28,8 @@ public class MovieService implements Serializable, MovieUsecaseSuit, IService<Mo
     }
 
     @Override
-    public void add(Movie m) {
-        movieRepo.addMovie(m);
+    public Movie add(Movie m) {
+        return movieRepo.addMovie(m);
     }
 
     @Override

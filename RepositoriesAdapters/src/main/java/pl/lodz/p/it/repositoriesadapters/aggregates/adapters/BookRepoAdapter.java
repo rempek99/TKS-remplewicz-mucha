@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.BookConverter.convertBookToEnt;
+import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.BookConverter.convertEntToBook;
 
 @Dependent
 public class BookRepoAdapter implements BookPort, Serializable {
@@ -40,8 +41,8 @@ public class BookRepoAdapter implements BookPort, Serializable {
     }
 
     @Override
-    public void addBook(Book b) {
-        bookRepo.add(convertBookToEnt(b));
+    public Book addBook(Book b) {
+        return convertEntToBook(bookRepo.add(convertBookToEnt(b)));
     }
 
     @Override

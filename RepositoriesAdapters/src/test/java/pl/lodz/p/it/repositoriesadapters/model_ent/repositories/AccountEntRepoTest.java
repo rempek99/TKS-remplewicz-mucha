@@ -17,7 +17,7 @@ class AccountEntRepoTest {
     private final AccountEnt tester3 = new AccountEnt("Tester3", "Testowy3", "user", true, "test3", "test12345");
 
     @BeforeEach
-    void initRepo() {
+    void initRepo() throws RepositoryException {
         repo = new AccountEntRepo();
         assertTrue(repo.getAll().isEmpty());
         repo.add(tester);
@@ -33,7 +33,7 @@ class AccountEntRepoTest {
     }
 
     @Test
-    void addAccount() {
+    void addAccount() throws RepositoryException {
         final int repo_size = repo.getAll().size();
         AccountEnt my_acc = new AccountEnt("Arek", "Remplewicz", "user", true, "ar", "rem1234");
         repo.add(my_acc);
@@ -53,7 +53,7 @@ class AccountEntRepoTest {
         assertEquals(tester2, found_acc);
     }
     @Test
-    void getAccountViaUUID() {
+    void getAccountViaUUID() throws RepositoryException {
         AccountEnt my_acc = new AccountEnt("Arek", "Remplewicz", "user", true, "ar", "rem1234");
         AccountEnt added = repo.add(my_acc);
         AccountEnt found = repo.getViaUUID(added.getId());

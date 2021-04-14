@@ -44,8 +44,8 @@ public class AccountService implements Serializable, AccountUsecaseSuit, IServic
     public void update(Account income, Account outcome) {accountRepo.updateSingleAcc(income, outcome);}
 
     @Override
-    public void add(Account a) {
-        accountRepo.addAccount(a);
+    public Account add(Account a) throws IllegalArgumentException {
+        return accountRepo.addAccount(a);
     }
 
     @Override

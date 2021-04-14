@@ -1,11 +1,14 @@
 package pl.lodz.p.it.soap.api;
 
+import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.RepositoryException;
 import pl.lodz.p.it.soap.aggregates.adapters.AccountSoapAdapter;
 import pl.lodz.p.it.soap.model.AccountSoap;
 
 import javax.inject.Inject;
 import javax.jws.WebService;
 import javax.ws.rs.POST;
+import javax.xml.namespace.QName;
+import javax.xml.rpc.soap.SOAPFaultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,17 +31,30 @@ public class AccountSoapAPI {
     }
 
     @POST
-    public void addSingleAccToStorage(AccountSoap account) {
-        accountAdapter.addAccount(account);
+    public AccountSoap addSingleAccToStorage(AccountSoap account) throws SoapException {
+        try {
+            return accountAdapter.addAccount(account);
+        }
+        catch (IllegalArgumentException e)
+        {
+            if(e.getCause().getMessage().equals(RepositoryException.DUPLICATED)) {
+                throw new SoapException("Duplicated");
+            }
+            else {
+                throw e;
+            }
+        }
+
     }
 
-    public void removeSingleAccFromStorage(String str) {
+    public String removeSingleAccFromStorage(String str) throws SoapException {
         Optional<AccountSoap> acc = Optional.ofNullable(accountAdapter.getAccountViaUUID(str));
         if(acc.isPresent()) {
             accountAdapter.removeAccount(acc.get());
+            return SoapMessage.OK;
         }
         else{
-          throw new IllegalArgumentException("Account not found");
+          throw new SoapException("Not found");
         }
     }
 

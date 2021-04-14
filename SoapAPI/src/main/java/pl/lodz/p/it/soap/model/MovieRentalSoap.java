@@ -22,6 +22,7 @@ import java.util.UUID;
         "movie",
         "account",
         "id",
+        "range",
         "rentalStart",
         "rentalEnd"
 })

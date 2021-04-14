@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.MovieConverter.convertEntToMovie;
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.MovieConverter.convertMovieToEnt;
 
 @Dependent
@@ -43,8 +44,8 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
 
     @Override
-    public void addMovie(Movie m) {
-        movieRepo.add(convertMovieToEnt(m));
+    public Movie addMovie(Movie m) {
+        return convertEntToMovie(movieRepo.add(convertMovieToEnt(m)));
     }
 
 
