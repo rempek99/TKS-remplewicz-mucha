@@ -10,6 +10,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Dependent
 public class AccountService implements Serializable, AccountUsecaseSuit, IService<Account> {
@@ -36,7 +37,7 @@ public class AccountService implements Serializable, AccountUsecaseSuit, IServic
     public Account getSingleBookSelection(BookRental b) {return accountRepo.getBookSelectedViaUUID(b); }
 
     @Override
-    public Account getViaUUID(String str) {
+    public Optional<Account> getViaUUID(String str) {
         return accountRepo.getAccountViaUUID(str);
     }
 
@@ -60,8 +61,14 @@ public class AccountService implements Serializable, AccountUsecaseSuit, IServic
 
     @Override
     public void setAccountStatus(String id, boolean status, String role) {
-        Account account = accountRepo.getAccountViaUUID(id);
-        Account newAccount = new Account(account.getFirstName(),account.getLastName(),role,status,account.getLogin(),account.getPassword());
-        accountRepo.updateSingleAcc(account,newAccount);
+        Optional<Account> accountOpt = accountRepo.getAccountViaUUID(id);
+        if (accountOpt.isPresent()) {
+            Account account = accountOpt.get();
+            Account newAccount = new Account(account.getFirstName(), account.getLastName(), role, status, account.getLogin(), account.getPassword());
+            accountRepo.updateSingleAcc(account, newAccount);
+        }
+        else {
+            throw new IllegalArgumentException("Not found");
+        }
     }
 }

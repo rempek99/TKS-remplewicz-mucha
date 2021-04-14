@@ -5,10 +5,11 @@ import pl.lodz.p.it.applicationcore.domainmodel.model.BookRental;
 import pl.lodz.p.it.applicationcore.domainmodel.model.MovieRental;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AccountPort {
     Account getAccount(Account a);
-    Account getAccountViaUUID(String str);
+    Optional<Account> getAccountViaUUID(String str);
     List<Account> getAllAccounts();
     Account getMovieSelectedViaUUID(MovieRental m);
     Account getBookSelectedViaUUID(BookRental b);

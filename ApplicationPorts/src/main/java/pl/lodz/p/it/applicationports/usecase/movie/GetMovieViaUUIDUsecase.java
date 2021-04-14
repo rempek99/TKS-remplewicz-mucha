@@ -2,6 +2,8 @@ package pl.lodz.p.it.applicationports.usecase.movie;
 
 import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
 
+import java.util.Optional;
+
 public interface GetMovieViaUUIDUsecase {
-    Movie getViaUUID(String str);
+    Optional<Movie> getViaUUID(String str);
 }

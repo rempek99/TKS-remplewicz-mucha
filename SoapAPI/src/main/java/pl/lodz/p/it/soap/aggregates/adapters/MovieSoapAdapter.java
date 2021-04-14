@@ -4,6 +4,7 @@ import pl.lodz.p.it.applicationcore.applicationservice.services.MovieService;
 import pl.lodz.p.it.applicationports.usecase.movie.MovieUsecaseSuit;
 import pl.lodz.p.it.repositoriesadapters.aggregates.converters.MovieConverter;
 import pl.lodz.p.it.soap.aggregates.converters.MovieSoapConverter;
+import pl.lodz.p.it.soap.api.SoapException;
 import pl.lodz.p.it.soap.model.MovieSoap;
 import pl.lodz.p.it.viewports.movie.MovieViewPortUsecaseSuit;
 
@@ -48,7 +49,12 @@ public class MovieSoapAdapter implements MovieViewPortUsecaseSuit<MovieSoap>, Se
 
     @Override
     public MovieSoap getMovieViaUUID(String str) {
-        return MovieSoapConverter.convertMovieToMovieSoap(movieService.getViaUUID(str));
+        if(movieService.getViaUUID(str).isPresent()) {
+            return MovieSoapConverter.convertMovieToMovieSoap(
+                    movieService.getViaUUID(str).get());
+        }
+        else
+            throw new IllegalArgumentException(SoapException.NOT_FOUND);
     }
 
     @Override

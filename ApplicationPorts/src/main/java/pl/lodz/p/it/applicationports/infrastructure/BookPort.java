@@ -2,6 +2,7 @@ package pl.lodz.p.it.applicationports.infrastructure;
 
 import pl.lodz.p.it.applicationcore.domainmodel.model.Book;
 import java.util.List;
+import java.util.Optional;
 
 public interface BookPort {
     Book getBook(Book b);
@@ -10,5 +11,5 @@ public interface BookPort {
     void setBookRented(Book b, boolean value);
     void removeBook(Book b);
     void updateSingleBook(Book income, Book outcome);
-    Book getBookViaUUID(String str);
+    Optional<Book> getBookViaUUID(String str);
 }

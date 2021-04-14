@@ -2,6 +2,7 @@ package pl.lodz.p.it.soap.aggregates.adapters;
 
 import pl.lodz.p.it.applicationports.usecase.book.BookUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.BookSoapConverter;
+import pl.lodz.p.it.soap.api.SoapException;
 import pl.lodz.p.it.soap.model.BookSoap;
 import pl.lodz.p.it.viewports.book.BookViewPortUsecaseSuit;
 
@@ -42,7 +43,12 @@ public class BookSoapAdapter implements BookViewPortUsecaseSuit<BookSoap>, Seria
 
     @Override
     public BookSoap getBookViaUUID(String str) {
-        return BookSoapConverter.convertBookToBookSoap(bookService.getViaUUID(str));
+        if(bookService.getViaUUID(str).isPresent()) {
+            return BookSoapConverter.convertBookToBookSoap(
+                    bookService.getViaUUID(str).get());
+        }
+        else
+            throw new IllegalArgumentException(SoapException.NOT_FOUND);
     }
 
     @Override

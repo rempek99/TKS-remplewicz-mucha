@@ -9,6 +9,7 @@ import pl.lodz.p.it.applicationcore.domainmodel.model.*;
 import pl.lodz.p.it.applicationports.infrastructure.AccountPort;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -69,9 +70,9 @@ class AccountServiceTest {
     void getAccountViaUUID() {
         //given
         String testID = tester.getId();
-        given(accountPort.getAccountViaUUID(tester.getId())).willReturn(tester);
+        given(accountPort.getAccountViaUUID(tester.getId())).willReturn(Optional.of(tester));
         //when
-        Account foundAccount = accountService.getViaUUID(testID);
+        Account foundAccount = accountService.getViaUUID(testID).get();
         //then
         then(accountPort).should().getAccountViaUUID(testID);
         then(accountPort).shouldHaveNoMoreInteractions();

@@ -8,6 +8,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @SessionScoped
 public class BookService implements Serializable, BookUsecaseSuit, IService<Book> {
@@ -45,7 +46,7 @@ public class BookService implements Serializable, BookUsecaseSuit, IService<Book
     }
 
     @Override
-    public Book getViaUUID(String str) {return bookRepo.getBookViaUUID(str);}
+    public Optional<Book> getViaUUID(String str) {return bookRepo.getBookViaUUID(str);}
 
     @Override
     public Book get(Book b) {

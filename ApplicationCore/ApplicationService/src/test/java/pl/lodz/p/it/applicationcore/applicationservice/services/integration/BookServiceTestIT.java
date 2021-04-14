@@ -34,7 +34,7 @@ class BookServiceTestIT {
     void updateSingleBook() {
         Book exampleBook = bookService.getAll().get(0);
         bookService.update(exampleBook, tester2);
-        Book foundBook = bookService.getViaUUID(exampleBook.getId());
+        Book foundBook = bookService.getViaUUID(exampleBook.getId()).get();
         assertEquals(tester2.getTitle(), foundBook.getTitle());
     }
 
@@ -50,7 +50,7 @@ class BookServiceTestIT {
         Book exampleBook = bookService.getAll().get(0);
         assertFalse(exampleBook.isRented());
         bookService.setBookRented(exampleBook,true);
-        assertTrue(bookService.getViaUUID(exampleBook.getId()).isRented());
+        assertTrue(bookService.getViaUUID(exampleBook.getId()).get().isRented());
     }
 
     @Test
@@ -64,7 +64,7 @@ class BookServiceTestIT {
     @Test
     void getBookViaUUID() {
         Book exampleBook = bookService.getAll().get(0);
-        Book exampleBookByID = bookService.getViaUUID(exampleBook.getId());
+        Book exampleBookByID = bookService.getViaUUID(exampleBook.getId()).get();
         assertEquals(exampleBook,exampleBookByID);
     }
 }

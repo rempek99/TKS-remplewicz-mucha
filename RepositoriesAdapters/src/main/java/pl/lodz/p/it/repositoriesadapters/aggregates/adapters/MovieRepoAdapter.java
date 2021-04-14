@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.MovieConverter.convertEntToMovie;
@@ -61,12 +62,11 @@ public class MovieRepoAdapter implements MoviePort, Serializable {
 
 
     @Override
-    public Movie getMovieViaUUID(String str) {
+    public Optional<Movie> getMovieViaUUID(String str) {
         cahceData();
         return movies.stream()
                 .filter(x -> x.getId().equals(str))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override

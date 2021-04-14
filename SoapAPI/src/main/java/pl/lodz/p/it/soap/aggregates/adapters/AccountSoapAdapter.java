@@ -3,6 +3,7 @@ package pl.lodz.p.it.soap.aggregates.adapters;
 
 import pl.lodz.p.it.applicationports.usecase.account.AccountUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.AccountSoapConverter;
+import pl.lodz.p.it.soap.api.SoapException;
 import pl.lodz.p.it.soap.model.AccountSoap;
 import pl.lodz.p.it.soap.model.BookRentalSoap;
 import pl.lodz.p.it.soap.model.MovieRentalSoap;
@@ -42,8 +43,13 @@ public class AccountSoapAdapter implements AccountViewPortUsecaseSuit<AccountSoa
 
     @Override
     public AccountSoap getAccountViaUUID(String str) {
-        return AccountSoapConverter.convertAccountToAccountSoap(
-                accountService.getViaUUID(str));
+        if(accountService.getViaUUID(str).isPresent()) {
+            return AccountSoapConverter.convertAccountToAccountSoap(
+                    accountService.getViaUUID(str).get());
+        }
+        else{
+            throw new IllegalArgumentException(SoapException.NOT_FOUND);
+        }
     }
 
     @Override

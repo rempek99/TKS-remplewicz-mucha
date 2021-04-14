@@ -54,7 +54,7 @@ class AccountServiceTestIT {
     @Test
     void getAccountViaUUID() {
         Account exampleAccount = accountService.getAll().get(0);
-        Account foundAccount = accountService.getViaUUID(exampleAccount.getId());
+        Account foundAccount = accountService.getViaUUID(exampleAccount.getId()).get();
         assertEquals(exampleAccount, foundAccount);
     }
 
@@ -62,7 +62,7 @@ class AccountServiceTestIT {
     void updateSingleAccount() {
         Account exampleAccount = accountService.getAll().get(0);
         accountService.update(exampleAccount, tester2);
-        Account foundAccount = accountService.getViaUUID(exampleAccount.getId());
+        Account foundAccount = accountService.getViaUUID(exampleAccount.getId()).get();
         assertEquals(tester2.getFirstName(), foundAccount.getFirstName());
     }
 

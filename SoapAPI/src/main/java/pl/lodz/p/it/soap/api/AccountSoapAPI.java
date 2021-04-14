@@ -7,8 +7,6 @@ import pl.lodz.p.it.soap.model.AccountSoap;
 import javax.inject.Inject;
 import javax.jws.WebService;
 import javax.ws.rs.POST;
-import javax.xml.namespace.QName;
-import javax.xml.rpc.soap.SOAPFaultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +24,16 @@ public class AccountSoapAPI {
         return accountAdapter.getAllAccounts();
     }
 
-    public AccountSoap getSingleAccFromStorage(String str) {
-        return accountAdapter.getAccountViaUUID(str);
+    public AccountSoap getSingleAccFromStorage(String str) throws SoapException {
+        try {
+            return accountAdapter.getAccountViaUUID(str);
+        }
+        catch (IllegalArgumentException e) {
+            if(e.getMessage().equals(SoapException.NOT_FOUND))
+                throw new SoapException(SoapException.NOT_FOUND);
+            else
+                throw e;
+        }
     }
 
     @POST
@@ -54,12 +60,12 @@ public class AccountSoapAPI {
             return SoapMessage.OK;
         }
         else{
-          throw new SoapException("Not found");
+          throw new SoapException(SoapException.NOT_FOUND);
         }
     }
 
-    public void updateSingleAccount(String str,AccountSoap desiredAccount) {
-        AccountSoap accountToChange = accountAdapter.getAccountViaUUID(str);
+    public void updateSingleAccount(String str,AccountSoap desiredAccount) throws SoapException {
+        AccountSoap accountToChange = getSingleAccFromStorage(str);
         accountAdapter.updateSingleAccount(accountToChange, desiredAccount);
     }
 }

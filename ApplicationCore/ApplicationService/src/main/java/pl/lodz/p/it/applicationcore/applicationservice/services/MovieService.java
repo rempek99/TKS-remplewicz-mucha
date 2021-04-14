@@ -6,6 +6,7 @@ import pl.lodz.p.it.applicationports.usecase.movie.MovieUsecaseSuit;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
@@ -42,7 +43,7 @@ public class MovieService implements Serializable, MovieUsecaseSuit, IService<Mo
     public void remove(Movie m) { movieRepo.removeMovie(m); }
 
     @Override
-    public Movie getViaUUID(String str) {return movieRepo.getMovieViaUUID(str);}
+    public Optional<Movie> getViaUUID(String str) {return movieRepo.getMovieViaUUID(str);}
 
     @Override
     public void update(Movie income, Movie outcome) {movieRepo.updateSingleMovie(income, outcome);}

@@ -43,7 +43,7 @@ class MovieServiceTestIT {
         Movie exampleMovie = movieService.getAll().get(0);
         assertFalse(exampleMovie.isRented());
         movieService.setMovieRented(exampleMovie,true);
-        assertTrue(movieService.getViaUUID(exampleMovie.getId()).isRented());
+        assertTrue(movieService.getViaUUID(exampleMovie.getId()).get().isRented());
     }
 
     @Test
@@ -57,7 +57,7 @@ class MovieServiceTestIT {
     @Test
     void getMovieViaUUID() {
         Movie exampleMovie = movieService.getAll().get(0);
-        Movie exampleMovieByID = movieService.getViaUUID(exampleMovie.getId());
+        Movie exampleMovieByID = movieService.getViaUUID(exampleMovie.getId()).get();
         assertEquals(exampleMovie,exampleMovieByID);
     }
 
@@ -65,7 +65,7 @@ class MovieServiceTestIT {
     void updateSingleMovie() {
         Movie exampleMovie = movieService.getAll().get(0);
         movieService.update(exampleMovie, tester2);
-        Movie foundMovie = movieService.getViaUUID(exampleMovie.getId());
+        Movie foundMovie = movieService.getViaUUID(exampleMovie.getId()).get();
         assertEquals(tester2.getTitle(), foundMovie.getTitle());
     }
 }

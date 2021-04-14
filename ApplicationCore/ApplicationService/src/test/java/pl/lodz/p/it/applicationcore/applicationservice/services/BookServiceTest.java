@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
@@ -85,9 +86,9 @@ class BookServiceTest {
     void getBookViaUUID() {
         //given
         Book exampleBook = tester2;
-        given(bookPort.getBookViaUUID(exampleBook.getId())).willReturn(exampleBook);
+        given(bookPort.getBookViaUUID(exampleBook.getId())).willReturn(Optional.of(exampleBook));
         //when
-        Book exampleBookByID = bookService.getViaUUID(exampleBook.getId());
+        Book exampleBookByID = bookService.getViaUUID(exampleBook.getId()).get();
         //then
         then(bookPort).should().getBookViaUUID(exampleBook.getId());
         assertEquals(exampleBook,exampleBookByID);

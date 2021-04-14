@@ -9,6 +9,7 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.BookConverter.convertBookToEnt;
@@ -54,12 +55,11 @@ public class BookRepoAdapter implements BookPort, Serializable {
     }
 
     @Override
-    public Book getBookViaUUID(String str) {
+    public Optional<Book> getBookViaUUID(String str) {
         cacheData();
         return books.stream()
                 .filter(x -> x.getId().equals(str))
-                .findAny()
-                .orElse(null);
+                .findAny();
     }
 
     @Override

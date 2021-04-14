@@ -3,6 +3,7 @@ package pl.lodz.p.it.repositoriesadapters.aggregates.adapters;
 import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
 import pl.lodz.p.it.applicationcore.domainmodel.model.BookRental;
 import pl.lodz.p.it.applicationcore.domainmodel.model.MovieRental;
+import pl.lodz.p.it.repositoriesadapters.aggregates.converters.AccountConverter;
 import pl.lodz.p.it.repositoriesadapters.model_ent.entities.AccountEnt;
 import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.AccountEntRepo;
 import pl.lodz.p.it.applicationports.infrastructure.AccountPort;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.AccountConverter.convertAccountToEnt;
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.AccountConverter.convertEntToAccount;
@@ -81,14 +83,15 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
     }
 
     @Override
-    public Account getAccountViaUUID(String str) {
+    public Optional<Account> getAccountViaUUID(String str) {
         cacheData();
-        for(AccountEnt acc: accounts) {
-            if(acc.getId().equals(str)){
-                return convertEntToAccount(acc);
-            }
-        }
-        return null;
+        return accounts
+                .stream()
+                .map(AccountConverter::convertEntToAccount)
+                .filter(
+                        account -> account.getId().equals(str)
+                )
+                .findFirst();
     }
 
     @Override

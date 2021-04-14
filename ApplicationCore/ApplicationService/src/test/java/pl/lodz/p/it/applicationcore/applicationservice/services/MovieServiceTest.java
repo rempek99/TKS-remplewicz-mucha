@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
@@ -79,9 +80,9 @@ class MovieServiceTest {
     void getMovieViaUUID() {
         //given
         Movie exampleMovie = tester;
-        given(moviePort.getMovieViaUUID(exampleMovie.getId())).willReturn(exampleMovie);
+        given(moviePort.getMovieViaUUID(exampleMovie.getId())).willReturn(Optional.of(exampleMovie));
         //when
-        Movie exampleMovieByID = movieService.getViaUUID(exampleMovie.getId());
+        Movie exampleMovieByID = movieService.getViaUUID(exampleMovie.getId()).get();
         //then
         then(moviePort).should().getMovieViaUUID(exampleMovie.getId());
         then(moviePort).shouldHaveNoMoreInteractions();
