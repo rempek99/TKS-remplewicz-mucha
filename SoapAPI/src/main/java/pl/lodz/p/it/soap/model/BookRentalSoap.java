@@ -59,8 +59,8 @@ public class BookRentalSoap {
                 .append(getBook(), that.getBook())
                 .append(getAccount(), that.getAccount())
                 .append(getId(), that.getId())
-                .append(getRentalStart(), that.getRentalStart())
-                .append(getRentalEnd(), that.getRentalEnd())
+                //.append(getRentalStart(), that.getRentalStart())
+                //.append(getRentalEnd(), that.getRentalEnd())
                 .isEquals();
     }
 
@@ -70,8 +70,8 @@ public class BookRentalSoap {
                 .append(getBook())
                 .append(getAccount())
                 .append(getId()).append(getRange())
-                .append(getRentalStart())
-                .append(getRentalEnd())
+               // .append(getRentalStart())
+               // .append(getRentalEnd())
                 .toHashCode();
     }
 }
