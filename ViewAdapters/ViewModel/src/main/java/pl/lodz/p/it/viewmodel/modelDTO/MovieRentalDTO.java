@@ -51,9 +51,9 @@ public class MovieRentalDTO {
                 .append(getMovie(), that.getMovie())
                 .append(getAccount(), that.getAccount())
                 .append(getId(), that.getId())
-                .append(getRange(), that.getRange())
-                .append(getRentalStart(), that.getRentalStart())
-                .append(getRentalEnd(), that.getRentalEnd())
+                //.append(getRange(), that.getRange())
+               // .append(getRentalStart(), that.getRentalStart())
+                //.append(getRentalEnd(), that.getRentalEnd())
                 .isEquals();
     }
 
@@ -63,9 +63,9 @@ public class MovieRentalDTO {
                 .append(getMovie())
                 .append(getAccount())
                 .append(getId())
-                .append(getRange())
-                .append(getRentalStart())
-                .append(getRentalEnd())
+               // .append(getRange())
+               // .append(getRentalStart())
+               // .append(getRentalEnd())
                 .toHashCode();
     }
 }
