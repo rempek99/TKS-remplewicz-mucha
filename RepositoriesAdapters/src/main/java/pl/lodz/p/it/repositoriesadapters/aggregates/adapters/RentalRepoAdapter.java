@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static pl.lodz.p.it.repositoriesadapters.aggregates.converters.BookRentalConverter.convertBookRentalToEnt;
@@ -72,26 +73,26 @@ public class RentalRepoAdapter implements RentalPort, Serializable {
     }
 
     @Override
-    public void addBookRental(BookRental r) {
-        rentalRepo.addBookRental(convertBookRentalToEnt(r));
+    public BookRental addBookRental(BookRental r) {
+        return BookRentalConverter.convertEntToBookRental(
+                rentalRepo.addBookRental(convertBookRentalToEnt(r))
+        );
     }
 
     @Override
-    public MovieRental getMovieRentalViaUUID(String str) {
+    public Optional<MovieRental> getMovieRentalViaUUID(String str) {
         cacheData();
         return movieRentals.stream()
                 .filter(x -> x.getId().equals(str))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override
-    public BookRental getBookRentalViaUUID(String str) {
+    public Optional<BookRental> getBookRentalViaUUID(String str) {
         cacheData();
         return bookRentals.stream()
                 .filter(x -> x.getId().equals(str))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override

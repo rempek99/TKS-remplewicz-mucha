@@ -2,10 +2,7 @@ package pl.lodz.p.it.soap.api;
 
 
 import pl.lodz.p.it.soap.aggregates.adapters.RentalSoapAdapter;
-import pl.lodz.p.it.soap.model.BookRentalSoap;
-import pl.lodz.p.it.soap.model.MovieRentalSoap;
-import pl.lodz.p.it.soap.model.MovieSoap;
-import pl.lodz.p.it.soap.model.SoapException;
+import pl.lodz.p.it.soap.model.*;
 
 import javax.inject.Inject;
 import javax.jws.WebService;
@@ -36,29 +33,22 @@ public class RentalSoapAPI {
     }
 
 
-
-    public void addSingleBookRentalToStorage(BookRentalSoap bookRental) {
-        rentalAdapter.addBookRental(bookRental);
+    public BookRentalSoap addSingleBookRentalToStorage(BookRentalSoap bookRental) {
+        return rentalAdapter.addBookRental(bookRental);
     }
 
 
-    public void removeSingleBookRentalFromStorage(String str) {
-        Optional<BookRentalSoap> bookRental = Optional.ofNullable(rentalAdapter.getBookRentalViaUUID(str));
-        if (bookRental.isPresent()) {
-            rentalAdapter.removeBookRental(bookRental.get());
-        } else {
-            throw new IllegalArgumentException("Book not found");
-        }
+    public String removeSingleBookRentalFromStorage(String str) throws SoapException {
+        BookRentalSoap bookRental = rentalAdapter.getBookRentalViaUUID(str);
+        rentalAdapter.removeBookRental(bookRental);
+        return SoapMessage.OK;
     }
 
 
-    public void updateSingleBookRentalFromStorage(String str, BookRentalSoap desiredBookRental) {
-        Optional<BookRentalSoap> bookRentalToChange = Optional.ofNullable(rentalAdapter.getBookRentalViaUUID(str));
-        if (bookRentalToChange.isPresent()) {
-            rentalAdapter.updateSingleBookRental(bookRentalToChange.get(), desiredBookRental);
-        } else {
-            throw new IllegalArgumentException("Book not found");
-        }
+    public String updateSingleBookRentalFromStorage(String str, BookRentalSoap desiredBookRental) throws SoapException {
+        BookRentalSoap bookRentalToChange = rentalAdapter.getBookRentalViaUUID(str);
+            rentalAdapter.updateSingleBookRental(bookRentalToChange, desiredBookRental);
+        return SoapMessage.OK;
     }
 
     public List<MovieRentalSoap> getMoviesRentalsFromStorage() {
@@ -78,26 +68,19 @@ public class RentalSoapAPI {
     }
 
 
-
     public MovieRentalSoap addSingleMovieRentalToStorage(MovieRentalSoap movieRental) {
         return rentalAdapter.addMovieRental(movieRental);
     }
 
-    public void removeSingleMovieRentalFromStorage(String str) {
-        Optional<MovieRentalSoap> movieRental = Optional.ofNullable(rentalAdapter.getMovieRentalViaUUID(str));
-        if (movieRental.isPresent()) {
-            rentalAdapter.removeMovieRental(movieRental.get());
-        } else {
-            throw new IllegalArgumentException("Movie not found");
-        }
+    public String removeSingleMovieRentalFromStorage(String str) throws SoapException {
+        MovieRentalSoap movieRental = rentalAdapter.getMovieRentalViaUUID(str);
+        rentalAdapter.removeMovieRental(movieRental);
+        return SoapMessage.OK;
     }
 
-    public void updateSingleMovieRentalFromStorage(String str, MovieRentalSoap desiredMovieRental) {
-        Optional<MovieRentalSoap> movieRentalToChange = Optional.ofNullable(rentalAdapter.getMovieRentalViaUUID(str));
-        if (movieRentalToChange.isPresent()) {
-            rentalAdapter.updateSingleMovieRental(movieRentalToChange.get(), desiredMovieRental);
-        } else {
-            throw new IllegalArgumentException("Movie not found");
-        }
+    public String updateSingleMovieRentalFromStorage(String str, MovieRentalSoap desiredMovieRental) throws SoapException {
+        MovieRentalSoap movieRentalToChange = rentalAdapter.getMovieRentalViaUUID(str);
+            rentalAdapter.updateSingleMovieRental(movieRentalToChange, desiredMovieRental);
+        return SoapMessage.OK;
     }
 }

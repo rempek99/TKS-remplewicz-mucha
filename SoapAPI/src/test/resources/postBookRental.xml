@@ -1,18 +1,17 @@
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="http://api.soap.it.p.lodz.pl/">
     <soapenv:Header/>
     <soapenv:Body>
-        <api:addSingleMovieRentalToStorage>
+        <api:addSingleBookRentalToStorage>
             <!--Optional:-->
             <arg0>
                 <!--Optional:-->
-                <movie>
-                    <title>The Godfather</title>
-                    <author>Francis Ford Coppola</author>
-                    <rating>9.2</rating>
+                <book>
+                    <title>Doctor Sleep</title>
+                    <author>Stephen King</author>
+                    <pages>656</pages>
                     <rented>false</rented>
-                    <!--Optional:-->
                     <id>testArg0</id>
-                </movie>
+                </book>
                 <!--Optional:-->
                 <account>
                     <firstName>Jan</firstName>
@@ -26,6 +25,6 @@
                 <!--Optional:-->
                 <id>testArg2</id>
             </arg0>
-        </api:addSingleMovieRentalToStorage>
+        </api:addSingleBookRentalToStorage>
     </soapenv:Body>
 </soapenv:Envelope>

@@ -1,0 +1,36 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="http://api.soap.it.p.lodz.pl/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <api:updateSingleMovieRentalFromStorage>
+            <!--Optional:-->
+            <arg0>testArg0</arg0>
+            <!--Optional:-->
+            <arg1>
+                <!--Optional:-->
+                <movie>
+                    <!--Optional:-->
+                    <title>Zmiana</title>
+                    <!--Optional:-->
+                    <author>Zmiana</author>
+                    <rating>1.0</rating>
+                    <rented>true</rented>
+                </movie>
+                <!--Optional:-->
+                <account>
+                    <!--Optional:-->
+                    <firstName>hello</firstName>
+                    <!--Optional:-->
+                    <lastName>hello</lastName>
+                    <!--Optional:-->
+                    <roleOfUser>USER</roleOfUser>
+                    <isActive>true</isActive>
+                    <!--Optional:-->
+                    <login>jan12</login>
+                    <password>kowalski</password>
+                </account>
+                <!--Optional:-->
+                <id>argTest2</id>
+            </arg1>
+        </api:updateSingleMovieRentalFromStorage>
+    </soapenv:Body>
+</soapenv:Envelope>

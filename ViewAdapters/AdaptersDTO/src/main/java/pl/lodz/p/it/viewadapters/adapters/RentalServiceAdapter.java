@@ -1,6 +1,7 @@
 package pl.lodz.p.it.viewadapters.adapters;
 
 import pl.lodz.p.it.applicationcore.applicationservice.services.RentalService;
+import pl.lodz.p.it.viewadapters.RestException;
 import pl.lodz.p.it.viewadapters.converters.BookRentalConverter;
 import pl.lodz.p.it.viewadapters.converters.MovieRentalConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.BookRentalDTO;
@@ -63,28 +64,40 @@ public class RentalServiceAdapter implements RentalViewPortUsecaseSuit<BookRenta
     }
 
     @Override
-    public void addBookRental(BookRentalDTO r) {
-        rentalService.addBookRental(BookRentalConverter.convertDTOToBookRental(r));
+    public BookRentalDTO addBookRental(BookRentalDTO r) {
+        return BookRentalConverter.convertBookRentalToDTO(
+                rentalService.addBookRental(BookRentalConverter.convertDTOToBookRental(r))
+        );
     }
 
     @Override
-    public MovieRentalDTO getMovieRentalViaUUID(String str) {
-        return MovieRentalConverter.convertMovieRentalToDTO(rentalService.getMovieRentalViaUUID(str));
+    public MovieRentalDTO getMovieRentalViaUUID(String str) throws RestException {
+        if(rentalService.getMovieRentalViaUUID(str).isPresent())
+            return MovieRentalConverter.convertMovieRentalToDTO(
+                    rentalService.getMovieRentalViaUUID(str).get()
+            );
+        else
+            throw new RestException(RestException.NOT_FOUND);
     }
 
     @Override
-    public BookRentalDTO getBookRentalViaUUID(String str) {
-        return BookRentalConverter.convertBookRentalToDTO(rentalService.getBookRentalViaUUID(str));
+    public BookRentalDTO getBookRentalViaUUID(String str) throws RestException {
+        if(rentalService.getBookRentalViaUUID(str).isPresent())
+            return BookRentalConverter.convertBookRentalToDTO(
+                rentalService.getBookRentalViaUUID(str).get()
+        );
+        else
+            throw new RestException(RestException.NOT_FOUND);
     }
 
     @Override
-    public MovieRentalDTO getMovieRental(MovieRentalDTO m) {
-        return MovieRentalConverter.convertMovieRentalToDTO(rentalService.getMovieRentalViaUUID(m.getId()));
+    public MovieRentalDTO getMovieRental(MovieRentalDTO m) throws RestException {
+        return getMovieRentalViaUUID(m.getId());
     }
 
     @Override
-    public BookRentalDTO getBookRental(BookRentalDTO b) {
-        return BookRentalConverter.convertBookRentalToDTO(rentalService.getBookRentalViaUUID(b.getId()));
+    public BookRentalDTO getBookRental(BookRentalDTO b) throws RestException {
+        return getBookRentalViaUUID(b.getId());
     }
 
     @Override

@@ -79,14 +79,14 @@ class RentalServiceTestIT {
     @Test
     void getMovieRentalViaUUID() {
         MovieRental exampleMovieRental = rentalService.getAllMovieRentals().get(0);
-        MovieRental foundMovieRentalViaUUID = rentalService.getMovieRentalViaUUID(exampleMovieRental.getId());
+        MovieRental foundMovieRentalViaUUID = rentalService.getMovieRentalViaUUID(exampleMovieRental.getId()).get();
         assertEquals(exampleMovieRental, foundMovieRentalViaUUID);
     }
 
     @Test
     void getBookRentalViaUUID() {
         BookRental exampleBookRental = rentalService.getAllBookRentals().get(0);
-        BookRental foundBookRentalViaUUID = rentalService.getBookRentalViaUUID(exampleBookRental.getId());
+        BookRental foundBookRentalViaUUID = rentalService.getBookRentalViaUUID(exampleBookRental.getId()).get();
         assertEquals(exampleBookRental, foundBookRentalViaUUID);
     }
 
@@ -95,7 +95,7 @@ class RentalServiceTestIT {
         MovieRental exampleMovieRental = rentalService.getAllMovieRentals().get(0);
         MovieRental newMovieRental = new MovieRental(testMovie2, tester);
         rentalService.updateSingleMovieRental(exampleMovieRental, newMovieRental);
-        MovieRental foundMovieRental = rentalService.getMovieRentalViaUUID(exampleMovieRental.getId());
+        MovieRental foundMovieRental = rentalService.getMovieRentalViaUUID(exampleMovieRental.getId()).get();
         assertEquals(newMovieRental.getMovie(), foundMovieRental.getMovie());
     }
 
@@ -104,7 +104,7 @@ class RentalServiceTestIT {
         BookRental exampleBookRental = rentalService.getAllBookRentals().get(0);
         BookRental newBookRental = new BookRental(testBook2, tester3);
         rentalService.updateSingleBookRental(exampleBookRental, newBookRental);
-        BookRental foundBookRental = rentalService.getBookRentalViaUUID(exampleBookRental.getId());
+        BookRental foundBookRental = rentalService.getBookRentalViaUUID(exampleBookRental.getId()).get();
         assertEquals(newBookRental.getBook(), foundBookRental.getBook());
     }
 

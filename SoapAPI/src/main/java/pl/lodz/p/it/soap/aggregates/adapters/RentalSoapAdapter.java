@@ -6,6 +6,7 @@ import pl.lodz.p.it.soap.aggregates.converters.BookRentalSoapConverter;
 import pl.lodz.p.it.soap.aggregates.converters.MovieRentalSoapConverter;
 import pl.lodz.p.it.soap.model.BookRentalSoap;
 import pl.lodz.p.it.soap.model.MovieRentalSoap;
+import pl.lodz.p.it.soap.model.SoapException;
 import pl.lodz.p.it.viewports.rentals.RentalViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
@@ -64,28 +65,38 @@ public class RentalSoapAdapter implements RentalViewPortUsecaseSuit<BookRentalSo
     }
 
     @Override
-    public void addBookRental(BookRentalSoap r) {
-        rentalService.addBookRental(BookRentalSoapConverter.convertBookRentalSoapToBookRental(r));
+    public BookRentalSoap addBookRental(BookRentalSoap r) {
+        return BookRentalSoapConverter.convertBookRentalToBookRentalSoap(
+                rentalService.addBookRental(BookRentalSoapConverter.convertBookRentalSoapToBookRental(r))
+        );
     }
 
     @Override
-    public MovieRentalSoap getMovieRentalViaUUID(String str) {
-        return MovieRentalSoapConverter.convertMovieRentalToMovieRentalSoap(rentalService.getMovieRentalViaUUID(str));
+    public MovieRentalSoap getMovieRentalViaUUID(String str) throws SoapException {
+        if(rentalService.getMovieRentalViaUUID(str).isPresent())
+        return MovieRentalSoapConverter.convertMovieRentalToMovieRentalSoap(
+                rentalService.getMovieRentalViaUUID(str).get());
+        else
+            throw new SoapException(SoapException.NOT_FOUND);
     }
 
     @Override
-    public BookRentalSoap getBookRentalViaUUID(String str) {
-        return BookRentalSoapConverter.convertBookRentalToBookRentalSoap(rentalService.getBookRentalViaUUID(str));
+    public BookRentalSoap getBookRentalViaUUID(String str) throws SoapException {
+        if(rentalService.getBookRentalViaUUID(str).isPresent())
+        return BookRentalSoapConverter.convertBookRentalToBookRentalSoap(
+                rentalService.getBookRentalViaUUID(str).get());
+        else
+            throw new SoapException(SoapException.NOT_FOUND);
     }
 
     @Override
-    public MovieRentalSoap getMovieRental(MovieRentalSoap m) {
-        return MovieRentalSoapConverter.convertMovieRentalToMovieRentalSoap(rentalService.getMovieRentalViaUUID(m.getId()));
+    public MovieRentalSoap getMovieRental(MovieRentalSoap m) throws SoapException {
+        return getMovieRentalViaUUID(m.getId());
     }
 
     @Override
-    public BookRentalSoap getBookRental(BookRentalSoap b) {
-        return BookRentalSoapConverter.convertBookRentalToBookRentalSoap(rentalService.getBookRentalViaUUID(b.getId()));
+    public BookRentalSoap getBookRental(BookRentalSoap b) throws SoapException {
+        return getBookRentalViaUUID(b.getId());
     }
 
     @Override

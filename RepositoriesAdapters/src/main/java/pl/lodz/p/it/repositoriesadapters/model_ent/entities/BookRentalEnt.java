@@ -49,8 +49,8 @@ public class BookRentalEnt {
                 .append(getBookEnt(), that.getBookEnt())
                 .append(getAccountEnt(), that.getAccountEnt())
                 .append(getId(), that.getId())
-                .append(getRentalStart(), that.getRentalStart())
-                .append(getRentalEnd(), that.getRentalEnd())
+              //  .append(getRentalStart(), that.getRentalStart())
+              //  .append(getRentalEnd(), that.getRentalEnd())
                 .isEquals();
     }
 
@@ -60,9 +60,9 @@ public class BookRentalEnt {
                 .append(getBookEnt())
                 .append(getAccountEnt())
                 .append(getId())
-                .append(getRange())
-                .append(getRentalStart())
-                .append(getRentalEnd())
+               // .append(getRange())
+               // .append(getRentalStart())
+              //  .append(getRentalEnd())
                 .toHashCode();
     }
 }

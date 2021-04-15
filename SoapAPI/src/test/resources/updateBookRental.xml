@@ -1,0 +1,34 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:api="http://api.soap.it.p.lodz.pl/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <api:updateSingleBookRentalFromStorage>
+            <!--Optional:-->
+            <arg0>testArg0</arg0>
+            <!--Optional:-->
+            <arg1>
+                <!--Optional:-->
+                <book>
+                    <title>Zmiana</title>
+                    <author>Zmiana</author>
+                    <pages>321</pages>
+                    <rented>true</rented>
+                </book>
+                <!--Optional:-->
+                <account>
+                    <!--Optional:-->
+                    <firstName>hello</firstName>
+                    <!--Optional:-->
+                    <lastName>hello</lastName>
+                    <!--Optional:-->
+                    <roleOfUser>USER</roleOfUser>
+                    <isActive>true</isActive>
+                    <!--Optional:-->
+                    <login>jan12</login>
+                    <password>kowalski</password>
+                </account>
+                <!--Optional:-->
+                <id>argTest2</id>
+            </arg1>
+        </api:updateSingleBookRentalFromStorage>
+    </soapenv:Body>
+</soapenv:Envelope>

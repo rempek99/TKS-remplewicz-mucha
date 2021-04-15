@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @SessionScoped
 public class RentalService implements Serializable, RentalUsecaseSuit {
@@ -30,9 +31,11 @@ public class RentalService implements Serializable, RentalUsecaseSuit {
 
     @Override
     public MovieRental addMovieRental(MovieRental r) {
+        r.setRentalStart(new Date());
         return rentalRepo.addMovieRental(r); }
     @Override
-    public void addBookRental(BookRental r) { rentalRepo.addBookRental(r); }
+    public BookRental addBookRental(BookRental r) {
+        return rentalRepo.addBookRental(r); }
 
     @Override
     public void removeMovieRental(MovieRental r) {rentalRepo.removeMovieRental(r); }
@@ -40,9 +43,9 @@ public class RentalService implements Serializable, RentalUsecaseSuit {
     public void removeBookRental(BookRental r) {rentalRepo.removeBookRental(r); }
 
     @Override
-    public MovieRental getMovieRentalViaUUID(String str) {return rentalRepo.getMovieRentalViaUUID(str);}
+    public Optional<MovieRental> getMovieRentalViaUUID(String str) {return rentalRepo.getMovieRentalViaUUID(str);}
     @Override
-    public BookRental getBookRentalViaUUID(String str) {return rentalRepo.getBookRentalViaUUID(str);}
+    public Optional<BookRental> getBookRentalViaUUID(String str) {return rentalRepo.getBookRentalViaUUID(str);}
 
     @Override
     public void updateSingleBookRental(BookRental income, BookRental outcome) {rentalRepo.updateSingleBookRental(income, outcome);}

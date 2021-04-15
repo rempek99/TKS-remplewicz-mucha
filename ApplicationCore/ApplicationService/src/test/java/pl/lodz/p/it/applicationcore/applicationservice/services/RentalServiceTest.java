@@ -8,6 +8,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.lodz.p.it.applicationcore.domainmodel.model.*;
 import pl.lodz.p.it.applicationports.infrastructure.RentalPort;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.BDDMockito.given;
@@ -103,9 +105,9 @@ class RentalServiceTest {
     void getMovieRentalViaUUID() {
         //given
         MovieRental exampleMovieRental = testMovieRental;
-        given(rentalPort.getMovieRentalViaUUID(exampleMovieRental.getId())).willReturn(exampleMovieRental);
+        given(rentalPort.getMovieRentalViaUUID(exampleMovieRental.getId())).willReturn(Optional.of(exampleMovieRental));
         //when
-        MovieRental foundMovieRentalViaUUID = rentalService.getMovieRentalViaUUID(exampleMovieRental.getId());
+        MovieRental foundMovieRentalViaUUID = rentalService.getMovieRentalViaUUID(exampleMovieRental.getId()).get();
         //then
         then(rentalPort).should().getMovieRentalViaUUID(exampleMovieRental.getId());
         then(rentalPort).shouldHaveNoMoreInteractions();
@@ -116,9 +118,9 @@ class RentalServiceTest {
     void getBookRentalViaUUID() {
         //given
         BookRental exampleBookRental = testBookRental;
-        given(rentalPort.getBookRentalViaUUID(exampleBookRental.getId())).willReturn(exampleBookRental);
+        given(rentalPort.getBookRentalViaUUID(exampleBookRental.getId())).willReturn(Optional.of(exampleBookRental));
         //when
-        BookRental foundBookRentalViaUUID = rentalService.getBookRentalViaUUID(exampleBookRental.getId());
+        BookRental foundBookRentalViaUUID = rentalService.getBookRentalViaUUID(exampleBookRental.getId()).get();
         //then
         then(rentalPort).should().getBookRentalViaUUID(exampleBookRental.getId());
         then(rentalPort).shouldHaveNoMoreInteractions();
