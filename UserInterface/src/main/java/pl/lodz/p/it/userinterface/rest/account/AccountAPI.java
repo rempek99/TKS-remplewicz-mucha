@@ -42,10 +42,10 @@ public class AccountAPI {
 
     @POST
     public Response addSingleAccToStorage(@Valid AccountDTO account) {
-        accountAdapter.addAccount(account);
+        AccountDTO accountDTO = accountAdapter.addAccount(account);
         return Response
                 .ok()
-                .entity("Success")
+                .entity(accountDTO)
                 .status(Response.Status.CREATED)
                 .build();
     }

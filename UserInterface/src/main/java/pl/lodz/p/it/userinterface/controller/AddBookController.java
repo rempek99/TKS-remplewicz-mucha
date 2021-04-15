@@ -1,6 +1,6 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewports.book.AddBookUsecase;
+import pl.lodz.p.it.viewadapters.adapters.BookServiceAdapter;
 import pl.lodz.p.it.viewmodel.modelDTO.BookDTO;
 
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import javax.inject.Named;
 public class AddBookController implements Serializable {
 
     @Inject
-    private AddBookUsecase addBookService;
+    private BookServiceAdapter bookService;
     private BookDTO bookDTO;
 
     @PostConstruct
@@ -27,7 +27,7 @@ public class AddBookController implements Serializable {
     }
 
     public void addConfirmed() {
-        addBookService.addBook(bookDTO);
+        bookService.addBook(bookDTO);
         init();
     }
 }

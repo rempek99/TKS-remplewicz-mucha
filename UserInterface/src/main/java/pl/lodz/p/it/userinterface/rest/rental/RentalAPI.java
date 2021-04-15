@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 @RequestScoped
-@Path("retnals")
+@Path("rentals")
 public class RentalAPI {
 
     @Inject
@@ -28,8 +28,8 @@ public class RentalAPI {
     @POST
     @Path("book")
     public Response addSingleBookRentalToStorage(BookRentalDTO bookRental) {
-        rentalAdapter.addBookRental(bookRental);
-        return Response.ok().entity("Success").status(Response.Status.CREATED).build();
+        BookRentalDTO bookRentalDTO = rentalAdapter.addBookRental(bookRental);
+        return Response.ok().entity(bookRentalDTO).status(Response.Status.CREATED).build();
     }
 
     @DELETE
@@ -65,8 +65,8 @@ public class RentalAPI {
     @POST
     @Path("movie")
     public Response addSingleMovieRentalToStorage(MovieRentalDTO movieRental) {
-        rentalAdapter.addMovieRental(movieRental);
-        return Response.ok().entity("Success").status(Response.Status.CREATED).build();
+        MovieRentalDTO movieRentalDTO = rentalAdapter.addMovieRental(movieRental);
+        return Response.ok().entity(movieRentalDTO).status(Response.Status.CREATED).build();
     }
 
     @DELETE

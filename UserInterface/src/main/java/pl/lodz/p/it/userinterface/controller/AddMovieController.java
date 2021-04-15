@@ -1,7 +1,7 @@
 package pl.lodz.p.it.userinterface.controller;
 
+import pl.lodz.p.it.viewadapters.adapters.MovieServiceAdapter;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
-import pl.lodz.p.it.viewports.movie.AddMovieUsecase;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -14,7 +14,7 @@ import javax.inject.Named;
 public class AddMovieController implements Serializable {
 
     @Inject
-    private AddMovieUsecase addMovieService;
+    private MovieServiceAdapter movieService;
     private MovieDTO movieDTO;
 
     @PostConstruct
@@ -27,7 +27,7 @@ public class AddMovieController implements Serializable {
     }
 
     public void addConfirmed() {
-        addMovieService.addMovie(movieDTO);
+        movieService.addMovie(movieDTO);
         init();
     }
 }

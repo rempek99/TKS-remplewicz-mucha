@@ -1,5 +1,6 @@
 package pl.lodz.p.it.userinterface.controller;
 
+import pl.lodz.p.it.viewadapters.adapters.MovieServiceAdapter;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
 import pl.lodz.p.it.viewports.movie.GetAllMoviesUsecase;
 import pl.lodz.p.it.viewports.movie.RemoveMovieUsecase;
@@ -14,12 +15,9 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 public class ListMoviesController implements Serializable {
+
     @Inject
-    private GetAllMoviesUsecase getAllMoviesService;
-    @Inject
-    private RemoveMovieUsecase removeMovieService;
-    @Inject
-    private SetMovieRentedUsecase setMovieRentedService;
+    private MovieServiceAdapter movieService;
     private List<MovieDTO> filteredMovies;
 
     public List<MovieDTO> getFilteredMovies() {
@@ -31,7 +29,7 @@ public class ListMoviesController implements Serializable {
     }
 
     public List<MovieDTO> getMovies() {
-        return getAllMoviesService.getAllMovies();
+        return movieService.getAllMovies();
     }
 
     public void printSelectedMovie(MovieDTO m) {
@@ -39,8 +37,8 @@ public class ListMoviesController implements Serializable {
     }
 
     public void removeSelectedMovie(MovieDTO m) {
-        removeMovieService.removeMovie(m);
+        movieService.removeMovie(m);
     }
 
-    public void setRentedSelectedMovie(MovieDTO m, boolean value) { setMovieRentedService.setMovieRented(m, value); }
+    public void setRentedSelectedMovie(MovieDTO m, boolean value) { movieService.setMovieRented(m, value); }
 }

@@ -27,10 +27,10 @@ public class MovieAPI {
 
     @POST
     public Response addSingleMovieToStorage(MovieDTO movie) {
-        movieAdapter.addMovie(movie);
+        MovieDTO movieDTO = movieAdapter.addMovie(movie);
         return Response
                 .ok()
-                .entity("Success")
+                .entity(movieDTO)
                 .status(Response.Status.CREATED)
                 .build();
     }

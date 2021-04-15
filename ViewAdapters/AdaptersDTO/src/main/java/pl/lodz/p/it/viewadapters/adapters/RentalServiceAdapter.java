@@ -4,7 +4,9 @@ import pl.lodz.p.it.applicationcore.applicationservice.services.RentalService;
 import pl.lodz.p.it.viewadapters.RestException;
 import pl.lodz.p.it.viewadapters.converters.BookRentalConverter;
 import pl.lodz.p.it.viewadapters.converters.MovieRentalConverter;
+import pl.lodz.p.it.viewmodel.modelDTO.BookDTO;
 import pl.lodz.p.it.viewmodel.modelDTO.BookRentalDTO;
+import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieRentalDTO;
 import pl.lodz.p.it.viewports.rentals.RentalViewPortUsecaseSuit;
 
@@ -124,5 +126,13 @@ public class RentalServiceAdapter implements RentalViewPortUsecaseSuit<BookRenta
     @Override
     public List<Date> getDisabledDays() {
         return rentalService.getDisabledDays();
+    }
+
+    public void setBookRented(BookDTO book, boolean b) {
+        book.setRented(b);
+    }
+
+    public void setMovieRented(MovieDTO movie, boolean b) {
+        movie.setRented(b);
     }
 }

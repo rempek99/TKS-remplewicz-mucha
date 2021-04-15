@@ -23,8 +23,8 @@ public class BookAPI {
 
     @POST
     public Response addSingleBookToStorage(BookDTO book) {
-        bookAdapter.addBook(book);
-        return Response.ok().entity("Success").status(Response.Status.CREATED).build();
+        BookDTO bookDTO = bookAdapter.addBook(book);
+        return Response.ok().entity(bookDTO).status(Response.Status.CREATED).build();
     }
 
     @DELETE

@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BookRentalRestConverterTest {
 
     private final AccountDTO accountDTO = new AccountDTO("test", "Testowy", "user", true, "test", "test123");
-    private final Account account= new Account("test", "Testowy", "user", true, "test", "test123");
     private final BookDTO bookDTO = new BookDTO("Test", "test", 100,false);
-    private final Book book = new Book("Test", "test", 100,false);
     private final BookRentalDTO bookRentalDTO = new BookRentalDTO(bookDTO, accountDTO);
+    private final Account account= new Account("test", "Testowy", "user", true, "test", "test123");
+    private final Book book = new Book("Test", "test", 100,false);
     private final BookRental bookRental = new BookRental(book, account);
 
     @BeforeEach

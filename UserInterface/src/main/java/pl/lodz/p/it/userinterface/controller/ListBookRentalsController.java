@@ -1,5 +1,6 @@
 package pl.lodz.p.it.userinterface.controller;
 
+import pl.lodz.p.it.viewadapters.adapters.RentalServiceAdapter;
 import pl.lodz.p.it.viewports.book.SetBookRentedUsecase;
 import pl.lodz.p.it.viewmodel.modelDTO.BookRentalDTO;
 import pl.lodz.p.it.viewports.rentals.GetAllBookRentalsUsecase;
@@ -14,23 +15,20 @@ import java.util.List;
 @Named
 @ViewScoped
 public class ListBookRentalsController implements Serializable {
+
     @Inject
-    private GetAllBookRentalsUsecase getRentalsService;
-    @Inject
-    private SetBookRentedUsecase setRentedService;
-    @Inject
-    private RemoveBookRentalUsecase removeRentalService;
+    private RentalServiceAdapter rentalService;
 
     private List<BookRentalDTO> filteredBooks;
 
-    public List<BookRentalDTO> getBookRentals() {return getRentalsService.getAllBookRentals(); }
+    public List<BookRentalDTO> getBookRentals() {return rentalService.getAllBookRentals(); }
 
-    public GetAllBookRentalsUsecase getRentalService() {
-        return getRentalsService;
-    }
+//    public GetAllBookRentalsUsecase getRentalService() {
+//        return getRentalsService;
+//    }
 
-    public void setRentalService(GetAllBookRentalsUsecase rentalService) {
-        this.getRentalsService = rentalService;
+    public void setRentalService(RentalServiceAdapter rentalService) {
+        this.rentalService = rentalService;
     }
 
     public List<BookRentalDTO> getFilteredBooks() {
@@ -43,7 +41,7 @@ public class ListBookRentalsController implements Serializable {
 
     public void removeSelectedBookRental(BookRentalDTO b) {
         b.getBook().setRented(false);
-        setRentedService.setBookRented(b.getBook(), false);
-        removeRentalService.removeBookRental(b);
+        rentalService.setBookRented(b.getBook(), false);
+        rentalService.removeBookRental(b);
     }
 }
