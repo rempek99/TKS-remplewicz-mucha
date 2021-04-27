@@ -1,7 +1,7 @@
 package pl.lodz.p.it.soap.api;
 
 
-import pl.lodz.p.it.repositoriesadapters.model_ent.repositories.RepositoryException;
+import pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories.RepositoryException;
 import pl.lodz.p.it.soap.aggregates.adapters.BookSoapAdapter;
 import pl.lodz.p.it.soap.model.BookSoap;
 import pl.lodz.p.it.soap.model.SoapException;

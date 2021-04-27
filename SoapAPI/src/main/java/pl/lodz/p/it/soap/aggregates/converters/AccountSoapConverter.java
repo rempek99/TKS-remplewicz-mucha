@@ -1,6 +1,6 @@
 package pl.lodz.p.it.soap.aggregates.converters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Account;
 import pl.lodz.p.it.soap.model.AccountSoap;
 
 public class AccountSoapConverter {

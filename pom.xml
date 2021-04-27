@@ -11,13 +11,12 @@
     <url>https://github.com/rempek99/TKS-remplewicz-mucha</url>
     <name>TKS-remplewicz-mucha</name>
     <modules>
-        <module>ApplicationCore</module>
-        <module>RepositoriesAdapters</module>
-        <module>ApplicationPorts</module>
         <module>UserInterface</module>
         <module>ViewPorts</module>
         <module>ViewAdapters</module>
         <module>SoapAPI</module>
+        <module>User</module>
+        <module>Rent</module>
     </modules>
 
     <properties>

@@ -2,7 +2,7 @@ package pl.lodz.p.it.soaptests.converters;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Movie;
 import pl.lodz.p.it.soap.aggregates.converters.MovieSoapConverter;
 import pl.lodz.p.it.soap.model.MovieSoap;
 

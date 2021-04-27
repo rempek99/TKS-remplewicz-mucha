@@ -1,6 +1,6 @@
 package pl.lodz.p.it.soap.aggregates.adapters;
 
-import pl.lodz.p.it.applicationcore.applicationservice.services.MovieService;
+import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.MovieService;
 import pl.lodz.p.it.applicationports.usecase.movie.MovieUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.MovieSoapConverter;
 import pl.lodz.p.it.soap.model.SoapException;

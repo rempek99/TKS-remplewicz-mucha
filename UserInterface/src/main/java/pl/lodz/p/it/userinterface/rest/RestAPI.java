@@ -1,6 +1,6 @@
 package pl.lodz.p.it.userinterface.rest;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.*;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.*;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;

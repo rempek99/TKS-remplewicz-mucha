@@ -1,6 +1,6 @@
 package pl.lodz.p.it.viewadapters.adapters;
 
-import pl.lodz.p.it.applicationcore.applicationservice.services.RentalService;
+import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.RentalService;
 import pl.lodz.p.it.viewadapters.RestException;
 import pl.lodz.p.it.viewadapters.converters.BookRentalConverter;
 import pl.lodz.p.it.viewadapters.converters.MovieRentalConverter;

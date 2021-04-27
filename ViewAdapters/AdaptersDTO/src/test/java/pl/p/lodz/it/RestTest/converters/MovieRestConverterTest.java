@@ -2,7 +2,7 @@ package pl.p.lodz.it.RestTest.converters;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Movie;
 import pl.lodz.p.it.viewadapters.converters.MovieConverter;
 import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
 

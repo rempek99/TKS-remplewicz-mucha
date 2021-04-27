@@ -1,6 +1,6 @@
 package pl.lodz.p.it.viewadapters.adapters;
 
-import pl.lodz.p.it.applicationcore.applicationservice.services.BookService;
+import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.BookService;
 import pl.lodz.p.it.applicationports.usecase.book.BookUsecaseSuit;
 import pl.lodz.p.it.viewadapters.RestException;
 import pl.lodz.p.it.viewadapters.converters.BookConverter;

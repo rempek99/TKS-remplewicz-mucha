@@ -1,6 +1,6 @@
 package pl.lodz.p.it.viewadapters.converters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Account;
 import pl.lodz.p.it.viewmodel.modelDTO.AccountDTO;
 
 public class AccountConverter {

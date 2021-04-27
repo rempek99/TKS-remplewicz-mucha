@@ -1,6 +1,6 @@
 package pl.lodz.p.it.soap.aggregates.adapters;
 
-import pl.lodz.p.it.applicationcore.applicationservice.services.RentalService;
+import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.RentalService;
 import pl.lodz.p.it.applicationports.usecase.rentals.RentalUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.BookRentalSoapConverter;
 import pl.lodz.p.it.soap.aggregates.converters.MovieRentalSoapConverter;

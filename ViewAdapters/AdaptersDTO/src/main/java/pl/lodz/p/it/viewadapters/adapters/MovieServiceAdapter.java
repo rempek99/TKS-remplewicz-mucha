@@ -1,6 +1,6 @@
 package pl.lodz.p.it.viewadapters.adapters;
 
-import pl.lodz.p.it.applicationcore.applicationservice.services.MovieService;
+import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.MovieService;
 import pl.lodz.p.it.applicationports.usecase.movie.MovieUsecaseSuit;
 import pl.lodz.p.it.viewadapters.RestException;
 import pl.lodz.p.it.viewadapters.converters.MovieConverter;

@@ -2,7 +2,7 @@ package pl.lodz.p.it.userinterface.controller;
 
 import pl.lodz.p.it.viewports.account.GetAccountUsecase;
 import pl.lodz.p.it.viewmodel.modelDTO.AccountDTO;
-import pl.lodz.p.it.applicationcore.applicationservice.services.AccountService;
+import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.AccountService;
 import pl.lodz.p.it.viewports.account.AddAccountUsecase;
 
 import java.io.Serializable;

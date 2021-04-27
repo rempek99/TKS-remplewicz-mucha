@@ -2,7 +2,7 @@ package pl.lodz.p.it.soaptests.converters;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Account;
 import pl.lodz.p.it.soap.aggregates.converters.AccountSoapConverter;
 import pl.lodz.p.it.soap.model.AccountSoap;
 
