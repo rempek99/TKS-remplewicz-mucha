@@ -1,10 +1,8 @@
 package pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services;
 
-import pl.lodz.p.it.applicationports.infrastructure.AccountPort;
+import pl.lodz.p.it.rentapplicationports.infrastructure.AccountPort;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Account;
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.BookRental;
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.MovieRental;
-import pl.lodz.p.it.applicationports.usecase.account.AccountUsecaseSuit;
+import pl.lodz.p.it.rentapplicationports.usecase.client.AccountUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -27,14 +25,6 @@ public class AccountService implements Serializable, AccountUsecaseSuit, IServic
     public List<Account> getAll() {
         return accountRepo.getAllAccounts();
     }
-
-    @Override
-    public Account getSingleMovieSelection(MovieRental m) {
-        return accountRepo.getMovieSelectedViaUUID(m);
-    }
-
-    @Override
-    public Account getSingleBookSelection(BookRental b) {return accountRepo.getBookSelectedViaUUID(b); }
 
     @Override
     public Optional<Account> getViaUUID(String str) {

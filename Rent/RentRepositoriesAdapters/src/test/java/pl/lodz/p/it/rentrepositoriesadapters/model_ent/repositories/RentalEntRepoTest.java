@@ -1,4 +1,4 @@
-package test.java.pl.lodz.p.it.repositoriesadapters.model_ent.repositories;
+package pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ class RentalEntRepoTest {
 
     private final MovieEnt testMovie = new MovieEnt("Test", "Tester", 100,false);
     private final BookEnt testBook = new BookEnt("Test", "Tester", 100,false);
-    private final AccountEnt testAccount = new AccountEnt("Tester", "Testowy", "user", true, "test", "test123");
+    private final ClientEnt testAccount = new ClientEnt("Tester", "Testowy", "user", true, "test", "test123");
     private MovieRentalEnt my_movie;
     private BookRentalEnt my_book;
 

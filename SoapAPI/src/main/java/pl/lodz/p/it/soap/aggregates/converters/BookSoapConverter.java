@@ -1,6 +1,5 @@
 package pl.lodz.p.it.soap.aggregates.converters;
 
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Book;
 import pl.lodz.p.it.soap.model.BookSoap;
 
 public class BookSoapConverter {

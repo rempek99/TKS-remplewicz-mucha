@@ -1,15 +1,9 @@
 package pl.lodz.p.it.rentrepositoriesadapters.aggregates.adapters;
 
-import pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters.MovieConverter;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Account;
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Movie;
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.MovieRental;
-import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.MovieEnt;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories.AccountEntRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 class AccountRepoAdapterTest {
 
@@ -41,20 +35,6 @@ class AccountRepoAdapterTest {
 
     @Test
     void getAccount() {
-    }
-
-    @Test
-    void getMovieSelectedViaUUID() {
-        List<Account> allAccounts = accountRepoAdapter.getAllAccounts();
-        System.out.println(allAccounts);
-        Movie testMovie = new Movie("Test", "Tester", 100,false);
-        MovieRental testRental = new MovieRental(testMovie, temporary);
-        MovieEnt testMovieEnt = MovieConverter.convertMovieToEnt(testMovie);
-        accountRepoAdapter.getMovieSelectedViaUUID(testRental);
-    }
-
-    @Test
-    void getBookSelectedViaUUID() {
     }
 
     @Test

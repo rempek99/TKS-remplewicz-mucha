@@ -13,7 +13,7 @@ import java.util.*;
 @ToString
 public class BookRental {
     private Book book;
-    private Account account;
+    private Client account;
     private String id;
     private List<Date> range = new ArrayList<>();
     private Date rentalStart;
@@ -23,7 +23,7 @@ public class BookRental {
         this.id = UUID.randomUUID().toString();
     }
 
-    public BookRental(Book book, Account account) {
+    public BookRental(Book book, Client account) {
         this.book = book;
         this.account = account;
         this.id = UUID.randomUUID().toString();

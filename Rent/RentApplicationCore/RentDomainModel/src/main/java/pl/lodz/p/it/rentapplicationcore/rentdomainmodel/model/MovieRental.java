@@ -13,7 +13,7 @@ import java.util.*;
 @ToString
 public class MovieRental {
     private Movie movie;
-    private Account account;
+    private Client account;
     private String id;
     private List<Date> range = new ArrayList<>();
     private Date rentalStart;
@@ -23,7 +23,7 @@ public class MovieRental {
         this.id = UUID.randomUUID().toString();
     }
 
-    public MovieRental(Movie movie, Account account) {
+    public MovieRental(Movie movie, Client account) {
         this.movie = movie;
         this.account = account;
         rentalStart = new Date();

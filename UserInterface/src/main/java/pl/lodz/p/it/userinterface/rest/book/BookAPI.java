@@ -1,8 +1,5 @@
 package pl.lodz.p.it.userinterface.rest.book;
 
-import pl.lodz.p.it.viewadapters.adapters.BookServiceAdapter;
-import pl.lodz.p.it.viewmodel.modelDTO.BookDTO;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;

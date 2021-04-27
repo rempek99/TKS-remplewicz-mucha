@@ -1,8 +1,5 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewadapters.adapters.MovieServiceAdapter;
-import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
-
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

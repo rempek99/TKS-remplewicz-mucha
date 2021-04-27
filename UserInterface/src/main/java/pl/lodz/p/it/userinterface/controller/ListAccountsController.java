@@ -1,7 +1,7 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewports.account.*;
-import pl.lodz.p.it.viewmodel.modelDTO.*;
+import pl.lodz.p.it.rentviewports.client.*;
+import pl.lodz.p.it.rentviewmodel.modelDTO.*;
 
 import java.io.Serializable;
 import java.util.List;

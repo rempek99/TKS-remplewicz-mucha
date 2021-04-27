@@ -1,9 +1,9 @@
-package main.java.pl.lodz.p.it.repositoriesadapters.aggregates.adapters;
+package pl.lodz.p.it.rentrepositoriesadapters.aggregates.adapters;
 
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories.MovieEntRepo;
 import pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters.MovieConverter;
-import pl.lodz.p.it.applicationports.infrastructure.MoviePort;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
+import pl.lodz.p.it.rentapplicationports.infrastructure.MoviePort;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Movie;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories.RepositoryException;
 
 import javax.enterprise.context.Dependent;

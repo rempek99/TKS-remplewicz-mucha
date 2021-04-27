@@ -1,6 +1,6 @@
 package pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services;
 
-import pl.lodz.p.it.applicationports.infrastructure.BookPort;
+import pl.lodz.p.it.rentapplicationports.infrastructure.BookPort;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

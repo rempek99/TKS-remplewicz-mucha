@@ -21,11 +21,6 @@ class AccountServiceTestIT {
     private final Account tester = new Account("Tester", "Testowy", "user", true, "test", "test123");
     private final Account tester2 = new Account("Tester2", "Testowy2", "user", true, "test2", "test1234");
     private final Account tester3 = new Account("Tester3", "Testowy3", "user", true, "test3", "test12345");
-    private final Movie testMovie = new Movie("Test3", "Tester3", 300, true);
-    private final Book testBook = new Book("Test", "Tester", 100, false);
-    private final BookRental testBookRental = new BookRental(testBook, tester);
-    private final MovieRental testMovieRental = new MovieRental(testMovie, tester);
-
 
     @BeforeEach
     void initServiceAndRepositories() {
@@ -37,18 +32,6 @@ class AccountServiceTestIT {
     void getAllAccounts() {
         List<Account> accountList = accountService.getAll();
         assertFalse(accountList.isEmpty());
-    }
-
-    @Test
-    void getSingleMovieSelection() {
-        Account found = accountService.getSingleMovieSelection(testMovieRental);
-        assertEquals(tester, found);
-    }
-
-    @Test
-    void getSingleBookSelection() {
-        Account found = accountService.getSingleBookSelection(testBookRental);
-        assertEquals(tester, found);
     }
 
     @Test

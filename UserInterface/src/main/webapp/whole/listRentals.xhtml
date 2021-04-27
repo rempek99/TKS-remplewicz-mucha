@@ -58,7 +58,7 @@
                 <p:column headerText="Rented by"
                           rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
                     <h:outputText id="rentalUser"
-                                  value="#{movieRental.account.firstName} #{movieRental.account.lastName}"/>
+                                  value="#{movieRental.pl.lodz.p.it.rentviewports.account.firstName} #{movieRental.pl.lodz.p.it.rentviewports.account.lastName}"/>
                 </p:column>
                 <!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{movieRental.accountEnt.id}" filterStyle="display:none">-->
                 <!--                    <div style="text-align: center"><h:outputText-->
@@ -66,18 +66,18 @@
                 <!--                            value="#{listAccountsController.getDesiredAccount((request.userPrincipal.name)).firstName} #{listAccountsController.getDesiredAccount((request.userPrincipal.name)).lastName} (you)" /></div>-->
                 <!--                </p:column>-->
                 <p:column headerText="Options">
-                    <h:commandButton value="Release rented pl.lodz.p.it.viewports.movie"
+                    <h:commandButton value="Release rented pl.lodz.p.it.rentviewports.movie"
                                      rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}"
                                      action="#{listMovieRentalsController.removeSelectedMovieRental(movieRental)}"
-                                     onclick="return window.confirm('Are you sure you want return #{movieRental.pl.lodz.p.it.viewports.movie.title}?')"
+                                     onclick="return window.confirm('Are you sure you want return #{movieRental.pl.lodz.p.it.rentviewports.movie.title}?')"
                                      style="margin-left: 0dp">
                     </h:commandButton>
                     <h:commandButton
-                            value="#{movieRental.account.id==request.userPrincipal.name? 'Release rented pl.lodz.p.it.viewports.movie' : 'Not your rental'}"
+                            value="#{movieRental.pl.lodz.p.it.rentviewports.account.id==request.userPrincipal.name? 'Release rented pl.lodz.p.it.rentviewports.movie' : 'Not your rental'}"
                             rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}"
                             action="#{listMovieRentalsController.removeSelectedMovieRental(movieRental)}"
-                            disabled="#{movieRental.account.id ne request.userPrincipal.name}"
-                            onclick="return window.confirm('Are you sure you want return #{movieRental.pl.lodz.p.it.viewports.movie.title}?')"
+                            disabled="#{movieRental.pl.lodz.p.it.rentviewports.account.id ne request.userPrincipal.name}"
+                            onclick="return window.confirm('Are you sure you want return #{movieRental.pl.lodz.p.it.rentviewports.movie.title}?')"
                             style="margin-left: 0dp">
                     </h:commandButton>
                 </p:column>
@@ -127,7 +127,7 @@
                 <p:column headerText="Rented by"
                           rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
                     <h:outputText id="user"
-                                  value="#{bookRental.account.firstName} #{bookRental.account.lastName}"/>
+                                  value="#{bookRental.pl.lodz.p.it.rentviewports.account.firstName} #{bookRental.pl.lodz.p.it.rentviewports.account.lastName}"/>
                 </p:column>
                 <!--                <p:column headerText="Rented by" rendered="#{login.managerOrUserAllowedAccess}" filterMatchMode="contains" filterBy="#{bookRental.accountEnt.id}" filterStyle="display:none">-->
                 <!--                    <div style="text-align: center"><h:outputText-->
@@ -135,18 +135,18 @@
                 <!--                            value="#{listAccountsController.getDesiredAccount((request.userPrincipal.name)).firstName} #{listAccountsController.getDesiredAccount((request.userPrincipal.name)).lastName} (you)" /></div>-->
                 <!--                </p:column>-->
                 <p:column headerText="Options">
-                    <h:commandButton value="Release rented pl.lodz.p.it.viewports.book"
+                    <h:commandButton value="Release rented pl.lodz.p.it.rentviewports.book"
                                      rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}"
                                      action="#{listBookRentalsController.removeSelectedBookRental(bookRental)}"
-                                     onclick="return window.confirm('Are you sure you want return #{bookRental.pl.lodz.p.it.viewports.book.title}?')"
+                                     onclick="return window.confirm('Are you sure you want return #{bookRental.pl.lodz.p.it.rentviewports.book.title}?')"
                                      style="margin-left: 0dp">
                     </h:commandButton>
                     <h:commandButton
-                            value="#{bookRental.account.id==request.userPrincipal.name? 'Release rented pl.lodz.p.it.viewports.book' : 'Not your rental'}"
+                            value="#{bookRental.pl.lodz.p.it.rentviewports.account.id==request.userPrincipal.name? 'Release rented pl.lodz.p.it.rentviewports.book' : 'Not your rental'}"
                             rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}"
                             action="#{listBookRentalsController.removeSelectedBookRental(bookRental)}"
-                            disabled="#{bookRental.account.id ne request.userPrincipal.name}"
-                            onclick="return window.confirm('Are you sure you want return #{bookRental.pl.lodz.p.it.viewports.book.title}?')"
+                            disabled="#{bookRental.pl.lodz.p.it.rentviewports.account.id ne request.userPrincipal.name}"
+                            onclick="return window.confirm('Are you sure you want return #{bookRental.pl.lodz.p.it.rentviewports.book.title}?')"
                             style="margin-left: 0dp">
                     </h:commandButton>
                 </p:column>

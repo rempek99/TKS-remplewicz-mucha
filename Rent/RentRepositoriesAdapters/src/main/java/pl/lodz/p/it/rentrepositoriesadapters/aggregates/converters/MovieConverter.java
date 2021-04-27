@@ -1,6 +1,6 @@
-package main.java.pl.lodz.p.it.repositoriesadapters.aggregates.converters;
+package pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Movie;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.MovieEnt;
 
 public class MovieConverter {

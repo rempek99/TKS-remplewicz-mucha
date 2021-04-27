@@ -14,13 +14,13 @@ import java.util.List;
 @ToString
 public class BookRentalEnt {
     private BookEnt bookEnt;
-    private AccountEnt accountEnt;
+    private ClientEnt accountEnt;
     private String id;
     private List<Date> range = new ArrayList<>();
     private Date rentalStart;
     private Date rentalEnd;
 
-    public BookRentalEnt(BookEnt bookEnt, AccountEnt accountEnt) {
+    public BookRentalEnt(BookEnt bookEnt, ClientEnt accountEnt) {
         this.bookEnt = bookEnt;
         this.accountEnt = accountEnt;
         rentalStart = new Date();

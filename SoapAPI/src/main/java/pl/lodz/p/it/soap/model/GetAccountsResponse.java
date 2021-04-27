@@ -16,13 +16,13 @@ public class GetAccountsResponse {
     protected List<AccountSoap> account;
 
     /**
-     * Gets the value of the account property.
+     * Gets the value of the pl.lodz.p.it.rentviewports.account property.
      *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the account property.
+     * This is why there is not a <CODE>set</CODE> method for the pl.lodz.p.it.rentviewports.account property.
      *
      * <p>
      * For example, to add a new item, do as follows:

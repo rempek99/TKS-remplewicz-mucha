@@ -1,7 +1,7 @@
 package pl.lodz.p.it.rentapplicationcore.rentdomainmodel.repositories;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.BookRental;
-import pl.lodz.p.it.applicationcore.domainmodel.model.MovieRental;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.BookRental;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.MovieRental;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.*;

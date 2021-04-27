@@ -1,9 +1,9 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewports.account.GetAccountUsecase;
-import pl.lodz.p.it.viewmodel.modelDTO.AccountDTO;
+import pl.lodz.p.it.rentviewports.client.GetAccountUsecase;
+import pl.lodz.p.it.rentviewmodel.modelDTO.AccountDTO;
 import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.AccountService;
-import pl.lodz.p.it.viewports.account.AddAccountUsecase;
+import pl.lodz.p.it.rentviewports.client.AddAccountUsecase;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;

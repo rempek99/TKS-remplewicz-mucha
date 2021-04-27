@@ -1,11 +1,5 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewadapters.adapters.MovieServiceAdapter;
-import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
-import pl.lodz.p.it.viewports.movie.GetAllMoviesUsecase;
-import pl.lodz.p.it.viewports.movie.RemoveMovieUsecase;
-import pl.lodz.p.it.viewports.movie.SetMovieRentedUsecase;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.view.ViewScoped;

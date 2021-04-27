@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import pl.lodz.p.it.applicationcore.domainmodel.model.*;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +22,7 @@ class RentalRepoTest {
 
     private final Movie testMovie = new Movie("Test", "Tester", 100,false);
     private final Book testBook = new Book("Test", "Tester", 100,false);
-    private final Account testAccount = new Account("Tester", "Testowy", "user", true, "test", "test123");
+    private final Client testAccount = new Client("Tester", "Testowy", "user", true, "test", "test123");
     private MovieRental my_movie;
     private BookRental my_book;
 

@@ -1,16 +1,12 @@
 package pl.lodz.p.it.userinterface.rest.rental;
 
 
-import pl.lodz.p.it.viewadapters.RestException;
-import pl.lodz.p.it.viewadapters.adapters.RentalServiceAdapter;
-import pl.lodz.p.it.viewmodel.modelDTO.BookRentalDTO;
-import pl.lodz.p.it.viewmodel.modelDTO.MovieRentalDTO;
+import pl.lodz.p.it.rentviewadapters.RestException;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.Optional;
 
 @RequestScoped
 @Path("rentals")

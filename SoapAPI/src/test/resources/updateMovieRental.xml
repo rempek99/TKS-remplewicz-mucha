@@ -16,7 +16,7 @@
                     <rented>true</rented>
                 </movie>
                 <!--Optional:-->
-                <account>
+                <pl.lodz.p.it.rentviewports.account>
                     <!--Optional:-->
                     <firstName>hello</firstName>
                     <!--Optional:-->
@@ -27,7 +27,7 @@
                     <!--Optional:-->
                     <login>jan12</login>
                     <password>kowalski</password>
-                </account>
+                </pl.lodz.p.it.rentviewports.account>
                 <!--Optional:-->
                 <id>argTest2</id>
             </arg1>

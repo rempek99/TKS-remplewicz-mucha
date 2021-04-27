@@ -18,13 +18,13 @@
             <div class="topNavigationBar" id="navBar">
                 <ui:fragment><a href="#home" class="active" >Welcome page</a></ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN'}">
-                    <a href="../admins/addAccount.xhtml">Add pl.lodz.p.it.viewports.account</a>
+                    <a href="../admins/addAccount.xhtml">Add pl.lodz.p.it.rentviewports.pl.lodz.p.it.rentviewports.client</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
-                    <a href="../managers/addMovie.xhtml">Add pl.lodz.p.it.viewports.movie</a>
+                    <a href="../managers/addMovie.xhtml">Add pl.lodz.p.it.rentviewports.movie</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
-                    <a href="../managers/addBook.xhtml">Add pl.lodz.p.it.viewports.book</a>
+                    <a href="../managers/addBook.xhtml">Add pl.lodz.p.it.rentviewports.book</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER'}">
                     <a href="../managers/listAccounts.xhtml">List all accounts</a>
@@ -36,7 +36,7 @@
                     <a href="listBooks.xhtml">Show available books</a>
                 </ui:fragment>
                 <ui:fragment rendered="#{listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='ADMIN' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='MANAGER' || listAccountsController.getDesiredAccount(request.userPrincipal.name).roleOfUser=='USER'}">
-                    <a href="listRentals.xhtml">Show pl.lodz.p.it.viewports.rentals list</a>
+                    <a href="listRentals.xhtml">Show pl.lodz.p.it.rentviewports.rentals list</a>
                 </ui:fragment>
                 <ui:fragment>
                     <h:commandButton styleClass="ownButton" value="Logout" action="#{logout.submit}" style="font-weight: bold"/>

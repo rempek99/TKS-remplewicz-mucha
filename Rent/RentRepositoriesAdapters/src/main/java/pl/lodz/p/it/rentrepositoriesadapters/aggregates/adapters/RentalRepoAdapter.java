@@ -1,11 +1,10 @@
-package main.java.pl.lodz.p.it.repositoriesadapters.aggregates.adapters;
+package pl.lodz.p.it.rentrepositoriesadapters.aggregates.adapters;
 
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories.RentalEntRepo;
 import pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters.BookRentalConverter;
 import pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters.MovieRentalConverter;
-import pl.lodz.p.it.applicationports.infrastructure.RentalPort;
-import pl.lodz.p.it.applicationcore.domainmodel.model.BookRental;
-import pl.lodz.p.it.applicationcore.domainmodel.model.MovieRental;
+import pl.lodz.p.it.rentapplicationports.infrastructure.RentalPort;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.*;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

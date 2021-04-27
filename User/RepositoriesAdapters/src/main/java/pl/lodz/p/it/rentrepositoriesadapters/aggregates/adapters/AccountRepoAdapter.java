@@ -1,12 +1,10 @@
 package pl.lodz.p.it.rentrepositoriesadapters.aggregates.adapters;
 
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Account;
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.BookRental;
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.MovieRental;
 import pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters.AccountConverter;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.AccountEnt;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories.AccountEntRepo;
-import pl.lodz.p.it.applicationports.infrastructure.AccountPort;
+import pl.lodz.p.it.rentapplicationports.infrastructure.AccountPort;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories.RepositoryException;
 
 import javax.enterprise.context.Dependent;
@@ -70,16 +68,6 @@ public class AccountRepoAdapter implements AccountPort, Serializable{
         } else {
             return null;
         }
-    }
-
-    @Override
-    public Account getMovieSelectedViaUUID(MovieRental movieRental) {
-        return movieRental.getAccount();
-    }
-
-    @Override
-    public Account getBookSelectedViaUUID(BookRental bookRental) {
-        return bookRental.getAccount();
     }
 
     @Override

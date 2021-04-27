@@ -1,7 +1,7 @@
 package pl.lodz.p.it.userinterface.rest.account;
 
-import pl.lodz.p.it.viewadapters.adapters.AccountServiceAdapter;
-import pl.lodz.p.it.viewmodel.modelDTO.AccountDTO;
+import pl.lodz.p.it.rentviewadapters.adapters.AccountServiceAdapter;
+import pl.lodz.p.it.rentviewmodel.modelDTO.AccountDTO;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

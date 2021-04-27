@@ -1,11 +1,10 @@
 package pl.lodz.p.it.soap.aggregates.adapters;
 
-import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.MovieService;
-import pl.lodz.p.it.applicationports.usecase.movie.MovieUsecaseSuit;
+import pl.lodz.p.it.rentapplicationports.usecase.movie.MovieUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.MovieSoapConverter;
 import pl.lodz.p.it.soap.model.SoapException;
 import pl.lodz.p.it.soap.model.MovieSoap;
-import pl.lodz.p.it.viewports.movie.MovieViewPortUsecaseSuit;
+import pl.lodz.p.it.rentviewports.movie.MovieViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

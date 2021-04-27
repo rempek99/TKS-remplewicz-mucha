@@ -14,13 +14,13 @@ import java.util.List;
 @ToString
 public class MovieRentalEnt {
     private MovieEnt movieEnt;
-    private AccountEnt accountEnt;
+    private ClientEnt accountEnt;
     private String id;
     private List<Date> range = new ArrayList<>();
     private Date rentalStart;
     private Date rentalEnd;
 
-    public MovieRentalEnt(MovieEnt movieEnt, AccountEnt accountEnt) {
+    public MovieRentalEnt(MovieEnt movieEnt, ClientEnt accountEnt) {
         this.movieEnt = movieEnt;
         this.accountEnt = accountEnt;
         range = new ArrayList<>();

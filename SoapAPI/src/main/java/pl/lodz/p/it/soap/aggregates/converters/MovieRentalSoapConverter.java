@@ -1,6 +1,5 @@
 package pl.lodz.p.it.soap.aggregates.converters;
 
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.MovieRental;
 import pl.lodz.p.it.soap.model.MovieRentalSoap;
 
 public class MovieRentalSoapConverter {

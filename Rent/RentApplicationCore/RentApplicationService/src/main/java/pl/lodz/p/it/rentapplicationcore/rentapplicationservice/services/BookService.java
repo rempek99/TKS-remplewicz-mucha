@@ -1,8 +1,8 @@
 package pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services;
 
-import pl.lodz.p.it.applicationports.infrastructure.BookPort;
+import pl.lodz.p.it.rentapplicationports.infrastructure.BookPort;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Book;
-import pl.lodz.p.it.applicationports.usecase.book.BookUsecaseSuit;
+import pl.lodz.p.it.rentapplicationports.usecase.book.BookUsecaseSuit;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;

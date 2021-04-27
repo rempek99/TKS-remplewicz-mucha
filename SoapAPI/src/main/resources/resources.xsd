@@ -37,7 +37,7 @@
     <xs:complexType name="bookRentalSoap">
         <xs:sequence>
             <xs:element name="book" type="tns:bookSoap"/>
-            <xs:element name="account" type="tns:accountSoap"/>
+            <xs:element name="pl.lodz.p.it.rentviewports.account" type="tns:accountSoap"/>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="rentalStart" type="xs:date"/>
             <xs:element name="rentalEnd" type="xs:date"/>
@@ -47,7 +47,7 @@
     <xs:complexType name="movieRentalSoap">
         <xs:sequence>
             <xs:element name="movie" type="tns:movieSoap"/>
-            <xs:element name="account" type="tns:accountSoap"/>
+            <xs:element name="pl.lodz.p.it.rentviewports.account" type="tns:accountSoap"/>
             <xs:element name="id" type="xs:string"/>
             <xs:element name="rentalStart" type="xs:date"/>
             <xs:element name="rentalEnd" type="xs:date"/>
@@ -65,7 +65,7 @@
     <xs:element name="getAccountResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="account" type="tns:accountSoap"/>
+                <xs:element name="pl.lodz.p.it.rentviewports.account" type="tns:accountSoap"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -113,7 +113,7 @@
     <xs:element name="getAccountsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="account" type="tns:accountSoap" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="pl.lodz.p.it.rentviewports.account" type="tns:accountSoap" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

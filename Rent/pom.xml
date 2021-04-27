@@ -14,6 +14,8 @@
         <module>RentApplicationCore</module>
         <module>RentRepositoriesAdapters</module>
         <module>RentApplicationPorts</module>
+        <module>RentViewPorts</module>
+        <module>RentViewAdapters</module>
      </modules>
 
     <properties>

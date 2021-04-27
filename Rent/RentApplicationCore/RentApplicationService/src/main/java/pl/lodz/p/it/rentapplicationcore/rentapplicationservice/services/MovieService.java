@@ -1,8 +1,8 @@
 package pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services;
 
-import pl.lodz.p.it.applicationports.infrastructure.MoviePort;
+import pl.lodz.p.it.rentapplicationports.infrastructure.MoviePort;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Movie;
-import pl.lodz.p.it.applicationports.usecase.movie.MovieUsecaseSuit;
+import pl.lodz.p.it.rentapplicationports.usecase.movie.MovieUsecaseSuit;
 
 import java.io.Serializable;
 import java.util.List;

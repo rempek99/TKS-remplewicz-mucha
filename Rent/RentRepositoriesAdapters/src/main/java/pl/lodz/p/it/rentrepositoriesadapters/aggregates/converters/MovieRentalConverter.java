@@ -1,9 +1,7 @@
-package main.java.pl.lodz.p.it.repositoriesadapters.aggregates.converters;
+package pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
-import pl.lodz.p.it.applicationcore.domainmodel.model.MovieRental;
-import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.AccountEnt;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.*;
+import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.ClientEnt;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.MovieEnt;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.MovieRentalEnt;
 
@@ -19,8 +17,8 @@ public class MovieRentalConverter {
     public static MovieRentalEnt convertMovieRentalToEnt(MovieRental movieRental) {
         Movie movie = movieRental.getMovie();
         MovieEnt movieEnt = MovieConverter.convertMovieToEnt(movie);
-        Account account = movieRental.getAccount();
-        AccountEnt accountEnt = AccountConverter.convertAccountToEnt(account);
+        Client account = movieRental.getAccount();
+        ClientEnt accountEnt = ClientConverter.convertClientToEnt(account);
         String id = movieRental.getId();
         List<Date> range = movieRental.getRange();
         Date rentalStart = movieRental.getRentalStart();
@@ -38,8 +36,8 @@ public class MovieRentalConverter {
     public static MovieRental convertEntToMovieRental(MovieRentalEnt movieRental) {
         MovieEnt movieEnt = movieRental.getMovieEnt();
         Movie movie = MovieConverter.convertEntToMovie(movieEnt);
-        AccountEnt accountEnt = movieRental.getAccountEnt();
-        Account account = AccountConverter.convertEntToAccount(accountEnt);
+        ClientEnt accountEnt = movieRental.getAccountEnt();
+        Client account = ClientConverter.convertEntToClient(accountEnt);
         String id = movieRental.getId();
         List<Date> range = movieRental.getRange();
         Date rentalStart = movieRental.getRentalStart();

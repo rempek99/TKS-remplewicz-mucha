@@ -1,7 +1,7 @@
 package pl.lodz.p.it.rentapplicationcore.rentdomainmodel.repositories;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.Book;
-import pl.lodz.p.it.applicationcore.domainmodel.repositories.IRepository;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Book;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.repositories.IRepository;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;

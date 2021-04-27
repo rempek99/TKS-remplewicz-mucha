@@ -12,8 +12,6 @@
     <name>TKS-remplewicz-mucha</name>
     <modules>
         <module>UserInterface</module>
-        <module>ViewPorts</module>
-        <module>ViewAdapters</module>
         <module>SoapAPI</module>
         <module>User</module>
         <module>Rent</module>

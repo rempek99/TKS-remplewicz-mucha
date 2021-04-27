@@ -1,11 +1,9 @@
-package test.java.pl.lodz.p.it.repositoriesadapters.aggregates.converters;
+package pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Book;
-import pl.lodz.p.it.applicationcore.domainmodel.model.BookRental;
-import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.AccountEnt;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.*;
+import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.ClientEnt;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.BookEnt;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.BookRentalEnt;
 
@@ -13,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BookRentalConverterTest {
 
-    private final AccountEnt accountEnt = new AccountEnt("test", "Testowy", "user", true, "test", "test123");
-    private final Account account= new Account("test", "Testowy", "user", true, "test", "test123");
+    private final ClientEnt accountEnt = new ClientEnt("test", "Testowy", "user", true, "test", "test123");
+    private final Client account= new Client("test", "Testowy", "user", true, "test", "test123");
     private final BookEnt bookEnt = new BookEnt("Test", "test", 100,false);
     private final Book book = new Book("Test", "test", 100,false);
     private final BookRentalEnt bookRentalEnt = new BookRentalEnt(bookEnt, accountEnt);

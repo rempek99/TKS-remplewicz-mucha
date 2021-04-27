@@ -1,9 +1,9 @@
 package pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services;
 
-import pl.lodz.p.it.applicationports.infrastructure.RentalPort;
+import pl.lodz.p.it.rentapplicationports.infrastructure.RentalPort;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.BookRental;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.MovieRental;
-import pl.lodz.p.it.applicationports.usecase.rentals.RentalUsecaseSuit;
+import pl.lodz.p.it.rentapplicationports.usecase.rentals.RentalUsecaseSuit;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;

@@ -1,0 +1,8 @@
+package pl.lodz.p.it.rentapplicationports.usecase.rentals;
+
+import java.util.Date;
+import java.util.List;
+
+public interface GetDisabledDaysUsecase {
+    List<Date> getDisabledDays();
+}

@@ -1,11 +1,5 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewadapters.adapters.RentalServiceAdapter;
-import pl.lodz.p.it.viewports.book.SetBookRentedUsecase;
-import pl.lodz.p.it.viewmodel.modelDTO.BookRentalDTO;
-import pl.lodz.p.it.viewports.rentals.GetAllBookRentalsUsecase;
-import pl.lodz.p.it.viewports.rentals.RemoveBookRentalUsecase;
-
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

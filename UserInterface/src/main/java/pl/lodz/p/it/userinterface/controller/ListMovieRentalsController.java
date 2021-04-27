@@ -1,8 +1,6 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewadapters.adapters.RentalServiceAdapter;
-import pl.lodz.p.it.viewmodel.modelDTO.MovieRentalDTO;
-import pl.lodz.p.it.viewports.rentals.GetAllMovieRentalsUsecase;
+import pl.lodz.p.it.rentviewports.rentals.GetAllMovieRentalsUsecase;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;

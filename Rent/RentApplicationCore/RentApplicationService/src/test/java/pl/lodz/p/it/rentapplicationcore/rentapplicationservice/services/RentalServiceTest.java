@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.lodz.p.it.applicationports.infrastructure.RentalPort;
+import pl.lodz.p.it.rentapplicationports.infrastructure.RentalPort;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.*;
 
 import java.util.Optional;
@@ -32,9 +32,9 @@ class RentalServiceTest {
     private final Book testBook2 = new Book("Test2", "Tester2", 200, true);
     private final Book testBook3 = new Book("Test3", "Tester3", 300, true);
 
-    private final Account tester = new Account("Tester", "Testowy", "user", true, "test", "test123");
-    private final Account tester2 = new Account("Tester2", "Testowy2", "user", true, "test2", "test1234");
-    private final Account tester3 = new Account("Tester3", "Testowy3", "user", true, "test3", "test12345");
+    private final Client tester = new Client("Tester", "Testowy", "user", true, "test", "test123");
+    private final Client tester2 = new Client("Tester2", "Testowy2", "user", true, "test2", "test1234");
+    private final Client tester3 = new Client("Tester3", "Testowy3", "user", true, "test3", "test12345");
     private final BookRental testBookRental = new BookRental(testBook, tester);
     private final MovieRental testMovieRental = new MovieRental(testMovie, tester);
 

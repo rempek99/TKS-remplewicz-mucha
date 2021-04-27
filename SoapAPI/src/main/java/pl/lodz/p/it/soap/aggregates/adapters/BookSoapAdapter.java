@@ -1,10 +1,10 @@
 package pl.lodz.p.it.soap.aggregates.adapters;
 
-import pl.lodz.p.it.applicationports.usecase.book.BookUsecaseSuit;
+import pl.lodz.p.it.rentapplicationports.usecase.book.BookUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.BookSoapConverter;
 import pl.lodz.p.it.soap.model.SoapException;
 import pl.lodz.p.it.soap.model.BookSoap;
-import pl.lodz.p.it.viewports.book.BookViewPortUsecaseSuit;
+import pl.lodz.p.it.rentviewports.book.BookViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

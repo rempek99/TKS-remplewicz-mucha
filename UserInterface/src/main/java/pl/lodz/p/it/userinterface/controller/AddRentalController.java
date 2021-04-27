@@ -1,10 +1,10 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewports.account.GetAccountViaUUIDUsecase;
-import pl.lodz.p.it.viewmodel.modelDTO.*;
-import pl.lodz.p.it.viewports.rentals.AddBookRentalUsecase;
-import pl.lodz.p.it.viewports.rentals.AddMovieRentalUsecase;
-import pl.lodz.p.it.viewports.rentals.GetDisabledDaysUsecase;
+import pl.lodz.p.it.rentviewports.client.GetAccountViaUUIDUsecase;
+import pl.lodz.p.it.rentviewmodel.modelDTO.*;
+import pl.lodz.p.it.rentviewports.rentals.AddBookRentalUsecase;
+import pl.lodz.p.it.rentviewports.rentals.AddMovieRentalUsecase;
+import pl.lodz.p.it.rentviewports.rentals.GetDisabledDaysUsecase;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

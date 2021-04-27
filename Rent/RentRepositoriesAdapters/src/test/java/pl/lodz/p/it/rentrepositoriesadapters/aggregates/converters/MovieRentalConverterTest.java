@@ -1,9 +1,7 @@
-package test.java.pl.lodz.p.it.repositoriesadapters.aggregates.converters;
+package pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.Account;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
-import pl.lodz.p.it.applicationcore.domainmodel.model.MovieRental;
-import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.AccountEnt;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.*;
+import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.ClientEnt;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.MovieEnt;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.MovieRentalEnt;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MovieRentalConverterTest {
 
-    private final AccountEnt accountEnt = new AccountEnt("test", "Testowy", "user", true, "test", "test123");
-    private final Account account= new Account("test", "Testowy", "user", true, "test", "test123");
+    private final ClientEnt accountEnt = new ClientEnt("test", "Testowy", "user", true, "test", "test123");
+    private final Client account= new Client("test", "Testowy", "user", true, "test", "test123");
     private final MovieEnt movieEnt = new MovieEnt("Test", "test", 7.9,false);
     private final Movie movie = new Movie("Test", "test", 7.9,false);
     private final MovieRentalEnt movieRentalEnt = new MovieRentalEnt(movieEnt, accountEnt);

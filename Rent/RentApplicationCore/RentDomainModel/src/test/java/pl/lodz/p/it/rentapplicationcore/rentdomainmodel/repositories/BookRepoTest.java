@@ -1,6 +1,6 @@
 package pl.lodz.p.it.rentapplicationcore.rentdomainmodel.repositories;
 
-import pl.lodz.p.it.applicationcore.domainmodel.model.Book;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Book;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

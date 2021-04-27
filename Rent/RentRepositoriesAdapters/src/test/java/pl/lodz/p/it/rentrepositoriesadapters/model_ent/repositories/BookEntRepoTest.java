@@ -1,4 +1,4 @@
-package test.java.pl.lodz.p.it.repositoriesadapters.model_ent.repositories;
+package pl.lodz.p.it.rentrepositoriesadapters.model_ent.repositories;
 
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.BookEnt;
 import org.junit.jupiter.api.BeforeEach;

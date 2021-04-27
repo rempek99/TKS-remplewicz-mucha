@@ -1,13 +1,12 @@
 package pl.lodz.p.it.soap.aggregates.adapters;
 
-import pl.lodz.p.it.rentapplicationcore.rentapplicationservice.services.RentalService;
-import pl.lodz.p.it.applicationports.usecase.rentals.RentalUsecaseSuit;
+import pl.lodz.p.it.rentapplicationports.usecase.rentals.RentalUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.BookRentalSoapConverter;
 import pl.lodz.p.it.soap.aggregates.converters.MovieRentalSoapConverter;
 import pl.lodz.p.it.soap.model.BookRentalSoap;
 import pl.lodz.p.it.soap.model.MovieRentalSoap;
 import pl.lodz.p.it.soap.model.SoapException;
-import pl.lodz.p.it.viewports.rentals.RentalViewPortUsecaseSuit;
+import pl.lodz.p.it.rentviewports.rentals.RentalViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

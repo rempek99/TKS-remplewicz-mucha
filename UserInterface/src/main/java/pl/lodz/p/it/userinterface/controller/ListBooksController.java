@@ -1,8 +1,5 @@
 package pl.lodz.p.it.userinterface.controller;
 
-import pl.lodz.p.it.viewadapters.adapters.BookServiceAdapter;
-import pl.lodz.p.it.viewmodel.modelDTO.BookDTO;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.view.ViewScoped;

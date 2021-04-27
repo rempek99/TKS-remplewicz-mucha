@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AccountSoapConverterTest {
 
-    private final AccountSoap accountSoap = new AccountSoap("pl.lodz.p.it.viewports.account", "Testowy", "user", true, "pl.lodz.p.it.viewports.account", "account123");
-    private final Account account = new Account("pl.lodz.p.it.viewports.account", "Testowy", "user", true, "pl.lodz.p.it.viewports.account", "account123");
+    private final AccountSoap accountSoap = new AccountSoap("pl.lodz.p.it.viewports.pl.lodz.p.it.rentviewports.account", "Testowy", "user", true, "pl.lodz.p.it.viewports.pl.lodz.p.it.rentviewports.account", "account123");
+    private final Account account = new Account("pl.lodz.p.it.viewports.pl.lodz.p.it.rentviewports.account", "Testowy", "user", true, "pl.lodz.p.it.viewports.pl.lodz.p.it.rentviewports.account", "account123");
 
     @BeforeEach
     void init() {

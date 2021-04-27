@@ -1,13 +1,13 @@
 package pl.lodz.p.it.soap.aggregates.adapters;
 
 
-import pl.lodz.p.it.applicationports.usecase.account.AccountUsecaseSuit;
+import pl.lodz.p.it.rentapplicationports.usecase.client.AccountUsecaseSuit;
 import pl.lodz.p.it.soap.aggregates.converters.AccountSoapConverter;
 import pl.lodz.p.it.soap.model.SoapException;
 import pl.lodz.p.it.soap.model.AccountSoap;
 import pl.lodz.p.it.soap.model.BookRentalSoap;
 import pl.lodz.p.it.soap.model.MovieRentalSoap;
-import pl.lodz.p.it.viewports.account.AccountViewPortUsecaseSuit;
+import pl.lodz.p.it.rentviewports.client.AccountViewPortUsecaseSuit;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;

@@ -1,8 +1,5 @@
 package pl.lodz.p.it.userinterface.rest.movie;
 
-import pl.lodz.p.it.viewadapters.adapters.MovieServiceAdapter;
-import pl.lodz.p.it.viewmodel.modelDTO.MovieDTO;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.lodz.p.it.applicationports.infrastructure.AccountPort;
+import pl.lodz.p.it.rentapplicationports.infrastructure.AccountPort;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.*;
 
 import java.util.List;
@@ -28,10 +28,6 @@ class AccountServiceTest {
     private final Account tester = new Account("Tester", "Testowy", "user", true, "test", "test123");
     private final Account tester2 = new Account("Tester2", "Testowy2", "user", true, "test2", "test1234");
     private final Account tester3 = new Account("Tester3", "Testowy3", "user", true, "test3", "test12345");
-    private final Movie testMovie = new Movie("Test3", "Tester3", 300, true);
-    private final Book testBook = new Book("Test", "Tester", 100, false);
-    private final BookRental testBookRental = new BookRental(testBook, tester);
-    private final MovieRental testMovieRental = new MovieRental(testMovie, tester);
 
     @Test
     void getAllAccounts() {
@@ -40,30 +36,6 @@ class AccountServiceTest {
         List<Account> accountList = accountService.getAll();
         //then
         then(accountPort).should().getAllAccounts();
-    }
-
-    @Test
-    void getSingleMovieSelection() {
-        //given
-        given(accountPort.getMovieSelectedViaUUID(testMovieRental)).willReturn(tester);
-        //when
-        Account found = accountService.getSingleMovieSelection(testMovieRental);
-        //then
-        then(accountPort).should().getMovieSelectedViaUUID(testMovieRental);
-        then(accountPort).shouldHaveNoMoreInteractions();
-        assertEquals(tester, found);
-    }
-
-    @Test
-    void getSingleBookSelection() {
-        //given
-        given(accountPort.getBookSelectedViaUUID(testBookRental)).willReturn(tester);
-        //when
-        Account found = accountService.getSingleBookSelection(testBookRental);
-        //then
-        then(accountPort).should().getBookSelectedViaUUID(testBookRental);
-        then(accountPort).shouldHaveNoMoreInteractions();
-        assertEquals(tester, found);
     }
 
     @Test

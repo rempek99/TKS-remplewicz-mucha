@@ -24,11 +24,11 @@ public class RentalEntRepo {
     private void insertInitData() {
         addBookRental(new BookRentalEnt(
                 new BookEnt("Doctor Sleep", "Stephen King", 656, false),
-                new AccountEnt("Jan", "Kowalski", "USER", true, "jan12", "kowalski")
+                new ClientEnt("Jan", "Kowalski", "USER", true, "jan12", "kowalski")
         ));
         addMovieRental(new MovieRentalEnt(
                 new MovieEnt("The Godfather", "Francis Ford Coppola", 9.2, false),
-                new AccountEnt("Jan2", "Kowalski2", "USER", true, "jan12", "kowalski")
+                new ClientEnt("Jan2", "Kowalski2", "USER", true, "jan12", "kowalski")
         ));
     }
 

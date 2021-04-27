@@ -14,7 +14,7 @@
                     <id>testArg0</id>
                 </movie>
                 <!--Optional:-->
-                <account>
+                <pl.lodz.p.it.rentviewports.account>
                     <firstName>Jan</firstName>
                     <lastName>Kowalski</lastName>
                     <roleOfUser>USER</roleOfUser>
@@ -22,7 +22,7 @@
                     <id>testArg1</id>
                     <login>jan12</login>
                     <password>kowalski</password>
-                </account>
+                </pl.lodz.p.it.rentviewports.account>
                 <!--Optional:-->
                 <id>testArg2</id>
             </arg0>

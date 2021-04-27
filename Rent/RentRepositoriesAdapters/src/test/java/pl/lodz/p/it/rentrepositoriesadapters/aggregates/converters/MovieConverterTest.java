@@ -1,8 +1,8 @@
-package test.java.pl.lodz.p.it.repositoriesadapters.aggregates.converters;
+package pl.lodz.p.it.rentrepositoriesadapters.aggregates.converters;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.lodz.p.it.applicationcore.domainmodel.model.Movie;
+import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Movie;
 import pl.lodz.p.it.rentrepositoriesadapters.model_ent.entities.MovieEnt;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
