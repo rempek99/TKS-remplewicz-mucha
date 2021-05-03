@@ -1,6 +1,6 @@
 package pl.lodz.p.it.user.userapplicationapi.modelDTO;
 
-import pl.lodz.p.it.rentviewmodel.repositoriesDTO.AccountRepoDTO;
+import pl.lodz.p.it.user.userapplicationapi.modelDTO.repositoriesDTO.AccountRepoDTO;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;

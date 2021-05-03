@@ -11,8 +11,8 @@
     <url>https://github.com/rempek99/TKS-remplewicz-mucha</url>
     <name>TKS-remplewicz-mucha</name>
     <modules>
-        <module>UserInterface</module>
-        <module>SoapAPI</module>
+<!--        <module>UserInterface</module>-->
+<!--        <module>SoapAPI</module>-->
         <module>UserApplication</module>
         <module>Rent</module>
     </modules>
@@ -173,27 +173,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <artifactId>maven-failsafe-plugin</artifactId>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <goals>-->
-            <!--                            <goal>verify</goal>-->
-            <!--                            <goal>integration-test</goal>-->
-            <!--                        </goals>-->
-            <!--                        <configuration>-->
-            <!--                            <argLine>@{argLine}</argLine>-->
-            <!--                            <systemPropertyVariables>-->
-            <!--                                <java.security.egd>file:/dev/./urandom</java.security.egd>-->
-            <!--                            </systemPropertyVariables>-->
-            <!--                            <environmentVariables>-->
-            <!--                                <TESTCONTAINERS_RYUK_DISABLED>true</TESTCONTAINERS_RYUK_DISABLED>-->
-            <!--                            </environmentVariables>-->
-            <!--                            <trimStackTrace>false</trimStackTrace>-->
-            <!--                        </configuration>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
 </project>

@@ -1,6 +1,6 @@
 package pl.lodz.p.it.user.userapplicationcore.userdomainmodel.model;
 
-import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.repositories.AccountRepo;
+import pl.lodz.p.it.user.userapplicationcore.userdomainmodel.repositories.AccountRepo;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
