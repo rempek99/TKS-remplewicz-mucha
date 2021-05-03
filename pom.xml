@@ -14,7 +14,7 @@
 <!--        <module>UserInterface</module>-->
 <!--        <module>SoapAPI</module>-->
         <module>UserApplication</module>
-        <module>Rent</module>
+        <module>RentApplication</module>
     </modules>
 
     <properties>
