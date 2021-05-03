@@ -13,7 +13,7 @@
     <modules>
         <module>UserInterface</module>
         <module>SoapAPI</module>
-        <module>User</module>
+        <module>UserApplication</module>
         <module>Rent</module>
     </modules>
 
