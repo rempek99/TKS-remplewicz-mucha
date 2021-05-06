@@ -12,8 +12,6 @@
         <module>RentRepositoriesAdapters</module>
         <module>RentApplicationPorts</module>
         <module>RentApplicationAPI</module>
-        <!--        <module>RentViewPorts</module>-->
-<!--        <module>RentViewAdapters</module>-->
      </modules>
     <parent>
         <artifactId>TKS-remplewicz-mucha</artifactId>
