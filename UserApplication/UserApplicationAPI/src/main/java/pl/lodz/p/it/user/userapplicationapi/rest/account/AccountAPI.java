@@ -21,6 +21,8 @@ public class AccountAPI {
     @Inject
     AccountServiceAdapter accountAdapter;
 
+    // Queries
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccFromStorage() {
@@ -41,12 +43,14 @@ public class AccountAPI {
                 .build();
     }
 
+    // Commands
+
     @POST
     public Response addSingleAccToStorage(@Valid AccountDTO account) {
         AccountDTO accountDTO = accountAdapter.addAccount(account);
         return Response
                 .ok()
-                .entity(accountDTO)
+               // .entity(accountDTO)
                 .status(Response.Status.CREATED)
                 .build();
     }

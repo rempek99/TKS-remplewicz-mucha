@@ -16,6 +16,8 @@ public class MovieAPI {
     @Inject
     MovieServiceAdapter movieAdapter;
 
+    // Queries
+
     @GET
     public Response getMoviesFromStorage() {
         return Response
@@ -25,12 +27,14 @@ public class MovieAPI {
                 .build();
     }
 
+    // Commands
+
     @POST
     public Response addSingleMovieToStorage(MovieDTO movie) {
         MovieDTO movieDTO = movieAdapter.addMovie(movie);
         return Response
                 .ok()
-                .entity(movieDTO)
+//                .entity(movieDTO)
                 .status(Response.Status.CREATED)
                 .build();
     }

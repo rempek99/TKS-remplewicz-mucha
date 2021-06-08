@@ -16,15 +16,23 @@ public class BookAPI {
     @Inject
     BookServiceAdapter bookAdapter;
 
+    // Queries
+
     @GET
     public Response getBooksFromStorage() {
         return Response.ok().entity(bookAdapter.getAllBooks()).status(Response.Status.OK).build();
     }
 
+    // Commands
+
     @POST
     public Response addSingleBookToStorage(BookDTO book) {
         BookDTO bookDTO = bookAdapter.addBook(book);
-        return Response.ok().entity(bookDTO).status(Response.Status.CREATED).build();
+        return Response
+                .ok()
+                //.entity(bookDTO)
+                .status(Response.Status.CREATED)
+                .build();
     }
 
     @DELETE

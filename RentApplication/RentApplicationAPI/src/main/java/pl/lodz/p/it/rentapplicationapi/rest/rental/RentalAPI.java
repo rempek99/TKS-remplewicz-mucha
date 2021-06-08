@@ -18,17 +18,31 @@ public class RentalAPI {
     @Inject
     RentalServiceAdapter rentalAdapter;
 
+    // Queries
+
     @GET
     @Path("book")
     public Response getBooksRentalsFromStorage() {
         return Response.ok().entity(rentalAdapter.getAllBookRentals()).status(Response.Status.OK).build();
     }
 
+    @GET
+    @Path("movie")
+    public Response getMoviesRentalsFromStorage() {
+        return Response.ok().entity(rentalAdapter.getAllMovieRentals()).status(Response.Status.OK).build();
+    }
+
+    // Commands
+
     @POST
     @Path("book")
     public Response addSingleBookRentalToStorage(BookRentalDTO bookRental) {
         BookRentalDTO bookRentalDTO = rentalAdapter.addBookRental(bookRental);
-        return Response.ok().entity(bookRentalDTO).status(Response.Status.CREATED).build();
+        return Response
+                .ok()
+                //.entity(bookRentalDTO)
+                .status(Response.Status.CREATED)
+                .build();
     }
 
     @DELETE
@@ -55,17 +69,15 @@ public class RentalAPI {
         }
     }
 
-    @GET
-    @Path("movie")
-    public Response getMoviesRentalsFromStorage() {
-        return Response.ok().entity(rentalAdapter.getAllMovieRentals()).status(Response.Status.OK).build();
-    }
-
     @POST
     @Path("movie")
     public Response addSingleMovieRentalToStorage(MovieRentalDTO movieRental) {
         MovieRentalDTO movieRentalDTO = rentalAdapter.addMovieRental(movieRental);
-        return Response.ok().entity(movieRentalDTO).status(Response.Status.CREATED).build();
+        return Response
+                .ok()
+//                .entity(movieRentalDTO)
+                .status(Response.Status.CREATED)
+                .build();
     }
 
     @DELETE
