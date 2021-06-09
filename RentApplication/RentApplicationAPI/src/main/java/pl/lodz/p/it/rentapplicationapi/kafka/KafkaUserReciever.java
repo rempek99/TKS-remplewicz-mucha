@@ -1,10 +1,8 @@
-package pl.lodz.p.it.user.userapplicationapi.kafka;
-
+package pl.lodz.p.it.rentapplicationapi.kafka;
 
 import io.confluent.kafka.serializers.KafkaJsonDeserializerConfig;
 import org.apache.kafka.clients.consumer.*;
 import pl.lodz.p.it.topicmodels.dtos.UserDTO;
-import pl.lodz.p.it.topicmodels.events.GeneralEvent;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -17,7 +15,7 @@ import java.util.TimerTask;
 
 @Startup
 @Singleton
-public class KafkaUserReciever implements AutoCloseable {
+public class KafkaUserReciever implements AutoCloseable{
 
     private Consumer<String, UserDTO> consumer;
     private Properties properties;
@@ -34,7 +32,7 @@ public class KafkaUserReciever implements AutoCloseable {
     private void init() {
         properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        properties.put(ConsumerConfig.GROUP_ID_CONFIG, "group1");
+        properties.put(ConsumerConfig.GROUP_ID_CONFIG, "group2");
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer");
         properties.put("schema.registry.url", "http://localhost:8081");

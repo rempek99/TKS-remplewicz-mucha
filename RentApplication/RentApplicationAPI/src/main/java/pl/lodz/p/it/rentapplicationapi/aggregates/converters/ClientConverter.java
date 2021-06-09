@@ -2,6 +2,7 @@ package pl.lodz.p.it.rentapplicationapi.aggregates.converters;
 
 import pl.lodz.p.it.rentapplicationapi.rentviewmodel.modelDTO.ClientDTO;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Client;
+import pl.lodz.p.it.topicmodels.dtos.UserDTO;
 
 public class ClientConverter {
 
@@ -36,5 +37,9 @@ public class ClientConverter {
         newAccount.setId(id);
 
         return newAccount;
+    }
+
+    public static ClientDTO convertFromUserKafkaDTO(UserDTO value) {
+        return new ClientDTO(value.getFirstName(), value.getLastName(), value.getRoleOfUser(), value.isActive(), value.getLogin(), value.getPassword());
     }
 }

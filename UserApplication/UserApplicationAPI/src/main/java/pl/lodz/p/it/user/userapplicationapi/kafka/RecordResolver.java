@@ -23,20 +23,27 @@ public class RecordResolver {
     @Inject
     private KafkaFailReporter failReporter;
 
-    public GeneralEvent resolve(ConsumerRecord<String, UserDTO> record) {
+    public void resolve(ConsumerRecord<String, UserDTO> record) {
         if (UserEvent.CREATE_USER.equals(record.key())) {
             try {
                 accountAdapter
                         .addAccount(
                                 AccountConverter.convertFromUserKafkaDTO(record.value()));
-                return UserEvent.createUserEvent(record.value());
+
             } catch (Exception e) {
                 e.printStackTrace();
                 failReporter.sendFailedCreadedUserEvent(record.value());
-                return FailureEvent.createFailureEvent(record.key());
             }
         }
-        return FailureEvent.createFailureEvent(record.key());
+        if(UserEvent.REMOVE_USER.equals(record.key())){
+            try {
+                accountAdapter
+                        .removeAccount(
+                                AccountConverter.convertFromUserKafkaDTO(record.value()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

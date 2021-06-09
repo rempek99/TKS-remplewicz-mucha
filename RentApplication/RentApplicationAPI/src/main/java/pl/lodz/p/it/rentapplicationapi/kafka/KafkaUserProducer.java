@@ -1,28 +1,24 @@
-package pl.lodz.p.it.topicmodels.util;
+package pl.lodz.p.it.rentapplicationapi.kafka;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import pl.lodz.p.it.topicmodels.dtos.UserDTO;
-import pl.lodz.p.it.topicmodels.events.FailureEvent;
+import pl.lodz.p.it.topicmodels.events.UserEvent;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-@Stateless
-@LocalBean
-public class KafkaFailReporter {
+public class KafkaUserProducer {
 
     private KafkaProducer<String, UserDTO> producer;
     private final Properties properties;
 
-    public KafkaFailReporter() {
+    public KafkaUserProducer() {
         // KafkaConfiguration
         properties = new Properties();
         properties.setProperty("bootstrap.servers","localhost:9092");
-        properties.setProperty("kafka.topic.name", "UserResponseQueue");
+        properties.setProperty("kafka.topic.name", "UserTopic");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 "org.apache.kafka.common.serialization.StringSerializer");
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
@@ -31,13 +27,15 @@ public class KafkaFailReporter {
 
     }
 
-    public void sendFailedCreadedUserEvent(UserDTO user){
-        String key = FailureEvent.OPERATION_FAILED;
+    public void sendRemoveUserEvent(UserDTO user){
+        String key = UserEvent.REMOVE_USER;
         sendEvent(key,user);
     }
 
     private void sendEvent(String key, UserDTO user){
-        producer = new KafkaProducer<>(properties);
+//        String topic = properties.getProperty("kafka.topic.name");
+
+        producer = new KafkaProducer<String, UserDTO>(properties);
         ProducerRecord<String,UserDTO> record = new ProducerRecord<>(
                 properties.getProperty("kafka.topic.name"),
                 key,
@@ -50,10 +48,5 @@ public class KafkaFailReporter {
         }finally {
             producer.close();
         }
-    }
-
-    public void sendRemoveUserEvent(UserDTO user) {
-        String key = FailureEvent.REMOVE_USER;
-        sendEvent(key,user);
     }
 }
