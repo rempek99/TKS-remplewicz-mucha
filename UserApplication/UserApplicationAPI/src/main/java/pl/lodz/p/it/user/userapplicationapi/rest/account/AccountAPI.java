@@ -1,6 +1,10 @@
 package pl.lodz.p.it.user.userapplicationapi.rest.account;
 
 
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.ByteArraySerializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 import pl.lodz.p.it.user.userapplicationapi.aggregates.adapters.AccountServiceAdapter;
 import pl.lodz.p.it.user.userapplicationapi.modelDTO.AccountDTO;
 
@@ -10,16 +14,34 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
+import java.util.Date;
 import java.util.Optional;
+import java.util.Properties;
 
 @RequestScoped
 @Path("accounts")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
-public class AccountAPI {
+public class AccountAPI implements AutoCloseable{
 
     @Inject
-    AccountServiceAdapter accountAdapter;
+    private AccountServiceAdapter accountAdapter;
+    private final KafkaProducer<String,byte[]> producer;
+    private final Properties properties;
+
+    @Inject
+    public AccountAPI() {
+        // KafkaConfiguration
+        properties = new Properties();
+        properties.setProperty("bootstrap.servers","localhost:9092");
+        properties.setProperty("kafka.topic.name", "tks-shop");
+        producer = new KafkaProducer<String, byte[]>(
+                properties,
+                new StringSerializer(),
+                new ByteArraySerializer());
+
+    }
 
     // Queries
 
@@ -43,6 +65,18 @@ public class AccountAPI {
                 .build();
     }
 
+    @GET
+    @Path("kafka/ping")
+    public Response ping(){
+        byte[] payload = ("Message from UserApplication | " + new Date()).getBytes();
+        System.out.println("\n\n___\tMessange sent to kafka!\t___\n\n");
+        ProducerRecord<String,byte[]> record = new ProducerRecord<>(
+                properties.getProperty("kafka.topic.name"),
+                payload
+        );
+        producer.send(record);
+        return Response.ok().entity(payload).build();
+    }
     // Commands
 
     @POST
@@ -89,4 +123,8 @@ public class AccountAPI {
     }
 
 
+    @Override
+    public void close() throws Exception {
+        producer.close();
+    }
 }

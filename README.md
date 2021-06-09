@@ -12,3 +12,19 @@
 - 1 package to generate war 
 - 2 deploy using payara-micro
 - 3 undeploy and stop payara-micro
+
+
+## Kafka Configuration
+
+- Download kafka 
+
+https://www.apache.org/dyn/closer.cgi?path=/kafka/2.8.0/kafka_2.13-2.8.0.tgz
+
+- Start Environment
+
+`bin/zookeeper-server-start.sh config/zookeeper.properties`
+`bin/kafka-server-start.sh config/server.properties`
+
+- Create topic
+
+`bin/kafka-topics.sh --create --topic tks-shop --bootstrap-server localhost:9092`

@@ -15,6 +15,7 @@
 <!--        <module>SoapAPI</module>-->
         <module>UserApplication</module>
         <module>RentApplication</module>
+        <module>WebApplication</module>
     </modules>
 
     <properties>
@@ -24,7 +25,12 @@
         <maven.compiler.target>11</maven.compiler.target>
         <payaramicro.maven.plugin.version>1.3.0</payaramicro.maven.plugin.version>
     </properties>
-
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -131,6 +137,19 @@
             <artifactId>jersey-hk2</artifactId>
             <version>2.30.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.confluent/kafka-json-schema-serializer -->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-json-schema-serializer</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
