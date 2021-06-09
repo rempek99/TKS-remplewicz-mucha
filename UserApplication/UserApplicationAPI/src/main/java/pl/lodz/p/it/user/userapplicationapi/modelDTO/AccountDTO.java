@@ -1,16 +1,10 @@
 package pl.lodz.p.it.user.userapplicationapi.modelDTO;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.UUID;
 
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
+@Data
 public class AccountDTO {
     private String firstName;
     private String lastName;

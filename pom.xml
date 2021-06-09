@@ -16,6 +16,7 @@
         <module>UserApplication</module>
         <module>RentApplication</module>
         <module>WebApplication</module>
+        <module>TopicModels</module>
     </modules>
 
     <properties>

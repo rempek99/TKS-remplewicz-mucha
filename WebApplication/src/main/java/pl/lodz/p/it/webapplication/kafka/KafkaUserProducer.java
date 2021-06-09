@@ -1,20 +1,17 @@
-package kafka;
+package pl.lodz.p.it.webapplication.kafka;
 
-import dtos.UserDTO;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.serialization.ByteArraySerializer;
-import org.apache.kafka.common.serialization.StringSerializer;
+import pl.lodz.p.it.topicmodels.dtos.UserDTO;
+import pl.lodz.p.it.topicmodels.events.UserEvent;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class KafkaUserProducer implements AutoCloseable{
+public class KafkaUserProducer{
 
-    private final KafkaProducer<String,UserDTO> producer;
+    private  KafkaProducer<String, UserDTO> producer;
     private final Properties properties;
 
     public KafkaUserProducer() {
@@ -27,21 +24,23 @@ public class KafkaUserProducer implements AutoCloseable{
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 "io.confluent.kafka.serializers.json.KafkaJsonSchemaSerializer");
         properties.put("schema.registry.url", "http://localhost:8081");
-        producer = new KafkaProducer<String, UserDTO>(properties);
+
     }
 
     public void sendCreateUserEvent(){
+        String key = UserEvent.CREATE_USER;
         UserDTO user = UserDTO
                 .builder()
                 .firstName("test")
                 .lastName("testowy")
                 .build();
-        sendEvent(user);
+        sendEvent(key,user);
     }
 
-    private void sendEvent(UserDTO user){
+    private void sendEvent(String key, UserDTO user){
 //        String topic = properties.getProperty("kafka.topic.name");
-        String key = "testkey";
+
+        producer = new KafkaProducer<String, UserDTO>(properties);
         ProducerRecord<String,UserDTO> record = new ProducerRecord<>(
                 properties.getProperty("kafka.topic.name"),
                 key,
@@ -51,11 +50,8 @@ public class KafkaUserProducer implements AutoCloseable{
             producer.send(record).get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
+        }finally {
+            producer.close();
         }
-    }
-
-    @Override
-    public void close() throws Exception {
-        producer.close();
     }
 }

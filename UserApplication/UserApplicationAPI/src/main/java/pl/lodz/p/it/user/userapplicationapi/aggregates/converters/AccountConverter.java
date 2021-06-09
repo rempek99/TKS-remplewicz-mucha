@@ -1,12 +1,23 @@
 package pl.lodz.p.it.user.userapplicationapi.aggregates.converters;
 
 
+import pl.lodz.p.it.topicmodels.dtos.UserDTO;
 import pl.lodz.p.it.user.userapplicationapi.modelDTO.AccountDTO;
 import pl.lodz.p.it.user.userapplicationcore.userdomainmodel.model.Account;
 
 public class AccountConverter {
 
     private AccountConverter() {
+    }
+    public static AccountDTO convertFromUserKafkaDTO(UserDTO user){
+        return new AccountDTO(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getRoleOfUser(),
+                user.isActive(),
+                user.getLogin(),
+                user.getPassword()
+        );
     }
 
     public static AccountDTO convertAccountToDTO(Account account){

@@ -21,7 +21,11 @@
     </parent>
 
     <dependencies>
-
+        <dependency>
+            <groupId>pl.lodz.p.it</groupId>
+            <artifactId>TopicModels</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

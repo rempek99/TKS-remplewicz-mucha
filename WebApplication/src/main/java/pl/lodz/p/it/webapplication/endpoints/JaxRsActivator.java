@@ -1,4 +1,4 @@
-package endpoints;
+package pl.lodz.p.it.webapplication.endpoints;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

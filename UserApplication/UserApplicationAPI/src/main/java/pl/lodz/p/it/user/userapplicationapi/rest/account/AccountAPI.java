@@ -6,6 +6,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import pl.lodz.p.it.user.userapplicationapi.aggregates.adapters.AccountServiceAdapter;
+import pl.lodz.p.it.user.userapplicationapi.kafka.KafkaUserReciever;
 import pl.lodz.p.it.user.userapplicationapi.modelDTO.AccountDTO;
 
 import javax.enterprise.context.RequestScoped;
