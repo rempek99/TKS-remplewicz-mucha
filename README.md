@@ -25,7 +25,7 @@ https://www.apache.org/dyn/closer.cgi?path=/kafka/2.8.0/kafka_2.13-2.8.0.tgz
 `bin/zookeeper-server-start.sh config/zookeeper.properties`
 `bin/kafka-server-start.sh config/server.properties`
 
-* (CONFLUENT) start schema registyry
+* (CONFLUENT) start schema registry
 
 `bin/schema-registry-start ./etc/schema-registry/schema-registry.properties`
 
@@ -38,7 +38,7 @@ https://www.apache.org/dyn/closer.cgi?path=/kafka/2.8.0/kafka_2.13-2.8.0.tgz
 
 - List topics
 
-`/bin/kafka-topics --list --bootstrap-server localhost:9092`
+`bin/kafka-topics --list --bootstrap-server localhost:9092`
 
 - Console Consumer (with keys)
 
