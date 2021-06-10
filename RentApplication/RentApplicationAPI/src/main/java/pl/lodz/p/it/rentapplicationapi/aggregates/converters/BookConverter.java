@@ -1,6 +1,5 @@
 package pl.lodz.p.it.rentapplicationapi.aggregates.converters;
 
-
 import pl.lodz.p.it.rentapplicationapi.rentviewmodel.modelDTO.BookDTO;
 import pl.lodz.p.it.rentapplicationcore.rentdomainmodel.model.Book;
 
@@ -33,5 +32,9 @@ public class BookConverter {
         newBook.setId(id);
 
         return newBook;
+    }
+
+    public static BookDTO convertFromBookKafkaDTO(pl.lodz.p.it.topicmodels.dtos.BookDTO value) {
+        return new BookDTO(value.getTitle(), value.getAuthor(), value.getPages(), value.isRented());
     }
 }

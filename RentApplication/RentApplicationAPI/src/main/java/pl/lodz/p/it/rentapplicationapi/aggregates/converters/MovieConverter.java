@@ -34,4 +34,8 @@ public class MovieConverter {
 
         return newMovie;
     }
+
+    public static MovieDTO convertFromMovieKafkaDTO(pl.lodz.p.it.topicmodels.dtos.MovieDTO value) {
+        return new MovieDTO(value.getTitle(), value.getAuthor(), value.getRating(), value.isRented());
+    }
 }
