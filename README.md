@@ -25,6 +25,21 @@ https://www.apache.org/dyn/closer.cgi?path=/kafka/2.8.0/kafka_2.13-2.8.0.tgz
 `bin/zookeeper-server-start.sh config/zookeeper.properties`
 `bin/kafka-server-start.sh config/server.properties`
 
+* (CONFLUENT) start schema registyry
+
+`bin/schema-registry-start ./etc/schema-registry/schema-registry.properties`
+
+
+### Useful commands
+
 - Create topic
 
-`bin/kafka-topics.sh --create --topic tks-shop --bootstrap-server localhost:9092`
+`bin/kafka-topics.sh --create --topic TOPIC_NAME --bootstrap-server localhost:9092`
+
+- List topics
+
+`/bin/kafka-topics --list --bootstrap-server localhost:9092`
+
+- Console Consumer (with keys)
+
+`bin/kafka-console-consumer.sh --topic UserTopic --bootstrap-server localhost:9092 --property print.key=true`
