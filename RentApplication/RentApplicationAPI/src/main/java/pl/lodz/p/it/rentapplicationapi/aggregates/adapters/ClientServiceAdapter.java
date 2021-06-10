@@ -33,7 +33,9 @@ public class ClientServiceAdapter implements ClientViewPortUsecaseSuit<ClientDTO
     }
 
     @Override
-    public ClientDTO addClient(ClientDTO a) {
+    public ClientDTO addClient(ClientDTO a) throws Exception {
+        if(a.getFirstName().equals("blad"))
+            throw new Exception();
         return ClientConverter.convertClientToDTO(
                 accountService.add(ClientConverter.convertDTOToClient(a))
         );

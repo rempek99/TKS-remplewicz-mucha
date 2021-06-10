@@ -43,7 +43,7 @@ public class ClientEntRepo implements IdentityStore, IRepositoryEnt<ClientEnt> {
                 .stream()
                 .anyMatch(account -> account.getLogin().equals(a.getLogin())))
             throw new RepositoryException(RepositoryException.DUPLICATED);
-        a.setId(UUID.randomUUID().toString());
+//        a.setId(UUID.randomUUID().toString());
         accounts.add(a);
         return a;
     }

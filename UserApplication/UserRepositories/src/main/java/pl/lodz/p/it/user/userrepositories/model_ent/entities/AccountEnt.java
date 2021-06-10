@@ -40,7 +40,7 @@ public class AccountEnt {
 
         return new EqualsBuilder()
                 .append(isActive(), that.isActive())
-                .append(getId(), that.getId())
+//                .append(getId(), that.getId())
                 .append(getLogin(), that.getLogin())
                 .append(getPassword(), that.getPassword())
                 .append(getFirstName(), that.getFirstName())
@@ -52,7 +52,7 @@ public class AccountEnt {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(getId())
+//                .append(getId())
                 .append(getLogin())
                 .append(getPassword())
                 .append(getFirstName())
